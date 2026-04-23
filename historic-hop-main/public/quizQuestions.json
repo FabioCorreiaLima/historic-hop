@@ -1,0 +1,6002 @@
+[
+  {
+    "id": 1,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Qual era o material mais utilizado na Idade da Pedra?",
+    "options": [
+      "Ferro",
+      "Bronze",
+      "Pedra",
+      "Madeira"
+    ],
+    "correctIndex": 2,
+    "explanation": "A Idade da Pedra é assim chamada porque a pedra era o principal material usado para fabricar ferramentas e armas."
+  },
+  {
+    "id": 2,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Em qual continente surgiram os primeiros seres humanos?",
+    "options": [
+      "Europa",
+      "Ásia",
+      "África",
+      "América"
+    ],
+    "correctIndex": 2,
+    "explanation": "A África é considerada o berço da humanidade, onde foram encontrados os fósseis mais antigos de nossos ancestrais."
+  },
+  {
+    "id": 3,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Qual civilização construiu as pirâmides de Gizé?",
+    "options": [
+      "Romana",
+      "Grega",
+      "Egípcia",
+      "Persa"
+    ],
+    "correctIndex": 2,
+    "explanation": "As pirâmides de Gizé foram construídas pelos egípcios por volta de 2500 a.C. como túmulos para seus faraós."
+  },
+  {
+    "id": 4,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "O que significa 'pré-história'?",
+    "options": [
+      "Antes da escrita",
+      "Antes do fogo",
+      "Antes da agricultura",
+      "Antes das guerras"
+    ],
+    "correctIndex": 0,
+    "explanation": "Pré-história é o período antes da invenção da escrita, que marca o início da história registrada."
+  },
+  {
+    "id": 5,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Qual rio era fundamental para a civilização egípcia?",
+    "options": [
+      "Tigre",
+      "Eufrates",
+      "Nilo",
+      "Ganges"
+    ],
+    "correctIndex": 2,
+    "explanation": "O Rio Nilo era essencial para o Egito antigo, fornecendo água, terras férteis e rotas de transporte."
+  },
+  {
+    "id": 6,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Qual era a principal cidade-estado guerreira da Grécia?",
+    "options": [
+      "Atenas",
+      "Esparta",
+      "Tebas",
+      "Corinto"
+    ],
+    "correctIndex": 1,
+    "explanation": "Esparta era famosa por sua sociedade militarista, onde os cidadãos eram treinados para a guerra desde a infância."
+  },
+  {
+    "id": 7,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Quem foi o primeiro imperador de Roma?",
+    "options": [
+      "Júlio César",
+      "Augusto",
+      "Nero",
+      "Calígula"
+    ],
+    "correctIndex": 1,
+    "explanation": "Augusto (Otávio) foi o primeiro imperador romano, governando de 27 a.C. a 14 d.C., inaugurando a Pax Romana."
+  },
+  {
+    "id": 8,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "O que eram as Olimpíadas na Grécia Antiga?",
+    "options": [
+      "Festivais religiosos e esportivos",
+      "Guerras",
+      "Feiras comerciais",
+      "Julgamentos"
+    ],
+    "correctIndex": 0,
+    "explanation": "As Olimpíadas eram festivais religiosos e esportivos realizados em honra a Zeus em Olímpia, a cada quatro anos."
+  },
+  {
+    "id": 9,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Qual filósofo grego foi mestre de Alexandre, o Grande?",
+    "options": [
+      "Sócrates",
+      "Platão",
+      "Aristóteles",
+      "Tales"
+    ],
+    "correctIndex": 2,
+    "explanation": "Aristóteles foi tutor de Alexandre, o Grande, e um dos maiores filósofos da história ocidental."
+  },
+  {
+    "id": 10,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "O que causou a queda do Império Romano do Ocidente?",
+    "options": [
+      "Invasões bárbaras",
+      "Terremotos",
+      "Epidemia",
+      "Seca"
+    ],
+    "correctIndex": 0,
+    "explanation": "As invasões de povos germânicos (bárbaros) foram um fator crucial para a queda de Roma em 476 d.C."
+  },
+  {
+    "id": 11,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "O que foi o feudalismo?",
+    "options": [
+      "Sistema econômico industrial",
+      "Sistema político baseado em terras",
+      "Religião medieval",
+      "Tipo de governo democrático"
+    ],
+    "correctIndex": 1,
+    "explanation": "O feudalismo era um sistema político-social baseado na posse de terras (feudos) e relações de vassalagem."
+  },
+  {
+    "id": 12,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "Qual era o papel da Igreja Católica na Idade Média?",
+    "options": [
+      "Apenas religioso",
+      "Central na política, educação e cultura",
+      "Sem importância",
+      "Apenas econômico"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Igreja Católica era a instituição mais poderosa da Idade Média, influenciando política, educação, arte e cultura."
+  },
+  {
+    "id": 13,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "O que foram as Cruzadas?",
+    "options": [
+      "Expedições militares à Terra Santa",
+      "Feiras comerciais",
+      "Festivais religiosos",
+      "Tratados de paz"
+    ],
+    "correctIndex": 0,
+    "explanation": "As Cruzadas foram expedições militares cristãs para reconquistar Jerusalém e a Terra Santa dos muçulmanos."
+  },
+  {
+    "id": 14,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "Qual doença devastou a Europa no século XIV?",
+    "options": [
+      "Gripe",
+      "Varíola",
+      "Peste Negra",
+      "Malária"
+    ],
+    "correctIndex": 2,
+    "explanation": "A Peste Negra (peste bubônica) matou cerca de um terço da população europeia entre 1347 e 1353."
+  },
+  {
+    "id": 15,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "O que era um castelo medieval?",
+    "options": [
+      "Apenas moradia",
+      "Fortaleza militar e residência",
+      "Templo religioso",
+      "Mercado"
+    ],
+    "correctIndex": 1,
+    "explanation": "Castelos medievais serviam como fortalezas militares e residências dos senhores feudais e suas famílias."
+  },
+  {
+    "id": 16,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Quem chegou ao Brasil em 1500?",
+    "options": [
+      "Cristóvão Colombo",
+      "Pedro Álvares Cabral",
+      "Vasco da Gama",
+      "Fernão de Magalhães"
+    ],
+    "correctIndex": 1,
+    "explanation": "Pedro Álvares Cabral chegou ao Brasil em 22 de abril de 1500, tomando posse da terra para Portugal."
+  },
+  {
+    "id": 17,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Qual país liderou as Grandes Navegações?",
+    "options": [
+      "Espanha",
+      "Inglaterra",
+      "Portugal",
+      "França"
+    ],
+    "correctIndex": 2,
+    "explanation": "Portugal foi pioneiro nas Grandes Navegações, desenvolvendo tecnologias náuticas e explorando a costa africana."
+  },
+  {
+    "id": 18,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "O que Colombo buscava quando chegou à América?",
+    "options": [
+      "Ouro na África",
+      "Uma rota marítima para as Índias",
+      "O Brasil",
+      "A Austrália"
+    ],
+    "correctIndex": 1,
+    "explanation": "Colombo buscava uma rota marítima para as Índias navegando para o oeste, mas chegou à América em 1492."
+  },
+  {
+    "id": 19,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Qual instrumento ajudou os navegadores?",
+    "options": [
+      "Telescópio",
+      "Bússola",
+      "Microscópio",
+      "Relógio de sol"
+    ],
+    "correctIndex": 1,
+    "explanation": "A bússola foi essencial para a navegação marítima, permitindo aos navegadores determinar a direção em alto-mar."
+  },
+  {
+    "id": 20,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "O Tratado de Tordesilhas dividiu o mundo entre quais países?",
+    "options": [
+      "Inglaterra e França",
+      "Portugal e Espanha",
+      "Holanda e Portugal",
+      "Espanha e França"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Tratado de Tordesilhas (1494) dividiu as terras descobertas entre Portugal e Espanha."
+  },
+  {
+    "id": 21,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "Qual era a principal atividade econômica do Brasil colonial?",
+    "options": [
+      "Mineração",
+      "Produção de açúcar",
+      "Pecuária",
+      "Pesca"
+    ],
+    "correctIndex": 1,
+    "explanation": "A produção de açúcar foi a principal atividade econômica nos primeiros séculos da colonização brasileira."
+  },
+  {
+    "id": 22,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "Quem eram os bandeirantes?",
+    "options": [
+      "Exploradores do interior",
+      "Marinheiros",
+      "Sacerdotes",
+      "Governadores"
+    ],
+    "correctIndex": 0,
+    "explanation": "Os bandeirantes eram exploradores que desbravavam o interior do Brasil em busca de ouro, pedras preciosas e indígenas."
+  },
+  {
+    "id": 23,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "O que foi a escravidão no Brasil colonial?",
+    "options": [
+      "Trabalho voluntário",
+      "Sistema de trabalho forçado de africanos",
+      "Contrato de trabalho",
+      "Serviço militar"
+    ],
+    "correctIndex": 1,
+    "explanation": "A escravidão no Brasil envolveu o trabalho forçado de milhões de africanos trazidos à força para trabalhar nas plantações."
+  },
+  {
+    "id": 24,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "Qual cidade foi a primeira capital do Brasil?",
+    "options": [
+      "Rio de Janeiro",
+      "São Paulo",
+      "Salvador",
+      "Recife"
+    ],
+    "correctIndex": 2,
+    "explanation": "Salvador foi a primeira capital do Brasil colonial, fundada em 1549, permanecendo como capital até 1763."
+  },
+  {
+    "id": 25,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "O que eram os engenhos de açúcar?",
+    "options": [
+      "Fábricas de tecidos",
+      "Propriedades que produziam açúcar",
+      "Igrejas",
+      "Fortalezas"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os engenhos eram grandes propriedades rurais onde se cultivava a cana e produzia-se açúcar para exportação."
+  },
+  {
+    "id": 26,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Em que ano começou a Revolução Francesa?",
+    "options": [
+      "1776",
+      "1789",
+      "1799",
+      "1804"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Revolução Francesa começou em 1789 com a Queda da Bastilha em 14 de julho."
+  },
+  {
+    "id": 27,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Qual era o lema da Revolução Francesa?",
+    "options": [
+      "Paz e Prosperidade",
+      "Liberdade, Igualdade, Fraternidade",
+      "Ordem e Progresso",
+      "Deus e Pátria"
+    ],
+    "correctIndex": 1,
+    "explanation": "O lema 'Liberté, Égalité, Fraternité' sintetizava os ideais iluministas da revolução."
+  },
+  {
+    "id": 28,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Quem foi guilhotinado durante o Terror?",
+    "options": [
+      "Napoleão",
+      "Luís XVI",
+      "Voltaire",
+      "Rousseau"
+    ],
+    "correctIndex": 1,
+    "explanation": "O rei Luís XVI foi guilhotinado em 21 de janeiro de 1793, condenado por traição."
+  },
+  {
+    "id": 29,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "O que era o Terceiro Estado?",
+    "options": [
+      "A nobreza",
+      "O clero",
+      "O povo comum",
+      "O exército"
+    ],
+    "correctIndex": 2,
+    "explanation": "O Terceiro Estado representava cerca de 97% da população francesa: burgueses, camponeses e trabalhadores urbanos."
+  },
+  {
+    "id": 30,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Quem liderou o período do Terror?",
+    "options": [
+      "Napoleão",
+      "Robespierre",
+      "Luís XVI",
+      "Danton"
+    ],
+    "correctIndex": 1,
+    "explanation": "Maximilien Robespierre liderou o Comitê de Salvação Pública durante o Período do Terror (1793-1794)."
+  },
+  {
+    "id": 31,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Qual foi a principal derrota de Napoleão?",
+    "options": [
+      "Austerlitz",
+      "Waterloo",
+      "Marengo",
+      "Trafalgar"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Batalha de Waterloo em 1815 foi a derrota final de Napoleão, encerrando seus Cem Dias de retorno ao poder."
+  },
+  {
+    "id": 32,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Para onde Napoleão foi exilado pela última vez?",
+    "options": [
+      "Córsega",
+      "Elba",
+      "Santa Helena",
+      "Malta"
+    ],
+    "correctIndex": 2,
+    "explanation": "Napoleão foi exilado para a Ilha de Santa Helena no Atlântico Sul, onde morreu em 1821."
+  },
+  {
+    "id": 33,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "O que foi o Código Napoleônico?",
+    "options": [
+      "Código militar",
+      "Código civil de leis",
+      "Código religioso",
+      "Código naval"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Código Napoleônico foi um conjunto de leis civis que influenciou sistemas jurídicos em todo o mundo."
+  },
+  {
+    "id": 34,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Napoleão se coroou imperador em que ano?",
+    "options": [
+      "1789",
+      "1799",
+      "1804",
+      "1815"
+    ],
+    "correctIndex": 2,
+    "explanation": "Napoleão se coroou Imperador dos Franceses em 2 de dezembro de 1804, na Catedral de Notre-Dame."
+  },
+  {
+    "id": 35,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Qual país Napoleão invadiu em 1812 com desastrosas consequências?",
+    "options": [
+      "Inglaterra",
+      "Espanha",
+      "Rússia",
+      "Áustria"
+    ],
+    "correctIndex": 2,
+    "explanation": "A invasão da Rússia em 1812 foi catastrófica — o Grande Exército foi dizimado pelo inverno russo e guerrilhas."
+  },
+  {
+    "id": 36,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "Em que ano o Brasil declarou sua independência?",
+    "options": [
+      "1808",
+      "1815",
+      "1822",
+      "1831"
+    ],
+    "correctIndex": 2,
+    "explanation": "O Brasil declarou sua independência em 7 de setembro de 1822, com o Grito do Ipiranga."
+  },
+  {
+    "id": 37,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "Quem proclamou a Independência do Brasil?",
+    "options": [
+      "Dom João VI",
+      "Dom Pedro I",
+      "José Bonifácio",
+      "Tiradentes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dom Pedro I proclamou a independência às margens do Rio Ipiranga, em São Paulo."
+  },
+  {
+    "id": 38,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "O que levou a família real ao Brasil em 1808?",
+    "options": [
+      "Revolução Francesa",
+      "Invasão napoleônica",
+      "Guerra dos Cem Anos",
+      "Revolução Industrial"
+    ],
+    "correctIndex": 1,
+    "explanation": "A invasão de Portugal por Napoleão forçou a família real a se transferir para o Brasil."
+  },
+  {
+    "id": 39,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "Qual foi o papel de José Bonifácio?",
+    "options": [
+      "Comandou o exército",
+      "Articulador político da independência",
+      "Escreveu a Constituição",
+      "Liderou a Inconfidência"
+    ],
+    "correctIndex": 1,
+    "explanation": "José Bonifácio foi o 'Patriarca da Independência', principal conselheiro de Dom Pedro I."
+  },
+  {
+    "id": 40,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "Qual foi a primeira forma de governo após a independência?",
+    "options": [
+      "República",
+      "Parlamentarismo",
+      "Monarquia Constitucional",
+      "Ditadura"
+    ],
+    "correctIndex": 2,
+    "explanation": "O Brasil adotou a Monarquia Constitucional, com Dom Pedro I como primeiro imperador."
+  },
+  {
+    "id": 41,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "Onde começou a Revolução Industrial?",
+    "options": [
+      "França",
+      "Alemanha",
+      "Inglaterra",
+      "EUA"
+    ],
+    "correctIndex": 2,
+    "explanation": "A Revolução Industrial começou na Inglaterra no final do século XVIII, impulsionada pela indústria têxtil."
+  },
+  {
+    "id": 42,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "Qual invenção foi central para a Revolução Industrial?",
+    "options": [
+      "Computador",
+      "Máquina a vapor",
+      "Avião",
+      "Telefone"
+    ],
+    "correctIndex": 1,
+    "explanation": "A máquina a vapor, aperfeiçoada por James Watt, revolucionou transportes e produção industrial."
+  },
+  {
+    "id": 43,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "O que mudou na vida dos trabalhadores?",
+    "options": [
+      "Trabalhavam menos",
+      "Migraram para fábricas nas cidades",
+      "Voltaram ao campo",
+      "Ganharam mais"
+    ],
+    "correctIndex": 1,
+    "explanation": "A industrialização provocou êxodo rural — milhões migraram para cidades para trabalhar em fábricas."
+  },
+  {
+    "id": 44,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "Qual setor foi o primeiro a se industrializar?",
+    "options": [
+      "Siderurgia",
+      "Têxtil",
+      "Automobilístico",
+      "Alimentício"
+    ],
+    "correctIndex": 1,
+    "explanation": "A indústria têxtil foi a primeira a se mecanizar, especialmente com máquinas de fiar e teares mecânicos."
+  },
+  {
+    "id": 45,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "O que era o ludismo?",
+    "options": [
+      "Movimento artístico",
+      "Movimento de destruição de máquinas",
+      "Partido político",
+      "Filosofia"
+    ],
+    "correctIndex": 1,
+    "explanation": "O ludismo foi um movimento de trabalhadores que destruíam máquinas por medo de perder seus empregos."
+  },
+  {
+    "id": 46,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "Em que ano foi assinada a Lei Áurea no Brasil?",
+    "options": [
+      "1850",
+      "1871",
+      "1885",
+      "1888"
+    ],
+    "correctIndex": 3,
+    "explanation": "A Lei Áurea foi assinada em 13 de maio de 1888 pela Princesa Isabel, abolindo a escravidão no Brasil."
+  },
+  {
+    "id": 47,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "Quem assinou a Lei Áurea?",
+    "options": [
+      "Dom Pedro II",
+      "Princesa Isabel",
+      "Deodoro da Fonseca",
+      "José Bonifácio"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Princesa Isabel, filha de Dom Pedro II, assinou a Lei Áurea como regente do Império."
+  },
+  {
+    "id": 48,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "O que foi a Lei do Ventre Livre?",
+    "options": [
+      "Libertou todos os escravos",
+      "Filhos de escravas nasciam livres",
+      "Proibiu o tráfico",
+      "Libertou os idosos"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Lei do Ventre Livre (1871) determinava que filhos de escravas nascidos a partir daquela data seriam livres."
+  },
+  {
+    "id": 49,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "O Brasil foi o último país das Américas a abolir a escravidão?",
+    "options": [
+      "Sim",
+      "Não, foi Cuba",
+      "Não, foi os EUA",
+      "Não, foi o Haiti"
+    ],
+    "correctIndex": 0,
+    "explanation": "Sim, o Brasil foi o último país das Américas a abolir a escravidão, em 1888."
+  },
+  {
+    "id": 50,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "O que aconteceu com os escravos libertos após a abolição?",
+    "options": [
+      "Receberam terras",
+      "Foram marginalizados sem apoio",
+      "Voltaram à África",
+      "Viraram funcionários públicos"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os ex-escravos foram libertos sem terras, educação ou apoio, resultando em marginalização social."
+  },
+  {
+    "id": 51,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Qual evento desencadeou a Primeira Guerra Mundial?",
+    "options": [
+      "Invasão da Polônia",
+      "Assassinato do Arquiduque Franz Ferdinand",
+      "Queda da Bastilha",
+      "Revolução Russa"
+    ],
+    "correctIndex": 1,
+    "explanation": "O assassinato do Arquiduque Franz Ferdinand da Áustria-Hungria em Sarajevo (1914) foi o estopim da guerra."
+  },
+  {
+    "id": 52,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Quais eram os países da Tríplice Entente?",
+    "options": [
+      "Alemanha, Áustria, Itália",
+      "França, Rússia, Reino Unido",
+      "EUA, Japão, China",
+      "Espanha, Portugal, Holanda"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Tríplice Entente era formada por França, Rússia e Reino Unido, opondo-se à Tríplice Aliança."
+  },
+  {
+    "id": 53,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "O que foi a guerra de trincheiras?",
+    "options": [
+      "Batalhas navais",
+      "Combate em valas escavadas no solo",
+      "Guerra aérea",
+      "Guerrilha urbana"
+    ],
+    "correctIndex": 1,
+    "explanation": "A guerra de trincheiras caracterizou a Frente Ocidental, com soldados combatendo em valas longas e profundas."
+  },
+  {
+    "id": 54,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Qual tratado encerrou a Primeira Guerra Mundial?",
+    "options": [
+      "Tratado de Viena",
+      "Tratado de Versalhes",
+      "Tratado de Paris",
+      "Tratado de Westfália"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Tratado de Versalhes (1919) encerrou oficialmente a guerra e impôs pesadas sanções à Alemanha."
+  },
+  {
+    "id": 55,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Quando os EUA entraram na Primeira Guerra?",
+    "options": [
+      "1914",
+      "1915",
+      "1917",
+      "1918"
+    ],
+    "correctIndex": 2,
+    "explanation": "Os EUA entraram na guerra em 1917, após a Alemanha retomar a guerra submarina irrestrita."
+  },
+  {
+    "id": 56,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que foi a Grande Depressão?",
+    "options": [
+      "Uma pandemia",
+      "Crise econômica mundial",
+      "Guerra civil",
+      "Revolução"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Grande Depressão (1929) foi a pior crise econômica do século XX, causando desemprego e miséria global."
+  },
+  {
+    "id": 57,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "Quem foi Benito Mussolini?",
+    "options": [
+      "Líder soviético",
+      "Ditador fascista italiano",
+      "Presidente dos EUA",
+      "Rei da Espanha"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mussolini foi o ditador fascista da Itália de 1922 a 1943, criando o primeiro regime fascista da história."
+  },
+  {
+    "id": 58,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que caracterizava o nazismo?",
+    "options": [
+      "Democracia direta",
+      "Nacionalismo extremo e racismo",
+      "Socialismo igualitário",
+      "Liberalismo econômico"
+    ],
+    "correctIndex": 1,
+    "explanation": "O nazismo era uma ideologia ultranacionalista, racista e totalitária liderada por Adolf Hitler."
+  },
+  {
+    "id": 59,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "A Quebra da Bolsa de Nova York ocorreu em que ano?",
+    "options": [
+      "1919",
+      "1925",
+      "1929",
+      "1933"
+    ],
+    "correctIndex": 2,
+    "explanation": "A Quebra da Bolsa de Nova York em outubro de 1929 desencadeou a Grande Depressão mundial."
+  },
+  {
+    "id": 60,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que foi a República de Weimar?",
+    "options": [
+      "Governo provisório francês",
+      "Democracia alemã pós-WWI",
+      "Monarquia austríaca",
+      "Aliança militar"
+    ],
+    "correctIndex": 1,
+    "explanation": "A República de Weimar foi o regime democrático alemão (1919-1933) que precedeu o nazismo."
+  },
+  {
+    "id": 61,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "Quando começou a Segunda Guerra Mundial?",
+    "options": [
+      "1937",
+      "1939",
+      "1941",
+      "1942"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Segunda Guerra Mundial começou em 1º de setembro de 1939, com a invasão da Polônia pela Alemanha."
+  },
+  {
+    "id": 62,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "O que foi o Dia D?",
+    "options": [
+      "Rendição japonesa",
+      "Invasão aliada na Normandia",
+      "Bomba atômica",
+      "Início da guerra"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Dia D (6 de junho de 1944) foi a maior invasão anfíbia da história, na Normandia, França."
+  },
+  {
+    "id": 63,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "Onde foram lançadas as bombas atômicas?",
+    "options": [
+      "Berlim e Munique",
+      "Hiroshima e Nagasaki",
+      "Tóquio e Osaka",
+      "Pequim e Xangai"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os EUA lançaram bombas atômicas em Hiroshima (6/ago) e Nagasaki (9/ago) de 1945."
+  },
+  {
+    "id": 64,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "O que foi o Holocausto?",
+    "options": [
+      "Batalha decisiva",
+      "Genocídio de judeus pelos nazistas",
+      "Acordo de paz",
+      "Revolução"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Holocausto foi o genocídio sistemático de cerca de 6 milhões de judeus pelo regime nazista."
+  },
+  {
+    "id": 65,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "Qual país foi invadido pela Alemanha em 1941, quebrando o pacto?",
+    "options": [
+      "França",
+      "Inglaterra",
+      "União Soviética",
+      "EUA"
+    ],
+    "correctIndex": 2,
+    "explanation": "A Alemanha invadiu a União Soviética em junho de 1941, quebrando o Pacto Molotov-Ribbentrop."
+  },
+  {
+    "id": 66,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi a Guerra Fria?",
+    "options": [
+      "Guerra entre EUA e URSS com combate direto",
+      "Tensão geopolítica sem conflito direto",
+      "Guerra na Antártida",
+      "Conflito comercial"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Guerra Fria foi uma tensão geopolítica entre EUA e URSS (1947-1991) sem confronto militar direto entre eles."
+  },
+  {
+    "id": 67,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi o Muro de Berlim?",
+    "options": [
+      "Monumento histórico",
+      "Barreira dividindo Berlim Oriental e Ocidental",
+      "Fortaleza medieval",
+      "Palácio real"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Muro de Berlim (1961-1989) dividiu a cidade em dois setores: capitalista (Ocidental) e comunista (Oriental)."
+  },
+  {
+    "id": 68,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "Em que ano caiu o Muro de Berlim?",
+    "options": [
+      "1985",
+      "1987",
+      "1989",
+      "1991"
+    ],
+    "correctIndex": 2,
+    "explanation": "O Muro de Berlim caiu em 9 de novembro de 1989, simbolizando o fim da Guerra Fria na Europa."
+  },
+  {
+    "id": 69,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi a Corrida Espacial?",
+    "options": [
+      "Competição automotiva",
+      "Disputa por exploração do espaço",
+      "Corrida de armamentos",
+      "Competição econômica"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Corrida Espacial foi a competição entre EUA e URSS pela supremacia na exploração espacial."
+  },
+  {
+    "id": 70,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "Quem foi o primeiro homem na Lua?",
+    "options": [
+      "Yuri Gagarin",
+      "Neil Armstrong",
+      "Buzz Aldrin",
+      "John Glenn"
+    ],
+    "correctIndex": 1,
+    "explanation": "Neil Armstrong foi o primeiro homem a pisar na Lua em 20 de julho de 1969, na missão Apollo 11."
+  },
+  {
+    "id": 71,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "Em que ano foi proclamada a República no Brasil?",
+    "options": [
+      "1822",
+      "1889",
+      "1891",
+      "1930"
+    ],
+    "correctIndex": 1,
+    "explanation": "A República foi proclamada em 15 de novembro de 1889 pelo Marechal Deodoro da Fonseca."
+  },
+  {
+    "id": 72,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "Quem proclamou a República?",
+    "options": [
+      "Dom Pedro II",
+      "Deodoro da Fonseca",
+      "Floriano Peixoto",
+      "Getúlio Vargas"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Marechal Deodoro da Fonseca liderou o golpe militar que derrubou a monarquia e proclamou a República."
+  },
+  {
+    "id": 73,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi a Era Vargas?",
+    "options": [
+      "Período de 1930-1945 sob Getúlio Vargas",
+      "Governo militar",
+      "Período colonial",
+      "República Velha"
+    ],
+    "correctIndex": 0,
+    "explanation": "A Era Vargas (1930-1945) foi o período em que Getúlio Vargas governou o Brasil, incluindo o Estado Novo."
+  },
+  {
+    "id": 74,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi a Política do Café com Leite?",
+    "options": [
+      "Acordo comercial",
+      "Alternância entre SP e MG na presidência",
+      "Reforma agrária",
+      "Tratado internacional"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Política do Café com Leite era a alternância de poder entre São Paulo (café) e Minas Gerais (leite)."
+  },
+  {
+    "id": 75,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "Quando ocorreu o golpe militar no Brasil?",
+    "options": [
+      "1954",
+      "1960",
+      "1964",
+      "1968"
+    ],
+    "correctIndex": 2,
+    "explanation": "O golpe militar de 31 de março de 1964 instaurou uma ditadura que durou até 1985."
+  },
+  {
+    "id": 76,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Qual era a capital do Império Asteca?",
+    "options": [
+      "Cusco",
+      "Tenochtitlán",
+      "Machu Picchu",
+      "Chichén Itzá"
+    ],
+    "correctIndex": 1,
+    "explanation": "Tenochtitlán, atual Cidade do México, foi a magnífica capital asteca construída sobre um lago."
+  },
+  {
+    "id": 77,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Qual civilização criou o sistema de quipus?",
+    "options": [
+      "Maia",
+      "Asteca",
+      "Inca",
+      "Olmeca"
+    ],
+    "correctIndex": 2,
+    "explanation": "Os incas usavam quipus — cordas com nós — como sistema de registro de informações e contabilidade."
+  },
+  {
+    "id": 78,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "O que era a pedra do sol asteca?",
+    "options": [
+      "Relógio solar",
+      "Calendário cerimonial",
+      "Mapa estelar",
+      "Moeda"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Pedra do Sol era um calendário cerimonial asteca com representações cosmológicas e ciclos temporais."
+  },
+  {
+    "id": 79,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Qual conquistador espanhol destruiu o Império Asteca?",
+    "options": [
+      "Pizarro",
+      "Cortés",
+      "Colombo",
+      "Magalhães"
+    ],
+    "correctIndex": 1,
+    "explanation": "Hernán Cortés conquistou o Império Asteca entre 1519 e 1521, com apoio de povos indígenas aliados."
+  },
+  {
+    "id": 80,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Onde ficava Machu Picchu?",
+    "options": [
+      "México",
+      "Guatemala",
+      "Peru",
+      "Bolívia"
+    ],
+    "correctIndex": 2,
+    "explanation": "Machu Picchu é uma cidadela inca localizada nos Andes peruanos, a 2.430 metros de altitude."
+  },
+  {
+    "id": 81,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "Em que ano ocorreu a Revolução Russa?",
+    "options": [
+      "1905",
+      "1914",
+      "1917",
+      "1922"
+    ],
+    "correctIndex": 2,
+    "explanation": "A Revolução Russa de 1917 derrubou o czar Nicolau II e eventualmente levou os bolcheviques ao poder."
+  },
+  {
+    "id": 82,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "Quem liderou os bolcheviques?",
+    "options": [
+      "Stalin",
+      "Lenin",
+      "Trotsky",
+      "Marx"
+    ],
+    "correctIndex": 1,
+    "explanation": "Vladimir Lenin liderou os bolcheviques na Revolução de Outubro de 1917, tomando o poder na Rússia."
+  },
+  {
+    "id": 83,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que foi o Gulag?",
+    "options": [
+      "Parlamento soviético",
+      "Sistema de campos de trabalho forçado",
+      "Partido comunista",
+      "Exército vermelho"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Gulag era o sistema de campos de trabalho forçado soviético, onde milhões foram presos e muitos morreram."
+  },
+  {
+    "id": 84,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "Quem sucedeu Lenin na liderança soviética?",
+    "options": [
+      "Trotsky",
+      "Stalin",
+      "Khruschev",
+      "Brezhnev"
+    ],
+    "correctIndex": 1,
+    "explanation": "Josef Stalin assumiu o poder após a morte de Lenin em 1924, governando a URSS até 1953."
+  },
+  {
+    "id": 85,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "Quando a URSS se dissolveu?",
+    "options": [
+      "1985",
+      "1989",
+      "1991",
+      "1993"
+    ],
+    "correctIndex": 2,
+    "explanation": "A União Soviética se dissolveu oficialmente em 25 de dezembro de 1991, encerrando a Guerra Fria."
+  },
+  {
+    "id": 86,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "Quem liderou a independência da Índia?",
+    "options": [
+      "Nehru",
+      "Gandhi",
+      "Jinnah",
+      "Bose"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mahatma Gandhi liderou o movimento de independência da Índia através da resistência não-violenta."
+  },
+  {
+    "id": 87,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "O que foi o Apartheid?",
+    "options": [
+      "Guerra civil",
+      "Sistema de segregação racial na África do Sul",
+      "Movimento independentista",
+      "Acordo de paz"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Apartheid foi um regime de segregação racial institucionalizada na África do Sul (1948-1994)."
+  },
+  {
+    "id": 88,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "Quem foi Nelson Mandela?",
+    "options": [
+      "Líder militar",
+      "Presidente e ativista anti-apartheid",
+      "Rei sul-africano",
+      "Colonizador"
+    ],
+    "correctIndex": 1,
+    "explanation": "Nelson Mandela foi um ativista anti-apartheid preso por 27 anos, que se tornou o primeiro presidente negro da África do Sul."
+  },
+  {
+    "id": 89,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "A maioria das colônias africanas se tornou independente em qual década?",
+    "options": [
+      "1940",
+      "1950",
+      "1960",
+      "1970"
+    ],
+    "correctIndex": 2,
+    "explanation": "A década de 1960 é conhecida como 'Ano da África', quando 17 países africanos conquistaram independência."
+  },
+  {
+    "id": 90,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "O que foi o Movimento dos Não-Alinhados?",
+    "options": [
+      "Aliança militar",
+      "Grupo de países neutros na Guerra Fria",
+      "Organização religiosa",
+      "Bloco econômico"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Movimento dos Não-Alinhados reunia países que não se alinhavam nem com EUA nem com URSS na Guerra Fria."
+  },
+  {
+    "id": 91,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "Quanto tempo durou a ditadura militar no Brasil?",
+    "options": [
+      "10 anos",
+      "15 anos",
+      "21 anos",
+      "30 anos"
+    ],
+    "correctIndex": 2,
+    "explanation": "A ditadura militar brasileira durou 21 anos, de 1964 a 1985."
+  },
+  {
+    "id": 92,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "O que foi o AI-5?",
+    "options": [
+      "Acordo internacional",
+      "Ato institucional mais repressivo",
+      "Constituição democrática",
+      "Reforma educacional"
+    ],
+    "correctIndex": 1,
+    "explanation": "O AI-5 (1968) foi o ato institucional mais duro da ditadura, suspendendo direitos e permitindo perseguição política."
+  },
+  {
+    "id": 93,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "O que foi o 'Milagre Econômico' brasileiro?",
+    "options": [
+      "Período de crescimento rápido",
+      "Crise financeira",
+      "Reforma agrária",
+      "Privatização"
+    ],
+    "correctIndex": 0,
+    "explanation": "O Milagre Econômico (1968-1973) foi um período de alto crescimento do PIB, mas com aumento da desigualdade."
+  },
+  {
+    "id": 94,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "Qual movimento pediu eleições diretas em 1984?",
+    "options": [
+      "Diretas Já",
+      "Revolução de 30",
+      "Tenentismo",
+      "Canudos"
+    ],
+    "correctIndex": 0,
+    "explanation": "O movimento 'Diretas Já' mobilizou milhões de brasileiros pedindo eleições diretas para presidente."
+  },
+  {
+    "id": 95,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "Quem foi o último presidente militar do Brasil?",
+    "options": [
+      "Médici",
+      "Geisel",
+      "Figueiredo",
+      "Costa e Silva"
+    ],
+    "correctIndex": 2,
+    "explanation": "João Figueiredo foi o último presidente militar (1979-1985), conduzindo a abertura política gradual."
+  },
+  {
+    "id": 96,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que foi o ataque de 11 de setembro de 2001?",
+    "options": [
+      "Terremoto em NY",
+      "Ataque terrorista às Torres Gêmeas",
+      "Queda da bolsa",
+      "Furacão"
+    ],
+    "correctIndex": 1,
+    "explanation": "O 11 de Setembro foi um ataque terrorista da Al-Qaeda que destruiu as Torres Gêmeas do World Trade Center em Nova York."
+  },
+  {
+    "id": 97,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que é a União Europeia?",
+    "options": [
+      "Aliança militar",
+      "Bloco político-econômico europeu",
+      "Organização religiosa",
+      "Tratado comercial"
+    ],
+    "correctIndex": 1,
+    "explanation": "A União Europeia é um bloco político-econômico de países europeus com mercado comum e, em muitos, moeda única (euro)."
+  },
+  {
+    "id": 98,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que foi a Primavera Árabe?",
+    "options": [
+      "Festival cultural",
+      "Onda de protestos no mundo árabe",
+      "Acordo de paz",
+      "Olimpíadas"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Primavera Árabe (2010-2012) foi uma série de revoltas populares em países árabes por democracia e direitos."
+  },
+  {
+    "id": 99,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "Qual pandemia afetou o mundo em 2020?",
+    "options": [
+      "H1N1",
+      "Ebola",
+      "COVID-19",
+      "SARS"
+    ],
+    "correctIndex": 2,
+    "explanation": "A pandemia de COVID-19, causada pelo SARS-CoV-2, afetou o mundo inteiro a partir de 2020."
+  },
+  {
+    "id": 100,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que é a globalização?",
+    "options": [
+      "Isolamento de países",
+      "Integração econômica e cultural mundial",
+      "Colonialismo moderno",
+      "Guerra comercial"
+    ],
+    "correctIndex": 1,
+    "explanation": "A globalização é o processo de integração econômica, cultural e política entre os países do mundo."
+  },
+  {
+    "id": 101,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Qual foi a principal mudança da Revolução Neolítica?",
+    "options": [
+      "Uso do fogo",
+      "Agricultura e sedentarismo",
+      "Escrita cuneiforme",
+      "Metalurgia"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Revolução Neolítica marcou a transição do nomadismo para a agricultura e a vida sedentária."
+  },
+  {
+    "id": 102,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Em qual continente surgiram os primeiros hominídeos?",
+    "options": [
+      "Europa",
+      "Ásia",
+      "África",
+      "América"
+    ],
+    "correctIndex": 2,
+    "explanation": "Os fósseis mais antigos de hominídeos foram encontrados na África."
+  },
+  {
+    "id": 103,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Qual civilização construiu as pirâmides de Gizé?",
+    "options": [
+      "Mesopotâmia",
+      "Egito Antigo",
+      "Grécia",
+      "Fenícia"
+    ],
+    "correctIndex": 1,
+    "explanation": "As pirâmides de Gizé foram construídas pelos faraós do Antigo Egito."
+  },
+  {
+    "id": 104,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "O que é o Crescente Fértil?",
+    "options": [
+      "Uma lua cheia especial",
+      "Região entre rios Tigre e Eufrates",
+      "Uma ferramenta agrícola",
+      "Uma rota comercial"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Crescente Fértil é a região entre os rios Tigre e Eufrates onde surgiram as primeiras civilizações."
+  },
+  {
+    "id": 105,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Qual foi a primeira forma de escrita conhecida?",
+    "options": [
+      "Hieroglífica",
+      "Cuneiforme",
+      "Alfabeto fenício",
+      "Latim"
+    ],
+    "correctIndex": 1,
+    "explanation": "A escrita cuneiforme, criada pelos sumérios na Mesopotâmia, é a mais antiga conhecida."
+  },
+  {
+    "id": 106,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "O que caracterizava a Idade dos Metais?",
+    "options": [
+      "Uso exclusivo de pedra",
+      "Domínio da fundição de metais",
+      "Invenção da roda",
+      "Surgimento das religiões"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Idade dos Metais se caracteriza pelo domínio da metalurgia, usando cobre, bronze e ferro."
+  },
+  {
+    "id": 107,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Qual rio era fundamental para a civilização egípcia?",
+    "options": [
+      "Tigre",
+      "Eufrates",
+      "Nilo",
+      "Jordão"
+    ],
+    "correctIndex": 2,
+    "explanation": "O Rio Nilo era vital para a agricultura e a vida no Egito Antigo graças às suas cheias anuais."
+  },
+  {
+    "id": 108,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "O que eram as pinturas rupestres?",
+    "options": [
+      "Esculturas em metal",
+      "Desenhos feitos em paredes de cavernas",
+      "Mapas antigos",
+      "Manuscritos religiosos"
+    ],
+    "correctIndex": 1,
+    "explanation": "Pinturas rupestres são representações artísticas feitas em paredes de cavernas por povos pré-históricos."
+  },
+  {
+    "id": 109,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Qual era a função dos zigurates na Mesopotâmia?",
+    "options": [
+      "Moradia",
+      "Templo religioso",
+      "Mercado",
+      "Forte militar"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os zigurates eram templos religiosos dedicados aos deuses mesopotâmicos."
+  },
+  {
+    "id": 110,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Quem foi Hamurabi?",
+    "options": [
+      "Faraó egípcio",
+      "Rei babilônico autor de famoso código de leis",
+      "Filósofo grego",
+      "Imperador romano"
+    ],
+    "correctIndex": 1,
+    "explanation": "Hamurabi foi rei da Babilônia e criou um dos primeiros códigos de leis escritos da história."
+  },
+  {
+    "id": 111,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "O que marcou o fim da Pré-História?",
+    "options": [
+      "Descoberta do fogo",
+      "Invenção da roda",
+      "Surgimento da escrita",
+      "Uso de metais"
+    ],
+    "correctIndex": 2,
+    "explanation": "O surgimento da escrita, por volta de 3500 a.C., é considerado o marco do fim da Pré-História."
+  },
+  {
+    "id": 112,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Como os povos pré-históricos conservavam alimentos?",
+    "options": [
+      "Geladeira",
+      "Defumação e secagem",
+      "Enlatamento",
+      "Congelamento industrial"
+    ],
+    "correctIndex": 1,
+    "explanation": "Técnicas como defumação, secagem ao sol e salga eram usadas para conservar alimentos."
+  },
+  {
+    "id": 113,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Qual civilização inventou o papiro?",
+    "options": [
+      "Suméria",
+      "Egípcia",
+      "Chinesa",
+      "Indiana"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os egípcios desenvolveram o papiro a partir de uma planta aquática do Rio Nilo."
+  },
+  {
+    "id": 114,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "O que era o nomadismo?",
+    "options": [
+      "Viver em cidades",
+      "Deslocar-se constantemente em busca de recursos",
+      "Praticar agricultura",
+      "Construir templos"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os povos nômades se deslocavam constantemente em busca de caça, pesca e coleta."
+  },
+  {
+    "id": 115,
+    "level": 1,
+    "difficulty": "fácil",
+    "topic": "Pré-História e Antiguidade",
+    "question": "Qual animal foi um dos primeiros domesticados pelo ser humano?",
+    "options": [
+      "Gato",
+      "Cavalo",
+      "Cão",
+      "Galinha"
+    ],
+    "correctIndex": 2,
+    "explanation": "O cão foi um dos primeiros animais domesticados, auxiliando na caça e proteção."
+  },
+  {
+    "id": 116,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Quem escreveu a Ilíada e a Odisseia?",
+    "options": [
+      "Sófocles",
+      "Platão",
+      "Homero",
+      "Aristóteles"
+    ],
+    "correctIndex": 2,
+    "explanation": "Homero é o autor atribuído às epopéias Ilíada e Odisseia."
+  },
+  {
+    "id": 117,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Qual era a forma de governo de Esparta?",
+    "options": [
+      "Democracia",
+      "Oligarquia militar",
+      "Monarquia absoluta",
+      "Teocracia"
+    ],
+    "correctIndex": 1,
+    "explanation": "Esparta era governada por uma oligarquia militar com dois reis e um conselho de anciãos."
+  },
+  {
+    "id": 118,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Quem foi o primeiro imperador romano?",
+    "options": [
+      "Júlio César",
+      "Augusto",
+      "Nero",
+      "Calígula"
+    ],
+    "correctIndex": 1,
+    "explanation": "Augusto (Otávio) foi o primeiro imperador romano, inaugurando o Principado em 27 a.C."
+  },
+  {
+    "id": 119,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "O que era a Ágora em Atenas?",
+    "options": [
+      "Templo religioso",
+      "Praça pública para debates e comércio",
+      "Estádio esportivo",
+      "Palácio real"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Ágora era a praça pública central de Atenas, usada para assembleias e comércio."
+  },
+  {
+    "id": 120,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Qual filósofo grego foi condenado a beber cicuta?",
+    "options": [
+      "Platão",
+      "Aristóteles",
+      "Sócrates",
+      "Tales"
+    ],
+    "correctIndex": 2,
+    "explanation": "Sócrates foi condenado à morte por 'corromper a juventude' e bebeu cicuta."
+  },
+  {
+    "id": 121,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "O que foram as Guerras Púnicas?",
+    "options": [
+      "Conflitos entre Grécia e Pérsia",
+      "Guerras entre Roma e Cartago",
+      "Invasões bárbaras",
+      "Revoltas de escravos"
+    ],
+    "correctIndex": 1,
+    "explanation": "As Guerras Púnicas foram três conflitos entre Roma e Cartago pelo domínio do Mediterrâneo."
+  },
+  {
+    "id": 122,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Qual era a língua oficial do Império Romano?",
+    "options": [
+      "Grego",
+      "Latim",
+      "Etrusco",
+      "Osco"
+    ],
+    "correctIndex": 1,
+    "explanation": "O latim era a língua oficial do Império Romano e originou as línguas românicas."
+  },
+  {
+    "id": 123,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "O que era o Coliseu de Roma?",
+    "options": [
+      "Templo",
+      "Anfiteatro para espetáculos",
+      "Mercado",
+      "Senado"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Coliseu era um anfiteatro onde ocorriam lutas de gladiadores e outros espetáculos."
+  },
+  {
+    "id": 124,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Quem foi Alexandre, o Grande?",
+    "options": [
+      "Imperador romano",
+      "Rei macedônio que conquistou vasto império",
+      "Filósofo ateniense",
+      "Faraó egípcio"
+    ],
+    "correctIndex": 1,
+    "explanation": "Alexandre, o Grande, foi rei da Macedônia e criou um dos maiores impérios da Antiguidade."
+  },
+  {
+    "id": 125,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "O que era a democracia ateniense?",
+    "options": [
+      "Voto universal",
+      "Participação direta dos cidadãos homens livres",
+      "Monarquia parlamentar",
+      "República federativa"
+    ],
+    "correctIndex": 1,
+    "explanation": "Na democracia ateniense, cidadãos homens livres participavam diretamente das decisões políticas."
+  },
+  {
+    "id": 126,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Qual deus era o principal do panteão grego?",
+    "options": [
+      "Ares",
+      "Poseidon",
+      "Zeus",
+      "Apolo"
+    ],
+    "correctIndex": 2,
+    "explanation": "Zeus era considerado o pai dos deuses e dos homens na mitologia grega."
+  },
+  {
+    "id": 127,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "O que foi a Pax Romana?",
+    "options": [
+      "Tratado de paz",
+      "Período de estabilidade no Império Romano",
+      "Festival religioso",
+      "Lei romana"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Pax Romana foi um período de ~200 anos de relativa paz e estabilidade no Império Romano."
+  },
+  {
+    "id": 128,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Quem liderou a revolta dos escravos em Roma?",
+    "options": [
+      "Bruto",
+      "Espártaco",
+      "Catilina",
+      "Pompeu"
+    ],
+    "correctIndex": 1,
+    "explanation": "Espártaco liderou a maior revolta de escravos da República Romana em 73 a.C."
+  },
+  {
+    "id": 129,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "O que eram as cidades-estado gregas?",
+    "options": [
+      "Províncias romanas",
+      "Pólis independentes com governo próprio",
+      "Colônias fenícias",
+      "Impérios orientais"
+    ],
+    "correctIndex": 1,
+    "explanation": "As pólis gregas eram cidades-estado independentes com governo, leis e exército próprios."
+  },
+  {
+    "id": 130,
+    "level": 2,
+    "difficulty": "fácil",
+    "topic": "Grécia e Roma Antiga",
+    "question": "Qual foi a causa da queda do Império Romano do Ocidente?",
+    "options": [
+      "Apenas invasões bárbaras",
+      "Combinação de crises internas e invasões",
+      "Um terremoto",
+      "Peste negra"
+    ],
+    "correctIndex": 1,
+    "explanation": "A queda se deveu a uma combinação de crises econômicas, políticas, militares e invasões bárbaras."
+  },
+  {
+    "id": 131,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "Qual sistema econômico predominou na Idade Média?",
+    "options": [
+      "Capitalismo",
+      "Mercantilismo",
+      "Feudalismo",
+      "Socialismo"
+    ],
+    "correctIndex": 2,
+    "explanation": "O feudalismo foi o sistema predominante, baseado na posse de terras e relações de vassalagem."
+  },
+  {
+    "id": 132,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "O que foram as Cruzadas?",
+    "options": [
+      "Guerras entre feudos",
+      "Expedições militares cristãs à Terra Santa",
+      "Revoltas camponesas",
+      "Invasões vikings"
+    ],
+    "correctIndex": 1,
+    "explanation": "As Cruzadas foram expedições militares organizadas pela cristandade para reconquistar Jerusalém."
+  },
+  {
+    "id": 133,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "Quem foi Carlos Magno?",
+    "options": [
+      "Papa medieval",
+      "Rei dos francos e imperador do Sacro Império",
+      "Viking famoso",
+      "Sultão otomano"
+    ],
+    "correctIndex": 1,
+    "explanation": "Carlos Magno unificou grande parte da Europa Ocidental e foi coroado imperador em 800 d.C."
+  },
+  {
+    "id": 134,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "O que era um feudo?",
+    "options": [
+      "Moeda medieval",
+      "Terra concedida pelo senhor ao vassalo",
+      "Tipo de arma",
+      "Igreja medieval"
+    ],
+    "correctIndex": 1,
+    "explanation": "O feudo era uma porção de terra concedida pelo senhor feudal em troca de serviços e lealdade."
+  },
+  {
+    "id": 135,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "Qual doença devastou a Europa no século XIV?",
+    "options": [
+      "Varíola",
+      "Malária",
+      "Peste Negra",
+      "Cólera"
+    ],
+    "correctIndex": 2,
+    "explanation": "A Peste Negra matou cerca de um terço da população europeia entre 1347 e 1351."
+  },
+  {
+    "id": 136,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "O que era a Inquisição?",
+    "options": [
+      "Parlamento medieval",
+      "Tribunal religioso para julgar heresias",
+      "Guilda de comerciantes",
+      "Ordem de cavaleiros"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Inquisição era um tribunal da Igreja Católica criado para investigar e punir heresias."
+  },
+  {
+    "id": 137,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "Qual era o papel da Igreja Católica na Idade Média?",
+    "options": [
+      "Apenas religioso",
+      "Central na vida política, social e cultural",
+      "Sem influência",
+      "Apenas econômico"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Igreja Católica era a instituição mais poderosa da Europa medieval, influenciando todos os aspectos da vida."
+  },
+  {
+    "id": 138,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "O que eram as guildas medievais?",
+    "options": [
+      "Exércitos",
+      "Associações de artesãos e comerciantes",
+      "Ordens religiosas",
+      "Tribunais"
+    ],
+    "correctIndex": 1,
+    "explanation": "As guildas eram associações que regulavam ofícios, preços e qualidade dos produtos."
+  },
+  {
+    "id": 139,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "Quem eram os vikings?",
+    "options": [
+      "Povo do Mediterrâneo",
+      "Navegadores e guerreiros escandinavos",
+      "Monges irlandeses",
+      "Mercadores árabes"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os vikings eram povos nórdicos que navegaram, comerciaram e conquistaram regiões da Europa."
+  },
+  {
+    "id": 140,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "O que foi o Cisma do Oriente (1054)?",
+    "options": [
+      "Divisão do Império Romano",
+      "Separação entre Igreja Católica e Ortodoxa",
+      "Início das Cruzadas",
+      "Fim do feudalismo"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Cisma de 1054 dividiu a cristandade em Igreja Católica Romana e Igreja Ortodoxa."
+  },
+  {
+    "id": 141,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "O que era a servidão?",
+    "options": [
+      "Escravidão",
+      "Condição do camponês preso à terra do senhor feudal",
+      "Trabalho assalariado",
+      "Voluntariado"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os servos eram camponeses vinculados à terra, devendo tributos e trabalho ao senhor feudal."
+  },
+  {
+    "id": 142,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "Qual a importância de Constantinopla?",
+    "options": [
+      "Capital do Império Bizantino e centro comercial",
+      "Cidade viking",
+      "Capital franca",
+      "Porto fenício"
+    ],
+    "correctIndex": 0,
+    "explanation": "Constantinopla foi a capital do Império Bizantino e o principal centro comercial entre Europa e Ásia."
+  },
+  {
+    "id": 143,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "O que foi a Reconquista?",
+    "options": [
+      "Invasão da Inglaterra",
+      "Retomada da Península Ibérica dos mouros",
+      "Conquista da Escandinávia",
+      "Expansão otomana"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Reconquista foi o processo de retomada cristã da Península Ibérica, concluído em 1492."
+  },
+  {
+    "id": 144,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "Qual era a principal atividade econômica medieval?",
+    "options": [
+      "Comércio marítimo",
+      "Agricultura",
+      "Mineração",
+      "Indústria"
+    ],
+    "correctIndex": 1,
+    "explanation": "A agricultura era a base econômica medieval, praticada nos feudos por servos e camponeses."
+  },
+  {
+    "id": 145,
+    "level": 3,
+    "difficulty": "fácil",
+    "topic": "Idade Média",
+    "question": "O que era a cavalaria medieval?",
+    "options": [
+      "Tipo de comércio",
+      "Código de honra e conduta dos cavaleiros",
+      "Forma de governo",
+      "Religião"
+    ],
+    "correctIndex": 1,
+    "explanation": "A cavalaria era um código que incluía honra, coragem, proteção aos fracos e lealdade ao senhor."
+  },
+  {
+    "id": 146,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Qual país liderou as Grandes Navegações no século XV?",
+    "options": [
+      "Espanha",
+      "Inglaterra",
+      "Portugal",
+      "França"
+    ],
+    "correctIndex": 2,
+    "explanation": "Portugal foi pioneiro nas navegações com a Escola de Sagres e explorações na costa africana."
+  },
+  {
+    "id": 147,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Quem chegou ao Brasil em 1500?",
+    "options": [
+      "Cristóvão Colombo",
+      "Vasco da Gama",
+      "Pedro Álvares Cabral",
+      "Fernão de Magalhães"
+    ],
+    "correctIndex": 2,
+    "explanation": "Pedro Álvares Cabral chegou ao litoral brasileiro em 22 de abril de 1500."
+  },
+  {
+    "id": 148,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Qual era o objetivo principal das navegações?",
+    "options": [
+      "Turismo",
+      "Busca por rotas comerciais para as Índias",
+      "Conquista religiosa",
+      "Exploração científica"
+    ],
+    "correctIndex": 1,
+    "explanation": "O principal objetivo era encontrar rotas marítimas para o comércio de especiarias com as Índias."
+  },
+  {
+    "id": 149,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "O que foi o Tratado de Tordesilhas?",
+    "options": [
+      "Acordo de paz",
+      "Divisão do mundo entre Portugal e Espanha",
+      "Tratado comercial",
+      "Aliança militar"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Tratado de Tordesilhas (1494) dividiu as terras descobertas entre Portugal e Espanha."
+  },
+  {
+    "id": 150,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Quem realizou a primeira circum-navegação?",
+    "options": [
+      "Colombo",
+      "Vasco da Gama",
+      "Expedição de Fernão de Magalhães",
+      "Drake"
+    ],
+    "correctIndex": 2,
+    "explanation": "A expedição de Fernão de Magalhães (completada por Elcano) realizou a primeira volta ao mundo."
+  },
+  {
+    "id": 151,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Qual instrumento era essencial para a navegação?",
+    "options": [
+      "Telescópio",
+      "Astrolábio",
+      "Microscópio",
+      "Termômetro"
+    ],
+    "correctIndex": 1,
+    "explanation": "O astrolábio era usado para determinar a latitude medindo a posição dos astros."
+  },
+  {
+    "id": 152,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "O que eram as caravelas?",
+    "options": [
+      "Armas de fogo",
+      "Embarcações ágeis usadas nas explorações",
+      "Mapas antigos",
+      "Moedas de troca"
+    ],
+    "correctIndex": 1,
+    "explanation": "As caravelas eram navios leves e velozes desenvolvidos pelos portugueses para explorações marítimas."
+  },
+  {
+    "id": 153,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Quem contornou o Cabo da Boa Esperança pela primeira vez?",
+    "options": [
+      "Colombo",
+      "Bartolomeu Dias",
+      "Cabral",
+      "Américo Vespúcio"
+    ],
+    "correctIndex": 1,
+    "explanation": "Bartolomeu Dias contornou o extremo sul da África em 1488, abrindo caminho para as Índias."
+  },
+  {
+    "id": 154,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Por que as especiarias eram tão valiosas?",
+    "options": [
+      "Eram raras e usadas como tempero e conservante",
+      "Serviam como arma",
+      "Eram usadas como combustível",
+      "Não tinham valor real"
+    ],
+    "correctIndex": 0,
+    "explanation": "Especiarias como pimenta e canela eram raras na Europa e essenciais para conservar e temperar alimentos."
+  },
+  {
+    "id": 155,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Qual foi o papel de Henrique, o Navegador?",
+    "options": [
+      "Primeiro a chegar à América",
+      "Patrocinou expedições portuguesas",
+      "Inventou a bússola",
+      "Descobriu a Austrália"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Infante D. Henrique patrocinou expedições e fundou a Escola de Sagres, impulsionando as navegações."
+  },
+  {
+    "id": 156,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Vasco da Gama chegou a qual destino em 1498?",
+    "options": [
+      "Brasil",
+      "Índia",
+      "China",
+      "Japão"
+    ],
+    "correctIndex": 1,
+    "explanation": "Vasco da Gama chegou a Calicute, na Índia, em 1498, completando a rota marítima para o Oriente."
+  },
+  {
+    "id": 157,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "O que era o escorbuto?",
+    "options": [
+      "Doença causada por falta de vitamina C",
+      "Tipo de tempestade",
+      "Instrumento de navegação",
+      "Imposto colonial"
+    ],
+    "correctIndex": 0,
+    "explanation": "O escorbuto, causado por deficiência de vitamina C, foi uma das principais doenças nas longas viagens."
+  },
+  {
+    "id": 158,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Quem deu o nome ao continente americano?",
+    "options": [
+      "Colombo",
+      "Cabral",
+      "Em homenagem a Américo Vespúcio",
+      "Magalhães"
+    ],
+    "correctIndex": 2,
+    "explanation": "O nome América vem de Américo Vespúcio, que identificou que se tratava de um novo continente."
+  },
+  {
+    "id": 159,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "O que motivou a Espanha a financiar Colombo?",
+    "options": [
+      "Rivalidade com Portugal na busca por rotas",
+      "Interesse em pesquisa",
+      "Turismo",
+      "Motivos religiosos apenas"
+    ],
+    "correctIndex": 0,
+    "explanation": "A Espanha financiou Colombo para competir com Portugal na busca por rotas comerciais marítimas."
+  },
+  {
+    "id": 160,
+    "level": 4,
+    "difficulty": "fácil",
+    "topic": "Grandes Navegações",
+    "question": "Qual era o produto mais buscado nas Índias?",
+    "options": [
+      "Ouro",
+      "Pimenta-do-reino",
+      "Algodão",
+      "Seda"
+    ],
+    "correctIndex": 1,
+    "explanation": "A pimenta-do-reino era a especiaria mais valiosa e cobiçada no comércio com o Oriente."
+  },
+  {
+    "id": 161,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "Qual foi o primeiro produto explorado no Brasil colonial?",
+    "options": [
+      "Ouro",
+      "Açúcar",
+      "Pau-brasil",
+      "Café"
+    ],
+    "correctIndex": 2,
+    "explanation": "O pau-brasil foi o primeiro recurso explorado pelos portugueses, dando nome ao país."
+  },
+  {
+    "id": 162,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "O que eram as capitanias hereditárias?",
+    "options": [
+      "Províncias independentes",
+      "Divisões territoriais administradas por donatários",
+      "Regiões indígenas",
+      "Colônias espanholas"
+    ],
+    "correctIndex": 1,
+    "explanation": "As capitanias hereditárias dividiam o território em faixas governadas por donatários nomeados pelo rei."
+  },
+  {
+    "id": 163,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "Quem foram os bandeirantes?",
+    "options": [
+      "Marinheiros",
+      "Exploradores que desbravaram o interior do Brasil",
+      "Religiosos",
+      "Comerciantes costeiros"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os bandeirantes foram exploradores que adentraram o interior em busca de ouro, pedras e indígenas."
+  },
+  {
+    "id": 164,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "O que foi a economia açucareira?",
+    "options": [
+      "Cultivo doméstico",
+      "Base econômica colonial com engenhos e trabalho escravo",
+      "Exportação de cacau",
+      "Pecuária intensiva"
+    ],
+    "correctIndex": 1,
+    "explanation": "A economia açucareira foi a principal atividade colonial, baseada em engenhos e mão de obra escrava."
+  },
+  {
+    "id": 165,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "Qual era o papel dos jesuítas no Brasil colonial?",
+    "options": [
+      "Explorar ouro",
+      "Catequizar indígenas e fundar missões",
+      "Administrar capitanias",
+      "Comandar o exército"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os jesuítas vieram ao Brasil para catequizar os indígenas e fundaram diversas missões e escolas."
+  },
+  {
+    "id": 166,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "O que foi a invasão holandesa no Brasil?",
+    "options": [
+      "Invasão no Sul",
+      "Ocupação do Nordeste por holandeses no séc. XVII",
+      "Ataque ao Rio de Janeiro",
+      "Invasão do Pará"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os holandeses ocuparam o Nordeste brasileiro (1630-1654), com destaque para o governo de Nassau."
+  },
+  {
+    "id": 167,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "Quem foi Maurício de Nassau?",
+    "options": [
+      "Rei de Portugal",
+      "Governante holandês do Nordeste brasileiro",
+      "Bandeirante",
+      "Papa"
+    ],
+    "correctIndex": 1,
+    "explanation": "Maurício de Nassau governou o Brasil holandês (1637-1644), promovendo desenvolvimento e tolerância religiosa."
+  },
+  {
+    "id": 168,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "O que foi o Ciclo do Ouro?",
+    "options": [
+      "Período de mineração em Minas Gerais no séc. XVIII",
+      "Comércio de joias",
+      "Exportação de café",
+      "Era das navegações"
+    ],
+    "correctIndex": 0,
+    "explanation": "O Ciclo do Ouro ocorreu no século XVIII em Minas Gerais, atraindo milhares de pessoas ao interior."
+  },
+  {
+    "id": 169,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "O que era o Quilombo dos Palmares?",
+    "options": [
+      "Fazenda de café",
+      "Comunidade de escravos fugidos em Alagoas",
+      "Vila portuguesa",
+      "Missão jesuíta"
+    ],
+    "correctIndex": 1,
+    "explanation": "Palmares foi o maior quilombo do Brasil colonial, liderado por Zumbi, e resistiu por quase um século."
+  },
+  {
+    "id": 170,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "Qual era a principal mão de obra nos engenhos?",
+    "options": [
+      "Indígena assalariada",
+      "Africana escravizada",
+      "Europeia imigrante",
+      "Asiática contratada"
+    ],
+    "correctIndex": 1,
+    "explanation": "A mão de obra escrava africana era a base da produção açucareira nos engenhos coloniais."
+  },
+  {
+    "id": 171,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "O que foi a Inconfidência Mineira?",
+    "options": [
+      "Revolta escrava",
+      "Movimento pela independência de Minas Gerais",
+      "Invasão francesa",
+      "Guerra entre capitanias"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Inconfidência Mineira (1789) foi uma conspiração pela independência, liderada por Tiradentes."
+  },
+  {
+    "id": 172,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "O que era o pacto colonial?",
+    "options": [
+      "Acordo entre indígenas",
+      "Relação exclusiva de comércio entre colônia e metrópole",
+      "Tratado de paz",
+      "Lei abolicionista"
+    ],
+    "correctIndex": 1,
+    "explanation": "O pacto colonial obrigava a colônia a comerciar exclusivamente com a metrópole portuguesa."
+  },
+  {
+    "id": 173,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "Qual cidade foi a primeira capital do Brasil?",
+    "options": [
+      "Rio de Janeiro",
+      "São Paulo",
+      "Salvador",
+      "Recife"
+    ],
+    "correctIndex": 2,
+    "explanation": "Salvador foi a primeira capital do Brasil colonial, de 1549 até 1763."
+  },
+  {
+    "id": 174,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "O que eram os engenhos?",
+    "options": [
+      "Fábricas têxteis",
+      "Propriedades de produção de açúcar",
+      "Minas de ouro",
+      "Portos comerciais"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os engenhos eram grandes propriedades rurais dedicadas à produção de açúcar de cana."
+  },
+  {
+    "id": 175,
+    "level": 5,
+    "difficulty": "fácil",
+    "topic": "Brasil Colonial",
+    "question": "Quem foi Zumbi dos Palmares?",
+    "options": [
+      "Governador colonial",
+      "Líder do Quilombo dos Palmares",
+      "Bandeirante famoso",
+      "Missionário jesuíta"
+    ],
+    "correctIndex": 1,
+    "explanation": "Zumbi foi o último líder do Quilombo dos Palmares, símbolo da resistência negra no Brasil."
+  },
+  {
+    "id": 176,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Em que ano a Bastilha foi tomada?",
+    "options": [
+      "1776",
+      "1789",
+      "1799",
+      "1804"
+    ],
+    "correctIndex": 1,
+    "explanation": "A queda da Bastilha em 14 de julho de 1789 é o marco inicial da Revolução Francesa."
+  },
+  {
+    "id": 177,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "O que era o Terceiro Estado?",
+    "options": [
+      "Nobreza",
+      "Clero",
+      "Povo comum (burguesia, camponeses, trabalhadores)",
+      "Exército"
+    ],
+    "correctIndex": 2,
+    "explanation": "O Terceiro Estado representava o povo, incluindo burgueses, camponeses e trabalhadores urbanos."
+  },
+  {
+    "id": 178,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Qual documento foi aprovado em 1789?",
+    "options": [
+      "Constituição americana",
+      "Declaração dos Direitos do Homem e do Cidadão",
+      "Tratado de Versalhes",
+      "Código Napoleônico"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Declaração dos Direitos do Homem e do Cidadão proclamou liberdade, igualdade e fraternidade."
+  },
+  {
+    "id": 179,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Quem liderou o período do Terror?",
+    "options": [
+      "Napoleão",
+      "Luís XVI",
+      "Robespierre",
+      "Voltaire"
+    ],
+    "correctIndex": 2,
+    "explanation": "Maximilien de Robespierre liderou o Comitê de Salvação Pública durante o período do Terror."
+  },
+  {
+    "id": 180,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Qual era o lema da Revolução Francesa?",
+    "options": [
+      "Deus, Pátria e Família",
+      "Liberdade, Igualdade e Fraternidade",
+      "Ordem e Progresso",
+      "Paz e Amor"
+    ],
+    "correctIndex": 1,
+    "explanation": "'Liberté, Égalité, Fraternité' tornou-se o lema da república francesa."
+  },
+  {
+    "id": 181,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "O que foi a guilhotina durante a Revolução?",
+    "options": [
+      "Arma de guerra",
+      "Instrumento de execução usado em massa",
+      "Símbolo de liberdade",
+      "Ferramenta agrícola"
+    ],
+    "correctIndex": 1,
+    "explanation": "A guilhotina foi amplamente usada para execuções durante o período do Terror."
+  },
+  {
+    "id": 182,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Quem era o rei durante a Revolução?",
+    "options": [
+      "Luís XIV",
+      "Luís XV",
+      "Luís XVI",
+      "Carlos X"
+    ],
+    "correctIndex": 2,
+    "explanation": "Luís XVI era o rei da França quando a revolução eclodiu; foi guilhotinado em 1793."
+  },
+  {
+    "id": 183,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "O que foram os Estados Gerais?",
+    "options": [
+      "Províncias francesas",
+      "Assembleia dos três estados convocada pelo rei",
+      "Exércitos regionais",
+      "Tribunais"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os Estados Gerais eram a assembleia que reunia representantes do clero, nobreza e Terceiro Estado."
+  },
+  {
+    "id": 184,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Qual filósofo iluminista influenciou a revolução com o 'Contrato Social'?",
+    "options": [
+      "Voltaire",
+      "Montesquieu",
+      "Rousseau",
+      "Diderot"
+    ],
+    "correctIndex": 2,
+    "explanation": "Jean-Jacques Rousseau propôs a soberania popular e o contrato social entre governantes e governados."
+  },
+  {
+    "id": 185,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "O que foi o Diretório?",
+    "options": [
+      "Governo de cinco membros após o Terror",
+      "Conselho real",
+      "Partido político",
+      "Tribunal revolucionário"
+    ],
+    "correctIndex": 0,
+    "explanation": "O Diretório governou a França de 1795 a 1799, entre o Terror e a ascensão de Napoleão."
+  },
+  {
+    "id": 186,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Qual foi a causa econômica da Revolução?",
+    "options": [
+      "Excesso de riqueza",
+      "Crise financeira com altos impostos sobre o povo",
+      "Abundância de alimentos",
+      "Comércio próspero"
+    ],
+    "correctIndex": 1,
+    "explanation": "A França enfrentava grave crise financeira com impostos pesados sobre o Terceiro Estado."
+  },
+  {
+    "id": 187,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "O que aconteceu com Maria Antonieta?",
+    "options": [
+      "Fugiu para a Áustria",
+      "Foi guilhotinada",
+      "Governou a França",
+      "Exilou-se na Inglaterra"
+    ],
+    "correctIndex": 1,
+    "explanation": "Maria Antonieta, esposa de Luís XVI, foi guilhotinada em outubro de 1793."
+  },
+  {
+    "id": 188,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "O que era a Assembleia Nacional Constituinte?",
+    "options": [
+      "Parlamento real",
+      "Assembleia criada pelo Terceiro Estado para redigir uma constituição",
+      "Tribunal militar",
+      "Conselho religioso"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Terceiro Estado se autoproclamou Assembleia Nacional para criar uma constituição."
+  },
+  {
+    "id": 189,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "Qual classe social mais se beneficiou da Revolução?",
+    "options": [
+      "Nobreza",
+      "Clero",
+      "Burguesia",
+      "Camponeses"
+    ],
+    "correctIndex": 2,
+    "explanation": "A burguesia foi a maior beneficiada, conquistando poder político e econômico."
+  },
+  {
+    "id": 190,
+    "level": 6,
+    "difficulty": "médio",
+    "topic": "Revolução Francesa",
+    "question": "O que foi o juramento do Jogo da Péla?",
+    "options": [
+      "Competição esportiva",
+      "Juramento de não se separar até criar uma constituição",
+      "Acordo comercial",
+      "Tratado de paz"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os deputados do Terceiro Estado juraram não se separar até elaborar uma constituição para a França."
+  },
+  {
+    "id": 191,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Em que ano Napoleão se coroou imperador?",
+    "options": [
+      "1799",
+      "1802",
+      "1804",
+      "1810"
+    ],
+    "correctIndex": 2,
+    "explanation": "Napoleão coroou-se imperador da França em 2 de dezembro de 1804."
+  },
+  {
+    "id": 192,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "O que foi o Código Napoleônico?",
+    "options": [
+      "Estratégia militar",
+      "Conjunto de leis civis que influenciou o mundo",
+      "Tratado de paz",
+      "Manifesto político"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Código Napoleônico reformou o direito civil francês e influenciou sistemas jurídicos globais."
+  },
+  {
+    "id": 193,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Qual foi a maior derrota de Napoleão?",
+    "options": [
+      "Batalha de Austerlitz",
+      "Invasão da Rússia",
+      "Batalha de Trafalgar",
+      "Campanha do Egito"
+    ],
+    "correctIndex": 1,
+    "explanation": "A invasão da Rússia em 1812 foi desastrosa, com a Grande Armée praticamente destruída pelo inverno."
+  },
+  {
+    "id": 194,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Onde Napoleão foi exilado pela primeira vez?",
+    "options": [
+      "Santa Helena",
+      "Córsega",
+      "Ilha de Elba",
+      "Sicília"
+    ],
+    "correctIndex": 2,
+    "explanation": "Após abdicar em 1814, Napoleão foi exilado na Ilha de Elba, de onde escapou."
+  },
+  {
+    "id": 195,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "O que foi a Batalha de Waterloo?",
+    "options": [
+      "Vitória de Napoleão",
+      "Derrota definitiva de Napoleão em 1815",
+      "Batalha naval",
+      "Conflito colonial"
+    ],
+    "correctIndex": 1,
+    "explanation": "Em Waterloo (1815), Napoleão foi derrotado definitivamente pelas forças aliadas."
+  },
+  {
+    "id": 196,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "O que foi o Bloqueio Continental?",
+    "options": [
+      "Bloqueio naval da França",
+      "Proibição de comércio europeu com a Inglaterra",
+      "Cerco a Moscou",
+      "Embargo a colônias"
+    ],
+    "correctIndex": 1,
+    "explanation": "Napoleão proibiu países europeus de comerciar com a Inglaterra para enfraquecê-la economicamente."
+  },
+  {
+    "id": 197,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Qual país derrotou Napoleão em Trafalgar?",
+    "options": [
+      "Rússia",
+      "Prússia",
+      "Inglaterra",
+      "Áustria"
+    ],
+    "correctIndex": 2,
+    "explanation": "A marinha britânica, liderada por Nelson, venceu a frota franco-espanhola em Trafalgar (1805)."
+  },
+  {
+    "id": 198,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "O que foi o Congresso de Viena?",
+    "options": [
+      "Reunião para reorganizar a Europa após Napoleão",
+      "Festival cultural",
+      "Aliança militar",
+      "Tratado comercial"
+    ],
+    "correctIndex": 0,
+    "explanation": "O Congresso de Viena (1814-1815) redesenhou o mapa europeu e restaurou monarquias."
+  },
+  {
+    "id": 199,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Como Napoleão chegou ao poder?",
+    "options": [
+      "Eleição democrática",
+      "Golpe de Estado (18 Brumário)",
+      "Herança real",
+      "Revolução popular"
+    ],
+    "correctIndex": 1,
+    "explanation": "Napoleão tomou o poder em 1799 através do golpe do 18 de Brumário."
+  },
+  {
+    "id": 200,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Onde Napoleão morreu?",
+    "options": [
+      "Paris",
+      "Ilha de Elba",
+      "Santa Helena",
+      "Córsega"
+    ],
+    "correctIndex": 2,
+    "explanation": "Napoleão morreu em exílio na ilha de Santa Helena, no Atlântico Sul, em 1821."
+  },
+  {
+    "id": 201,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "O que foram os Cem Dias?",
+    "options": [
+      "Primeira campanha",
+      "Retorno de Napoleão ao poder antes de Waterloo",
+      "Cerco a Paris",
+      "Período legislativo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os Cem Dias referem-se ao breve retorno de Napoleão ao poder em 1815, antes de Waterloo."
+  },
+  {
+    "id": 202,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Qual foi a política de Napoleão para a educação?",
+    "options": [
+      "Aboliu escolas",
+      "Criou liceus e universidades estatais",
+      "Privatizou todo ensino",
+      "Não se envolveu"
+    ],
+    "correctIndex": 1,
+    "explanation": "Napoleão reformou a educação francesa, criando liceus e centralizando o sistema educacional."
+  },
+  {
+    "id": 203,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "O que foi a Confederação do Reno?",
+    "options": [
+      "Aliança de estados alemães sob proteção de Napoleão",
+      "Liga esportiva",
+      "Pacto religioso",
+      "Federação suíça"
+    ],
+    "correctIndex": 0,
+    "explanation": "A Confederação do Reno agrupou estados alemães sob influência napoleônica, dissolvendo o Sacro Império."
+  },
+  {
+    "id": 204,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "Qual foi o impacto de Napoleão na América Latina?",
+    "options": [
+      "Colonizou países",
+      "A invasão da Espanha enfraqueceu o controle colonial, estimulando independências",
+      "Nenhum impacto",
+      "Aliou-se aos colonizadores"
+    ],
+    "correctIndex": 1,
+    "explanation": "A invasão napoleônica da Espanha desestabilizou o poder colonial, facilitando os movimentos de independência."
+  },
+  {
+    "id": 205,
+    "level": 7,
+    "difficulty": "médio",
+    "topic": "Era Napoleônica",
+    "question": "O que foi a Batalha de Austerlitz?",
+    "options": [
+      "Derrota francesa",
+      "Grande vitória de Napoleão sobre Rússia e Áustria",
+      "Batalha naval",
+      "Conflito colonial"
+    ],
+    "correctIndex": 1,
+    "explanation": "Austerlitz (1805) é considerada a obra-prima militar de Napoleão, derrotando russos e austríacos."
+  },
+  {
+    "id": 206,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "Em que data o Brasil declarou independência?",
+    "options": [
+      "15 de novembro de 1889",
+      "7 de setembro de 1822",
+      "22 de abril de 1500",
+      "13 de maio de 1888"
+    ],
+    "correctIndex": 1,
+    "explanation": "D. Pedro I declarou a independência do Brasil em 7 de setembro de 1822 às margens do Ipiranga."
+  },
+  {
+    "id": 207,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "Quem proclamou a independência do Brasil?",
+    "options": [
+      "D. João VI",
+      "José Bonifácio",
+      "D. Pedro I",
+      "Tiradentes"
+    ],
+    "correctIndex": 2,
+    "explanation": "D. Pedro I proclamou a independência com o famoso grito do Ipiranga."
+  },
+  {
+    "id": 208,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "O que motivou a vinda da família real ao Brasil?",
+    "options": [
+      "Turismo",
+      "Invasão napoleônica de Portugal",
+      "Busca por ouro",
+      "Terremoto em Lisboa"
+    ],
+    "correctIndex": 1,
+    "explanation": "A família real fugiu para o Brasil em 1808 para escapar da invasão de Napoleão a Portugal."
+  },
+  {
+    "id": 209,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "O que foi a Abertura dos Portos em 1808?",
+    "options": [
+      "Construção de novos portos",
+      "Fim do monopólio comercial com Portugal",
+      "Início da navegação a vapor",
+      "Acordo com a Espanha"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Abertura dos Portos às Nações Amigas acabou com o monopólio comercial português."
+  },
+  {
+    "id": 210,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "Quem foi José Bonifácio?",
+    "options": [
+      "Primeiro presidente",
+      "Patriarca da Independência e conselheiro de D. Pedro",
+      "General militar",
+      "Religioso influente"
+    ],
+    "correctIndex": 1,
+    "explanation": "José Bonifácio de Andrada e Silva é considerado o Patriarca da Independência do Brasil."
+  },
+  {
+    "id": 211,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "Qual foi a primeira constituição do Brasil?",
+    "options": [
+      "1824",
+      "1891",
+      "1822",
+      "1834"
+    ],
+    "correctIndex": 0,
+    "explanation": "A Constituição de 1824 foi a primeira do Brasil, outorgada por D. Pedro I."
+  },
+  {
+    "id": 212,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "O que foi o Dia do Fico?",
+    "options": [
+      "Feriado nacional",
+      "Dia em que D. Pedro decidiu ficar no Brasil",
+      "Dia da independência",
+      "Aniversário de D. João"
+    ],
+    "correctIndex": 1,
+    "explanation": "Em 9 de janeiro de 1822, D. Pedro declarou 'Se é para o bem de todos, fico', desafiando as Cortes."
+  },
+  {
+    "id": 213,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "O que aconteceu com D. Pedro I após a independência?",
+    "options": [
+      "Governou até morrer",
+      "Abdicou em 1831 e voltou a Portugal",
+      "Foi deposto por golpe",
+      "Fugiu para a Inglaterra"
+    ],
+    "correctIndex": 1,
+    "explanation": "D. Pedro I abdicou em 1831 em favor de seu filho e retornou a Portugal."
+  },
+  {
+    "id": 214,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "O que foi o Período Regencial?",
+    "options": [
+      "Governo de D. Pedro I",
+      "Período entre a abdicação de D. Pedro I e a maioridade de D. Pedro II",
+      "Era colonial",
+      "República Velha"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Período Regencial (1831-1840) foi governado por regentes até D. Pedro II atingir a maioridade."
+  },
+  {
+    "id": 215,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "Qual foi o papel da maçonaria na independência?",
+    "options": [
+      "Nenhum",
+      "Influenciou líderes e articulou o movimento",
+      "Combateu a independência",
+      "Era aliada de Portugal"
+    ],
+    "correctIndex": 1,
+    "explanation": "A maçonaria teve papel significativo na articulação política da independência brasileira."
+  },
+  {
+    "id": 216,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "O que foi a Revolução do Porto?",
+    "options": [
+      "Revolta no Brasil",
+      "Revolução liberal em Portugal que exigiu o retorno de D. João VI",
+      "Conflito colonial",
+      "Invasão francesa"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Revolução do Porto (1820) exigiu o retorno de D. João VI e uma constituição para Portugal."
+  },
+  {
+    "id": 217,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "Qual país foi o primeiro a reconhecer a independência do Brasil?",
+    "options": [
+      "Inglaterra",
+      "Portugal",
+      "EUA",
+      "França"
+    ],
+    "correctIndex": 2,
+    "explanation": "Os Estados Unidos foram o primeiro país a reconhecer a independência do Brasil em 1824."
+  },
+  {
+    "id": 218,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "O que foi o Golpe da Maioridade?",
+    "options": [
+      "Golpe contra D. Pedro I",
+      "Antecipação da maioridade de D. Pedro II aos 14 anos",
+      "Revolução republicana",
+      "Abdicação forçada"
+    ],
+    "correctIndex": 1,
+    "explanation": "Em 1840, a maioridade de D. Pedro II foi antecipada para estabilizar o país."
+  },
+  {
+    "id": 219,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "Quem foi Dona Leopoldina?",
+    "options": [
+      "Rainha de Portugal",
+      "Esposa de D. Pedro I que apoiou a independência",
+      "Líder de revolta",
+      "Princesa espanhola"
+    ],
+    "correctIndex": 1,
+    "explanation": "Dona Leopoldina foi esposa de D. Pedro I e teve papel fundamental na decisão pela independência."
+  },
+  {
+    "id": 220,
+    "level": 8,
+    "difficulty": "médio",
+    "topic": "Independência do Brasil",
+    "question": "O que as Cortes portuguesas queriam do Brasil?",
+    "options": [
+      "Maior autonomia",
+      "Recolonizar o Brasil e revogar suas liberdades",
+      "Independência pacífica",
+      "Aliança igualitária"
+    ],
+    "correctIndex": 1,
+    "explanation": "As Cortes queriam reverter as mudanças feitas por D. João VI e devolver o Brasil ao status de colônia."
+  },
+  {
+    "id": 221,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "Onde começou a Revolução Industrial?",
+    "options": [
+      "França",
+      "Alemanha",
+      "Inglaterra",
+      "Estados Unidos"
+    ],
+    "correctIndex": 2,
+    "explanation": "A Revolução Industrial começou na Inglaterra no final do século XVIII."
+  },
+  {
+    "id": 222,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "Qual invenção foi crucial para a Revolução Industrial?",
+    "options": [
+      "Imprensa",
+      "Máquina a vapor",
+      "Telefone",
+      "Avião"
+    ],
+    "correctIndex": 1,
+    "explanation": "A máquina a vapor de James Watt revolucionou a produção industrial e os transportes."
+  },
+  {
+    "id": 223,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "Qual setor foi o primeiro a se industrializar?",
+    "options": [
+      "Siderurgia",
+      "Têxtil",
+      "Alimentício",
+      "Químico"
+    ],
+    "correctIndex": 1,
+    "explanation": "A indústria têxtil foi a primeira a se mecanizar, especialmente com máquinas de fiar e tecer."
+  },
+  {
+    "id": 224,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "O que foi o ludismo?",
+    "options": [
+      "Movimento artístico",
+      "Destruição de máquinas por trabalhadores",
+      "Filosofia industrial",
+      "Sindicalismo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os ludistas destruíam máquinas por acreditar que elas causavam desemprego."
+  },
+  {
+    "id": 225,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "Qual foi o impacto social da industrialização?",
+    "options": [
+      "Melhoria geral",
+      "Êxodo rural e péssimas condições de trabalho",
+      "Redução da pobreza",
+      "Igualdade social"
+    ],
+    "correctIndex": 1,
+    "explanation": "A industrialização causou êxodo rural, urbanização caótica e condições de trabalho desumanas."
+  },
+  {
+    "id": 226,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "O que foi a Segunda Revolução Industrial?",
+    "options": [
+      "Continuação na Inglaterra",
+      "Fase com eletricidade, petróleo e aço no fim do séc. XIX",
+      "Revolução na Ásia",
+      "Automação digital"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Segunda Revolução Industrial trouxe eletricidade, petróleo e novos materiais como o aço."
+  },
+  {
+    "id": 227,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "Qual transporte foi revolucionado pela máquina a vapor?",
+    "options": [
+      "Avião",
+      "Trem (ferrovia)",
+      "Automóvel",
+      "Bicicleta"
+    ],
+    "correctIndex": 1,
+    "explanation": "A locomotiva a vapor revolucionou o transporte terrestre com a expansão das ferrovias."
+  },
+  {
+    "id": 228,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "O que era o trabalho infantil na era industrial?",
+    "options": [
+      "Proibido",
+      "Comum, com crianças trabalhando longas jornadas em fábricas",
+      "Raro e bem pago",
+      "Educacional"
+    ],
+    "correctIndex": 1,
+    "explanation": "Crianças eram exploradas em fábricas e minas com jornadas de até 16 horas."
+  },
+  {
+    "id": 229,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "Quem foi Adam Smith?",
+    "options": [
+      "Inventor",
+      "Economista que defendeu o liberalismo econômico",
+      "Rei inglês",
+      "Sindicalista"
+    ],
+    "correctIndex": 1,
+    "explanation": "Adam Smith escreveu 'A Riqueza das Nações', defendendo o livre mercado e a mão invisível."
+  },
+  {
+    "id": 230,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "O que foi o cartismo?",
+    "options": [
+      "Movimento artístico",
+      "Movimento por direitos políticos dos trabalhadores na Inglaterra",
+      "Religião",
+      "Partido conservador"
+    ],
+    "correctIndex": 1,
+    "explanation": "O cartismo reivindicou o sufrágio universal masculino e direitos trabalhistas na Inglaterra."
+  },
+  {
+    "id": 231,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "Qual material substituiu o ferro na Segunda Revolução Industrial?",
+    "options": [
+      "Bronze",
+      "Aço",
+      "Alumínio",
+      "Plástico"
+    ],
+    "correctIndex": 1,
+    "explanation": "O aço, mais resistente e flexível que o ferro, tornou-se o material central da industrialização."
+  },
+  {
+    "id": 232,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "O que Karl Marx propôs?",
+    "options": [
+      "Liberalismo",
+      "Socialismo científico com a luta de classes",
+      "Absolutismo",
+      "Anarquismo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Marx propôs o socialismo científico, analisando o capitalismo pela luta entre burguesia e proletariado."
+  },
+  {
+    "id": 233,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "O que eram as trade unions?",
+    "options": [
+      "Empresas",
+      "Sindicatos de trabalhadores na Inglaterra",
+      "Bancos",
+      "Escolas"
+    ],
+    "correctIndex": 1,
+    "explanation": "As trade unions foram os primeiros sindicatos organizados para defender os direitos dos trabalhadores."
+  },
+  {
+    "id": 234,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "Qual foi o impacto ambiental da industrialização?",
+    "options": [
+      "Nenhum",
+      "Poluição do ar e água, desmatamento",
+      "Melhoria ambiental",
+      "Criação de reservas"
+    ],
+    "correctIndex": 1,
+    "explanation": "A industrialização causou poluição massiva do ar e da água e desmatamento para obter combustível."
+  },
+  {
+    "id": 235,
+    "level": 9,
+    "difficulty": "médio",
+    "topic": "Revolução Industrial",
+    "question": "O que foi a urbanização industrial?",
+    "options": [
+      "Planejamento urbano",
+      "Crescimento desordenado de cidades ao redor de fábricas",
+      "Ruralização",
+      "Suburbanização"
+    ],
+    "correctIndex": 1,
+    "explanation": "As cidades cresceram de forma caótica ao redor das fábricas, sem infraestrutura adequada."
+  },
+  {
+    "id": 236,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "Em que ano a escravidão foi abolida no Brasil?",
+    "options": [
+      "1850",
+      "1871",
+      "1888",
+      "1891"
+    ],
+    "correctIndex": 2,
+    "explanation": "A Lei Áurea, assinada em 13 de maio de 1888, aboliu a escravidão no Brasil."
+  },
+  {
+    "id": 237,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "Quem assinou a Lei Áurea?",
+    "options": [
+      "D. Pedro II",
+      "Princesa Isabel",
+      "Deodoro da Fonseca",
+      "José Bonifácio"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Princesa Isabel assinou a Lei Áurea como regente na ausência de D. Pedro II."
+  },
+  {
+    "id": 238,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "O que foi a Lei do Ventre Livre?",
+    "options": [
+      "Libertação total",
+      "Filhos de escravas nascidos após 1871 seriam livres",
+      "Lei de imigração",
+      "Reforma agrária"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Lei do Ventre Livre (1871) declarou livres os filhos de mulheres escravizadas nascidos a partir daquela data."
+  },
+  {
+    "id": 239,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "O que foi a Lei dos Sexagenários?",
+    "options": [
+      "Aposentadoria",
+      "Libertação de escravos com mais de 60 anos",
+      "Direito de voto",
+      "Imposto sobre escravos"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Lei dos Sexagenários (1885) libertou escravos com mais de 60 anos de idade."
+  },
+  {
+    "id": 240,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "O que foi a Lei Eusébio de Queirós?",
+    "options": [
+      "Aboliu a escravidão",
+      "Proibiu o tráfico de escravos em 1850",
+      "Libertou crianças",
+      "Criou quilombos"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Lei Eusébio de Queirós (1850) proibiu o tráfico transatlântico de escravos para o Brasil."
+  },
+  {
+    "id": 241,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "Qual movimento lutou contra a escravidão?",
+    "options": [
+      "Monarquismo",
+      "Abolicionismo",
+      "Republicanismo",
+      "Positivismo"
+    ],
+    "correctIndex": 1,
+    "explanation": "O movimento abolicionista uniu intelectuais, políticos e ex-escravos na luta pelo fim da escravidão."
+  },
+  {
+    "id": 242,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "Quem foi Luís Gama?",
+    "options": [
+      "Imperador",
+      "Abolicionista, poeta e advogado que libertou centenas de escravos",
+      "General",
+      "Fazendeiro"
+    ],
+    "correctIndex": 1,
+    "explanation": "Luís Gama foi um abolicionista negro que usou o direito para libertar escravos ilegalmente mantidos."
+  },
+  {
+    "id": 243,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "O que foi o movimento abolicionista no Ceará?",
+    "options": [
+      "Resistência à abolição",
+      "Ceará aboliu a escravidão 4 anos antes da Lei Áurea",
+      "Revolta de escravos",
+      "Campanha pró-escravidão"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Ceará aboliu a escravidão em 1884, quatro anos antes da Lei Áurea, tornando-se pioneiro."
+  },
+  {
+    "id": 244,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "Qual era a principal forma de resistência dos escravizados?",
+    "options": [
+      "Greves",
+      "Fugas e formação de quilombos",
+      "Protestos pacíficos",
+      "Petições"
+    ],
+    "correctIndex": 1,
+    "explanation": "Fugas individuais ou coletivas e a formação de quilombos eram as principais formas de resistência."
+  },
+  {
+    "id": 245,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "Quem foi Joaquim Nabuco?",
+    "options": [
+      "Militar",
+      "Político e escritor abolicionista",
+      "Fazendeiro",
+      "Religioso"
+    ],
+    "correctIndex": 1,
+    "explanation": "Joaquim Nabuco foi um dos mais importantes líderes abolicionistas, atuando no parlamento e na imprensa."
+  },
+  {
+    "id": 246,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "Qual país foi o último das Américas a abolir a escravidão?",
+    "options": [
+      "Estados Unidos",
+      "Cuba",
+      "Brasil",
+      "Haiti"
+    ],
+    "correctIndex": 2,
+    "explanation": "O Brasil foi o último país das Américas a abolir a escravidão, em 1888."
+  },
+  {
+    "id": 247,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "O que aconteceu com os ex-escravos após a abolição?",
+    "options": [
+      "Receberam terras",
+      "Foram marginalizados sem políticas de inclusão",
+      "Voltaram à África",
+      "Receberam indenização"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os ex-escravos foram largados sem terra, educação ou assistência, perpetuando a desigualdade racial."
+  },
+  {
+    "id": 248,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "O que era o tráfico negreiro?",
+    "options": [
+      "Comércio de especiarias",
+      "Comércio forçado de africanos escravizados pelo Atlântico",
+      "Rota comercial europeia",
+      "Migração voluntária"
+    ],
+    "correctIndex": 1,
+    "explanation": "O tráfico negreiro transportou milhões de africanos à força para as Américas por mais de três séculos."
+  },
+  {
+    "id": 249,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "Quem foi André Rebouças?",
+    "options": [
+      "Poeta",
+      "Engenheiro e abolicionista negro",
+      "Político conservador",
+      "General"
+    ],
+    "correctIndex": 1,
+    "explanation": "André Rebouças foi um engenheiro e abolicionista que defendeu a reforma agrária para ex-escravos."
+  },
+  {
+    "id": 250,
+    "level": 10,
+    "difficulty": "médio",
+    "topic": "Abolição da Escravidão",
+    "question": "Qual era a relação entre abolição e república?",
+    "options": [
+      "Nenhuma",
+      "A abolição enfraqueceu a monarquia e acelerou a república",
+      "A república impediu a abolição",
+      "A monarquia fortaleceu-se"
+    ],
+    "correctIndex": 1,
+    "explanation": "A abolição sem indenização afastou fazendeiros da monarquia, acelerando o movimento republicano."
+  },
+  {
+    "id": 251,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Quando começou a Primeira Guerra Mundial?",
+    "options": [
+      "1912",
+      "1914",
+      "1916",
+      "1918"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Primeira Guerra Mundial começou em 28 de julho de 1914."
+  },
+  {
+    "id": 252,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Qual evento detonou a guerra?",
+    "options": [
+      "Invasão da Polônia",
+      "Assassinato do arquiduque Franz Ferdinand",
+      "Revolução Russa",
+      "Crise econômica"
+    ],
+    "correctIndex": 1,
+    "explanation": "O assassinato do arquiduque Francisco Ferdinando da Áustria em Sarajevo foi o estopim da guerra."
+  },
+  {
+    "id": 253,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "O que era a Tríplice Entente?",
+    "options": [
+      "Alemanha, Áustria e Itália",
+      "França, Inglaterra e Rússia",
+      "EUA, França e Japão",
+      "Rússia, Alemanha e Turquia"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Tríplice Entente uniu França, Grã-Bretanha e Rússia contra as Potências Centrais."
+  },
+  {
+    "id": 254,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "O que caracterizou a guerra de trincheiras?",
+    "options": [
+      "Batalhas rápidas",
+      "Combates longos e estáticos em valas fortificadas",
+      "Guerra naval",
+      "Guerrilha urbana"
+    ],
+    "correctIndex": 1,
+    "explanation": "A guerra de trincheiras caracterizou-se por combates estáticos em valas, com enormes perdas humanas."
+  },
+  {
+    "id": 255,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Quando os EUA entraram na guerra?",
+    "options": [
+      "1914",
+      "1915",
+      "1917",
+      "1918"
+    ],
+    "correctIndex": 2,
+    "explanation": "Os EUA entraram na guerra em 1917 após ataques a navios americanos por submarinos alemães."
+  },
+  {
+    "id": 256,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "O que foi o Tratado de Versalhes?",
+    "options": [
+      "Aliança militar",
+      "Tratado de paz que puniu severamente a Alemanha",
+      "Acordo comercial",
+      "Divisão colonial"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Tratado de Versalhes (1919) impôs pesadas punições à Alemanha, gerando ressentimento."
+  },
+  {
+    "id": 257,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Qual arma foi usada pela primeira vez em larga escala?",
+    "options": [
+      "Bomba atômica",
+      "Gás venenoso",
+      "Mísseis",
+      "Drones"
+    ],
+    "correctIndex": 1,
+    "explanation": "Gases venenosos como o gás mostarda foram usados pela primeira vez em larga escala na Primeira Guerra."
+  },
+  {
+    "id": 258,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Quantos países participaram da guerra?",
+    "options": [
+      "5",
+      "10",
+      "Mais de 30",
+      "Apenas 2"
+    ],
+    "correctIndex": 2,
+    "explanation": "Mais de 30 países participaram da Primeira Guerra Mundial direta ou indiretamente."
+  },
+  {
+    "id": 259,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "O que foi a Liga das Nações?",
+    "options": [
+      "Aliança militar",
+      "Organização internacional para manter a paz após a guerra",
+      "Pacto econômico",
+      "Federação europeia"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Liga das Nações foi criada após a guerra para promover a paz, mas fracassou em evitar a Segunda Guerra."
+  },
+  {
+    "id": 260,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Qual império não sobreviveu à guerra?",
+    "options": [
+      "Britânico",
+      "Otomano",
+      "Japonês",
+      "Português"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Império Otomano foi um dos quatro impérios que se desintegraram após a Primeira Guerra."
+  },
+  {
+    "id": 261,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "O que foi a Batalha de Verdun?",
+    "options": [
+      "Batalha naval",
+      "Uma das mais sangrentas batalhas na frente ocidental",
+      "Conflito aéreo",
+      "Cerco a Paris"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Batalha de Verdun (1916) durou 10 meses e é símbolo da brutalidade da guerra de trincheiras."
+  },
+  {
+    "id": 262,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Qual foi o papel das mulheres na guerra?",
+    "options": [
+      "Nenhum",
+      "Assumiram trabalhos em fábricas e hospitais",
+      "Apenas doméstico",
+      "Combatentes na linha de frente"
+    ],
+    "correctIndex": 1,
+    "explanation": "As mulheres assumiram trabalhos em fábricas e enfermarias, fortalecendo o movimento sufragista."
+  },
+  {
+    "id": 263,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "O que foram os tanques de guerra?",
+    "options": [
+      "Veículos civis",
+      "Nova arma blindada usada pela primeira vez nesta guerra",
+      "Barcos",
+      "Aviões"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os tanques foram desenvolvidos pelos britânicos e usados pela primeira vez na Batalha do Somme (1916)."
+  },
+  {
+    "id": 264,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "O que foi o Armistício de 1918?",
+    "options": [
+      "Declaração de guerra",
+      "Acordo de cessar-fogo que encerrou a guerra em 11 de novembro",
+      "Tratado de paz final",
+      "Rendição da França"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Armistício de 11 de novembro de 1918 encerrou os combates da Primeira Guerra Mundial."
+  },
+  {
+    "id": 265,
+    "level": 11,
+    "difficulty": "avançado",
+    "topic": "Primeira Guerra Mundial",
+    "question": "Quantas pessoas morreram na Primeira Guerra?",
+    "options": [
+      "1 milhão",
+      "5 milhões",
+      "Cerca de 17 milhões",
+      "50 milhões"
+    ],
+    "correctIndex": 2,
+    "explanation": "Estima-se que cerca de 17 milhões de pessoas morreram na Primeira Guerra Mundial."
+  },
+  {
+    "id": 266,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que foi a Crise de 1929?",
+    "options": [
+      "Guerra civil",
+      "Quebra da bolsa de valores de Nova York",
+      "Revolução",
+      "Pandemia"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Crise de 1929 foi a quebra da bolsa de Nova York, causando depressão econômica mundial."
+  },
+  {
+    "id": 267,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "Quem foi Benito Mussolini?",
+    "options": [
+      "Rei italiano",
+      "Líder fascista da Itália",
+      "General alemão",
+      "Presidente francês"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mussolini fundou o fascismo e governou a Itália como ditador de 1922 a 1943."
+  },
+  {
+    "id": 268,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que foi a República de Weimar?",
+    "options": [
+      "Estado alemão democrático após a Primeira Guerra",
+      "Império austríaco",
+      "Colônia alemã",
+      "Partido nazista"
+    ],
+    "correctIndex": 0,
+    "explanation": "A República de Weimar foi o regime democrático alemão de 1919 a 1933, enfraquecido por crises."
+  },
+  {
+    "id": 269,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "Como Hitler chegou ao poder?",
+    "options": [
+      "Golpe militar",
+      "Nomeado chanceler legalmente em 1933",
+      "Revolução popular",
+      "Eleição direta"
+    ],
+    "correctIndex": 1,
+    "explanation": "Hitler foi nomeado chanceler em janeiro de 1933 e logo transformou a Alemanha em ditadura."
+  },
+  {
+    "id": 270,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que era o nazismo?",
+    "options": [
+      "Socialismo",
+      "Ideologia ultranacionalista, racista e totalitária",
+      "Liberalismo",
+      "Anarquismo"
+    ],
+    "correctIndex": 1,
+    "explanation": "O nazismo era uma ideologia totalitária baseada no racismo, antissemitismo e expansionismo."
+  },
+  {
+    "id": 271,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que foram as Leis de Nuremberg?",
+    "options": [
+      "Leis trabalhistas",
+      "Leis antissemitas que privaram judeus de direitos",
+      "Constituição",
+      "Código penal"
+    ],
+    "correctIndex": 1,
+    "explanation": "As Leis de Nuremberg (1935) retiraram a cidadania dos judeus e proibiram casamentos mistos."
+  },
+  {
+    "id": 272,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que foi a Noite dos Cristais?",
+    "options": [
+      "Festival",
+      "Pogrom contra judeus com destruição de sinagogas e lojas",
+      "Celebração nacional",
+      "Evento artístico"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Noite dos Cristais (1938) foi um pogrom nazista com destruição massiva de propriedades judaicas."
+  },
+  {
+    "id": 273,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que foi o New Deal?",
+    "options": [
+      "Acordo de paz",
+      "Programa de recuperação econômica dos EUA",
+      "Plano militar",
+      "Tratado comercial"
+    ],
+    "correctIndex": 1,
+    "explanation": "O New Deal foi o programa do presidente Roosevelt para combater a Grande Depressão nos EUA."
+  },
+  {
+    "id": 274,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que foi a Guerra Civil Espanhola?",
+    "options": [
+      "Conflito colonial",
+      "Guerra entre republicanos e nacionalistas de Franco",
+      "Invasão francesa",
+      "Revolta estudantil"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Guerra Civil Espanhola (1936-1939) terminou com a vitória do general Franco e a ditadura."
+  },
+  {
+    "id": 275,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que foi a política de apaziguamento?",
+    "options": [
+      "Agressão militar",
+      "Política de ceder às demandas de Hitler para evitar guerra",
+      "Aliança antifascista",
+      "Bloqueio econômico"
+    ],
+    "correctIndex": 1,
+    "explanation": "A política de apaziguamento permitiu a expansão nazista na esperança de evitar outra guerra."
+  },
+  {
+    "id": 276,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que foi a Marcha sobre Roma?",
+    "options": [
+      "Desfile militar",
+      "Marcha fascista que levou Mussolini ao poder em 1922",
+      "Procissão religiosa",
+      "Protesto estudantil"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Marcha sobre Roma em 1922 pressionou o rei a nomear Mussolini primeiro-ministro."
+  },
+  {
+    "id": 277,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "Qual foi o impacto da Crise de 1929 na Alemanha?",
+    "options": [
+      "Nenhum",
+      "Desemprego massivo que fortaleceu o nazismo",
+      "Prosperidade",
+      "Estabilidade"
+    ],
+    "correctIndex": 1,
+    "explanation": "A crise causou desemprego e miséria na Alemanha, criando terreno fértil para a ascensão nazista."
+  },
+  {
+    "id": 278,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que era o corporativismo fascista?",
+    "options": [
+      "Livre mercado",
+      "Estado controlando relações entre trabalhadores e empregadores",
+      "Comunismo",
+      "Anarquismo"
+    ],
+    "correctIndex": 1,
+    "explanation": "O corporativismo fascista submetia sindicatos e empresas ao controle estatal."
+  },
+  {
+    "id": 279,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "Quem foi Francisco Franco?",
+    "options": [
+      "Presidente democrático",
+      "Ditador da Espanha de 1939 a 1975",
+      "Rei espanhol",
+      "Líder comunista"
+    ],
+    "correctIndex": 1,
+    "explanation": "Franco governou a Espanha como ditador após vencer a Guerra Civil Espanhola."
+  },
+  {
+    "id": 280,
+    "level": 12,
+    "difficulty": "avançado",
+    "topic": "Entreguerras e Fascismo",
+    "question": "O que foi o Anschluss?",
+    "options": [
+      "Partido político",
+      "Anexação da Áustria pela Alemanha nazista em 1938",
+      "Tratado de paz",
+      "Batalha"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Anschluss foi a anexação da Áustria pela Alemanha nazista em março de 1938."
+  },
+  {
+    "id": 281,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "Quando começou a Segunda Guerra Mundial?",
+    "options": [
+      "1937",
+      "1939",
+      "1941",
+      "1942"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Segunda Guerra Mundial começou em 1º de setembro de 1939 com a invasão da Polônia pela Alemanha."
+  },
+  {
+    "id": 282,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "O que foi o Dia D?",
+    "options": [
+      "Rendição alemã",
+      "Invasão aliada da Normandia em 6 de junho de 1944",
+      "Ataque a Pearl Harbor",
+      "Bomba atômica"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Dia D foi o desembarque aliado na Normandia, França, marcando o início da libertação da Europa."
+  },
+  {
+    "id": 283,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "O que foi o Holocausto?",
+    "options": [
+      "Batalha",
+      "Genocídio de 6 milhões de judeus pelos nazistas",
+      "Epidemia",
+      "Crise econômica"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Holocausto foi o extermínio sistemático de 6 milhões de judeus pelo regime nazista."
+  },
+  {
+    "id": 284,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "Qual foi o papel do Brasil na Segunda Guerra?",
+    "options": [
+      "Neutro",
+      "Enviou a FEB para lutar na Itália",
+      "Apoiou o Eixo",
+      "Não participou"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Brasil enviou a Força Expedicionária Brasileira (FEB) para combater na Itália ao lado dos Aliados."
+  },
+  {
+    "id": 285,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "O que foi o ataque a Pearl Harbor?",
+    "options": [
+      "Ataque alemão",
+      "Ataque japonês à base naval americana no Havaí",
+      "Batalha europeia",
+      "Cerco russo"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Japão atacou Pearl Harbor em 7 de dezembro de 1941, levando os EUA à guerra."
+  },
+  {
+    "id": 286,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "Quais eram as potências do Eixo?",
+    "options": [
+      "EUA, URSS, Inglaterra",
+      "Alemanha, Itália, Japão",
+      "França, China, Brasil",
+      "Rússia, Alemanha, França"
+    ],
+    "correctIndex": 1,
+    "explanation": "As potências do Eixo eram Alemanha, Itália e Japão."
+  },
+  {
+    "id": 287,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "O que foi a Batalha de Stalingrado?",
+    "options": [
+      "Vitória alemã",
+      "Derrota decisiva da Alemanha pela URSS",
+      "Batalha naval",
+      "Conflito aéreo"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Batalha de Stalingrado (1942-43) foi o ponto de virada da guerra na frente oriental."
+  },
+  {
+    "id": 288,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "Onde foram lançadas as bombas atômicas?",
+    "options": [
+      "Berlim e Tóquio",
+      "Hiroshima e Nagasaki",
+      "Pearl Harbor e Midway",
+      "Londres e Paris"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os EUA lançaram bombas atômicas em Hiroshima (6/ago) e Nagasaki (9/ago) de 1945."
+  },
+  {
+    "id": 289,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "Quando a guerra terminou na Europa?",
+    "options": [
+      "1944",
+      "8 de maio de 1945",
+      "Agosto de 1945",
+      "1946"
+    ],
+    "correctIndex": 1,
+    "explanation": "A guerra na Europa terminou em 8 de maio de 1945, com a rendição da Alemanha (Dia da Vitória)."
+  },
+  {
+    "id": 290,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "O que foram os campos de concentração?",
+    "options": [
+      "Bases militares",
+      "Campos de extermínio e trabalho forçado nazistas",
+      "Hospitais",
+      "Prisões comuns"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os campos de concentração eram locais de extermínio, trabalho forçado e tortura do regime nazista."
+  },
+  {
+    "id": 291,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "O que foi o Tribunal de Nuremberg?",
+    "options": [
+      "Congresso político",
+      "Julgamento de líderes nazistas por crimes de guerra",
+      "Festival",
+      "Parlamento alemão"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Tribunal de Nuremberg (1945-46) julgou e condenou líderes nazistas por crimes contra a humanidade."
+  },
+  {
+    "id": 292,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "Qual foi a participação da URSS na guerra?",
+    "options": [
+      "Aliada do Eixo",
+      "Fundamental para a derrota da Alemanha na frente oriental",
+      "Neutra",
+      "Apenas forneceu armas"
+    ],
+    "correctIndex": 1,
+    "explanation": "A URSS sofreu as maiores perdas e foi decisiva na derrota da Alemanha na frente oriental."
+  },
+  {
+    "id": 293,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "O que foi a Resistência Francesa?",
+    "options": [
+      "Exército regular",
+      "Movimento clandestino contra a ocupação nazista",
+      "Partido político",
+      "Liga esportiva"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Resistência Francesa combateu clandestinamente a ocupação alemã durante a guerra."
+  },
+  {
+    "id": 294,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "O que foi a Conferência de Yalta?",
+    "options": [
+      "Tratado de paz",
+      "Reunião entre EUA, URSS e UK para planejar o pós-guerra",
+      "Julgamento de guerra",
+      "Aliança militar"
+    ],
+    "correctIndex": 1,
+    "explanation": "Em Yalta (1945), Roosevelt, Stalin e Churchill planejaram a reorganização da Europa pós-guerra."
+  },
+  {
+    "id": 295,
+    "level": 13,
+    "difficulty": "avançado",
+    "topic": "Segunda Guerra Mundial",
+    "question": "Quantas pessoas morreram na Segunda Guerra?",
+    "options": [
+      "10 milhões",
+      "30 milhões",
+      "Cerca de 70-85 milhões",
+      "100 milhões"
+    ],
+    "correctIndex": 2,
+    "explanation": "Estima-se que 70-85 milhões de pessoas morreram, sendo o conflito mais mortal da história."
+  },
+  {
+    "id": 296,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi a Guerra Fria?",
+    "options": [
+      "Guerra nuclear",
+      "Rivalidade geopolítica entre EUA e URSS sem conflito direto",
+      "Guerra na Sibéria",
+      "Conflito entre Europa e Ásia"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Guerra Fria foi a rivalidade entre EUA e URSS, marcada por tensão nuclear sem confronto direto."
+  },
+  {
+    "id": 297,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi o Muro de Berlim?",
+    "options": [
+      "Monumento",
+      "Barreira que dividiu Berlim Ocidental e Oriental",
+      "Forte militar",
+      "Palácio"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Muro de Berlim (1961-1989) dividiu a cidade em setores capitalista e comunista."
+  },
+  {
+    "id": 298,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi a crise dos mísseis de Cuba?",
+    "options": [
+      "Invasão de Cuba",
+      "Confronto nuclear entre EUA e URSS por mísseis soviéticos em Cuba",
+      "Guerra civil",
+      "Revolução cubana"
+    ],
+    "correctIndex": 1,
+    "explanation": "Em 1962, a descoberta de mísseis soviéticos em Cuba quase levou a uma guerra nuclear."
+  },
+  {
+    "id": 299,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que era a OTAN?",
+    "options": [
+      "Organização cultural",
+      "Aliança militar ocidental liderada pelos EUA",
+      "Liga comercial",
+      "Organização esportiva"
+    ],
+    "correctIndex": 1,
+    "explanation": "A OTAN foi criada em 1949 como aliança militar para conter a expansão soviética."
+  },
+  {
+    "id": 300,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi a corrida espacial?",
+    "options": [
+      "Competição esportiva",
+      "Rivalidade entre EUA e URSS pela conquista do espaço",
+      "Programa educacional",
+      "Corrida de carros"
+    ],
+    "correctIndex": 1,
+    "explanation": "EUA e URSS competiram pela supremacia espacial, culminando na chegada à Lua em 1969."
+  },
+  {
+    "id": 301,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "Quando caiu o Muro de Berlim?",
+    "options": [
+      "1985",
+      "1989",
+      "1991",
+      "1993"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Muro de Berlim caiu em 9 de novembro de 1989, simbolizando o fim da Guerra Fria."
+  },
+  {
+    "id": 302,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi a Guerra do Vietnã?",
+    "options": [
+      "Conflito colonial",
+      "Guerra entre Vietnã do Norte (comunista) e do Sul (apoiado pelos EUA)",
+      "Revolta interna",
+      "Guerra civil chinesa"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Guerra do Vietnã (1955-75) opôs o norte comunista ao sul apoiado pelos EUA, que foram derrotados."
+  },
+  {
+    "id": 303,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi a Doutrina Truman?",
+    "options": [
+      "Plano econômico",
+      "Política americana de conter a expansão do comunismo",
+      "Tratado de paz",
+      "Aliança com a URSS"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Doutrina Truman (1947) comprometeu os EUA a apoiar países contra a influência comunista."
+  },
+  {
+    "id": 304,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi o Plano Marshall?",
+    "options": [
+      "Plano militar",
+      "Programa de ajuda econômica dos EUA à Europa",
+      "Estratégia soviética",
+      "Acordo comercial"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Plano Marshall forneceu bilhões em ajuda para reconstruir a Europa Ocidental após a guerra."
+  },
+  {
+    "id": 305,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi a Perestroika?",
+    "options": [
+      "Revolução",
+      "Reformas econômicas de Gorbachev na URSS",
+      "Golpe militar",
+      "Invasão"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Perestroika foi o programa de reformas econômicas de Gorbachev para modernizar a URSS."
+  },
+  {
+    "id": 306,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "Quando a URSS se dissolveu?",
+    "options": [
+      "1985",
+      "1989",
+      "1991",
+      "1993"
+    ],
+    "correctIndex": 2,
+    "explanation": "A União Soviética se dissolveu oficialmente em 26 de dezembro de 1991."
+  },
+  {
+    "id": 307,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi a Guerra da Coreia?",
+    "options": [
+      "Guerra civil",
+      "Conflito entre Coreia do Norte (comunista) e Coreia do Sul (capitalista)",
+      "Invasão japonesa",
+      "Revolução"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Guerra da Coreia (1950-53) dividiu a península em dois estados que permanecem separados."
+  },
+  {
+    "id": 308,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que era a MAD (Destruição Mútua Assegurada)?",
+    "options": [
+      "Organização",
+      "Doutrina em que ambos os lados seriam destruídos em guerra nuclear",
+      "Tratado",
+      "Arma"
+    ],
+    "correctIndex": 1,
+    "explanation": "A MAD prevenia o uso de armas nucleares, pois ambos os lados seriam aniquilados."
+  },
+  {
+    "id": 309,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "O que foi o Pacto de Varsóvia?",
+    "options": [
+      "Acordo comercial",
+      "Aliança militar soviética com países do Leste Europeu",
+      "Tratado de paz",
+      "Organização cultural"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Pacto de Varsóvia (1955) foi a aliança militar soviética em resposta à OTAN."
+  },
+  {
+    "id": 310,
+    "level": 14,
+    "difficulty": "avançado",
+    "topic": "Guerra Fria",
+    "question": "Quem foi Mikhail Gorbachev?",
+    "options": [
+      "Czar russo",
+      "Último líder da URSS que promoveu reformas",
+      "General americano",
+      "Presidente alemão"
+    ],
+    "correctIndex": 1,
+    "explanation": "Gorbachev foi o último líder soviético, promovendo glasnost e perestroika antes da dissolução da URSS."
+  },
+  {
+    "id": 311,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "Quando foi proclamada a República no Brasil?",
+    "options": [
+      "1888",
+      "1889",
+      "1891",
+      "1900"
+    ],
+    "correctIndex": 1,
+    "explanation": "A República foi proclamada em 15 de novembro de 1889 pelo Marechal Deodoro da Fonseca."
+  },
+  {
+    "id": 312,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi a política do café com leite?",
+    "options": [
+      "Acordo comercial",
+      "Alternância de poder entre São Paulo e Minas Gerais",
+      "Programa alimentar",
+      "Lei agrícola"
+    ],
+    "correctIndex": 1,
+    "explanation": "A política do café com leite era a alternância presidencial entre paulistas e mineiros na República Velha."
+  },
+  {
+    "id": 313,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi a Revolta da Vacina?",
+    "options": [
+      "Epidemia",
+      "Revolta popular contra a vacinação obrigatória no Rio (1904)",
+      "Greve operária",
+      "Movimento militar"
+    ],
+    "correctIndex": 1,
+    "explanation": "Em 1904, a população do Rio se revoltou contra a vacinação obrigatória contra a varíola."
+  },
+  {
+    "id": 314,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "Quem foi Getúlio Vargas?",
+    "options": [
+      "Primeiro presidente",
+      "Ditador e presidente que governou o Brasil por 15 anos",
+      "General republicano",
+      "Abolicionista"
+    ],
+    "correctIndex": 1,
+    "explanation": "Getúlio Vargas governou o Brasil de 1930 a 1945 e de 1951 a 1954, marcando profundamente a política."
+  },
+  {
+    "id": 315,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi o Estado Novo?",
+    "options": [
+      "República democrática",
+      "Ditadura de Vargas de 1937 a 1945",
+      "Monarquia restaurada",
+      "Governo militar"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Estado Novo foi a ditadura de Vargas, com censura, centralização e propaganda nacionalista."
+  },
+  {
+    "id": 316,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi a Revolução de 1930?",
+    "options": [
+      "Golpe que levou Vargas ao poder encerrando a República Velha",
+      "Revolta popular",
+      "Independência",
+      "Proclamação da república"
+    ],
+    "correctIndex": 0,
+    "explanation": "A Revolução de 1930 encerrou a República Velha e levou Getúlio Vargas ao poder."
+  },
+  {
+    "id": 317,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi o tenentismo?",
+    "options": [
+      "Movimento sindical",
+      "Movimento de jovens oficiais por reformas políticas nos anos 1920",
+      "Partido político",
+      "Revolta escrava"
+    ],
+    "correctIndex": 1,
+    "explanation": "O tenentismo foi um movimento de oficiais militares insatisfeitos com a corrupção da República Velha."
+  },
+  {
+    "id": 318,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi a Coluna Prestes?",
+    "options": [
+      "Partido",
+      "Marcha de militares rebeldes pelo interior do Brasil",
+      "Revolta urbana",
+      "Campanha eleitoral"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Coluna Prestes percorreu milhares de km pelo Brasil entre 1925-27 protestando contra o governo."
+  },
+  {
+    "id": 319,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foram as leis trabalhistas de Vargas?",
+    "options": [
+      "Privatizações",
+      "Conjunto de direitos como salário mínimo, CLT e férias",
+      "Abolição",
+      "Reforma agrária"
+    ],
+    "correctIndex": 1,
+    "explanation": "Vargas criou a CLT, o salário mínimo e diversos direitos trabalhistas, sendo chamado 'pai dos pobres'."
+  },
+  {
+    "id": 320,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi a Revolução Constitucionalista de 1932?",
+    "options": [
+      "Revolta gaúcha",
+      "Revolta de São Paulo contra Vargas pedindo constituição",
+      "Golpe militar",
+      "Movimento nordestino"
+    ],
+    "correctIndex": 1,
+    "explanation": "São Paulo se revoltou contra Vargas em 1932, exigindo uma nova constituição e autonomia."
+  },
+  {
+    "id": 321,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi o voto feminino no Brasil?",
+    "options": [
+      "Sempre existiu",
+      "Conquistado em 1932",
+      "Concedido em 1889",
+      "Obtido em 1946"
+    ],
+    "correctIndex": 1,
+    "explanation": "O voto feminino foi conquistado no Brasil em 1932, durante o governo Vargas."
+  },
+  {
+    "id": 322,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi o populismo no Brasil?",
+    "options": [
+      "Democracia direta",
+      "Estilo político de líderes carismáticos com apelo popular",
+      "Ditadura",
+      "Anarquismo"
+    ],
+    "correctIndex": 1,
+    "explanation": "O populismo caracterizou líderes como Vargas e JK, que buscavam apoio popular direto."
+  },
+  {
+    "id": 323,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "Quem foi Juscelino Kubitschek?",
+    "options": [
+      "Ditador",
+      "Presidente que construiu Brasília e promoveu industrialização",
+      "General",
+      "Abolicionista"
+    ],
+    "correctIndex": 1,
+    "explanation": "JK governou de 1956-61 com o lema '50 anos em 5', construindo Brasília e industrializando o país."
+  },
+  {
+    "id": 324,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "Quando Brasília foi inaugurada?",
+    "options": [
+      "1950",
+      "1956",
+      "1960",
+      "1964"
+    ],
+    "correctIndex": 2,
+    "explanation": "Brasília foi inaugurada em 21 de abril de 1960 como a nova capital federal."
+  },
+  {
+    "id": 325,
+    "level": 15,
+    "difficulty": "avançado",
+    "topic": "Brasil República",
+    "question": "O que foi o suicídio de Vargas?",
+    "options": [
+      "Ficção",
+      "Vargas se matou em 1954 em meio a crise política",
+      "Assassinato",
+      "Exílio"
+    ],
+    "correctIndex": 1,
+    "explanation": "Getúlio Vargas suicidou-se em 24 de agosto de 1954, deixando uma carta-testamento ao povo brasileiro."
+  },
+  {
+    "id": 326,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Qual era a capital do Império Asteca?",
+    "options": [
+      "Machu Picchu",
+      "Tenochtitlán",
+      "Cusco",
+      "Chichén Itzá"
+    ],
+    "correctIndex": 1,
+    "explanation": "Tenochtitlán, atual Cidade do México, era a grandiosa capital do Império Asteca."
+  },
+  {
+    "id": 327,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Quem conquistou o Império Asteca?",
+    "options": [
+      "Francisco Pizarro",
+      "Hernán Cortés",
+      "Pedro de Valdivia",
+      "Vasco da Gama"
+    ],
+    "correctIndex": 1,
+    "explanation": "Hernán Cortés conquistou o Império Asteca entre 1519 e 1521 com poucos soldados e alianças locais."
+  },
+  {
+    "id": 328,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Qual era a base alimentar dos maias?",
+    "options": [
+      "Trigo",
+      "Milho",
+      "Arroz",
+      "Batata"
+    ],
+    "correctIndex": 1,
+    "explanation": "O milho era sagrado e a base alimentar da civilização maia."
+  },
+  {
+    "id": 329,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "O que era Machu Picchu?",
+    "options": [
+      "Cidade asteca",
+      "Cidadela inca nos Andes peruanos",
+      "Templo maia",
+      "Porto comercial"
+    ],
+    "correctIndex": 1,
+    "explanation": "Machu Picchu era uma cidadela inca construída no alto dos Andes, possivelmente um retiro real."
+  },
+  {
+    "id": 330,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Qual civilização desenvolveu um calendário muito preciso?",
+    "options": [
+      "Inca",
+      "Asteca",
+      "Maia",
+      "Olmeca"
+    ],
+    "correctIndex": 2,
+    "explanation": "Os maias desenvolveram um calendário extremamente preciso baseado em observações astronômicas."
+  },
+  {
+    "id": 331,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Quem conquistou o Império Inca?",
+    "options": [
+      "Cortés",
+      "Francisco Pizarro",
+      "Drake",
+      "Colombo"
+    ],
+    "correctIndex": 1,
+    "explanation": "Francisco Pizarro conquistou o Império Inca em 1532, capturando o imperador Atahualpa."
+  },
+  {
+    "id": 332,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Qual era o sistema de registro dos incas?",
+    "options": [
+      "Escrita hieroglífica",
+      "Quipus (cordas com nós)",
+      "Papiro",
+      "Tábuas de argila"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os incas usavam quipus, sistemas de cordas com nós, para registrar informações numéricas."
+  },
+  {
+    "id": 333,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "O que era o sacrifício humano para os astecas?",
+    "options": [
+      "Punição criminal",
+      "Ritual religioso para alimentar os deuses",
+      "Esporte",
+      "Cerimônia de casamento"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os astecas praticavam sacrifícios humanos como ritual religioso para manter o equilíbrio cósmico."
+  },
+  {
+    "id": 334,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Qual era a extensão do Império Inca?",
+    "options": [
+      "Apenas o Peru",
+      "Do Equador ao Chile, pela cordilheira dos Andes",
+      "México e América Central",
+      "Brasil"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Império Inca se estendia do Equador ao Chile ao longo dos Andes, o maior das Américas."
+  },
+  {
+    "id": 335,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "O que era a escrita maia?",
+    "options": [
+      "Alfabética",
+      "Sistema de glifos hieroglíficos",
+      "Cuneiforme",
+      "Não tinham escrita"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os maias desenvolveram um complexo sistema de escrita hieroglífica com mais de 800 glifos."
+  },
+  {
+    "id": 336,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Qual era o principal deus asteca?",
+    "options": [
+      "Inti",
+      "Huitzilopochtli, deus do sol e da guerra",
+      "Quetzalcóatl",
+      "Tláloc"
+    ],
+    "correctIndex": 1,
+    "explanation": "Huitzilopochtli era o deus principal asteca, associado ao sol e à guerra."
+  },
+  {
+    "id": 337,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "O que era o Caminho Inca?",
+    "options": [
+      "Rota comercial marítima",
+      "Extensa rede de estradas pelo império",
+      "Rota migratória",
+      "Trilha religiosa"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Caminho Inca era uma vasta rede de estradas que conectava todo o império, com mais de 30.000 km."
+  },
+  {
+    "id": 338,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "O que eram os cenotes para os maias?",
+    "options": [
+      "Templos",
+      "Poços naturais sagrados usados em rituais",
+      "Moradias",
+      "Mercados"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os cenotes eram poços naturais de água doce considerados sagrados e usados em rituais maias."
+  },
+  {
+    "id": 339,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "O que causou a queda das civilizações pré-colombianas?",
+    "options": [
+      "Desastres naturais",
+      "Combinação de doenças europeias, armas e alianças locais",
+      "Guerras internas apenas",
+      "Mudanças climáticas"
+    ],
+    "correctIndex": 1,
+    "explanation": "Doenças trazidas pelos europeus, armas superiores e alianças com povos locais causaram sua queda."
+  },
+  {
+    "id": 340,
+    "level": 16,
+    "difficulty": "expert",
+    "topic": "Civilizações Pré-Colombianas",
+    "question": "Qual civilização é considerada a mais antiga da Mesoamérica?",
+    "options": [
+      "Maia",
+      "Asteca",
+      "Olmeca",
+      "Inca"
+    ],
+    "correctIndex": 2,
+    "explanation": "Os olmecas são considerados a civilização-mãe da Mesoamérica, surgida por volta de 1500 a.C."
+  },
+  {
+    "id": 341,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "Em que ano ocorreu a Revolução Russa?",
+    "options": [
+      "1905",
+      "1914",
+      "1917",
+      "1921"
+    ],
+    "correctIndex": 2,
+    "explanation": "A Revolução Russa de 1917 derrubou o czarismo e estabeleceu o primeiro estado socialista."
+  },
+  {
+    "id": 342,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "Quem liderou os bolcheviques?",
+    "options": [
+      "Stalin",
+      "Trotsky",
+      "Lênin",
+      "Kerensky"
+    ],
+    "correctIndex": 2,
+    "explanation": "Vladimir Lênin liderou os bolcheviques na Revolução de Outubro de 1917."
+  },
+  {
+    "id": 343,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que foi a Revolução de Fevereiro de 1917?",
+    "options": [
+      "Golpe bolchevique",
+      "Derrubada do czar e estabelecimento de governo provisório",
+      "Invasão alemã",
+      "Revolta camponesa"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Revolução de Fevereiro derrubou o czar Nicolau II e criou um governo provisório."
+  },
+  {
+    "id": 344,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que foi a NEP?",
+    "options": [
+      "Partido",
+      "Nova Política Econômica que permitiu algum capitalismo",
+      "Plano militar",
+      "Constituição"
+    ],
+    "correctIndex": 1,
+    "explanation": "A NEP de Lênin (1921) permitiu atividade privada limitada para recuperar a economia."
+  },
+  {
+    "id": 345,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que foram os planos quinquenais de Stalin?",
+    "options": [
+      "Planos educacionais",
+      "Programas de industrialização forçada",
+      "Reformas agrícolas",
+      "Planos militares"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os planos quinquenais de Stalin forçaram a industrialização rápida da URSS com enormes custos humanos."
+  },
+  {
+    "id": 346,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que foi a coletivização?",
+    "options": [
+      "Distribuição de terras",
+      "Junção forçada de propriedades rurais em fazendas coletivas",
+      "Privatização",
+      "Urbanização"
+    ],
+    "correctIndex": 1,
+    "explanation": "Stalin forçou a coletivização agrícola, causando fome e morte de milhões de camponeses."
+  },
+  {
+    "id": 347,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que foi o Holodomor?",
+    "options": [
+      "Batalha",
+      "Grande fome na Ucrânia causada pela coletivização de Stalin",
+      "Tratado",
+      "Revolução"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Holodomor (1932-33) foi uma fome provocada na Ucrânia que matou milhões de pessoas."
+  },
+  {
+    "id": 348,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que foram os expurgos de Stalin?",
+    "options": [
+      "Reformas",
+      "Perseguição e execução de opositores reais ou imaginários",
+      "Eleições",
+      "Festivais"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os expurgos eliminaram rivais políticos, militares e intelectuais, enviando milhões ao Gulag."
+  },
+  {
+    "id": 349,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que era o Gulag?",
+    "options": [
+      "Partido",
+      "Sistema de campos de trabalho forçado soviéticos",
+      "Universidade",
+      "Fábrica"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Gulag era o sistema de campos de trabalho forçado onde milhões de prisioneiros foram explorados."
+  },
+  {
+    "id": 350,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que foi a Revolução de Outubro?",
+    "options": [
+      "Revolta camponesa",
+      "Tomada do poder pelos bolcheviques em outubro de 1917",
+      "Eleição",
+      "Reforma"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Revolução de Outubro foi o golpe bolchevique que derrubou o governo provisório e instaurou o socialismo."
+  },
+  {
+    "id": 351,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "Quem foi Trotsky?",
+    "options": [
+      "Czar",
+      "Líder revolucionário rival de Stalin, exilado e assassinado",
+      "General",
+      "Diplomata"
+    ],
+    "correctIndex": 1,
+    "explanation": "Leon Trotsky foi líder da Revolução mas perdeu a disputa com Stalin, sendo exilado e assassinado."
+  },
+  {
+    "id": 352,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que foi a Guerra Civil Russa?",
+    "options": [
+      "Conflito entre Rússia e Alemanha",
+      "Guerra entre bolcheviques (Vermelhos) e antibolcheviques (Brancos)",
+      "Revolta camponesa",
+      "Invasão japonesa"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Guerra Civil (1917-22) opôs bolcheviques aos exércitos brancos e intervencionistas estrangeiros."
+  },
+  {
+    "id": 353,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que era o soviete?",
+    "options": [
+      "Exército",
+      "Conselho de trabalhadores e soldados",
+      "Partido",
+      "Tribunal"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os sovietes eram conselhos de trabalhadores, soldados e camponeses que exerciam poder local."
+  },
+  {
+    "id": 354,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que foi o culto à personalidade de Stalin?",
+    "options": [
+      "Religião",
+      "Propaganda massiva glorificando Stalin como líder supremo",
+      "Movimento artístico",
+      "Filosofia"
+    ],
+    "correctIndex": 1,
+    "explanation": "O culto à personalidade promovia Stalin como líder infalível através de propaganda massiva."
+  },
+  {
+    "id": 355,
+    "level": 17,
+    "difficulty": "expert",
+    "topic": "Revolução Russa e URSS",
+    "question": "O que foi a desestalinização?",
+    "options": [
+      "Fim da URSS",
+      "Processo de denúncia dos crimes de Stalin por Khrushchev",
+      "Retorno ao czarismo",
+      "Revolução"
+    ],
+    "correctIndex": 1,
+    "explanation": "Khrushchev denunciou os crimes de Stalin em 1956, iniciando o processo de desestalinização."
+  },
+  {
+    "id": 356,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "O que foi o processo de descolonização?",
+    "options": [
+      "Colonização de novos territórios",
+      "Independência de colônias na África e Ásia após a Segunda Guerra",
+      "Expansão europeia",
+      "Globalização"
+    ],
+    "correctIndex": 1,
+    "explanation": "A descolonização foi o processo de independência de colônias africanas e asiáticas no pós-guerra."
+  },
+  {
+    "id": 357,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "Quem foi Mahatma Gandhi?",
+    "options": [
+      "Presidente da Índia",
+      "Líder da independência indiana pela não-violência",
+      "General",
+      "Rei"
+    ],
+    "correctIndex": 1,
+    "explanation": "Gandhi liderou o movimento de independência da Índia usando a desobediência civil não-violenta."
+  },
+  {
+    "id": 358,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "Quando a Índia se tornou independente?",
+    "options": [
+      "1945",
+      "1947",
+      "1950",
+      "1955"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Índia conquistou a independência do domínio britânico em 15 de agosto de 1947."
+  },
+  {
+    "id": 359,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "O que foi o Apartheid?",
+    "options": [
+      "Movimento de libertação",
+      "Sistema de segregação racial na África do Sul",
+      "Partido político",
+      "Religião"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Apartheid foi o sistema de segregação racial institucionalizada na África do Sul (1948-1994)."
+  },
+  {
+    "id": 360,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "Quem foi Nelson Mandela?",
+    "options": [
+      "Rei africano",
+      "Líder antiapartheid e primeiro presidente negro da África do Sul",
+      "General",
+      "Religioso"
+    ],
+    "correctIndex": 1,
+    "explanation": "Mandela lutou contra o Apartheid, ficou 27 anos preso e se tornou o primeiro presidente negro do país."
+  },
+  {
+    "id": 361,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "O que foi a Conferência de Bandung?",
+    "options": [
+      "Tratado de paz",
+      "Reunião de países afro-asiáticos pelo não-alinhamento (1955)",
+      "Aliança militar",
+      "Festival"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Conferência de Bandung reuniu países afro-asiáticos recém-independentes pelo não-alinhamento."
+  },
+  {
+    "id": 362,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "O que foi a Guerra da Argélia?",
+    "options": [
+      "Conflito entre árabes",
+      "Guerra de independência da Argélia contra a França",
+      "Guerra civil",
+      "Invasão britânica"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Guerra da Argélia (1954-62) foi uma violenta luta de independência contra o domínio francês."
+  },
+  {
+    "id": 363,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "O que significava 'Terceiro Mundo'?",
+    "options": [
+      "Países pobres",
+      "Países não-alinhados nem com EUA nem com URSS",
+      "Países europeus",
+      "Colônias"
+    ],
+    "correctIndex": 1,
+    "explanation": "O termo 'Terceiro Mundo' designava países que não se alinhavam nem ao bloco capitalista nem ao socialista."
+  },
+  {
+    "id": 364,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "Quem foi Patrice Lumumba?",
+    "options": [
+      "Presidente sul-africano",
+      "Primeiro líder do Congo independente, assassinado",
+      "Rei etíope",
+      "General nigeriano"
+    ],
+    "correctIndex": 1,
+    "explanation": "Lumumba foi o primeiro-ministro do Congo independente, assassinado com envolvimento de potências ocidentais."
+  },
+  {
+    "id": 365,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "O que foi a partição da Índia?",
+    "options": [
+      "Unificação",
+      "Divisão em Índia (hindu) e Paquistão (muçulmano) em 1947",
+      "Colonização",
+      "Revolta"
+    ],
+    "correctIndex": 1,
+    "explanation": "A partição dividiu a Índia britânica em Índia e Paquistão, causando violência e migrações em massa."
+  },
+  {
+    "id": 366,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "O que foi o movimento Pan-Africanismo?",
+    "options": [
+      "Colonialismo",
+      "Movimento pela unidade e libertação dos povos africanos",
+      "Partido europeu",
+      "Religião"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Pan-Africanismo promoveu a solidariedade, unidade e libertação dos povos africanos."
+  },
+  {
+    "id": 367,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "Quando a maioria dos países africanos se tornou independente?",
+    "options": [
+      "Anos 1930",
+      "Anos 1940",
+      "Anos 1960",
+      "Anos 1980"
+    ],
+    "correctIndex": 2,
+    "explanation": "A década de 1960 é conhecida como 'Ano da África' pela independência de dezenas de países."
+  },
+  {
+    "id": 368,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "O que foi o Movimento dos Não-Alinhados?",
+    "options": [
+      "Aliança militar",
+      "Grupo de países que recusaram alinhar-se com EUA ou URSS",
+      "Liga comercial",
+      "Organização religiosa"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Movimento dos Não-Alinhados uniu países que buscavam independência dos blocos da Guerra Fria."
+  },
+  {
+    "id": 369,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "Quem foi Kwame Nkrumah?",
+    "options": [
+      "Rei egípcio",
+      "Líder da independência de Gana e pan-africanista",
+      "General francês",
+      "Explorador"
+    ],
+    "correctIndex": 1,
+    "explanation": "Nkrumah liderou a independência de Gana em 1957 e foi um dos fundadores do pan-africanismo."
+  },
+  {
+    "id": 370,
+    "level": 18,
+    "difficulty": "expert",
+    "topic": "Descolonização e Terceiro Mundo",
+    "question": "O que foi a Revolução Cubana?",
+    "options": [
+      "Reforma agrária",
+      "Revolução liderada por Fidel Castro que instaurou socialismo em Cuba",
+      "Golpe militar",
+      "Independência colonial"
+    ],
+    "correctIndex": 1,
+    "explanation": "Fidel Castro liderou a revolução que derrubou Batista em 1959 e instaurou o socialismo em Cuba."
+  },
+  {
+    "id": 371,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "Quando começou a ditadura militar no Brasil?",
+    "options": [
+      "1960",
+      "1964",
+      "1968",
+      "1970"
+    ],
+    "correctIndex": 1,
+    "explanation": "O golpe militar de 31 de março de 1964 instaurou a ditadura que durou até 1985."
+  },
+  {
+    "id": 372,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "O que foi o AI-5?",
+    "options": [
+      "Lei trabalhista",
+      "Ato Institucional que endureceu a ditadura em 1968",
+      "Constituição",
+      "Partido político"
+    ],
+    "correctIndex": 1,
+    "explanation": "O AI-5 deu poderes absolutos ao presidente, fechou o Congresso e suspendeu habeas corpus."
+  },
+  {
+    "id": 373,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "Quem foi o primeiro presidente militar?",
+    "options": [
+      "Costa e Silva",
+      "Médici",
+      "Castelo Branco",
+      "Geisel"
+    ],
+    "correctIndex": 2,
+    "explanation": "Humberto de Alencar Castelo Branco foi o primeiro presidente do regime militar (1964-67)."
+  },
+  {
+    "id": 374,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "O que foi o 'milagre econômico'?",
+    "options": [
+      "Crise",
+      "Período de alto crescimento econômico com desigualdade (1968-73)",
+      "Reforma agrária",
+      "Privatização"
+    ],
+    "correctIndex": 1,
+    "explanation": "O 'milagre econômico' trouxe crescimento do PIB, mas com concentração de renda e endividamento."
+  },
+  {
+    "id": 375,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "O que foi a guerrilha do Araguaia?",
+    "options": [
+      "Movimento urbano",
+      "Resistência armada do PCdoB na Amazônia contra a ditadura",
+      "Revolta indígena",
+      "Conflito com a Bolívia"
+    ],
+    "correctIndex": 1,
+    "explanation": "A guerrilha do Araguaia (1972-74) foi uma resistência armada no sul do Pará, brutalmente reprimida."
+  },
+  {
+    "id": 376,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "O que foi a abertura política?",
+    "options": [
+      "Golpe",
+      "Processo gradual de redemocratização iniciado por Geisel",
+      "Revolução",
+      "Fechamento do Congresso"
+    ],
+    "correctIndex": 1,
+    "explanation": "A abertura foi o processo 'lento, gradual e seguro' de redemocratização iniciado pelo general Geisel."
+  },
+  {
+    "id": 377,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "O que foi o movimento Diretas Já?",
+    "options": [
+      "Partido político",
+      "Campanha popular por eleições diretas para presidente em 1984",
+      "Greve geral",
+      "Revolta militar"
+    ],
+    "correctIndex": 1,
+    "explanation": "Diretas Já mobilizou milhões pedindo eleições diretas, mas a emenda foi rejeitada no Congresso."
+  },
+  {
+    "id": 378,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "Quem foi o último presidente militar?",
+    "options": [
+      "Geisel",
+      "Médici",
+      "Figueiredo",
+      "Costa e Silva"
+    ],
+    "correctIndex": 2,
+    "explanation": "João Baptista Figueiredo foi o último presidente militar (1979-85), completando a abertura."
+  },
+  {
+    "id": 379,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "O que foi a Lei da Anistia?",
+    "options": [
+      "Lei trabalhista",
+      "Lei que perdoou crimes políticos de ambos os lados em 1979",
+      "Constituição",
+      "Decreto militar"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Lei da Anistia (1979) perdoou crimes políticos, permitindo o retorno de exilados."
+  },
+  {
+    "id": 380,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "O que foi o DOI-CODI?",
+    "options": [
+      "Partido",
+      "Órgão de repressão e tortura da ditadura",
+      "Ministério",
+      "Empresa estatal"
+    ],
+    "correctIndex": 1,
+    "explanation": "O DOI-CODI era o órgão responsável por prender, interrogar e torturar opositores da ditadura."
+  },
+  {
+    "id": 381,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "Quem foi Vladmir Herzog?",
+    "options": [
+      "Político",
+      "Jornalista assassinado pela ditadura em 1975",
+      "General",
+      "Guerrilheiro"
+    ],
+    "correctIndex": 1,
+    "explanation": "Vladimir Herzog foi jornalista morto sob tortura no DOI-CODI, o que gerou grande comoção nacional."
+  },
+  {
+    "id": 382,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "O que foi a censura durante a ditadura?",
+    "options": [
+      "Liberdade de imprensa",
+      "Controle total do governo sobre meios de comunicação e artes",
+      "Programa cultural",
+      "Incentivo à arte"
+    ],
+    "correctIndex": 1,
+    "explanation": "A ditadura censurava jornais, músicas, filmes e livros que criticassem o regime."
+  },
+  {
+    "id": 383,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "Quem foi Tancredo Neves?",
+    "options": [
+      "Presidente militar",
+      "Primeiro presidente civil eleito após a ditadura, morreu antes de assumir",
+      "General",
+      "Guerrilheiro"
+    ],
+    "correctIndex": 1,
+    "explanation": "Tancredo Neves foi eleito indiretamente em 1985, mas morreu antes de tomar posse."
+  },
+  {
+    "id": 384,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "O que foi o bipartidarismo?",
+    "options": [
+      "Multipartidarismo",
+      "Sistema com apenas dois partidos permitidos: ARENA e MDB",
+      "Partido único",
+      "Anarquismo"
+    ],
+    "correctIndex": 1,
+    "explanation": "A ditadura permitiu apenas dois partidos: ARENA (governo) e MDB (oposição consentida)."
+  },
+  {
+    "id": 385,
+    "level": 19,
+    "difficulty": "expert",
+    "topic": "Ditadura Militar no Brasil",
+    "question": "Quantas pessoas foram mortas ou desapareceram durante a ditadura?",
+    "options": [
+      "Nenhuma",
+      "Centenas (estimativa oficial de 434 mortos e desaparecidos)",
+      "Milhões",
+      "Dezenas de milhares"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Comissão da Verdade identificou 434 mortos e desaparecidos políticos durante a ditadura."
+  },
+  {
+    "id": 386,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que foi a queda do Muro de Berlim?",
+    "options": [
+      "Construção de um muro",
+      "Evento que simbolizou o fim da Guerra Fria em 1989",
+      "Reunião diplomática",
+      "Desastre natural"
+    ],
+    "correctIndex": 1,
+    "explanation": "A queda do Muro de Berlim em 1989 simbolizou o fim da divisão entre leste e oeste."
+  },
+  {
+    "id": 387,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que foram os atentados de 11 de setembro?",
+    "options": [
+      "Desastres naturais",
+      "Ataques terroristas aos EUA em 2001",
+      "Conflito militar",
+      "Crise econômica"
+    ],
+    "correctIndex": 1,
+    "explanation": "Em 11 de setembro de 2001, ataques terroristas da Al-Qaeda atingiram o World Trade Center e o Pentágono."
+  },
+  {
+    "id": 388,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que é a globalização?",
+    "options": [
+      "Isolamento",
+      "Processo de integração econômica, cultural e política mundial",
+      "Colonização",
+      "Desindustrialização"
+    ],
+    "correctIndex": 1,
+    "explanation": "A globalização é o processo de crescente interconexão econômica, cultural e política entre países."
+  },
+  {
+    "id": 389,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que foi a Primavera Árabe?",
+    "options": [
+      "Festival",
+      "Série de protestos e revoluções no mundo árabe a partir de 2010",
+      "Acordo de paz",
+      "Conferência"
+    ],
+    "correctIndex": 1,
+    "explanation": "A Primavera Árabe foi uma onda de protestos populares contra regimes autoritários no Oriente Médio."
+  },
+  {
+    "id": 390,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que é a União Europeia?",
+    "options": [
+      "Aliança militar",
+      "Bloco político e econômico de países europeus",
+      "Liga esportiva",
+      "Organização religiosa"
+    ],
+    "correctIndex": 1,
+    "explanation": "A União Europeia é um bloco de integração política e econômica fundado pelo Tratado de Maastricht (1993)."
+  },
+  {
+    "id": 391,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que foi o Brexit?",
+    "options": [
+      "Acordo comercial",
+      "Saída do Reino Unido da União Europeia",
+      "Crise financeira",
+      "Eleição"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Brexit foi a saída do Reino Unido da União Europeia, efetivada em 2020 após referendo de 2016."
+  },
+  {
+    "id": 392,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que é o aquecimento global?",
+    "options": [
+      "Resfriamento",
+      "Aumento da temperatura média da Terra por emissão de gases de efeito estufa",
+      "Fenômeno natural apenas",
+      "Mito"
+    ],
+    "correctIndex": 1,
+    "explanation": "O aquecimento global é causado principalmente pela emissão de gases de efeito estufa por atividades humanas."
+  },
+  {
+    "id": 393,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que foi a crise financeira de 2008?",
+    "options": [
+      "Boom econômico",
+      "Crise bancária global originada nos EUA pelo mercado imobiliário",
+      "Revolução",
+      "Guerra comercial"
+    ],
+    "correctIndex": 1,
+    "explanation": "A crise de 2008 foi causada pelo colapso do mercado imobiliário americano, gerando recessão global."
+  },
+  {
+    "id": 394,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que é o Acordo de Paris?",
+    "options": [
+      "Tratado militar",
+      "Acordo internacional para combater as mudanças climáticas",
+      "Aliança comercial",
+      "Pacto de segurança"
+    ],
+    "correctIndex": 1,
+    "explanation": "O Acordo de Paris (2015) uniu países no compromisso de limitar o aquecimento global a 1,5-2°C."
+  },
+  {
+    "id": 395,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que foi a pandemia de COVID-19?",
+    "options": [
+      "Gripe comum",
+      "Pandemia global causada pelo coronavírus SARS-CoV-2 a partir de 2020",
+      "Epidemia local",
+      "Surto de dengue"
+    ],
+    "correctIndex": 1,
+    "explanation": "A COVID-19 causou uma pandemia global com milhões de mortes e profundos impactos socioeconômicos."
+  },
+  {
+    "id": 396,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que são os Objetivos de Desenvolvimento Sustentável (ODS)?",
+    "options": [
+      "Metas militares",
+      "17 metas da ONU para 2030 abrangendo pobreza, meio ambiente e paz",
+      "Leis nacionais",
+      "Acordos comerciais"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os ODS são 17 metas globais da ONU para erradicar a pobreza e proteger o planeta até 2030."
+  },
+  {
+    "id": 397,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que é a inteligência artificial?",
+    "options": [
+      "Robôs apenas",
+      "Tecnologia que permite máquinas simular raciocínio humano",
+      "Ficção científica",
+      "Programa simples"
+    ],
+    "correctIndex": 1,
+    "explanation": "A IA é um campo da computação que desenvolve sistemas capazes de aprender e tomar decisões."
+  },
+  {
+    "id": 398,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que foi a Guerra do Iraque?",
+    "options": [
+      "Conflito medieval",
+      "Invasão americana do Iraque em 2003 sob alegação de armas de destruição em massa",
+      "Revolta interna",
+      "Guerra colonial"
+    ],
+    "correctIndex": 1,
+    "explanation": "Os EUA invadiram o Iraque em 2003 alegando existência de armas de destruição em massa, nunca encontradas."
+  },
+  {
+    "id": 399,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que são as redes sociais no contexto histórico?",
+    "options": [
+      "Jornais",
+      "Plataformas digitais que transformaram comunicação, política e sociedade no séc. XXI",
+      "Rádio",
+      "Televisão"
+    ],
+    "correctIndex": 1,
+    "explanation": "As redes sociais revolucionaram a comunicação e se tornaram ferramentas de mobilização política."
+  },
+  {
+    "id": 400,
+    "level": 20,
+    "difficulty": "expert",
+    "topic": "Mundo Contemporâneo",
+    "question": "O que é o BRICS?",
+    "options": [
+      "Empresa",
+      "Grupo de economias emergentes: Brasil, Rússia, Índia, China e África do Sul",
+      "Aliança militar",
+      "Organização europeia"
+    ],
+    "correctIndex": 1,
+    "explanation": "O BRICS reúne grandes economias emergentes para cooperação política e econômica."
+  }
+]
