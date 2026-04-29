@@ -20,7 +20,14 @@ export class ActivityRepository {
       "SELECT * FROM activities WHERE \"periodId\" = $1 ORDER BY \"createdAt\" DESC LIMIT $2",
       [periodId, limit]
     );
-    console.log("Atividades recuperadas do banco:", result.rows);
+    return result.rows;
+  }
+
+  static async getByPeriodRandom(periodId: string, limit: number = 20) {
+    const result = await query(
+      "SELECT * FROM activities WHERE \"periodId\" = $1 ORDER BY RANDOM() LIMIT $2",
+      [periodId, limit]
+    );
     return result.rows;
   }
 

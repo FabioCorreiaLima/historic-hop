@@ -238,9 +238,10 @@ export const questionsApi = {
 };
 
 export const activitiesApi = {
-  getActivitiesByPeriod: async (periodId: string, limit: number = 10): Promise<Activity[]> => {
+  getActivitiesByPeriod: async (periodId: string, limit: number = 10, random: boolean = false): Promise<Activity[]> => {
     try {
-      const data = await apiCall<unknown[]>(`/activities?periodId=${periodId}&limit=${limit}`);
+      const randomParam = random ? '&random=true' : '';
+      const data = await apiCall<unknown[]>(`/activities?periodId=${periodId}&limit=${limit}${randomParam}`);
       if (!Array.isArray(data)) return [];
 
       return data

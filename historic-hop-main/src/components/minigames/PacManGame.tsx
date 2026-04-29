@@ -260,13 +260,15 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
     const handleShowQuestion = async () => {
       setLoadingQuestion(true); setShowQuestion(true);
       try {
-        const activities = await api.activities.getActivitiesByPeriod(periodId, 50);
-        const quiz = activities.filter(a => a.type === 'quiz') as QuizActivity[];
-        if (quiz.length > 0) {
-          const unasked = quiz.filter(q => !askedQuestionsRef.current.includes(q.id));
-          const list = unasked.length > 0 ? unasked : quiz;
+        const activities = await api.activities.getActivitiesByPeriod(periodId, 50, true);
+        // Suporta QUIZ e VERDADEIRO/FALSO para maior variedade
+        const validActivities = activities.filter(a => a.type === 'quiz' || a.type === 'true_false');
+        
+        if (validActivities.length > 0) {
+          const unasked = validActivities.filter(q => !askedQuestionsRef.current.includes(q.id));
+          const list = unasked.length > 0 ? unasked : validActivities;
           const randomQ = list[Math.floor(Math.random() * list.length)];
-          setCurrentQuestion(randomQ);
+          setCurrentQuestion(randomQ as any);
           askedQuestionsRef.current.push(randomQ.id);
         } else resumeGame(true);
       } catch (err) { resumeGame(true); } finally { setLoadingQuestion(false); }
@@ -297,9 +299,17 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
     }
   };
 
-  const handleAnswerSubmit = (index: number) => {
+  const handleAnswerSubmit = (answer: number | boolean) => {
     if (!currentQuestion) return;
-    resumeGame(index === currentQuestion.correctIndex);
+    
+    let isCorrect = false;
+    if (currentQuestion.type === 'quiz') {
+      isCorrect = (answer as number) === (currentQuestion as any).correctIndex;
+    } else if (currentQuestion.type === 'true_false') {
+      isCorrect = (answer as boolean) === (currentQuestion as any).isTrue;
+    }
+    
+    resumeGame(isCorrect);
   };
 
   return (
@@ -347,18 +357,37 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
                  </div>
                ) : (
                  <>
-                   <p className="text-xl text-white mb-10 font-bold leading-relaxed">{currentQuestion.question}</p>
+                   <p className="text-xl text-white mb-10 font-bold leading-relaxed">
+                     {currentQuestion.type === 'quiz' ? (currentQuestion as any).question : (currentQuestion as any).statement}
+                   </p>
                    <div className="grid grid-cols-1 gap-4">
-                     {currentQuestion.options.map((opt, i) => (
-                       <button
-                         key={i}
-                         onClick={() => handleAnswerSubmit(i)}
-                         className="p-5 rounded-2xl bg-slate-800 border-2 border-slate-700 hover:bg-amber-400 hover:text-slate-950 hover:border-amber-300 text-white text-left font-black transition-all active:scale-95 group"
-                       >
-                         <span className="inline-block w-8 h-8 bg-black/20 group-hover:bg-black/40 rounded-lg text-center mr-3">{String.fromCharCode(65 + i)}</span>
-                         {opt}
-                       </button>
-                     ))}
+                     {currentQuestion.type === 'quiz' ? (
+                       (currentQuestion as any).options.map((opt: string, i: number) => (
+                         <button
+                           key={i}
+                           onClick={() => handleAnswerSubmit(i)}
+                           className="p-5 rounded-2xl bg-slate-800 border-2 border-slate-700 hover:bg-amber-400 hover:text-slate-950 hover:border-amber-300 text-white text-left font-black transition-all active:scale-95 group"
+                         >
+                           <span className="inline-block w-8 h-8 bg-black/20 group-hover:bg-black/40 rounded-lg text-center mr-3">{String.fromCharCode(65 + i)}</span>
+                           {opt}
+                         </button>
+                       ))
+                     ) : (
+                       <>
+                         <button
+                           onClick={() => handleAnswerSubmit(true)}
+                           className="p-5 rounded-2xl bg-slate-800 border-2 border-slate-700 hover:bg-emerald-500 hover:text-white hover:border-emerald-400 text-white text-center font-black transition-all active:scale-95"
+                         >
+                           VERDADEIRO
+                         </button>
+                         <button
+                           onClick={() => handleAnswerSubmit(false)}
+                           className="p-5 rounded-2xl bg-slate-800 border-2 border-slate-700 hover:bg-red-500 hover:text-white hover:border-red-400 text-white text-center font-black transition-all active:scale-95"
+                         >
+                           FALSO
+                         </button>
+                       </>
+                     )}
                    </div>
                  </>
                )}

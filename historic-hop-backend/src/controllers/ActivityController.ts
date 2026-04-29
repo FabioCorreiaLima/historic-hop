@@ -45,8 +45,13 @@ export class ActivityController {
 
   static getActivities = async (req: Request, res: Response) => {
     try {
-      const { periodId, limit } = req.query;
-      const activities = await ActivityRepository.getByPeriod(periodId as string, Number(limit) || 10);
+      const { periodId, limit, random } = req.query;
+      const parsedLimit = Number(limit) || 10;
+      
+      const activities = random === 'true' 
+        ? await ActivityRepository.getByPeriodRandom(periodId as string, parsedLimit)
+        : await ActivityRepository.getByPeriod(periodId as string, parsedLimit);
+        
       res.json(activities.map((a: any) => ActivityController.formatActivity(a)));
     } catch (error) {
       console.error("Erro ao buscar atividades:", error);
