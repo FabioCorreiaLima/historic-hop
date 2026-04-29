@@ -297,7 +297,7 @@ const AdminPanel = () => {
                       <label className="text-xs font-bold text-muted-foreground mb-1 block">ID Único (Slug)</label>
                       <input
                         type="text"
-                        value={editingPeriod.id}
+                        value={editingPeriod.id || ""}
                         onChange={e => setEditingPeriod({ ...editingPeriod, id: e.target.value.toLowerCase().replace(/\s+/g, '_') })}
                         placeholder="ex: era_vargas"
                         disabled={!!editingPeriod.id && periods.some(p => p.id === editingPeriod.id)}
@@ -308,7 +308,7 @@ const AdminPanel = () => {
                       <label className="text-xs font-bold text-muted-foreground mb-1 block">Nome do Período</label>
                       <input
                         type="text"
-                        value={editingPeriod.name}
+                        value={editingPeriod.name || ""}
                         onChange={e => setEditingPeriod({ ...editingPeriod, name: e.target.value })}
                         placeholder="ex: Era Vargas"
                         className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground focus:border-primary transition-all outline-none"
@@ -319,7 +319,7 @@ const AdminPanel = () => {
                         <label className="text-xs font-bold text-muted-foreground mb-1 block">Emoji</label>
                         <input
                           type="text"
-                          value={editingPeriod.emoji}
+                          value={editingPeriod.emoji || ""}
                           onChange={e => setEditingPeriod({ ...editingPeriod, emoji: e.target.value })}
                           className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground text-center text-xl"
                         />
@@ -328,7 +328,7 @@ const AdminPanel = () => {
                         <label className="text-xs font-bold text-muted-foreground mb-1 block">Anos</label>
                         <input
                           type="text"
-                          value={editingPeriod.years}
+                          value={editingPeriod.years || ""}
                           onChange={e => setEditingPeriod({ ...editingPeriod, years: e.target.value })}
                           placeholder="1930-1945"
                           className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
@@ -355,7 +355,7 @@ const AdminPanel = () => {
                       <label className="text-xs font-bold text-muted-foreground mb-1 block">Emoji do Personagem</label>
                       <input
                         type="text"
-                        value={editingPeriod.characterEmoji}
+                        value={editingPeriod.characterEmoji || ""}
                         onChange={e => setEditingPeriod({ ...editingPeriod, characterEmoji: e.target.value })}
                         className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground text-center text-xl"
                       />
@@ -363,7 +363,7 @@ const AdminPanel = () => {
                     <div>
                       <label className="text-xs font-bold text-muted-foreground mb-1 block">Descrição do Período (Para a IA)</label>
                       <textarea
-                        value={editingPeriod.description}
+                        value={editingPeriod.description || ""}
                         onChange={e => setEditingPeriod({ ...editingPeriod, description: e.target.value })}
                         rows={3}
                         placeholder="Descreva os principais eventos deste período para que a IA gere as perguntas e o chat corretamente."
@@ -380,7 +380,7 @@ const AdminPanel = () => {
                       <label className="text-xs font-bold text-muted-foreground mb-1 block">Cor do Texto (Tailwind)</label>
                       <input
                         type="text"
-                        value={editingPeriod.color}
+                        value={editingPeriod.color || ""}
                         onChange={e => setEditingPeriod({ ...editingPeriod, color: e.target.value })}
                         placeholder="text-blue-600"
                         className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
@@ -390,7 +390,7 @@ const AdminPanel = () => {
                       <label className="text-xs font-bold text-muted-foreground mb-1 block">Cor de Fundo (Tailwind)</label>
                       <input
                         type="text"
-                        value={editingPeriod.bgColor}
+                        value={editingPeriod.bgColor || ""}
                         onChange={e => setEditingPeriod({ ...editingPeriod, bgColor: e.target.value })}
                         placeholder="bg-blue-50"
                         className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
@@ -400,7 +400,7 @@ const AdminPanel = () => {
                       <label className="text-xs font-bold text-muted-foreground mb-1 block">Cor da Borda (Tailwind)</label>
                       <input
                         type="text"
-                        value={editingPeriod.borderColor}
+                        value={editingPeriod.borderColor || ""}
                         onChange={e => setEditingPeriod({ ...editingPeriod, borderColor: e.target.value })}
                         placeholder="border-blue-300"
                         className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
@@ -507,7 +507,7 @@ const AdminPanel = () => {
                     <label className="text-sm text-muted-foreground mb-1 block">Tópico</label>
                     <input
                       type="text"
-                      value={editingQuestion.topic}
+                      value={editingQuestion.topic || ""}
                       onChange={e => setEditingQuestion({ ...editingQuestion, topic: e.target.value })}
                       placeholder="Ex: Segunda Guerra Mundial"
                       className="w-full px-3 py-2 rounded-xl bg-muted/50 border border-border text-foreground"
@@ -518,7 +518,7 @@ const AdminPanel = () => {
                 <div className="mb-4">
                   <label className="text-sm text-muted-foreground mb-1 block">Pergunta</label>
                   <textarea
-                    value={editingQuestion.question}
+                    value={editingQuestion.question || ""}
                     onChange={e => setEditingQuestion({ ...editingQuestion, question: e.target.value })}
                     rows={2}
                     className="w-full px-3 py-2 rounded-xl bg-muted/50 border border-border text-foreground resize-none"
