@@ -43,18 +43,18 @@ export class PeriodRepository {
 
     const result = await query(
       `INSERT INTO historical_periods 
-      (id, name, emoji, years, color, "bgColor", "borderColor", description, "characterName", "characterEmoji", order_index, image_url)
+      (id, name, emoji, years, color, bgcolor, bordercolor, description, charactername, characteremoji, order_index, image_url)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
       ON CONFLICT (id) DO UPDATE SET
       name = EXCLUDED.name,
       emoji = EXCLUDED.emoji,
       years = EXCLUDED.years,
       color = EXCLUDED.color,
-      "bgColor" = EXCLUDED."bgColor",
-      "borderColor" = EXCLUDED."borderColor",
+      bgcolor = EXCLUDED.bgcolor,
+      bordercolor = EXCLUDED.bordercolor,
       description = EXCLUDED.description,
-      "characterName" = EXCLUDED."characterName",
-      "characterEmoji" = EXCLUDED."characterEmoji",
+      charactername = EXCLUDED.charactername,
+      characteremoji = EXCLUDED.characteremoji,
       order_index = EXCLUDED.order_index,
       image_url = EXCLUDED.image_url,
       "updatedAt" = CURRENT_TIMESTAMP

@@ -61,7 +61,7 @@ export class AIService {
           signal: controller.signal
         });
         clearTimeout(timeoutId);
-        const data = await response.json();
+        const data: any = await response.json();
         const pages = data?.query?.pages;
         if (pages) {
           const pageId = Object.keys(pages)[0];

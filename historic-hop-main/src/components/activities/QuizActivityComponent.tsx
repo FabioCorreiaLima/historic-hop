@@ -26,6 +26,7 @@ const QuizActivityComponent = ({
   const [showFeedback, setShowFeedback] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30);
   const [timerActive, setTimerActive] = useState(true);
+  const [imageLoadFailed, setImageLoadFailed] = useState(false);
 
   // Validação dos dados
   useEffect(() => {
@@ -34,6 +35,11 @@ const QuizActivityComponent = ({
       console.error("❌ Atividade inválida:", activity);
     }
   }, [activity]);
+
+  useEffect(() => {
+    // Reset when a new question arrives
+    setImageLoadFailed(false);
+  }, [activity.id, activity.imageUrl]);
 
   // Timer
   useEffect(() => {
@@ -145,15 +151,15 @@ const QuizActivityComponent = ({
         </div>
 
         {/* Media */}
-        {activity.imageUrl && (
+        {activity.imageUrl && !imageLoadFailed && (
           <div className="mb-6 rounded-2xl overflow-hidden border border-white/10">
             <img 
               src={activity.imageUrl} 
               alt="Ilustração" 
               className="w-full h-48 object-cover"
               onError={(e) => {
-                console.error("❌ Erro ao carregar imagem:", activity.imageUrl);
-                e.currentTarget.style.display = 'none';
+                console.warn("Imagem indisponível, seguindo sem mídia:", activity.imageUrl);
+                setImageLoadFailed(true);
               }}
             />
           </div>

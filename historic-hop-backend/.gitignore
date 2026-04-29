@@ -1,0 +1,15 @@
+# Node / build
+node_modules
+dist
+*.log
+
+# Env (nunca commitar)
+.env
+
+# Python venvs (não fazem parte do backend Node)
+.venv
+venv
+
+# OS/editor
+.DS_Store
+.vscode

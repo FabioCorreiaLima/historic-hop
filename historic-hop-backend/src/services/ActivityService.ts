@@ -1,34 +1,10 @@
 import { AIService } from "./AIService.js";
 import { ActivityRepository } from "../repositories/ActivityRepository.js";
 import { PeriodRepository } from "../repositories/PeriodRepository.js";
+import { CurriculumService } from "./CurriculumService.js";
 import crypto from "crypto";
 
-const PERIOD_PROMPTS_FALLBACK: Record<string, string> = {
-  colonia: "Especialista em História do Brasil Colonial (1500-1822).",
-  imperio: "Especialista em História do Império do Brasil (1822-1889).",
-  republica_velha: "Especialista em História da República Velha (1889-1930).",
-  era_vargas: "Especialista em História da Era Vargas (1930-1945).",
-  ditadura: "Especialista em História da Ditadura Militar (1964-1985).",
-  nova_republica: "Especialista em História da Nova República (1985-presente)."
-};
-
-const PERIOD_NAMES: Record<string, string> = {
-  colonia: "Brasil Colônia",
-  imperio: "Império do Brasil",
-  republica_velha: "República Velha",
-  era_vargas: "Era Vargas",
-  ditadura: "Ditadura Militar",
-  nova_republica: "Nova República"
-};
-
-const CHARACTER_AVATARS: Record<string, string> = {
-  colonia: "Padre jesuíta português do século XVI, com batina, barba branca",
-  imperio: "Imperador Dom Pedro II, uniforme imperial, barba branca",
-  republica_velha: "Coronel fazendeiro de café, chapéu de palha, roupa elegante rural",
-  era_vargas: "Trabalhador industrial, roupa de operário, expressão determinada",
-  ditadura: "Estudante universitária jovem, cabelos longos, expressão idealista",
-  nova_republica: "Cidadão brasileiro moderno, expressão esperançosa"
-};
+// Hardcodes removidos para permitir geração de currículo 100% dinâmico pela BNCC
 
 export class ActivityService {
   /**
@@ -51,12 +27,12 @@ export class ActivityService {
 
     console.log("🟢 [1/7] Buscando/garantindo período...");
     const period = await this.ensurePeriodReady(periodId);
-    const periodName = period?.name || PERIOD_NAMES[periodId] || periodId;
+    if (!period) throw new Error(`Período ${periodId} não encontrado.`);
+    
+    const periodName = period.name;
     console.log(`📖 Período encontrado: ${periodName}`);
 
-    const periodPrompt = period
-      ? `Você é um especialista em História do Brasil sobre o período: ${period.name}. Descrição: ${period.description}.`
-      : (PERIOD_PROMPTS_FALLBACK[periodId] || "Especialista em História do Brasil.");
+    const periodPrompt = `Você é um especialista em História sobre o período: ${period.name}. Descrição: ${period.description || "Período histórico importante."}.`;
     
     console.log(`📝 Prompt do período (resumido): ${periodPrompt.substring(0, 100)}...`);
 
@@ -98,7 +74,8 @@ IMPORTANTE:
     console.log(`🟢 [6/7] Gerando avatar (includeAvatar=${includeAvatar})...`);
     let avatarUrl = null;
     if (includeAvatar) {
-      const avatarPrompt = CHARACTER_AVATARS[periodId] || "Personagem histórico";
+      const charName = period?.charactername || period?.characterName || "Personagem histórico";
+      const avatarPrompt = `Retrato de ${charName} do período ${periodName}, estilo histórico`;
       console.log(`👤 AvatarPrompt: "${avatarPrompt}"`);
       avatarUrl = await AIService.generateAvatar(avatarPrompt);
       console.log(`👤 Avatar gerado: ${avatarUrl || "FALHOU"}`);
@@ -111,13 +88,14 @@ IMPORTANTE:
       id: crypto.randomUUID(),
       type: activityType,
       periodId,
+      lessonId: CurriculumService.mainLessonId(periodId),
       level,
       difficulty,
       content: activityData,
       imageUrl,
       mapUrl,
       avatarUrl,
-      isAIGenerated: true
+      isAIGenerated: true,
     };
 
     console.log("💾 Salvando atividade no repositório...");
@@ -131,7 +109,12 @@ IMPORTANTE:
   /**
    * Gera um lote de atividades variadas em paralelo
    */
-  static async generateBatch(periodId: string, count: number = 5) {
+  static async generateBatch(
+    periodId: string,
+    count: number = 5,
+    level: number = 1,
+    difficulty: string = "Fácil"
+  ) {
     console.log(`\n🚀 [ActivityService] Iniciando generateBatch para período ${periodId}`);
     console.log(`📊 Quantidade solicitada: ${count} atividades`);
 
@@ -142,7 +125,7 @@ IMPORTANTE:
     for (let i = 0; i < count; i++) {
       const type = types[i % types.length];
       console.log(`📌 Atividade ${i + 1}/${count} - Tipo: ${type}`);
-      promises.push(this.generateSingleActivity({ periodId, activityType: type }));
+      promises.push(this.generateSingleActivity({ periodId, activityType: type, level, difficulty }));
     }
 
     console.log("⏳ Aguardando execução paralela de todas as atividades...");
@@ -160,10 +143,11 @@ IMPORTANTE:
     console.log(`\n❓ [ActivityService] generateSingleQuestion`);
     console.log(`📌 PeriodId: ${periodId}, Level: ${level}, Difficulty: ${difficulty}, Topic: ${topic || "nenhum"}`);
 
-    const periodName = PERIOD_NAMES[periodId] || "História do Brasil";
+    const period = await PeriodRepository.getById(periodId);
+    const periodName = period ? period.name : "História do Brasil";
     console.log(`📖 Período: ${periodName}`);
 
-    const prompt = `Você é especialista em história brasileira. Gere uma pergunta de quiz sobre ${periodName}, nível ${level}, dificuldade ${difficulty || "médio"}.
+    const prompt = `Você é especialista em história. Gere uma pergunta de quiz sobre ${periodName}, nível ${level}, dificuldade ${difficulty || "médio"}.
 ${topic ? `Tema: ${topic}` : ""}
 Responda APENAS com JSON: { "question": "", "options": [], "correctIndex": 0, "explanation": "" }
 
@@ -202,8 +186,9 @@ JSON:`;
 
     if (!charName) {
       console.log("🟢 Gerando nome de personagem via IA...");
+      const descr = period.description || period.name;
       const response = await AIService.generateText(
-        `Sugira um nome de personagem e emoji para o período "${period.name}". JSON: {"name": "", "emoji": ""}`,
+        `Sugira um nome de personagem histórico (real ou arquetípico) e um emoji para representar o período "${period.name}". Descrição: ${descr}. JSON: {"name": "", "emoji": ""}`,
         100
       );
       const charData = AIService.extractJSON(response);

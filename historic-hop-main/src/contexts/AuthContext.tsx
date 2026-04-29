@@ -1,6 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
-
-const API_URL = "http://localhost:5001/api";
+import { API_BASE } from "@/config/api";
 
 export interface User {
   id: string;
@@ -10,6 +9,7 @@ export interface User {
 interface Profile {
   display_name: string;
   avatar_url: string | null;
+  is_admin?: boolean;
 }
 
 interface AuthState {
@@ -46,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function fetchProfile(token: string) {
     try {
-      const res = await fetch(`${API_URL}/users/profile`, {
+      const res = await fetch(`${API_BASE}/users/profile`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -54,7 +54,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (res.ok) {
         const data = await res.json();
         setUser({ id: data.id, email: data.email });
-        setProfile({ display_name: data.name || data.email, avatar_url: data.avatar });
+        setProfile({
+          display_name: data.name || data.email,
+          avatar_url: data.avatar,
+          is_admin: data.is_admin === true,
+        });
       } else {
         // Token might be invalid
         localStorage.removeItem("auth_token");
@@ -71,7 +75,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signUp = async (email: string, password: string, displayName: string) => {
     try {
-      const res = await fetch(`${API_URL}/auth/register`, {
+      const res = await fetch(`${API_BASE}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password, name: displayName })
@@ -83,7 +87,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.setItem("auth_token", data.token);
       setSession({ access_token: data.token });
       setUser(data.user);
-      setProfile({ display_name: data.user.name, avatar_url: data.user.avatar });
+      setProfile({
+        display_name: data.user.name,
+        avatar_url: data.user.avatar,
+        is_admin: data.user.is_admin === true,
+      });
       
       return { error: null };
     } catch (error) {
@@ -93,7 +101,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signIn = async (email: string, password: string) => {
     try {
-      const res = await fetch(`${API_URL}/auth/login`, {
+      const res = await fetch(`${API_BASE}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -105,7 +113,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.setItem("auth_token", data.token);
       setSession({ access_token: data.token });
       setUser(data.user);
-      setProfile({ display_name: data.user.name, avatar_url: data.user.avatar });
+      setProfile({
+        display_name: data.user.name,
+        avatar_url: data.user.avatar,
+        is_admin: data.user.is_admin === true,
+      });
       
       return { error: null };
     } catch (error) {
@@ -124,7 +136,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!session?.access_token) return;
     
     try {
-      const res = await fetch(`${API_URL}/users/profile`, {
+      const res = await fetch(`${API_BASE}/users/profile`, {
         method: "PUT",
         headers: { 
           "Content-Type": "application/json",

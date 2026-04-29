@@ -4,9 +4,7 @@ router.post("/", async (req, res) => {
     try {
         const { audioFile } = req.body;
         if (!audioFile) {
-            return res
-                .status(400)
-                .json({ error: "Arquivo de áudio é obrigatório" });
+            return res.status(400).json({ error: "Arquivo de áudio é obrigatório" });
         }
         // TODO: Implementar speech-to-text com Replicate Whisper
         // Por enquanto, retorna um placeholder
@@ -17,9 +15,7 @@ router.post("/", async (req, res) => {
     catch (error) {
         console.error("Erro:", error);
         res.status(500).json({
-            error: error instanceof Error
-                ? error.message
-                : "Erro ao processar áudio",
+            error: error instanceof Error ? error.message : "Erro ao processar áudio",
         });
     }
 });

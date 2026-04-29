@@ -1,62 +1,104 @@
-import { replicate, AI_MODELS } from '../config/replicate.js';
+import { getGroqClient, AI_MODELS } from '../config/groq.js';
 export class AIService {
     static async generateText(prompt, maxTokens = 1000) {
+        const groq = getGroqClient();
         try {
-            const output = await replicate.run(AI_MODELS.TEXT_GENERATION, {
-                input: {
-                    prompt,
-                    max_tokens: maxTokens,
-                },
+            const response = await groq.chat.completions.create({
+                messages: [{ role: 'user', content: prompt }],
+                model: AI_MODELS.TEXT_GENERATION,
+                temperature: 0.7,
+                max_tokens: maxTokens,
+                top_p: 0.9,
             });
-            return Array.isArray(output) ? output.join('') : output;
+            return response.choices[0]?.message?.content || "";
         }
         catch (error) {
-            console.error('Erro na geração de texto:', error);
-            throw new Error('Falha ao gerar texto com IA');
+            console.error("Erro na geração de texto com Groq:", error);
+            throw error;
         }
     }
-    static async generateImage(prompt, width = 1024, height = 1024) {
+    static extractJSON(text) {
         try {
-            const output = await replicate.run(AI_MODELS.IMAGE_GENERATION, {
-                input: {
-                    prompt,
-                    width,
-                    height,
-                    negative_prompt: "blurry, low quality, distorted, ugly, modern elements",
-                },
-            });
-            return Array.isArray(output) ? output[0] : output;
+            const cleanText = text.trim();
+            // Tenta extrair bloco markdown primeiro
+            const markdownMatch = cleanText.match(/```(?:json)?\n?([\s\S]*?)\n?```/);
+            if (markdownMatch) {
+                try {
+                    return JSON.parse(markdownMatch[1].trim());
+                }
+                catch { }
+            }
+            // Tenta objeto JSON (mais específico antes de array)
+            const objMatch = cleanText.match(/\{[\s\S]*\}/);
+            if (objMatch) {
+                try {
+                    return JSON.parse(objMatch[0]);
+                }
+                catch { }
+            }
+            // Tenta array JSON
+            const arrayMatch = cleanText.match(/\[[\s\S]*\]/);
+            if (arrayMatch) {
+                try {
+                    return JSON.parse(arrayMatch[0]);
+                }
+                catch { }
+            }
+            throw new Error("JSON não encontrado");
         }
         catch (error) {
-            console.error('Erro na geração de imagem:', error);
-            throw new Error('Falha ao gerar imagem com IA');
+            console.error("Erro ao extrair JSON:", error);
+            throw new Error("Resposta da IA em formato inválido");
         }
+    }
+    static async fetchWikimediaImage(queryText) {
+        try {
+            if (!queryText || queryText.length < 3)
+                return null;
+            const searchUrl = `https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo&generator=search&gsrsearch=${encodeURIComponent(queryText)}&gsrnamespace=6&iiprop=url&gsrlimit=1&origin=*`;
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3000);
+            try {
+                const response = await fetch(searchUrl, {
+                    headers: { 'User-Agent': 'HistoricHop/1.0' },
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                const data = await response.json();
+                const pages = data?.query?.pages;
+                if (pages) {
+                    const pageId = Object.keys(pages)[0];
+                    const imageUrl = pages[pageId].imageinfo?.[0]?.url;
+                    if (imageUrl && (imageUrl.toLowerCase().endsWith('.jpg') || imageUrl.toLowerCase().endsWith('.png'))) {
+                        return imageUrl;
+                    }
+                }
+            }
+            catch (_e) {
+                clearTimeout(timeoutId);
+            }
+            return null;
+        }
+        catch (_error) {
+            return null;
+        }
+    }
+    static async generateImage(prompt, width = 1024, height = 640) {
+        let theme = prompt.split(':')[0].replace("Historical scene of ", "").trim();
+        if (theme.length > 40)
+            theme = theme.substring(0, 40);
+        const wikimediaImg = await this.fetchWikimediaImage(theme);
+        if (wikimediaImg)
+            return wikimediaImg;
+        const seed = Math.floor(Math.random() * 1000000);
+        return `https://image.pollinations.ai/prompt/${encodeURIComponent(theme + ", cinematic historical illustration, 8k")}/?width=${width}&height=${height}&nologo=true&seed=${seed}`;
     }
     static async generateMap(prompt) {
-        try {
-            const mapPrompt = `Historical map: ${prompt}. Detailed, accurate, educational, vintage style, clean design.`;
-            return await this.generateImage(mapPrompt, 1024, 768);
-        }
-        catch (error) {
-            console.error('Erro na geração de mapa:', error);
-            throw new Error('Falha ao gerar mapa histórico');
-        }
+        const seed = Math.floor(Math.random() * 1000000);
+        return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", old parchment map style, historical geography, detailed, 8k")}/?width=1024&height=1024&nologo=true&seed=${seed}`;
     }
     static async generateAvatar(prompt) {
-        try {
-            const avatarPrompt = `${prompt}. Realistic portrait, detailed facial features, historical character, dramatic lighting, high quality.`;
-            return await this.generateImage(avatarPrompt, 512, 512);
-        }
-        catch (error) {
-            console.error('Erro na geração de avatar:', error);
-            throw new Error('Falha ao gerar avatar');
-        }
-    }
-    static extractJSON(content) {
-        const jsonMatch = content.match(/\{[\s\S]*\}/);
-        if (!jsonMatch) {
-            throw new Error('Não foi possível extrair JSON da resposta da IA');
-        }
-        return JSON.parse(jsonMatch[0]);
+        const seed = Math.floor(Math.random() * 1000000);
+        return `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt + ", historical portrait, face focus, high quality, 8k")}/?width=512&height=512&nologo=true&seed=${seed}`;
     }
 }

@@ -18,6 +18,7 @@ import streaksRoutes from "./routes/streaks.js";
 import achievementsRoutes from "./routes/achievements.js";
 import rankingRoutes from "./routes/ranking.js";
 import periodsRoutes from "./routes/periods.js";
+import curriculumRoutes from "./routes/curriculum.js";
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ app.use("/api/streaks", streaksRoutes);
 app.use("/api/achievements", achievementsRoutes);
 app.use("/api/ranking", rankingRoutes);
 app.use("/api/historical-periods", periodsRoutes);
+app.use("/api/curriculum", curriculumRoutes);
 
 async function startServer() {
   try {

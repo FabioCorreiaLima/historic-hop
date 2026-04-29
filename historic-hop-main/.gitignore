@@ -8,6 +8,11 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+
+# Python (não faz parte do front; evita commit acidental)
+.venv
+venv
+
 dist
 dist-ssr
 *.local

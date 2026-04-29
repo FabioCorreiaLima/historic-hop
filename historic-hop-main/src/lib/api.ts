@@ -1,7 +1,8 @@
 // Centralized API client for Historic Hop
 // All API calls should go through here
 
-const API_BASE = "http://localhost:5001/api";
+import { API_BASE } from "@/config/api";
+import { Activity, ActivityType } from "@/types";
 
 interface ApiOptions {
   method?: "GET" | "POST" | "PUT" | "DELETE";
@@ -39,7 +40,7 @@ export const authApi = {
   register: (email: string, password: string, displayName: string) =>
     apiCall<{ user: unknown; session: unknown }>("/auth/register", {
       method: "POST",
-      body: { email, password, display_name: displayName },
+      body: { email, password, name: displayName },
     }),
 
   login: (email: string, password: string) =>
@@ -82,6 +83,88 @@ export const progressApi = {
 
   loadProgress: (token: string) =>
     apiCall<{ level: number; score: number; stars: number; percentage: number }[]>("/progress", {
+      token,
+    }),
+
+  completeLesson: (
+    token: string,
+    data: {
+      lessonId: string;
+      score?: number;
+      stars: number;
+      percentage: number;
+      maxCombo?: number;
+      timeSpent?: number;
+    }
+  ) =>
+    apiCall<{
+      success: boolean;
+      xpGained?: number;
+      legacyLevel?: number;
+      totalScore?: number;
+      maxLevel?: number;
+      error?: string;
+    }>("/progress/complete-lesson", {
+      method: "POST",
+      token,
+      body: data,
+    }),
+
+  submitMinigameScore: (
+    token: string,
+    data: {
+      minigame: string;
+      periodId: string;
+      score: number;
+    }
+  ) =>
+    apiCall<{
+      success: boolean;
+      xpGained: number;
+      totalScore: number;
+      minigame: string;
+    }>("/progress/minigame", {
+      method: "POST",
+      token,
+      body: data,
+    }),
+};
+
+export type CurriculumUnitFromApi = {
+  period: Record<string, unknown>;
+  orderIndex: number;
+  unlocked: boolean;
+  lessons: Array<{
+    id: string;
+    periodId: string;
+    title: string;
+    orderIndex: number;
+    xpReward: number;
+    progress: {
+      stars: number;
+      crownLevel: number;
+      bestPercentage: number;
+      bestScore: number;
+      attempts: number;
+      timeSpent: number;
+    } | null;
+  }>;
+};
+
+export const curriculumApi = {
+  getPublic: () =>
+    apiCall<{ course: { id: string; title: string; slug: string }; units: Omit<CurriculumUnitFromApi, "unlocked">[] }>(
+      "/curriculum"
+    ),
+
+  getMe: (token: string) =>
+    apiCall<{ course: { id: string; title: string; slug: string }; units: CurriculumUnitFromApi[] }>("/curriculum/me", {
+      token,
+    }),
+
+  generateFullCurriculum: (token: string) =>
+    apiCall<{ message: string; result: any }>("/curriculum/admin/generate-full", {
+      method: "POST",
       token,
     }),
 };
@@ -155,12 +238,47 @@ export const questionsApi = {
 };
 
 export const activitiesApi = {
-  generateActivity: (data: { periodId: string; activityType: string; level: number; difficulty: string }) =>
-    apiCall<unknown>("/generate-activity", {
-      method: "POST",
-      body: data,
-    }),
+  getActivitiesByPeriod: async (periodId: string, limit: number = 10): Promise<Activity[]> => {
+    try {
+      const data = await apiCall<unknown[]>(`/activities?periodId=${periodId}&limit=${limit}`);
+      if (!Array.isArray(data)) return [];
+
+      return data
+        .filter((act): act is Record<string, unknown> => Boolean(act) && typeof act === "object")
+        .map((act, index) => mapActivity(act, periodId, 1, "Fácil", index))
+        .filter((act): act is Activity => act !== null);
+    } catch (error) {
+      console.error("Erro ao buscar atividades:", error);
+      return [];
+    }
+  },
 };
+
+function mapActivity(
+  act: Record<string, unknown>,
+  periodId: string,
+  level: number,
+  difficulty: string,
+  index: number
+): Activity | null {
+  const type = act.type as ActivityType | undefined;
+  const content = (act.content as Record<string, unknown> | undefined) || {};
+  const base = {
+    id: typeof act.id === "string" ? act.id : `activity-${Date.now()}-${index}`,
+    type: (type || "quiz") as ActivityType,
+    level: typeof act.level === "number" ? act.level : level,
+    period: periodId,
+    topic: `História - ${periodId}`,
+    difficulty: typeof act.difficulty === "string" ? act.difficulty : difficulty,
+  };
+
+  if (type === "quiz") return { ...base, type: "quiz", question: (content.question as string) || "Pergunta não disponível", options: (content.options as string[]) || ["A", "B", "C", "D"], correctIndex: (content.correctIndex as number) ?? 0, explanation: (content.explanation as string) || "Sem explicação", imageUrl: (act.imageUrl as string | undefined) || null, mediaType: act.imageUrl ? "image" : "text" };
+  if (type === "true_false") return { ...base, type: "true_false", statement: (content.statement as string) || "Afirmação não disponível", isTrue: (content.isTrue as boolean) ?? true, explanation: (content.explanation as string) || "Sem explicação" };
+  if (type === "fill_blank") return { ...base, type: "fill_blank", textWithBlanks: (content.textWithBlanks as string) || "__BLANK__", blanks: (content.blanks as string[]) || [], options: (content.options as string[]) || [], explanation: (content.explanation as string) || "Sem explicação" };
+  if (type === "matching") return { ...base, type: "matching", instruction: (content.instruction as string) || "Associe os pares", pairs: (content.pairs as { left: string; right: string }[]) || [], explanation: (content.explanation as string) || "Sem explicação", imageUrl: (act.imageUrl as string | undefined) || null };
+  if (type === "chronological") return { ...base, type: "chronological", instruction: (content.instruction as string) || "Ordene", events: (content.events as { text: string; year: number }[]) || [], explanation: (content.explanation as string) || "Sem explicação" };
+  return null;
+}
 
 // History Chat API
 export const historyChatApi = {
@@ -206,6 +324,7 @@ export default {
   activities: activitiesApi,
   historyChat: historyChatApi,
   periods: historicalPeriodsApi,
+  curriculum: curriculumApi,
 };
 
 // Export named for convenience
@@ -220,4 +339,5 @@ export const api = {
   activities: activitiesApi,
   historyChat: historyChatApi,
   periods: historicalPeriodsApi,
+  curriculum: curriculumApi,
 };

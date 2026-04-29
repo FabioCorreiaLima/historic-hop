@@ -9,11 +9,27 @@ interface Props {
 }
 
 const FillBlank = ({ activity, onComplete }: Props) => {
+  let normalizedText = activity.textWithBlanks.includes("__BLANK__")
+    ? activity.textWithBlanks
+    : activity.textWithBlanks.replace(/\[BLANK\]|\{\{blank\}\}|___+/gi, "__BLANK__");
+  
+  // Se ainda não houver marcadores mas houver lacunas definidas, adiciona ao final
+  if (!normalizedText.includes("__BLANK__") && activity.blanks.length > 0) {
+    normalizedText += " " + "__BLANK__ ".repeat(activity.blanks.length).trim();
+  }
+  const parts = normalizedText.split("__BLANK__");
+  const blankCount = Math.max(parts.length - 1, activity.blanks.length);
+  const safeBlanks = activity.blanks.slice(0, blankCount);
+  while (safeBlanks.length < blankCount) safeBlanks.push("");
+
+  const initialOptions =
+    activity.options.length > 0 ? [...activity.options] : safeBlanks.filter(Boolean);
+
   const [selectedOptions, setSelectedOptions] = useState<(string | null)[]>(
-    activity.blanks.map(() => null)
+    Array.from({ length: blankCount }, () => null)
   );
   const [availableOptions, setAvailableOptions] = useState(() => {
-    const shuffled = [...activity.options];
+    const shuffled = [...initialOptions];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
@@ -30,7 +46,13 @@ const FillBlank = ({ activity, onComplete }: Props) => {
     const newSelected = [...selectedOptions];
     newSelected[currentBlankIndex] = option;
     setSelectedOptions(newSelected);
-    setAvailableOptions(prev => prev.filter(o => o !== option));
+    setAvailableOptions((prev) => {
+      const idx = prev.indexOf(option);
+      if (idx === -1) return prev;
+      const next = [...prev];
+      next.splice(idx, 1);
+      return next;
+    });
   };
 
   const handleRemoveFromBlank = (index: number) => {
@@ -44,7 +66,7 @@ const FillBlank = ({ activity, onComplete }: Props) => {
   };
 
   const checkAnswer = () => {
-    const correct = selectedOptions.every((opt, i) => opt === activity.blanks[i]);
+    const correct = selectedOptions.every((opt, i) => opt === safeBlanks[i]);
     setIsCorrect(correct);
     setChecked(true);
     if (correct) playCorrectSound();
@@ -52,9 +74,6 @@ const FillBlank = ({ activity, onComplete }: Props) => {
   };
 
   const allFilled = selectedOptions.every(o => o !== null);
-
-  // Render text with blanks
-  const parts = activity.textWithBlanks.split("__BLANK__");
 
   return (
     <div className="w-full max-w-2xl mx-auto px-4 animate-fade-in-up">
@@ -79,9 +98,9 @@ const FillBlank = ({ activity, onComplete }: Props) => {
                     className={`blank-slot ${
                       selectedOptions[i] ? "filled" : ""
                     } ${
-                      checked && selectedOptions[i] === activity.blanks[i] ? "correct-slot" : ""
+                      checked && selectedOptions[i] === safeBlanks[i] ? "correct-slot" : ""
                     } ${
-                      checked && selectedOptions[i] && selectedOptions[i] !== activity.blanks[i] ? "incorrect-slot" : ""
+                      checked && selectedOptions[i] && selectedOptions[i] !== safeBlanks[i] ? "incorrect-slot" : ""
                     }`}
                   >
                     {selectedOptions[i] || "___"}
@@ -95,9 +114,9 @@ const FillBlank = ({ activity, onComplete }: Props) => {
         {/* Available options */}
         {!checked && (
           <div className="flex flex-wrap gap-2 mb-5">
-            {availableOptions.map((option) => (
+            {availableOptions.map((option, idx) => (
               <button
-                key={option}
+                key={`${option}-${idx}`}
                 onClick={() => handleSelectOption(option)}
                 className="duo-btn duo-btn-secondary text-sm py-2 px-4"
                 disabled={currentBlankIndex === -1}
@@ -133,7 +152,7 @@ const FillBlank = ({ activity, onComplete }: Props) => {
                 </p>
                 {!isCorrect && (
                   <p className="text-sm text-red-600 mt-1">
-                    Resposta correta: {activity.blanks.join(", ")}
+                    Resposta correta: {safeBlanks.join(", ")}
                   </p>
                 )}
               </div>

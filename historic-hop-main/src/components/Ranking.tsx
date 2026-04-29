@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { api } from "@/lib/api";
 import { useAuth } from "@/contexts/AuthContext";
 import { Trophy, Medal, ArrowLeft, Crown, Calendar, Star } from "lucide-react";
+import { getLevel } from "@/lib/gamification";
 
 interface RankingEntry {
   user_id: string;
@@ -117,7 +118,9 @@ const Ranking = ({ onBack }: { onBack: () => void }) => {
                   <p className="text-sm font-semibold text-foreground truncate">
                     {entry.display_name} {isMe && <span className="text-xs text-primary">(Você)</span>}
                   </p>
-                  <p className="text-xs text-muted-foreground">Nível {entry.max_level}</p>
+                  <p className={`text-[10px] font-bold uppercase tracking-tighter ${getLevel(entry.total_score).color}`}>
+                    {getLevel(entry.total_score).title}
+                  </p>
                 </div>
                 <p className="text-sm font-bold text-accent">{score.toLocaleString()} pts</p>
               </div>

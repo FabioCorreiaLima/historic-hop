@@ -2,30 +2,39 @@ import { useState } from "react";
 import { Lock, Star, CheckCircle2, ChevronRight, Trophy, LogIn, LogOut, User, Settings, Award, MessageCircle, Menu, X } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAdmin } from "@/hooks/useAdmin";
-import { type HistoricalPeriod } from "@/data/activities";
+import { type HistoricalPeriod } from "@/types";
 import StreakBadge from "./StreakBadge";
+import { getLevel } from "@/lib/gamification";
 
 interface TimelineMapProps {
   periods: HistoricalPeriod[];
   periodProgress: Record<string, { completed: boolean; stars: number; correct: number; total: number }>;
+  /** Quando definido (após GET /curriculum/me), desbloqueio segue o servidor (trilha ordenada). */
+  periodServerUnlock?: Record<string, boolean> | null;
+  periodsLoading?: boolean;
   onSelectPeriod: (periodId: string) => void;
   onShowRanking: () => void;
   onShowAuth: () => void;
   onShowAchievements: () => void;
   onOpenChat: (periodId: string) => void;
+  onPlayPacman: (periodId: string) => void;
   streakCount: number;
   practicedToday: boolean;
   achievementCount: number;
 }
 
+
 const TimelineMap = ({ 
   periods, 
   periodProgress, 
+  periodServerUnlock = null,
+  periodsLoading = false,
   onSelectPeriod, 
   onShowRanking, 
   onShowAuth, 
   onShowAchievements, 
   onOpenChat, 
+  onPlayPacman,
   streakCount, 
   practicedToday, 
   achievementCount 
@@ -39,10 +48,23 @@ const TimelineMap = ({
   const totalStars = Object.values(periodProgress).reduce((sum, p) => sum + (p.stars || 0), 0);
 
   const isPeriodUnlocked = (index: number) => {
+    const p = periods[index];
+    if (!p) return false;
+    if (periodServerUnlock != null && p.id in periodServerUnlock) {
+      return periodServerUnlock[p.id];
+    }
     if (index === 0) return true;
     const prevPeriod = periods[index - 1];
     return periodProgress[prevPeriod.id]?.completed || false;
   };
+
+  if (periodsLoading && periods.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#0a0a0c] text-white">
+        <p className="text-sm text-white/60">Carregando trilha…</p>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full min-h-screen relative overflow-hidden bg-[#0a0a0c] flex flex-col md:flex-row">
@@ -90,7 +112,9 @@ const TimelineMap = ({
             </div>
             <div>
               <p className="font-bold text-white">{profile?.display_name || "Viajante"}</p>
-              <p className="text-xs text-blue-300/70">Nível {Math.floor(totalStars / 5) + 1}</p>
+              <p className={`text-xs font-semibold ${getLevel(profile?.total_score || 0).color}`}>
+                {getLevel(profile?.total_score || 0).title}
+              </p>
             </div>
           </div>
           
@@ -166,6 +190,7 @@ const TimelineMap = ({
             const unlocked = isPeriodUnlocked(index);
             const progress = periodProgress[period.id];
             const completed = progress?.completed || false;
+            const periodCardImage = period.image_url || period.imageUrl;
             
             // Web Layout: Alternate sides
             const isLeft = index % 2 === 0;
@@ -178,18 +203,17 @@ const TimelineMap = ({
               >
                 {/* Period Image/Card (Desktop) */}
                 <div className={`hidden lg:block w-full max-w-[400px] h-[250px] relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl transition-all duration-500 group-hover:scale-105 group-hover:-rotate-1 ${!unlocked && 'grayscale opacity-30'}`}>
-                  {period.image_url ? (
+                  {periodCardImage ? (
                     <img 
-                      src={period.image_url} 
+                      src={periodCardImage} 
                       alt={period.name} 
                       className="w-full h-full object-cover" 
                       onError={(e) => {
-                        (e.target as HTMLImageElement).src = "/map-bg.png";
-                        (e.target as HTMLImageElement).className = "w-full h-full object-cover opacity-20 grayscale";
+                        (e.target as HTMLImageElement).style.display = 'none';
                       }}
                     />
                   ) : (
-                    <div className="w-full h-full bg-slate-800 flex items-center justify-center text-6xl opacity-20">
+                    <div className={`w-full h-full ${period.bgColor?.replace('bg-', 'bg-').replace('/5', '/50') || 'bg-slate-800'} flex items-center justify-center text-6xl opacity-30`}>
                       {period.emoji}
                     </div>
                   )}
@@ -242,18 +266,17 @@ const TimelineMap = ({
                   <div className={`bg-white/5 border border-white/10 p-5 md:p-6 rounded-[2rem] backdrop-blur-md transition-all duration-500 group-hover:bg-white/10 ${!isLeft ? 'lg:text-right' : 'text-left'}`}>
                     {/* Mobile Image */}
                     <div className="mb-4 lg:hidden rounded-2xl overflow-hidden h-32 border border-white/5 relative">
-                       {period.image_url ? (
+                       {periodCardImage ? (
                         <img 
-                          src={period.image_url} 
+                          src={periodCardImage} 
                           alt={period.name} 
                           className="w-full h-full object-cover" 
                           onError={(e) => {
-                            (e.target as HTMLImageElement).src = "/map-bg.png";
-                            (e.target as HTMLImageElement).className = "w-full h-full object-cover opacity-20 grayscale";
+                            (e.target as HTMLImageElement).style.display = 'none';
                           }}
                         />
                       ) : (
-                        <div className="w-full h-full bg-slate-800 flex items-center justify-center text-4xl opacity-20">{period.emoji}</div>
+                        <div className={`w-full h-full ${period.bgColor?.replace('bg-', 'bg-').replace('/5', '/50') || 'bg-slate-800'} flex items-center justify-center text-4xl opacity-30`}>{period.emoji}</div>
                       )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       <p className="absolute bottom-3 left-3 text-[9px] font-black text-white/80 uppercase tracking-widest">{period.years}</p>
@@ -266,12 +289,19 @@ const TimelineMap = ({
                     <p className="text-[11px] md:text-xs text-white/50 mb-4 line-clamp-3 md:line-clamp-2">{period.description}</p>
                     
                     {unlocked && (
-                      <div className={`flex items-center gap-3 ${!isLeft ? 'lg:justify-end' : 'justify-start'}`}>
+                      <div className={`flex items-center gap-2 ${!isLeft ? 'lg:justify-end' : 'justify-start'}`}>
                         <button
                           onClick={() => onSelectPeriod(period.id)}
-                          className="flex-1 lg:flex-none px-6 py-2.5 rounded-xl bg-white text-black text-[11px] font-black hover:scale-105 active:scale-95 transition-all"
+                          className="flex-1 lg:flex-none px-4 py-2.5 rounded-xl bg-white text-black text-[11px] font-black hover:scale-105 active:scale-95 transition-all"
                         >
                           EXPLORAR
+                        </button>
+                        <button
+                          onClick={() => onPlayPacman(period.id)}
+                          className="w-11 h-11 rounded-xl bg-amber-400 border border-amber-500 flex items-center justify-center hover:bg-amber-300 active:scale-90 transition-all group relative"
+                          title="Jogar Pac-Man"
+                        >
+                          <span className="text-xl group-hover:scale-110 transition-transform">👾</span>
                         </button>
                         <button
                           onClick={() => onOpenChat(period.id)}

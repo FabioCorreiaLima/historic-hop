@@ -25,7 +25,7 @@ export class AuthService {
     const result = await query(`
       INSERT INTO users (email, name, password)
       VALUES ($1, $2, $3)
-      RETURNING id, email, name, avatar, "createdAt"
+      RETURNING id, email, name, avatar, is_admin, "createdAt"
     `, [email, name, hashedPassword]);
 
     return result.rows[0];
@@ -33,7 +33,7 @@ export class AuthService {
 
   static async findUserByEmail(email: string) {
     const result = await query(`
-      SELECT id, email, name, avatar, password, "createdAt"
+      SELECT id, email, name, avatar, password, is_admin, "createdAt"
       FROM users
       WHERE email = $1
     `, [email]);
@@ -43,7 +43,7 @@ export class AuthService {
 
   static async findUserById(id: string) {
     const result = await query(`
-      SELECT id, email, name, avatar, "createdAt"
+      SELECT id, email, name, avatar, is_admin, "createdAt"
       FROM users
       WHERE id = $1
     `, [id]);

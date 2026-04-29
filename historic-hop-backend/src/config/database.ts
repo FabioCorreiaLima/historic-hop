@@ -5,9 +5,8 @@ dotenv.config();
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_URL?.includes('supabase')
-    ? { rejectUnauthorized: false }
-    : undefined,
+  // Neon e outros provedores gerenciados geralmente exigem SSL.
+  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : undefined,
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
@@ -42,9 +41,15 @@ export async function initDatabase() {
         password VARCHAR(255),
         name VARCHAR(255),
         avatar TEXT,
+        is_admin BOOLEAN DEFAULT FALSE,
         "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`);
+    try {
+      await query(`ALTER TABLE users ADD COLUMN IF NOT EXISTS is_admin BOOLEAN DEFAULT FALSE`);
+    } catch {
+      /* ignore */
+    }
 
     // 2. Tabela de Conquistas
     await query(`CREATE TABLE IF NOT EXISTS user_achievements (
@@ -119,6 +124,7 @@ export async function initDatabase() {
         id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
         type VARCHAR(255) NOT NULL,
         "periodId" VARCHAR(255) NOT NULL,
+        "lessonId" VARCHAR(255),
         level INTEGER DEFAULT 1,
         difficulty VARCHAR(255) DEFAULT 'Fácil',
         content TEXT NOT NULL,
@@ -131,6 +137,11 @@ export async function initDatabase() {
         "createdAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         "updatedAt" TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )`);
+    try {
+      await query(`ALTER TABLE activities ADD COLUMN IF NOT EXISTS "lessonId" VARCHAR(255)`);
+    } catch {
+      /* ignore */
+    }
 
     // 8. Tabela de Períodos Históricos (Dinamismo do Mapa)
     await query(`CREATE TABLE IF NOT EXISTS historical_periods (
@@ -158,12 +169,97 @@ export async function initDatabase() {
       console.log('Coluna order_index já existe ou erro ao adicionar.');
     }
 
-    await seedHistoricalPeriods();
+    // 9. Currículo: cursos, ordem no mapa, lições, progresso por lição
+    await query(`CREATE TABLE IF NOT EXISTS courses (
+        id VARCHAR(255) PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        slug VARCHAR(255) UNIQUE,
+        locale VARCHAR(16) DEFAULT 'pt-BR',
+        order_index INTEGER DEFAULT 0,
+        is_published BOOLEAN DEFAULT TRUE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )`);
+
+    await query(`CREATE TABLE IF NOT EXISTS course_periods (
+        course_id VARCHAR(255) NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+        period_id VARCHAR(255) NOT NULL REFERENCES historical_periods(id) ON DELETE CASCADE,
+        order_index INTEGER NOT NULL DEFAULT 0,
+        PRIMARY KEY (course_id, period_id)
+    )`);
+
+    await query(`CREATE TABLE IF NOT EXISTS lessons (
+        id VARCHAR(255) PRIMARY KEY,
+        period_id VARCHAR(255) NOT NULL REFERENCES historical_periods(id) ON DELETE CASCADE,
+        title VARCHAR(255) NOT NULL,
+        order_index INTEGER DEFAULT 0,
+        xp_reward INTEGER DEFAULT 10,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )`);
+
+    await query(`CREATE TABLE IF NOT EXISTS user_lesson_progress (
+        id VARCHAR(255) PRIMARY KEY DEFAULT gen_random_uuid()::text,
+        user_id VARCHAR(255) NOT NULL,
+        lesson_id VARCHAR(255) NOT NULL,
+        stars INTEGER DEFAULT 0,
+        crown_level INTEGER DEFAULT 0,
+        best_score INTEGER DEFAULT 0,
+        best_percentage INTEGER DEFAULT 0,
+        attempts INTEGER DEFAULT 0,
+        time_spent INTEGER DEFAULT 0,
+        last_completed_at TIMESTAMP,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(user_id, lesson_id),
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+        FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE CASCADE
+    )`);
+
+    await ensureDefaultCurriculum();
 
     console.log('✅ Todas as tabelas foram inicializadas com sucesso');
   } catch (error) {
     console.error('❌ Erro ao inicializar banco:', error);
     dbConnected = false;
+  }
+}
+
+const DEFAULT_COURSE_ID = "default-br";
+
+/** Garante períodos iniciais só quando a tabela está vazia; currículo (curso + lições) é sempre idempotente. */
+async function ensureDefaultCurriculum() {
+  const { rows } = await query(`SELECT COUNT(*)::int AS c FROM historical_periods`);
+  if ((rows[0] as { c: number }).c === 0) {
+    await seedHistoricalPeriods();
+  }
+
+  await query(
+    `INSERT INTO courses (id, title, slug, order_index, is_published)
+     VALUES ($1, $2, $3, 0, TRUE)
+     ON CONFLICT (id) DO UPDATE SET title = EXCLUDED.title, slug = EXCLUDED.slug`,
+    [DEFAULT_COURSE_ID, "História do Brasil", "historia-brasil"]
+  );
+
+  const periodsRes = await query(
+    `SELECT id FROM historical_periods ORDER BY order_index ASC, id ASC`
+  );
+  let ord = 0;
+  for (const row of periodsRes.rows as { id: string }[]) {
+    await query(
+      `INSERT INTO course_periods (course_id, period_id, order_index)
+       VALUES ($1, $2, $3)
+       ON CONFLICT (course_id, period_id) DO UPDATE SET order_index = EXCLUDED.order_index`,
+      [DEFAULT_COURSE_ID, row.id, ord++]
+    );
+
+    const lessonId = `lesson_${row.id}_main`;
+    await query(
+      `INSERT INTO lessons (id, period_id, title, order_index, xp_reward)
+       VALUES ($1, $2, $3, 0, 15)
+       ON CONFLICT (id) DO NOTHING`,
+      [lessonId, row.id, "Trilha principal"]
+    );
   }
 }
 

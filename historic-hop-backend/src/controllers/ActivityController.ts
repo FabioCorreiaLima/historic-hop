@@ -33,8 +33,8 @@ export class ActivityController {
 
   static generateBatch = async (req: Request, res: Response) => {
     try {
-      const { periodId, count = 5 } = req.body;
-      const activities = await ActivityService.generateBatch(periodId, count);
+      const { periodId, count = 5, level = 1, difficulty = "Fácil" } = req.body;
+      const activities = await ActivityService.generateBatch(periodId, count, level, difficulty);
       res.json(activities.map((a: any) => ActivityController.formatActivity(a)));
     } catch (error) {
       console.error("Erro no Controller de Lote:", error);

@@ -1,22 +1,9 @@
-import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 
 export function useAdmin() {
-  const { user } = useAuth();
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const { user, profile, loading: authLoading } = useAuth();
+  const devBypass = import.meta.env.DEV && !!user;
+  const isAdmin = profile?.is_admin === true || devBypass;
 
-  useEffect(() => {
-    if (!user) {
-      setIsAdmin(false);
-      setLoading(false);
-      return;
-    }
-
-    // For now, any logged-in user can access the admin panel in local development
-    setIsAdmin(true);
-    setLoading(false);
-  }, [user]);
-
-  return { isAdmin, loading };
+  return { isAdmin, loading: authLoading };
 }

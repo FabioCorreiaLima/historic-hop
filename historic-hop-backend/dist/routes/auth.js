@@ -2,21 +2,26 @@ import { Router } from "express";
 import { AuthService } from "../services/AuthService.js";
 import { authLimiter } from "../middleware/rateLimit.js";
 const router = Router();
-// POST /api/auth/login - Login (placeholder for now)
+// POST /api/auth/login - Login
 router.post("/login", authLimiter, async (req, res) => {
     try {
-        const { email } = req.body;
-        if (!email) {
-            return res.status(400).json({ error: "Email é obrigatório" });
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.status(400).json({ error: "Email e senha são obrigatórios" });
         }
-        // For now, just create/find user without password
-        let user = await AuthService.findUserByEmail(email);
-        if (!user) {
-            user = await AuthService.createUser(email);
+        const user = await AuthService.findUserByEmail(email);
+        if (!user || !user.password) {
+            return res.status(401).json({ error: "Credenciais inválidas" });
+        }
+        const isValid = await AuthService.verifyPassword(password, user.password);
+        if (!isValid) {
+            return res.status(401).json({ error: "Credenciais inválidas" });
         }
         const token = AuthService.generateToken(user.id, user.email);
+        // Remove password from user object before sending
+        const { password: _, ...userWithoutPassword } = user;
         res.json({
-            user,
+            user: userWithoutPassword,
             token,
             message: "Login realizado com sucesso"
         });
@@ -26,21 +31,25 @@ router.post("/login", authLimiter, async (req, res) => {
         res.status(500).json({ error: "Erro interno do servidor" });
     }
 });
-// POST /api/auth/register - Registro (placeholder)
+// POST /api/auth/register - Registro
 router.post("/register", authLimiter, async (req, res) => {
     try {
-        const { email, name } = req.body;
-        if (!email) {
-            return res.status(400).json({ error: "Email é obrigatório" });
+        const { email, password, name } = req.body;
+        if (!email || !password) {
+            return res.status(400).json({ error: "Email e senha são obrigatórios" });
+        }
+        if (password.length < 6) {
+            return res.status(400).json({ error: "A senha deve ter no mínimo 6 caracteres" });
         }
         const existingUser = await AuthService.findUserByEmail(email);
         if (existingUser) {
             return res.status(400).json({ error: "Usuário já existe" });
         }
-        const user = await AuthService.createUser(email, name);
+        const user = await AuthService.createUser(email, name, password);
         const token = AuthService.generateToken(user.id, user.email);
+        const { password: _, ...userWithoutPassword } = user;
         res.status(201).json({
-            user,
+            user: userWithoutPassword,
             token,
             message: "Usuário criado com sucesso"
         });

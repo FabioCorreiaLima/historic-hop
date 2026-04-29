@@ -5,6 +5,9 @@ import { ArrowLeft, Plus, Pencil, Trash2, Save, X, Search, Filter, Image, Video,
 import { useNavigate } from "react-router-dom";
 import { api } from "@/lib/api";
 
+import { type HistoricalPeriod as Period, type Activity } from "@/types";
+
+// Adapt Question interface to match the existing one based on Activity
 interface Question {
   id: string;
   level: number;
@@ -18,19 +21,6 @@ interface Question {
   image_url: string | null;
   audio_url: string | null;
   video_url: string | null;
-}
-
-interface Period {
-  id: string;
-  name: string;
-  emoji: string;
-  years: string;
-  color: string;
-  bgColor: string;
-  borderColor: string;
-  description: string;
-  characterName: string;
-  characterEmoji: string;
 }
 
 const emptyQuestion: Omit<Question, "id"> = {
@@ -89,6 +79,7 @@ const AdminPanel = () => {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [generatingBNCC, setGeneratingBNCC] = useState(false);
 
   const fetchQuestions = useCallback(async () => {
     if (!session?.access_token) return;
@@ -140,6 +131,24 @@ const AdminPanel = () => {
       setError(err.message || "Erro ao salvar");
     }
     setSaving(false);
+  };
+
+  const handleGenerateBNCC = async () => {
+    if (!confirm("Isso irá apagar a trilha atual e gerar a Base Nacional Comum Curricular (História do Brasil) completa via IA. Esse processo pode demorar até 1 minuto. Deseja continuar?")) return;
+    if (!session?.access_token) return;
+
+    setGeneratingBNCC(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      const response = await api.curriculum.generateFullCurriculum(session.access_token);
+      setSuccess(`Currículo gerado! ${response.result?.count || ''} períodos criados.`);
+      fetchPeriods();
+    } catch (err: any) {
+      setError(err.message || "Erro ao gerar currículo BNCC");
+    }
+    setGeneratingBNCC(false);
   };
 
   const handleSavePeriod = async () => {
@@ -241,12 +250,22 @@ const AdminPanel = () => {
                 <Plus className="w-4 h-4" /> Nova Pergunta
               </button>
             ) : (
-              <button
-                onClick={() => setEditingPeriod({ ...emptyPeriod })}
-                className="duo-btn duo-btn-primary flex items-center gap-2"
-              >
-                <Plus className="w-4 h-4" /> Novo Período
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleGenerateBNCC}
+                  disabled={generatingBNCC}
+                  className="duo-btn duo-btn-secondary flex items-center gap-2 border-emerald-500/50 hover:bg-emerald-500/10 text-emerald-400 disabled:opacity-50"
+                >
+                  {generatingBNCC ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                  {generatingBNCC ? "Gerando IA..." : "Gerar BNCC"}
+                </button>
+                <button
+                  onClick={() => setEditingPeriod({ ...emptyPeriod })}
+                  className="duo-btn duo-btn-primary flex items-center gap-2"
+                >
+                  <Plus className="w-4 h-4" /> Novo Período
+                </button>
+              </div>
             )}
           </div>
         </div>

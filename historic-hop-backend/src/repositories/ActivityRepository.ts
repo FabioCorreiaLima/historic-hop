@@ -1,16 +1,15 @@
-import { privateEncrypt } from "crypto";
 import { query } from "../config/database.js";
 
 export class ActivityRepository {
   static async save(activity: any) {
-    const { id, type, periodId, level, difficulty, content, imageUrl, mapUrl, audioUrl, videoUrl, avatarUrl, isAIGenerated } = activity;
-    
+    const { id, type, periodId, lessonId, level, difficulty, content, imageUrl, mapUrl, audioUrl, videoUrl, avatarUrl, isAIGenerated } = activity;
+
     const result = await query(
       `INSERT INTO activities 
-      (id, type, "periodId", level, difficulty, content, "imageUrl", "mapUrl", "audioUrl", "videoUrl", "avatarUrl", "isAIGenerated")
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+      (id, type, "periodId", "lessonId", level, difficulty, content, "imageUrl", "mapUrl", "audioUrl", "videoUrl", "avatarUrl", "isAIGenerated")
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
       RETURNING *`,
-      [id, type, periodId, level || 1, difficulty || 'Fácil', JSON.stringify(content), imageUrl, mapUrl, audioUrl, videoUrl, avatarUrl, isAIGenerated ?? true]
+      [id, type, periodId, lessonId ?? null, level || 1, difficulty || "Fácil", JSON.stringify(content), imageUrl, mapUrl, audioUrl, videoUrl, avatarUrl, isAIGenerated ?? true]
     );
     
     return result.rows[0];
