@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import * as Phaser from 'phaser';
 import { api } from '@/lib/api';
 import { QuizActivity } from '@/types';
-import { Loader2, X, Volume2, VolumeX, Heart, Trophy, Ghost as GhostIcon } from 'lucide-react';
+import { Loader2, X, Volume2, VolumeX, Heart, Trophy, Zap } from 'lucide-react';
 
 interface PacManGameProps {
   periodId: string;
@@ -26,21 +26,22 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
   const audioCtx = useRef<AudioContext | null>(null);
   const bgmInterval = useRef<any>(null);
   
+  // Refs para estado persistente sem remontar o jogo
+  const askedQuestionsRef = useRef<string[]>([]);
+  const phaserSceneRef = useRef<any>(null);
+
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
   const [showQuestion, setShowQuestion] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<QuizActivity | null>(null);
   const [loadingQuestion, setLoadingQuestion] = useState(false);
   const [muted, setMuted] = useState(false);
-  const [askedQuestions, setAskedQuestions] = useState<string[]>([]);
-  const phaserSceneRef = useRef<any>(null);
 
   const playBeep = useCallback((freq: number, duration: number = 0.1, volume: number = 0.1) => {
     if (muted) return;
     try {
       if (!audioCtx.current) audioCtx.current = new (window.AudioContext || (window as any).webkitAudioContext)();
       if (audioCtx.current.state === 'suspended') audioCtx.current.resume();
-      
       const osc = audioCtx.current.createOscillator();
       const gain = audioCtx.current.createGain();
       osc.type = freq < 300 ? 'square' : 'sine';
@@ -54,17 +55,16 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
     } catch (e) { }
   }, [muted]);
 
-  // Música de fundo estilo Pac-Man (BPM constante)
   const startBGM = useCallback(() => {
     if (bgmInterval.current) clearInterval(bgmInterval.current);
     let step = 0;
     bgmInterval.current = setInterval(() => {
       if (!muted && !showQuestion) {
         const freq = step % 4 === 0 ? BEEP_FREQ.BGM_LOW : BEEP_FREQ.BGM_HIGH;
-        playBeep(freq, 0.05, 0.03);
+        playBeep(freq, 0.05, 0.02);
       }
       step++;
-    }, 250);
+    }, 280);
   }, [muted, showQuestion, playBeep]);
 
   useEffect(() => {
@@ -83,6 +83,7 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
       cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
       innerScore = 0;
       innerLives = 3;
+      isPowerMode = false;
 
       constructor() { super({ key: 'MainScene' }); }
 
@@ -139,16 +140,34 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
           this.innerScore += 10;
           setScore(this.innerScore);
           playBeep(BEEP_FREQ.DOT, 0.05);
+          this.showPopupText("+10", dot.x, dot.y);
           if (this.dots.countActive(true) === 0) this.finishGame(true);
         });
+
         this.physics.add.overlap(this.player, this.specialItems, (p, s) => {
           s.destroy();
           playBeep(BEEP_FREQ.POWERUP, 0.2);
           this.physics.world.pause();
           window.dispatchEvent(new CustomEvent('SHOW_QUESTION_EVENT'));
         });
-        this.physics.add.overlap(this.player, this.ghosts, () => this.handleDeath());
+
+        this.physics.add.overlap(this.player, this.ghosts, (p, ghost: any) => {
+          if (this.isPowerMode) {
+             ghost.setPosition(400, 400); // Manda pro "centro"
+             this.innerScore += 200;
+             setScore(this.innerScore);
+             this.showPopupText("+200", ghost.x, ghost.y, "#34d399");
+          } else {
+             this.handleDeath();
+          }
+        });
+
         this.cursors = this.input.keyboard!.createCursorKeys();
+      }
+
+      showPopupText(text: string, x: number, y: number, color: string = "#ffffff") {
+        const t = this.add.text(x, y, text, { font: "bold 16px Arial", color }).setOrigin(0.5);
+        this.tweens.add({ targets: t, y: y - 40, alpha: 0, duration: 800, onComplete: () => t.destroy() });
       }
 
       createGhost(x: number, y: number) {
@@ -173,6 +192,15 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
         }
       }
 
+      activatePowerMode() {
+        this.isPowerMode = true;
+        this.ghosts.setTint(0x60a5fa);
+        this.time.delayedCall(8000, () => {
+          this.isPowerMode = false;
+          this.ghosts.setTint(0xef4444);
+        });
+      }
+
       finishGame(won: boolean) {
         this.physics.pause();
         onGameOver(this.innerScore, won);
@@ -189,7 +217,7 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
 
         this.ghosts.getChildren().forEach((g: any) => {
           const dist = Phaser.Math.Distance.Between(g.x, g.y, this.player.x, this.player.y);
-          if (dist < 200) this.physics.moveToObject(g, this.player, 140);
+          if (dist < 200 && !this.isPowerMode) this.physics.moveToObject(g, this.player, 140);
           else if (Math.random() < 0.02) {
              const angle = Phaser.Math.Between(0, 3) * 90;
              this.physics.velocityFromAngle(angle, 120, g.body.velocity);
@@ -221,14 +249,8 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
     }
 
     const config: Phaser.Types.Core.GameConfig = {
-      type: Phaser.CANVAS, 
-      parent: gameContainerRef.current,
-      scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 800,
-        height: 800
-      },
+      type: Phaser.CANVAS, parent: gameContainerRef.current,
+      scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH, width: 800, height: 800 },
       physics: { default: 'arcade', arcade: { gravity: { x: 0, y: 0 } } },
       scene: MainScene
     };
@@ -238,16 +260,14 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
     const handleShowQuestion = async () => {
       setLoadingQuestion(true); setShowQuestion(true);
       try {
-        // Aumentamos o limite para 50 para ter mais variedade se disponível
         const activities = await api.activities.getActivitiesByPeriod(periodId, 50);
         const quiz = activities.filter(a => a.type === 'quiz') as QuizActivity[];
         if (quiz.length > 0) {
-          // Tentar encontrar uma pergunta não respondida ainda
-          const unasked = quiz.filter(q => !askedQuestions.includes(q.id));
+          const unasked = quiz.filter(q => !askedQuestionsRef.current.includes(q.id));
           const list = unasked.length > 0 ? unasked : quiz;
           const randomQ = list[Math.floor(Math.random() * list.length)];
           setCurrentQuestion(randomQ);
-          setAskedQuestions(prev => [...prev, randomQ.id]);
+          askedQuestionsRef.current.push(randomQ.id);
         } else resumeGame(true);
       } catch (err) { resumeGame(true); } finally { setLoadingQuestion(false); }
     };
@@ -257,7 +277,7 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
       if (gameInstance.current) gameInstance.current.destroy(true);
       window.removeEventListener('SHOW_QUESTION_EVENT', handleShowQuestion);
     };
-  }, [periodId, askedQuestions]);
+  }, [periodId]); // REMOVIDO askedQuestions daqui para não resetar o jogo
 
   const resumeGame = (isCorrect: boolean) => {
     setShowQuestion(false); setCurrentQuestion(null);
@@ -267,6 +287,8 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
         phaserSceneRef.current.innerScore += 500;
         setScore(phaserSceneRef.current.innerScore);
         phaserSceneRef.current.cameras.main.flash(500, 0, 255, 0);
+        // EFEITO ESPECIAL: Ativa o "Super Pac-Man" por 8 segundos!
+        phaserSceneRef.current.activatePowerMode();
       } else {
         playBeep(BEEP_FREQ.WRONG, 0.4, 0.2);
         phaserSceneRef.current.handleDeath();
@@ -293,11 +315,11 @@ export default function PacManGame({ periodId, onGameOver, onBack }: PacManGameP
          </div>
 
          <div className="flex gap-4">
-            <div className="bg-slate-900/80 backdrop-blur-md px-4 py-2 rounded-2xl flex items-center gap-2 border border-amber-400/30">
+            <div className="bg-slate-900/80 backdrop-blur-md px-4 py-2 rounded-2xl flex items-center gap-2 border border-amber-400/30 shadow-[0_0_15px_rgba(251,191,36,0.2)]">
                <Trophy className="w-5 h-5 text-amber-400" />
                <span className="text-xl font-black text-white tabular-nums">{score}</span>
             </div>
-            <div className="bg-slate-900/80 backdrop-blur-md px-4 py-2 rounded-2xl flex items-center gap-2 border border-red-500/30">
+            <div className="bg-slate-900/80 backdrop-blur-md px-4 py-2 rounded-2xl flex items-center gap-2 border border-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.2)]">
                <Heart className="w-5 h-5 text-red-500 fill-red-500" />
                <span className="text-xl font-black text-white">{lives}</span>
             </div>
