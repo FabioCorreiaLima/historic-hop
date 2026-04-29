@@ -345,7 +345,7 @@ const AdminPanel = () => {
                       <label className="text-xs font-bold text-muted-foreground mb-1 block">Nome do Personagem</label>
                       <input
                         type="text"
-                        value={editingPeriod.characterName}
+                        value={editingPeriod.characterName || ""}
                         onChange={e => setEditingPeriod({ ...editingPeriod, characterName: e.target.value })}
                         placeholder="ex: Getúlio"
                         className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
@@ -537,7 +537,7 @@ const AdminPanel = () => {
                       </button>
                       <input
                         type="text"
-                        value={opt}
+                        value={opt || ""}
                         onChange={e => {
                           const newOpts = [...editingQuestion.options];
                           newOpts[i] = e.target.value;
