@@ -183,6 +183,31 @@ export const streaksApi = {
     }),
 };
 
+// Store API
+export const storeApi = {
+  getItems: () =>
+    apiCall<any[]>("/store/items"),
+
+  getInventory: (token: string) =>
+    apiCall<{ inventory: any[]; coins: number }>("/store/inventory", {
+      token,
+    }),
+
+  buyItem: (token: string, itemId: string) =>
+    apiCall<{ success: boolean; message: string }>("/store/buy", {
+      method: "POST",
+      token,
+      body: { itemId },
+    }),
+
+  selectSkin: (token: string, skinId: string) =>
+    apiCall<{ success: boolean; message: string }>("/store/select-skin", {
+      method: "POST",
+      token,
+      body: { skinId },
+    }),
+};
+
 // Achievements API
 export const achievementsApi = {
   getAchievements: (token: string) =>
@@ -314,18 +339,35 @@ export const historicalPeriodsApi = {
     }),
 };
 
+// Pac-Man History API
+export const pacmanApi = {
+  getPhaseData: (periodId: string) =>
+    apiCall<{
+      periodId: string;
+      periodName: string;
+      theme: { wallColor: string; bgColor: string; accentColor: string; atmosphereLabel: string };
+      ghosts: Array<{ name: string; emoji: string; description: string; tintColor: string }>;
+      collectibles: Array<{ name: string; emoji: string; fact: string }>;
+      powerPellets: Array<{ name: string; emoji: string; effect: string }>;
+      finalChallenge: { question: string; options: string[]; correctIndex: number; explanation: string };
+      periodSummary: string;
+    }>(`/pacman/phase/${periodId}`),
+};
+
 export default {
   auth: authApi,
   user: userApi,
   progress: progressApi,
   streaks: streaksApi,
   achievements: achievementsApi,
+  store: storeApi,
   ranking: rankingApi,
   questions: questionsApi,
   activities: activitiesApi,
   historyChat: historyChatApi,
   periods: historicalPeriodsApi,
   curriculum: curriculumApi,
+  pacman: pacmanApi,
 };
 
 // Export named for convenience
@@ -335,10 +377,12 @@ export const api = {
   progress: progressApi,
   streaks: streaksApi,
   achievements: achievementsApi,
+  store: storeApi,
   ranking: rankingApi,
   questions: questionsApi,
   activities: activitiesApi,
   historyChat: historyChatApi,
   periods: historicalPeriodsApi,
   curriculum: curriculumApi,
+  pacman: pacmanApi,
 };

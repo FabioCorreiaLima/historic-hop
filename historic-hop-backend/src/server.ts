@@ -16,9 +16,11 @@ import manageQuestionsRoutes from "./routes/manageQuestions.js";
 import progressRoutes from "./routes/progress.js";
 import streaksRoutes from "./routes/streaks.js";
 import achievementsRoutes from "./routes/achievements.js";
+import storeRouter from "./routes/store.js";
 import rankingRoutes from "./routes/ranking.js";
 import periodsRoutes from "./routes/periods.js";
 import curriculumRoutes from "./routes/curriculum.js";
+import pacmanRoutes from "./routes/pacman.js";
 
 dotenv.config();
 
@@ -41,9 +43,11 @@ app.use("/api/manage-questions", manageQuestionsRoutes);
 app.use("/api/progress", progressRoutes);
 app.use("/api/streaks", streaksRoutes);
 app.use("/api/achievements", achievementsRoutes);
+app.use("/api/store", storeRouter);
 app.use("/api/ranking", rankingRoutes);
 app.use("/api/historical-periods", periodsRoutes);
 app.use("/api/curriculum", curriculumRoutes);
+app.use("/api/pacman", pacmanRoutes);
 
 async function startServer() {
   try {

@@ -2,9 +2,10 @@ import { AIService } from "./AIService.js";
 import { ActivityRepository } from "../repositories/ActivityRepository.js";
 import { PeriodRepository } from "../repositories/PeriodRepository.js";
 import { CurriculumService } from "./CurriculumService.js";
+import { DifficultyService } from "./DifficultyService.js";
 import crypto from "crypto";
 
-// Hardcodes removidos para permitir geração de currículo 100% dinâmico pela BNCC
+// Geração 100% dinâmica pela BNCC com escalonamento de dificuldade por nível
 
 export class ActivityService {
   /**
@@ -36,7 +37,7 @@ export class ActivityService {
     
     console.log(`📝 Prompt do período (resumido): ${periodPrompt.substring(0, 100)}...`);
 
-    const activityPrompt = this.getActivityPrompt(activityType, periodName);
+    const activityPrompt = this.getActivityPrompt(activityType, periodName, level);
     console.log(`📝 Prompt da atividade: ${activityPrompt.substring(0, 100)}...`);
 
     const systemPrompt = `${periodPrompt}
@@ -116,23 +117,27 @@ IMPORTANTE:
     difficulty: string = "Fácil"
   ) {
     console.log(`\n🚀 [ActivityService] Iniciando generateBatch para período ${periodId}`);
-    console.log(`📊 Quantidade solicitada: ${count} atividades`);
+    console.log(`📊 Quantidade solicitada: ${count} atividades, Nível: ${level}`);
 
-    const types = ["quiz", "true_false", "fill_blank", "chronological", "matching"];
-    console.log(`📋 Tipos disponíveis: ${types.join(", ")}`);
+    // Usa os tipos permitidos para o nível (DifficultyService)
+    const allowedTypes = DifficultyService.getAllowedTypes(level);
+    console.log(`📋 Tipos permitidos para nível ${level}: ${allowedTypes.join(", ")}`);
+
+    const resolvedDifficulty = DifficultyService.getTierName(level);
+    console.log(`🎯 Dificuldade resolvida: ${resolvedDifficulty}`);
 
     const promises = [];
     for (let i = 0; i < count; i++) {
-      const type = types[i % types.length];
+      const type = DifficultyService.selectActivityType(level, i);
       console.log(`📌 Atividade ${i + 1}/${count} - Tipo: ${type}`);
-      promises.push(this.generateSingleActivity({ periodId, activityType: type, level, difficulty }));
+      promises.push(
+        this.generateSingleActivity({ periodId, activityType: type, level, difficulty: resolvedDifficulty })
+      );
     }
 
     console.log("⏳ Aguardando execução paralela de todas as atividades...");
     const results = await Promise.all(promises);
     console.log(`✅ Lote concluído! ${results.length} atividades geradas com sucesso.`);
-    console.log(`📊 IDs gerados: ${results.map(r => r.id).join(", ")}`);
-
     return results;
   }
 
@@ -218,30 +223,96 @@ JSON:`;
     return { ...period, characterName: charName, characterEmoji: charEmoji, image_url: imageUrl };
   }
 
-  private static getActivityPrompt(type: string, periodName: string): string {
-    console.log(`📝 [getActivityPrompt] Tipo: ${type}, Período: ${periodName}`);
-    
+  /**
+   * Monta o prompt da atividade com base no TIPO e no NÍVEL.
+   * Todos os tipos incluem os campos educacionais: historicalFact e source.
+   */
+  private static getActivityPrompt(type: string, periodName: string, level: number = 1): string {
+    console.log(`📝 [getActivityPrompt] Tipo: ${type}, Período: ${periodName}, Nível: ${level}`);
+
+    const diffGuidelines = DifficultyService.buildPromptGuidelines(level);
+
+    // Campos educacionais obrigatórios em TODOS os tipos
+    const educationalFields = `
+  "historicalFact": "Um fato histórico complementar e interessante sobre o tema (diferente da explicação)",
+  "source": "Segundo [historiador ou documento real], [afirmação]"${level >= 16 ? ' // OBRIGATÓRIO: cite um historiador real (ex: Boris Fausto, José Murilo de Carvalho)' : ''}`;
+
     let prompt = "";
     switch (type) {
       case "quiz":
-        prompt = `Gere UMA pergunta de múltipla escolha sobre ${periodName}. JSON: { "question": "", "options": [], "correctIndex": 0, "explanation": "", "imagePrompt": "" }`;
+        prompt = `Gere UMA pergunta de múltipla escolha sobre ${periodName}.
+${diffGuidelines}
+JSON válido:
+{
+  "question": "Pergunta clara e objetiva",
+  "options": ["Opção A", "Opção B", "Opção C", "Opção D"],
+  "correctIndex": 0,
+  "explanation": "Por que esta resposta está correta e as outras erradas",
+  ${educationalFields},
+  "imagePrompt": "Cena histórica relacionada à pergunta para gerar imagem"
+}`;
         break;
+
       case "chronological":
-        prompt = `Gere UMA ordenação cronológica de 5 eventos sobre ${periodName}. JSON: { "instruction": "", "events": [{ "text": "", "year": 0, "description": "" }], "explanation": "" }`;
+        prompt = `Gere UMA atividade de ordenação cronológica com 5 eventos de ${periodName}.
+${diffGuidelines}
+JSON válido:
+{
+  "instruction": "Ordene os eventos cronologicamente",
+  "events": [
+    { "text": "Descrição do evento", "year": 1800, "description": "Contexto do evento" }
+  ],
+  "explanation": "Explicação da ordem correta e sua importância",
+  ${educationalFields}
+}`;
         break;
+
       case "true_false":
-        prompt = `Gere UMA afirmação V/F sobre ${periodName}. JSON: { "statement": "", "isTrue": true, "explanation": "" }`;
+        prompt = `Gere UMA afirmação Verdadeira ou Falsa sobre ${periodName}.
+${diffGuidelines}
+JSON válido:
+{
+  "statement": "Afirmação histórica a ser avaliada",
+  "isTrue": true,
+  "explanation": "Por que esta afirmação é verdadeira/falsa com contexto histórico",
+  ${educationalFields}
+}`;
         break;
+
       case "fill_blank":
-        prompt = `Gere UMA atividade de lacunas sobre ${periodName}. JSON: { "textWithBlanks": "", "blanks": [], "options": [], "explanation": "" }`;
+        prompt = `Gere UMA atividade de completar lacunas com texto histórico sobre ${periodName}.
+${diffGuidelines}
+Use __BLANK__ para indicar as lacunas no texto.
+JSON válido:
+{
+  "textWithBlanks": "Texto histórico com __BLANK__ nos lugares das lacunas",
+  "blanks": ["resposta1", "resposta2"],
+  "options": ["resposta1", "resposta2", "distrator1", "distrator2"],
+  "explanation": "Contexto histórico explicando as respostas corretas",
+  ${educationalFields}
+}`;
         break;
+
       case "matching":
-        prompt = `Gere UMA atividade de associação sobre ${periodName} com 4 pares. JSON: { "instruction": "", "pairs": [{ "left": "", "right": "" }], "explanation": "" }`;
+        prompt = `Gere UMA atividade de associação sobre ${periodName} com 4 pares.
+${diffGuidelines}
+JSON válido:
+{
+  "instruction": "Associe cada item da coluna A com seu correspondente na coluna B",
+  "pairs": [
+    { "left": "Conceito ou personagem", "right": "Definição ou evento relacionado" }
+  ],
+  "explanation": "Explicação das associações e sua importância histórica",
+  ${educationalFields}
+}`;
         break;
+
       default:
-        prompt = `Gere um quiz sobre ${periodName}. JSON: { "question": "", "options": [], "correctIndex": 0, "explanation": "" }`;
+        prompt = `Gere uma questão de quiz sobre ${periodName}.
+${diffGuidelines}
+JSON: { "question": "", "options": [], "correctIndex": 0, "explanation": "", ${educationalFields} }`;
     }
-    
+
     console.log(`📝 Prompt gerado (resumido): ${prompt.substring(0, 150)}...`);
     return prompt;
   }

@@ -2,6 +2,7 @@ import { ProgressRepository } from "../repositories/ProgressRepository.js";
 import { LessonRepository } from "../repositories/LessonRepository.js";
 import { UserLessonProgressRepository } from "../repositories/UserLessonProgressRepository.js";
 import { CurriculumRepository, DEFAULT_COURSE_ID } from "../repositories/CurriculumRepository.js";
+import { AchievementService } from "./AchievementService.js";
 
 export class ProgressService {
   static async getUserProgress(userId: string) {
@@ -28,11 +29,15 @@ export class ProgressService {
 
     await ProgressRepository.updateRanking(userId, score, maxLevel);
 
+    // 3. Verificar conquistas
+    const newAchievements = await AchievementService.checkAndUnlock(userId, "progress");
+    
     return {
       success: true,
       totalScore,
       maxLevel,
-      currentProgress: progress
+      currentProgress: progress,
+      newAchievements
     };
   }
 
@@ -112,11 +117,15 @@ export class ProgressService {
     const updatedProgress = await ProgressRepository.getByUser(userId);
     const totalScore = updatedProgress.reduce((acc, curr) => acc + (curr.score || 0), 0);
 
+    // Verificar conquistas após minigame
+    const newAchievements = await AchievementService.checkAndUnlock(userId, "progress");
+
     return {
       success: true,
       xpGained,
       totalScore,
-      minigame
+      minigame,
+      newAchievements
     };
   }
 }

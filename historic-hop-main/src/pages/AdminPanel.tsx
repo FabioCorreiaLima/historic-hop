@@ -215,58 +215,68 @@ const AdminPanel = () => {
   );
 
   return (
-    <div className="game-bg min-h-screen pb-20">
-      <div className="max-w-6xl mx-auto px-4 py-6">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">
-          <div className="flex items-center gap-3">
-            <button onClick={() => navigate("/")} className="glass-option p-2 rounded-xl hover:bg-muted/50 transition-colors">
-              <ArrowLeft className="w-5 h-5 text-foreground" />
-            </button>
-            <h1 className="text-2xl font-bold text-foreground">Painel Admin</h1>
+    <div className="game-bg min-h-screen pb-20 selection:bg-primary/30">
+      <div className="max-w-6xl mx-auto px-4 py-6 md:py-10">
+        {/* Header Responsivo */}
+        <div className="flex flex-col gap-6 mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={() => navigate("/")} 
+                className="group p-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all active:scale-90"
+                title="Voltar ao Início"
+              >
+                <ArrowLeft className="w-5 h-5 text-white/70 group-hover:text-white" />
+              </button>
+              <div>
+                <h1 className="text-3xl font-black text-white tracking-tighter">Painel Admin</h1>
+                <p className="text-xs font-bold text-primary uppercase tracking-widest">Gestão de Conteúdo</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              {activeTab === "questions" ? (
+                <button
+                  onClick={() => setEditingQuestion({ ...emptyQuestion })}
+                  className="duo-btn duo-btn-primary flex items-center justify-center gap-2 px-6 py-3 w-full sm:w-auto"
+                >
+                  <Plus className="w-4 h-4" /> Nova Pergunta
+                </button>
+              ) : (
+                <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                  <button
+                    onClick={handleGenerateBNCC}
+                    disabled={generatingBNCC}
+                    className="duo-btn duo-btn-secondary flex items-center justify-center gap-2 border-emerald-500/50 hover:bg-emerald-500/10 text-emerald-400 disabled:opacity-50 w-full sm:w-auto"
+                  >
+                    {generatingBNCC ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                    {generatingBNCC ? "Gerando IA..." : "Gerar BNCC"}
+                  </button>
+                  <button
+                    onClick={() => setEditingPeriod({ ...emptyPeriod })}
+                    className="duo-btn duo-btn-primary flex items-center justify-center gap-2 px-6 py-3 w-full sm:w-auto"
+                  >
+                    <Plus className="w-4 h-4" /> Novo Período
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
           
-          <div className="flex bg-muted/30 p-1 rounded-xl border border-border">
+          {/* Tabs Responsivas */}
+          <div className="flex bg-slate-900/50 p-1.5 rounded-2xl border border-white/10 w-full sm:w-fit">
             <button
               onClick={() => { setActiveTab("questions"); setSearchTerm(""); }}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === "questions" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+              className={`flex-1 sm:flex-none flex items-center justify-center gap-3 px-6 py-3 rounded-xl text-sm font-black transition-all ${activeTab === "questions" ? "bg-white text-slate-950 shadow-xl" : "text-white/50 hover:text-white"}`}
             >
               <Database className="w-4 h-4" /> Perguntas
             </button>
             <button
               onClick={() => { setActiveTab("periods"); setSearchTerm(""); }}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all ${activeTab === "periods" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+              className={`flex-1 sm:flex-none flex items-center justify-center gap-3 px-6 py-3 rounded-xl text-sm font-black transition-all ${activeTab === "periods" ? "bg-white text-slate-950 shadow-xl" : "text-white/50 hover:text-white"}`}
             >
               <MapIcon className="w-4 h-4" /> Mapa e Períodos
             </button>
-          </div>
-
-          <div className="md:ml-auto">
-            {activeTab === "questions" ? (
-              <button
-                onClick={() => setEditingQuestion({ ...emptyQuestion })}
-                className="duo-btn duo-btn-primary flex items-center gap-2"
-              >
-                <Plus className="w-4 h-4" /> Nova Pergunta
-              </button>
-            ) : (
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={handleGenerateBNCC}
-                  disabled={generatingBNCC}
-                  className="duo-btn duo-btn-secondary flex items-center gap-2 border-emerald-500/50 hover:bg-emerald-500/10 text-emerald-400 disabled:opacity-50"
-                >
-                  {generatingBNCC ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-                  {generatingBNCC ? "Gerando IA..." : "Gerar BNCC"}
-                </button>
-                <button
-                  onClick={() => setEditingPeriod({ ...emptyPeriod })}
-                  className="duo-btn duo-btn-primary flex items-center gap-2"
-                >
-                  <Plus className="w-4 h-4" /> Novo Período
-                </button>
-              </div>
-            )}
           </div>
         </div>
 
@@ -276,262 +286,269 @@ const AdminPanel = () => {
 
         {/* PERIODS TAB CONTENT */}
         {activeTab === "periods" && (
-          <>
+          <div className="animate-fade-in space-y-6">
             {editingPeriod && (
-              <div className="glass-strong rounded-2xl p-6 mb-8 animate-fade-in-up">
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-xl">
+              <div className="glass-strong rounded-3xl p-6 md:p-10 mb-10 border-white/20 shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] -z-10 rounded-full" />
+                
+                <div className="flex items-center gap-4 mb-10">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-3xl shadow-inner">
                     {editingPeriod.emoji}
                   </div>
-                  <h3 className="text-xl font-bold text-foreground">
-                    {editingPeriod.id ? `Editar: ${editingPeriod.name}` : "Novo Período Histórico"}
-                  </h3>
+                  <div>
+                    <h3 className="text-2xl font-black text-white">
+                      {editingPeriod.id ? `Editar: ${editingPeriod.name}` : "Novo Período"}
+                    </h3>
+                    <p className="text-xs font-bold text-white/40 uppercase tracking-widest">Configurações da Linha do Tempo</p>
+                  </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-                  <div className="space-y-4">
-                    <h4 className="text-sm font-bold text-muted-foreground uppercase flex items-center gap-2">
-                      <MapIcon className="w-4 h-4" /> Informações Básicas
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-10">
+                  {/* Seção 1 */}
+                  <div className="space-y-6">
+                    <h4 className="text-sm font-black text-primary uppercase flex items-center gap-3">
+                      <div className="w-6 h-6 rounded-lg bg-primary/20 flex items-center justify-center"><MapIcon className="w-3 h-3" /></div>
+                      Essenciais
                     </h4>
-                    <div>
-                      <label className="text-xs font-bold text-muted-foreground mb-1 block">ID Único (Slug)</label>
-                      <input
-                        type="text"
-                        value={editingPeriod.id || ""}
-                        onChange={e => setEditingPeriod({ ...editingPeriod, id: e.target.value.toLowerCase().replace(/\s+/g, '_') })}
-                        placeholder="ex: era_vargas"
-                        disabled={!!editingPeriod.id && periods.some(p => p.id === editingPeriod.id)}
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground focus:border-primary transition-all outline-none"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs font-bold text-muted-foreground mb-1 block">Nome do Período</label>
-                      <input
-                        type="text"
-                        value={editingPeriod.name || ""}
-                        onChange={e => setEditingPeriod({ ...editingPeriod, name: e.target.value })}
-                        placeholder="ex: Era Vargas"
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground focus:border-primary transition-all outline-none"
-                      />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="space-y-4">
                       <div>
-                        <label className="text-xs font-bold text-muted-foreground mb-1 block">Emoji</label>
+                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">ID Único (Slug)</label>
                         <input
                           type="text"
-                          value={editingPeriod.emoji || ""}
-                          onChange={e => setEditingPeriod({ ...editingPeriod, emoji: e.target.value })}
-                          className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground text-center text-xl"
+                          value={editingPeriod.id || ""}
+                          onChange={e => setEditingPeriod({ ...editingPeriod, id: e.target.value.toLowerCase().replace(/\s+/g, '_') })}
+                          placeholder="ex: era_vargas"
+                          disabled={!!editingPeriod.id && periods.some(p => p.id === editingPeriod.id)}
+                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none font-medium"
                         />
                       </div>
                       <div>
-                        <label className="text-xs font-bold text-muted-foreground mb-1 block">Anos</label>
+                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Nome do Período</label>
                         <input
                           type="text"
-                          value={editingPeriod.years || ""}
-                          onChange={e => setEditingPeriod({ ...editingPeriod, years: e.target.value })}
-                          placeholder="1930-1945"
-                          className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
+                          value={editingPeriod.name || ""}
+                          onChange={e => setEditingPeriod({ ...editingPeriod, name: e.target.value })}
+                          placeholder="ex: Era Vargas"
+                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white focus:border-primary transition-all outline-none font-medium"
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Emoji</label>
+                          <input
+                            type="text"
+                            value={editingPeriod.emoji || ""}
+                            onChange={e => setEditingPeriod({ ...editingPeriod, emoji: e.target.value })}
+                            className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white text-center text-2xl"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Anos</label>
+                          <input
+                            type="text"
+                            value={editingPeriod.years || ""}
+                            onChange={e => setEditingPeriod({ ...editingPeriod, years: e.target.value })}
+                            placeholder="1930-1945"
+                            className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Seção 2 */}
+                  <div className="space-y-6">
+                    <h4 className="text-sm font-black text-amber-400 uppercase flex items-center gap-3">
+                      <div className="w-6 h-6 rounded-lg bg-amber-400/20 flex items-center justify-center"><MessageSquare className="w-3 h-3" /></div>
+                      Pedagógico & Chat
+                    </h4>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Nome do Personagem</label>
+                        <input
+                          type="text"
+                          value={editingPeriod.characterName || ""}
+                          onChange={e => setEditingPeriod({ ...editingPeriod, characterName: e.target.value })}
+                          placeholder="ex: Getúlio"
+                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Emoji do Personagem</label>
+                        <input
+                          type="text"
+                          value={editingPeriod.characterEmoji || ""}
+                          onChange={e => setEditingPeriod({ ...editingPeriod, characterEmoji: e.target.value })}
+                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white text-center text-2xl"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Descrição (Contexto IA)</label>
+                        <textarea
+                          value={editingPeriod.description || ""}
+                          onChange={e => setEditingPeriod({ ...editingPeriod, description: e.target.value })}
+                          rows={3}
+                          placeholder="Fatos chaves para a IA usar no chat e perguntas..."
+                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white resize-none text-sm font-medium leading-relaxed"
                         />
                       </div>
                     </div>
                   </div>
 
-                  <div className="space-y-4">
-                    <h4 className="text-sm font-bold text-muted-foreground uppercase flex items-center gap-2">
-                      <MessageSquare className="w-4 h-4" /> Personagem do Chat
+                  {/* Seção 3 */}
+                  <div className="space-y-6">
+                    <h4 className="text-sm font-black text-emerald-400 uppercase flex items-center gap-3">
+                      <div className="w-6 h-6 rounded-lg bg-emerald-400/20 flex items-center justify-center"><Sparkles className="w-3 h-3" /></div>
+                      Aparência & Mapa
                     </h4>
-                    <div>
-                      <label className="text-xs font-bold text-muted-foreground mb-1 block">Nome do Personagem</label>
-                      <input
-                        type="text"
-                        value={editingPeriod.characterName || ""}
-                        onChange={e => setEditingPeriod({ ...editingPeriod, characterName: e.target.value })}
-                        placeholder="ex: Getúlio"
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
-                      />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Ordem (Índice)</label>
+                        <input
+                          type="number"
+                          value={editingPeriod.order_index || 0}
+                          onChange={e => setEditingPeriod({ ...editingPeriod, order_index: parseInt(e.target.value) || 0 })}
+                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Cor Texto</label>
+                        <input
+                          type="text"
+                          value={editingPeriod.color || ""}
+                          onChange={e => setEditingPeriod({ ...editingPeriod, color: e.target.value })}
+                          placeholder="text-blue-500"
+                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium"
+                        />
+                      </div>
                     </div>
                     <div>
-                      <label className="text-xs font-bold text-muted-foreground mb-1 block">Emoji do Personagem</label>
-                      <input
-                        type="text"
-                        value={editingPeriod.characterEmoji || ""}
-                        onChange={e => setEditingPeriod({ ...editingPeriod, characterEmoji: e.target.value })}
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground text-center text-xl"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs font-bold text-muted-foreground mb-1 block">Descrição do Período (Para a IA)</label>
-                      <textarea
-                        value={editingPeriod.description || ""}
-                        onChange={e => setEditingPeriod({ ...editingPeriod, description: e.target.value })}
-                        rows={3}
-                        placeholder="Descreva os principais eventos deste período para que a IA gere as perguntas e o chat corretamente."
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground resize-none text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <h4 className="text-sm font-bold text-muted-foreground uppercase flex items-center gap-2">
-                      <Sparkles className="w-4 h-4" /> Estilo Visual
-                    </h4>
-                    <div>
-                      <label className="text-xs font-bold text-muted-foreground mb-1 block">Cor do Texto (Tailwind)</label>
-                      <input
-                        type="text"
-                        value={editingPeriod.color || ""}
-                        onChange={e => setEditingPeriod({ ...editingPeriod, color: e.target.value })}
-                        placeholder="text-blue-600"
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs font-bold text-muted-foreground mb-1 block">Cor de Fundo (Tailwind)</label>
-                      <input
-                        type="text"
-                        value={editingPeriod.bgColor || ""}
-                        onChange={e => setEditingPeriod({ ...editingPeriod, bgColor: e.target.value })}
-                        placeholder="bg-blue-50"
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs font-bold text-muted-foreground mb-1 block">Cor da Borda (Tailwind)</label>
-                      <input
-                        type="text"
-                        value={editingPeriod.borderColor || ""}
-                        onChange={e => setEditingPeriod({ ...editingPeriod, borderColor: e.target.value })}
-                        placeholder="border-blue-300"
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs font-bold text-muted-foreground mb-1 block">Ordem (Posição no Mapa)</label>
-                      <input
-                        type="number"
-                        value={editingPeriod.order_index || 0}
-                        onChange={e => setEditingPeriod({ ...editingPeriod, order_index: parseInt(e.target.value) || 0 })}
-                        placeholder="ex: 10, 20, 30..."
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-xs font-bold text-muted-foreground mb-1 block">URL da Imagem de Capa</label>
+                      <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">URL da Imagem</label>
                       <input
                         type="text"
                         value={editingPeriod.image_url || ''}
                         onChange={e => setEditingPeriod({ ...editingPeriod, image_url: e.target.value })}
-                        placeholder="https://exemplo.com/imagem.jpg"
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
+                        placeholder="https://..."
+                        className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium"
                       />
+                    </div>
+                    <div className="p-4 rounded-2xl bg-white/5 border border-dashed border-white/10 flex items-center justify-center">
+                       {editingPeriod.image_url ? (
+                         <img src={editingPeriod.image_url} alt="Preview" className="h-20 w-full object-cover rounded-lg" />
+                       ) : (
+                         <div className="text-[10px] font-bold text-white/20">Sem preview de imagem</div>
+                       )}
                     </div>
                   </div>
                 </div>
 
-                <div className="flex gap-3 pt-4 border-t border-border">
+                <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-white/10">
                   <button
                     onClick={handleSavePeriod}
                     disabled={saving || !editingPeriod.id || !editingPeriod.name}
-                    className="duo-btn duo-btn-primary px-8 flex items-center gap-2 disabled:opacity-50"
+                    className="duo-btn duo-btn-primary px-10 py-4 flex items-center justify-center gap-3 disabled:opacity-50 text-base"
                   >
-                    <Save className="w-4 h-4" /> {saving ? "Salvando..." : "Salvar Período"}
+                    <Save className="w-5 h-5" /> {saving ? "Salvando..." : "Salvar Período"}
                   </button>
                   <button
                     onClick={() => setEditingPeriod(null)}
-                    className="duo-btn duo-btn-secondary px-6 flex items-center gap-2"
+                    className="duo-btn duo-btn-secondary px-8 py-4 flex items-center justify-center gap-3 text-base"
                   >
-                    <X className="w-4 h-4" /> Cancelar
+                    <X className="w-5 h-5" /> Cancelar
                   </button>
                 </div>
               </div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {periods.map(p => (
-                <div key={p.id} className="glass rounded-2xl p-4 flex items-start gap-4 hover:shadow-lg transition-all group">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 border-2 ${p.borderColor} ${p.bgColor}`}>
+                <div key={p.id} className="bg-slate-900/40 border border-white/10 rounded-3xl p-5 flex items-center gap-5 hover:bg-slate-900/60 hover:border-white/20 transition-all group relative overflow-hidden">
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 border border-white/5 bg-white/5 shadow-inner`}>
                     {p.emoji}
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-foreground mb-1 truncate">{p.name}</h3>
-                    <p className="text-xs text-muted-foreground font-bold uppercase mb-1">{p.years}</p>
-                    <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
-                      <span className="w-2 h-2 rounded-full bg-primary/40"></span>
-                      Personagem: {p.characterName}
+                  <div className="flex-1 min-w-0 pr-10">
+                    <h3 className="font-black text-white mb-0.5 truncate tracking-tight">{p.name}</h3>
+                    <p className="text-[10px] text-primary font-black uppercase tracking-widest">{p.years}</p>
+                    <div className="mt-2 flex items-center gap-2">
+                      <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center text-[8px]">{p.characterEmoji}</div>
+                      <span className="text-[10px] font-bold text-white/40 truncate">{p.characterName}</span>
                     </div>
                   </div>
                   <button
                     onClick={() => setEditingPeriod(p)}
-                    className="p-2 rounded-lg bg-muted/30 text-muted-foreground hover:bg-primary/20 hover:text-primary transition-all opacity-0 group-hover:opacity-100"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-white/5 text-white/50 hover:bg-white hover:text-slate-950 transition-all opacity-0 group-hover:opacity-100 shadow-xl"
                   >
                     <Pencil className="w-4 h-4" />
                   </button>
                 </div>
               ))}
             </div>
-          </>
+          </div>
         )}
 
-        {/* QUESTIONS TAB CONTENT (Omitted for brevity, but kept intact in the real file) */}
+        {/* QUESTIONS TAB CONTENT */}
         {activeTab === "questions" && (
-          <>
+          <div className="animate-fade-in space-y-6">
             {editingQuestion && (
-              <div className="glass-strong rounded-2xl p-6 mb-6 animate-fade-in-up">
-                <h3 className="text-lg font-bold text-foreground mb-4">
+              <div className="glass-strong rounded-3xl p-6 md:p-10 border-white/20 shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] -z-10 rounded-full" />
+                
+                <h3 className="text-2xl font-black text-white mb-8">
                   {editingQuestion.id ? "Editar Pergunta" : "Nova Pergunta"}
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                   <div>
-                    <label className="text-sm text-muted-foreground mb-1 block">Nível</label>
+                    <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Nível (Fase)</label>
                     <input
                       type="number"
                       min={1}
                       max={20}
                       value={editingQuestion.level}
                       onChange={e => setEditingQuestion({ ...editingQuestion, level: parseInt(e.target.value) || 1 })}
-                      className="w-full px-3 py-2 rounded-xl bg-muted/50 border border-border text-foreground"
+                      className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium outline-none focus:border-primary transition-all"
                     />
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground mb-1 block">Dificuldade</label>
+                    <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Dificuldade</label>
                     <select
                       value={editingQuestion.difficulty}
                       onChange={e => setEditingQuestion({ ...editingQuestion, difficulty: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl bg-muted/50 border border-border text-foreground"
+                      className="w-full px-5 py-3 rounded-2xl bg-slate-900 border border-white/10 text-white font-medium outline-none focus:border-primary transition-all appearance-none"
                     >
-                      {difficulties.map(d => <option key={d} value={d}>{d}</option>)}
+                      {difficulties.map(d => <option key={d} value={d} className="bg-slate-900">{d}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground mb-1 block">Tópico</label>
+                    <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Tópico / Assunto</label>
                     <input
                       type="text"
                       value={editingQuestion.topic || ""}
                       onChange={e => setEditingQuestion({ ...editingQuestion, topic: e.target.value })}
-                      placeholder="Ex: Segunda Guerra Mundial"
-                      className="w-full px-3 py-2 rounded-xl bg-muted/50 border border-border text-foreground"
+                      placeholder="Ex: Revolução Industrial"
+                      className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium outline-none focus:border-primary transition-all"
                     />
                   </div>
                 </div>
 
-                <div className="mb-4">
-                  <label className="text-sm text-muted-foreground mb-1 block">Pergunta</label>
+                <div className="mb-8">
+                  <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Texto da Pergunta</label>
                   <textarea
                     value={editingQuestion.question || ""}
                     onChange={e => setEditingQuestion({ ...editingQuestion, question: e.target.value })}
-                    rows={2}
-                    className="w-full px-3 py-2 rounded-xl bg-muted/50 border border-border text-foreground resize-none"
+                    rows={3}
+                    placeholder="Escreva a pergunta aqui..."
+                    className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white resize-none font-medium leading-relaxed outline-none focus:border-primary transition-all"
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
                   {editingQuestion.options.map((opt, i) => (
-                    <div key={i} className="flex items-center gap-2">
+                    <div key={i} className={`flex items-center gap-3 p-2 rounded-2xl border transition-all ${editingQuestion.correct_index === i ? 'bg-emerald-500/10 border-emerald-500/50' : 'bg-white/5 border-white/10'}`}>
                       <button
                         type="button"
                         onClick={() => setEditingQuestion({ ...editingQuestion, correct_index: i })}
-                        className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm ${editingQuestion.correct_index === i ? "bg-emerald-500 text-white" : "bg-muted text-muted-foreground"}`}
+                        className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm transition-all ${editingQuestion.correct_index === i ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/30" : "bg-white/10 text-white/40 hover:bg-white/20"}`}
                       >
                         {String.fromCharCode(65 + i)}
                       </button>
@@ -543,63 +560,78 @@ const AdminPanel = () => {
                           newOpts[i] = e.target.value;
                           setEditingQuestion({ ...editingQuestion, options: newOpts });
                         }}
-                        className="flex-1 px-3 py-2 rounded-xl bg-muted/50 border border-border text-foreground"
+                        placeholder={`Opção ${String.fromCharCode(65 + i)}`}
+                        className="flex-1 bg-transparent border-none text-white font-medium focus:ring-0 outline-none"
                       />
                     </div>
                   ))}
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-white/10">
                   <button
                     onClick={handleSaveQuestion}
                     disabled={saving || !editingQuestion.question.trim()}
-                    className="duo-btn duo-btn-primary px-6 flex items-center gap-2 disabled:opacity-50"
+                    className="duo-btn duo-btn-primary px-10 py-4 flex items-center justify-center gap-3 disabled:opacity-50 text-base"
                   >
-                    <Save className="w-4 h-4" /> {saving ? "Salvando..." : "Salvar"}
+                    <Save className="w-5 h-5" /> {saving ? "Salvando..." : "Salvar Pergunta"}
                   </button>
                   <button
                     onClick={() => setEditingQuestion(null)}
-                    className="duo-btn duo-btn-secondary px-6 flex items-center gap-2"
+                    className="duo-btn duo-btn-secondary px-8 py-4 flex items-center justify-center gap-3 text-base"
                   >
-                    <X className="w-4 h-4" /> Cancelar
+                    <X className="w-5 h-5" /> Cancelar
                   </button>
                 </div>
               </div>
             )}
 
-            <div className="flex gap-3 mb-6">
+            <div className="flex flex-col sm:flex-row gap-4 mb-10">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" />
                 <input
                   type="text"
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
-                  placeholder="Buscar perguntas..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-muted/50 border border-border text-foreground"
+                  placeholder="Buscar perguntas, tópicos ou períodos..."
+                  className="w-full pl-12 pr-6 py-4 rounded-2xl bg-slate-900/50 border border-white/10 text-white font-medium focus:border-primary transition-all outline-none"
                 />
               </div>
             </div>
 
             {loading ? (
-              <div className="text-center py-20"><Loader2 className="w-10 h-10 animate-spin mx-auto text-primary" /></div>
+              <div className="text-center py-24">
+                <Loader2 className="w-12 h-12 animate-spin mx-auto text-primary opacity-20" />
+                <p className="mt-4 text-white/20 font-bold uppercase tracking-widest text-xs">Carregando Acervo...</p>
+              </div>
             ) : (
-              <div className="space-y-2">
+              <div className="space-y-4">
                 {filteredQuestions.map(q => (
-                  <div key={q.id} className="glass rounded-xl p-4 flex items-center gap-4 group">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center font-bold text-primary">N{q.level}</div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-foreground truncate">{q.question}</p>
-                      <p className="text-xs text-muted-foreground">{q.topic} • {q.difficulty}</p>
+                  <div key={q.id} className="bg-slate-900/40 border border-white/10 rounded-3xl p-5 md:p-6 flex items-center gap-6 hover:bg-slate-900/60 transition-all group relative overflow-hidden">
+                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/5 flex flex-col items-center justify-center flex-shrink-0 shadow-inner">
+                      <span className="text-[10px] font-black text-white/30 uppercase leading-none mb-1">Nível</span>
+                      <span className="text-xl font-black text-white leading-none">{q.level}</span>
                     </div>
-                    <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-all">
-                      <button onClick={() => setEditingQuestion(q)} className="p-2 rounded-lg hover:bg-muted text-muted-foreground"><Pencil className="w-4 h-4" /></button>
-                      <button onClick={() => handleDeleteQuestion(q.id)} className="p-2 rounded-lg hover:bg-destructive/10 text-destructive"><Trash2 className="w-4 h-4" /></button>
+                    <div className="flex-1 min-w-0 pr-12">
+                      <p className="font-bold text-white mb-1.5 leading-tight group-hover:text-primary transition-colors">{q.question}</p>
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                        <span className="text-[10px] font-black text-primary uppercase tracking-widest">{q.topic}</span>
+                        <span className="text-[10px] font-black text-white/30 uppercase tracking-widest">• {q.difficulty}</span>
+                      </div>
+                    </div>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2 opacity-0 group-hover:opacity-100 transition-all scale-90 group-hover:scale-100">
+                      <button onClick={() => setEditingQuestion(q)} className="p-3 rounded-xl bg-white/5 text-white/50 hover:bg-white hover:text-slate-950 transition-all shadow-xl"><Pencil className="w-4 h-4" /></button>
+                      <button onClick={() => handleDeleteQuestion(q.id)} className="p-3 rounded-xl bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-xl"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </div>
                 ))}
+                {filteredQuestions.length === 0 && (
+                  <div className="text-center py-20 bg-white/5 rounded-3xl border border-dashed border-white/10">
+                    <p className="text-white/20 font-bold uppercase tracking-widest text-sm">Nenhuma pergunta encontrada</p>
+                  </div>
+                )}
               </div>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>
