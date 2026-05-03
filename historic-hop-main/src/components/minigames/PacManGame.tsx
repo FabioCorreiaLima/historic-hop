@@ -497,20 +497,20 @@ export default function PacManGame({ periodId, onGameOver, onBack, skinId = "cla
       {showNotebook && <HistorianNotebook entries={entries} onClose={() => setShowNotebook(false)} onClear={clearNotebook} />}
 
       <div className="absolute top-4 left-4 right-4 flex justify-between z-50">
-        <div className="flex gap-2">
-          <button onClick={onBack} className="p-2 bg-white/5 border border-white/10 text-white rounded-xl"><X /></button>
-          <button onClick={() => setMuted(!muted)} className="p-2 bg-white/5 border border-white/10 text-white rounded-xl">{muted ? <VolumeX /> : <Volume2 />}</button>
-          <button onClick={() => setShowNotebook(true)} className="p-2 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl"><BookOpen /></button>
+        <div className="flex gap-1 md:gap-2">
+          <button onClick={onBack} className="p-1.5 md:p-2 bg-white/5 border border-white/10 text-white rounded-lg md:rounded-xl"><X className="w-4 h-4 md:w-6 md:h-6" /></button>
+          <button onClick={() => setMuted(!muted)} className="p-1.5 md:p-2 bg-white/5 border border-white/10 text-white rounded-lg md:rounded-xl">{muted ? <VolumeX className="w-4 h-4 md:w-6 md:h-6" /> : <Volume2 className="w-4 h-4 md:w-6 md:h-6" />}</button>
+          <button onClick={() => setShowNotebook(true)} className="p-1.5 md:p-2 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-lg md:rounded-xl"><BookOpen className="w-4 h-4 md:w-6 md:h-6" /></button>
         </div>
-        <div className="flex gap-2">
-          <div className="bg-slate-900/80 px-3 py-1.5 rounded-xl border border-emerald-500/30 text-emerald-400 font-black">Faltam: {dotsLeft}</div>
-          <div className="bg-slate-900/80 px-3 py-1.5 rounded-xl border border-blue-500/30 text-blue-400 font-black">Nível {level}</div>
-          <div className="bg-slate-900/80 px-3 py-1.5 rounded-xl border border-amber-400/30 text-white font-black">{score}</div>
-          <div className="bg-slate-900/80 px-3 py-1.5 rounded-xl border border-red-500/30 text-white font-black">{lives} ❤️</div>
+        <div className="flex flex-wrap gap-1 md:gap-2 justify-end w-2/3 md:w-auto">
+          <div className="bg-slate-900/80 px-1.5 py-1 md:px-3 md:py-1.5 rounded-lg md:rounded-xl border border-emerald-500/30 text-emerald-400 font-black text-[9px] md:text-sm">Faltam: {dotsLeft}</div>
+          <div className="bg-slate-900/80 px-1.5 py-1 md:px-3 md:py-1.5 rounded-lg md:rounded-xl border border-blue-500/30 text-blue-400 font-black text-[9px] md:text-sm">Nível {level}</div>
+          <div className="bg-slate-900/80 px-1.5 py-1 md:px-3 md:py-1.5 rounded-lg md:rounded-xl border border-amber-400/30 text-white font-black text-[9px] md:text-sm">{score}</div>
+          <div className="bg-slate-900/80 px-1.5 py-1 md:px-3 md:py-1.5 rounded-lg md:rounded-xl border border-red-500/30 text-white font-black text-[9px] md:text-sm">{lives} ❤️</div>
         </div>
       </div>
 
-      <h2 className="text-xl font-black text-amber-400 uppercase italic mb-2 tracking-widest">{phaseData?.theme.atmosphereLabel}</h2>
+      <h2 className="text-base md:text-xl font-black text-amber-400 uppercase italic mt-16 md:mt-4 mb-2 md:mb-4 tracking-widest text-center">{phaseData?.theme.atmosphereLabel}</h2>
 
       <div ref={gameContainerRef} className="rounded-[2rem] overflow-hidden border-8 border-slate-900 shadow-2xl bg-slate-900" style={{ width: '100%', maxWidth: '600px', maxHeight: '60vh', aspectRatio: '1/1' }} />
 

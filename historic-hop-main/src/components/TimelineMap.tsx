@@ -98,13 +98,13 @@ const TimelineMap = ({
 
       {/* Sidebar - Desktop Stats & Mobile Drawer */}
       <div className={`fixed inset-y-0 left-0 w-[85vw] max-w-[320px] bg-[#0a0a0c]/95 md:bg-slate-900/20 backdrop-blur-3xl border-r border-white/5 p-6 md:p-8 z-[60] flex flex-col gap-6 md:gap-10 transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1) md:relative md:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-2xl shadow-2xl shadow-primary/20 ring-1 ring-white/20 animate-float">
+        <div className="flex items-center gap-3 md:gap-4">
+          <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-xl md:text-2xl shadow-2xl shadow-primary/20 ring-1 ring-white/20 animate-float">
             📚
           </div>
           <div>
-            <h1 className="text-2xl font-black text-white tracking-tighter leading-none">HISTORIC<br/>HOP</h1>
-            <p className="text-[9px] font-black text-primary tracking-[0.3em] uppercase mt-1">Timeline Explorer</p>
+            <h1 className="text-xl md:text-2xl font-black text-white tracking-tighter leading-none">HISTORIC<br/>HOP</h1>
+            <p className="text-[8px] md:text-[9px] font-black text-primary tracking-[0.2em] md:tracking-[0.3em] uppercase mt-1">Timeline Explorer</p>
           </div>
         </div>
 
@@ -112,12 +112,12 @@ const TimelineMap = ({
         <div className="relative group">
           <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 to-blue-500/50 rounded-[2rem] blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
           <div className="relative bg-slate-900/80 border border-white/10 rounded-[2rem] p-6 backdrop-blur-md">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-xl font-black text-white shadow-xl ring-2 ring-white/10">
-                {profile?.display_name?.charAt(0)?.toUpperCase() || <User className="w-6 h-6" />}
+            <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-lg md:text-xl font-black text-white shadow-xl ring-2 ring-white/10">
+                {profile?.display_name?.charAt(0)?.toUpperCase() || <User className="w-5 h-5 md:w-6 md:h-6" />}
               </div>
               <div>
-                <p className="font-black text-white text-lg tracking-tight">{profile?.display_name || "Viajante"}</p>
+                <p className="font-black text-white text-base md:text-lg tracking-tight truncate max-w-[120px] md:max-w-none">{profile?.display_name || "Viajante"}</p>
                 <div className={`inline-flex px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-widest bg-white/5 ${getLevel(profile?.total_score || 0).color}`}>
                   {getLevel(profile?.total_score || 0).title}
                 </div>
