@@ -97,7 +97,7 @@ const TimelineMap = ({
       </div>
 
       {/* Sidebar - Desktop Stats & Mobile Drawer */}
-      <div className={`fixed inset-y-0 left-0 w-80 bg-[#0a0a0c]/95 md:bg-slate-900/20 backdrop-blur-3xl border-r border-white/5 p-8 z-[60] flex flex-col gap-10 transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1) md:relative md:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className={`fixed inset-y-0 left-0 w-[85vw] max-w-[320px] bg-[#0a0a0c]/95 md:bg-slate-900/20 backdrop-blur-3xl border-r border-white/5 p-6 md:p-8 z-[60] flex flex-col gap-6 md:gap-10 transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1) md:relative md:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-2xl shadow-2xl shadow-primary/20 ring-1 ring-white/20 animate-float">
             📚
@@ -193,15 +193,15 @@ const TimelineMap = ({
       </div>
 
       {/* Main Map Area */}
-      <div className="flex-1 h-screen overflow-y-auto relative p-6 md:p-12 lg:p-16 scrollbar-hide">
-        <div className="max-w-3xl mx-auto flex flex-col gap-16 md:gap-20 relative pb-40">
+      <div className="flex-1 h-screen overflow-y-auto relative p-4 sm:p-6 md:p-12 lg:p-16 scrollbar-hide">
+        <div className="max-w-3xl mx-auto flex flex-col gap-8 md:gap-20 relative pb-32 md:pb-40">
           
           {/* Header Title Compact */}
           <div className="text-center mb-8 animate-fade-in">
             <div className="inline-block px-3 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[9px] font-black text-primary uppercase tracking-[0.2em] mb-3">
               Explore a História do Brasil
             </div>
-            <h2 className="text-4xl md:text-6xl font-black text-white drop-shadow-xl tracking-tighter italic">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-xl tracking-tighter italic">
               LINHA DO TEMPO
             </h2>
           </div>
@@ -217,11 +217,11 @@ const TimelineMap = ({
             return (
               <div 
                 key={period.id} 
-                className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-10 group relative ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
+                className={`flex flex-col lg:flex-row items-center gap-4 md:gap-6 lg:gap-10 group relative ${isLeft ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
               >
                 {/* Visual Connector Line - More subtle */}
                 {index < periods.length - 1 && (
-                  <div className="absolute top-[60px] lg:top-full left-1/2 w-0.5 h-16 md:h-24 bg-gradient-to-b from-white/10 to-transparent -translate-x-1/2 -z-10 hidden md:block" />
+                  <div className="absolute top-[48px] lg:top-full left-1/2 w-0.5 h-12 md:h-24 bg-gradient-to-b from-white/10 to-transparent -translate-x-1/2 -z-10 hidden md:block" />
                 )}
 
                 {/* Period Card - Compact & Elegant */}
@@ -293,8 +293,8 @@ const TimelineMap = ({
                 </div>
 
                 {/* The Central Node - Balanced Size */}
-                <div className="relative flex-shrink-0 order-first lg:order-none mb-4 lg:mb-0">
-                  <div className={`w-16 h-16 md:w-20 md:h-20 rounded-[1.5rem] md:rounded-[2rem] flex items-center justify-center text-3xl md:text-4xl shadow-2xl transition-all duration-500 ${
+                <div className="relative flex-shrink-0 order-first lg:order-none mb-3 lg:mb-0">
+                  <div className={`w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-[1rem] md:rounded-[1.5rem] lg:rounded-[2rem] flex items-center justify-center text-2xl md:text-3xl lg:text-4xl shadow-2xl transition-all duration-500 ${
                     completed
                       ? "bg-gradient-to-br from-emerald-400 to-teal-600 ring-4 ring-emerald-500/20 shadow-emerald-500/20"
                       : unlocked
@@ -303,8 +303,8 @@ const TimelineMap = ({
                   }`}>
                     {completed ? (
                       <div className="relative flex flex-col items-center">
-                        <CheckCircle2 className="w-8 h-8 md:w-10 md:h-10 text-white" />
-                        <div className="absolute -top-8 flex gap-0.5">
+                        <CheckCircle2 className="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-white" />
+                        <div className="absolute -top-6 md:-top-8 flex gap-0.5">
                           {[1, 2, 3].map(s => (
                             <Star key={s} className={`w-2.5 h-2.5 ${s <= (progress?.stars || 0) ? "text-amber-400 fill-amber-400" : "text-white/10"}`} />
                           ))}

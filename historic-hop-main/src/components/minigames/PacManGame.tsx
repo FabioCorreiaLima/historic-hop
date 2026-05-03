@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import * as Phaser from 'phaser';
 import { api } from '@/lib/api';
-import { Loader2, X, Volume2, VolumeX, Heart, Trophy, BookOpen } from 'lucide-react';
+import { Loader2, X, Volume2, VolumeX, Heart, Trophy, BookOpen, ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from 'lucide-react';
 import { HistorianNotebook } from '@/components/HistorianNotebook';
 import { useHistorianNotebook } from '@/hooks/useHistorianNotebook';
 
@@ -44,6 +44,9 @@ export default function PacManGame({ periodId, onGameOver, onBack, skinId = "cla
   const [lives, setLives] = useState(3);
   const [muted, setMuted] = useState(false);
   const [dotsLeft, setDotsLeft] = useState(0);
+
+  const directionRef = useRef<string | null>(null);
+  const handleDirection = (dir: string | null) => { directionRef.current = dir; };
 
   // No useEffect do Phaser, vamos atualizar o dotsLeft
   const [phaseData, setPhaseData] = useState<PhaseData | null>(null);
@@ -331,10 +334,10 @@ export default function PacManGame({ periodId, onGameOver, onBack, skinId = "cla
         let vx = 0, vy = 0;
         let rotation = 0;
         
-        if (this.cursors.left.isDown) { vx = -speed; rotation = 180; }
-        else if (this.cursors.right.isDown) { vx = speed; rotation = 0; }
-        else if (this.cursors.up.isDown) { vy = -speed; rotation = -90; }
-        else if (this.cursors.down.isDown) { vy = speed; rotation = 90; }
+        if (this.cursors.left.isDown || directionRef.current === 'left') { vx = -speed; rotation = 180; }
+        else if (this.cursors.right.isDown || directionRef.current === 'right') { vx = speed; rotation = 0; }
+        else if (this.cursors.up.isDown || directionRef.current === 'up') { vy = -speed; rotation = -90; }
+        else if (this.cursors.down.isDown || directionRef.current === 'down') { vy = speed; rotation = 90; }
 
         this.player.setVelocity(vx, vy);
 
@@ -509,7 +512,37 @@ export default function PacManGame({ periodId, onGameOver, onBack, skinId = "cla
 
       <h2 className="text-xl font-black text-amber-400 uppercase italic mb-2 tracking-widest">{phaseData?.theme.atmosphereLabel}</h2>
 
-      <div ref={gameContainerRef} className="rounded-[2rem] overflow-hidden border-8 border-slate-900 shadow-2xl bg-slate-900" style={{ width: '100%', maxWidth: '600px', maxHeight: '70vh', aspectRatio: '1/1' }} />
+      <div ref={gameContainerRef} className="rounded-[2rem] overflow-hidden border-8 border-slate-900 shadow-2xl bg-slate-900" style={{ width: '100%', maxWidth: '600px', maxHeight: '60vh', aspectRatio: '1/1' }} />
+
+      {/* Controles Mobile */}
+      <div className="grid grid-cols-3 gap-2 mt-4 md:hidden z-50">
+        <div />
+        <button 
+          className="w-16 h-16 bg-slate-800/80 rounded-2xl active:bg-amber-500 active:scale-95 flex items-center justify-center text-white border border-slate-600 transition-all touch-none select-none"
+          onPointerDown={(e) => { e.preventDefault(); handleDirection('up'); }}
+          onPointerUp={(e) => { e.preventDefault(); handleDirection(null); }}
+          onPointerLeave={(e) => { e.preventDefault(); handleDirection(null); }}
+        ><ArrowUp size={32} /></button>
+        <div />
+        <button 
+          className="w-16 h-16 bg-slate-800/80 rounded-2xl active:bg-amber-500 active:scale-95 flex items-center justify-center text-white border border-slate-600 transition-all touch-none select-none"
+          onPointerDown={(e) => { e.preventDefault(); handleDirection('left'); }}
+          onPointerUp={(e) => { e.preventDefault(); handleDirection(null); }}
+          onPointerLeave={(e) => { e.preventDefault(); handleDirection(null); }}
+        ><ArrowLeft size={32} /></button>
+        <button 
+          className="w-16 h-16 bg-slate-800/80 rounded-2xl active:bg-amber-500 active:scale-95 flex items-center justify-center text-white border border-slate-600 transition-all touch-none select-none"
+          onPointerDown={(e) => { e.preventDefault(); handleDirection('down'); }}
+          onPointerUp={(e) => { e.preventDefault(); handleDirection(null); }}
+          onPointerLeave={(e) => { e.preventDefault(); handleDirection(null); }}
+        ><ArrowDown size={32} /></button>
+        <button 
+          className="w-16 h-16 bg-slate-800/80 rounded-2xl active:bg-amber-500 active:scale-95 flex items-center justify-center text-white border border-slate-600 transition-all touch-none select-none"
+          onPointerDown={(e) => { e.preventDefault(); handleDirection('right'); }}
+          onPointerUp={(e) => { e.preventDefault(); handleDirection(null); }}
+          onPointerLeave={(e) => { e.preventDefault(); handleDirection(null); }}
+        ><ArrowRight size={32} /></button>
+      </div>
 
       {showCollectible && (
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-slate-900 border-2 border-amber-400 rounded-2xl px-4 py-2 text-center animate-bounce-in z-50">
@@ -563,8 +596,8 @@ export default function PacManGame({ periodId, onGameOver, onBack, skinId = "cla
       {showLevelUp && (
         <div className="absolute inset-0 bg-slate-950/80 flex items-center justify-center z-[110] backdrop-blur-sm animate-pop">
           <div className="text-center">
-            <h1 className="text-6xl font-black text-amber-400 italic tracking-tighter mb-2">NÍVEL CONCLUÍDO!</h1>
-            <p className="text-white text-xl font-bold uppercase tracking-widest">Preparando Nível {level + 1}...</p>
+            <h1 className="text-4xl md:text-6xl font-black text-amber-400 italic tracking-tighter mb-2">NÍVEL CONCLUÍDO!</h1>
+            <p className="text-white text-lg md:text-xl font-bold uppercase tracking-widest">Preparando Nível {level + 1}...</p>
           </div>
         </div>
       )}

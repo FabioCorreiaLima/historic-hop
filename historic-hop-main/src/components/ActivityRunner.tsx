@@ -177,9 +177,9 @@ const ActivityRunner = ({
           <div className="flex items-center gap-4 mb-5">
             <button
               onClick={onBack}
-              className="p-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all active:scale-90"
+              className="p-2 md:p-3 rounded-xl md:rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all active:scale-90"
             >
-              <ArrowLeft className="w-5 h-5 text-white" />
+              <ArrowLeft className="w-4 h-4 md:w-5 md:h-5 text-white" />
             </button>
 
             <div className="flex-1">
@@ -192,8 +192,8 @@ const ActivityRunner = ({
                   {typeLabels[current?.type] || current?.type}
                 </span>
               </div>
-              <h2 className="text-2xl font-black text-white flex items-center gap-3">
-                <span className="bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center text-xl shadow-inner border border-white/5">
+              <h2 className="text-xl md:text-2xl font-black text-white flex items-center gap-2 md:gap-3">
+                <span className="bg-white/5 w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl flex items-center justify-center text-lg md:text-xl shadow-inner border border-white/5">
                   {periodEmoji}
                 </span>
                 {periodName}
@@ -204,10 +204,10 @@ const ActivityRunner = ({
               {/* Caderno button */}
               <button
                 onClick={() => setShowNotebook(true)}
-                className="relative p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 transition-all"
+                className="relative p-2 md:p-3 rounded-xl md:rounded-2xl bg-amber-500/10 border border-amber-500/20 hover:bg-amber-500/20 transition-all"
                 title="Abrir Caderno do Historiador"
               >
-                <BookOpen className="w-5 h-5 text-amber-400" />
+                <BookOpen className="w-4 h-4 md:w-5 md:h-5 text-amber-400" />
                 {sessionFactEntries.length > 0 && (
                   <span className="absolute -top-1 -right-1 w-4 h-4 bg-amber-400 rounded-full text-[9px] font-black text-black flex items-center justify-center">
                     {sessionFactEntries.length}
