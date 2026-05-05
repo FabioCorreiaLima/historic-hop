@@ -3,11 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { 
   History, 
   User as UserIcon, 
-  Menu, 
-  X, 
   Settings, 
   LogOut, 
-  Store, 
   Trophy 
 } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -38,20 +35,20 @@ export function Navbar() {
 
   return (
     <nav className={cn(
-      "fixed top-0 w-full z-50 transition-all duration-300 px-6 h-16 flex items-center justify-center",
-      isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border/40 py-2" : "bg-transparent py-4"
+      "fixed top-0 w-full z-50 transition-all duration-500 px-6 h-20 flex items-center justify-center",
+      isScrolled ? "bg-quiz-bg/90 backdrop-blur-xl border-b border-quiz-border py-2" : "bg-transparent py-4"
     )}>
       <div className="max-w-7xl w-full flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:rotate-6 transition-transform">
-            <History className="w-6 h-6 text-primary-foreground" />
+          <div className="w-12 h-12 bg-quiz-primary rounded-2xl flex items-center justify-center shadow-2xl shadow-quiz-primary/20 group-hover:rotate-6 transition-transform">
+            <History className="w-7 h-7 text-black" />
           </div>
-          <span className="text-xl font-black tracking-tighter uppercase hidden sm:block">Historic Hop</span>
+          <span className="text-2xl font-black tracking-tighter uppercase hidden sm:block text-quiz-text-main">Historic <span className="text-quiz-primary">Hop</span></span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-1 bg-secondary/30 p-1 rounded-2xl border border-border/20">
+        <div className="hidden md:flex items-center gap-1 bg-quiz-surface/50 p-1.5 rounded-2xl border border-quiz-border shadow-2xl">
           <NavLink to="/" active={location.pathname === "/"}>Mapa</NavLink>
           <NavLink to="/ranking" active={location.pathname === "/ranking"}>Ranking</NavLink>
           <NavLink to="/loja" active={location.pathname === "/loja"}>Loja</NavLink>
@@ -64,36 +61,36 @@ export function Navbar() {
         <div className="flex items-center gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-10 w-10 rounded-full p-0 overflow-hidden border border-border/50">
-                <Avatar className="h-full w-full">
+              <Button variant="ghost" className="relative h-12 w-12 rounded-2xl p-0 overflow-hidden border-2 border-quiz-border hover:border-quiz-primary transition-all">
+                <Avatar className="h-full w-full rounded-none">
                   <AvatarImage src={profile?.avatar_url || ""} />
-                  <AvatarFallback className="bg-primary/10 text-primary font-black">
+                  <AvatarFallback className="bg-quiz-primary/10 text-quiz-primary font-black">
                     {profile?.display_name?.charAt(0) || "U"}
                   </AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 mt-2" align="end">
-              <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-bold leading-none">{profile?.display_name || "Viajante"}</p>
-                  <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+            <DropdownMenuContent className="w-64 mt-4 bg-quiz-surface border-quiz-border text-quiz-text-main rounded-2xl p-2" align="end">
+              <DropdownMenuLabel className="font-normal p-4">
+                <div className="flex flex-col space-y-2">
+                  <p className="text-lg font-black leading-none text-quiz-primary uppercase tracking-tight">{profile?.display_name || "Viajante"}</p>
+                  <p className="text-xs leading-none text-quiz-text-muted font-medium">{user.email}</p>
                 </div>
               </DropdownMenuLabel>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="bg-quiz-border" />
               <DropdownMenuItem asChild>
-                <Link to="/perfil" className="flex items-center cursor-pointer">
-                  <UserIcon className="mr-2 h-4 w-4" /> Perfil
+                <Link to="/perfil" className="flex items-center cursor-pointer p-3 rounded-xl hover:bg-quiz-bg focus:bg-quiz-bg focus:text-quiz-primary">
+                  <UserIcon className="mr-3 h-5 w-5" /> <span className="font-bold">Perfil</span>
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/config" className="flex items-center cursor-pointer">
-                  <Settings className="mr-2 h-4 w-4" /> Configurações
+                <Link to="/config" className="flex items-center cursor-pointer p-3 rounded-xl hover:bg-quiz-bg focus:bg-quiz-bg focus:text-quiz-primary">
+                  <Settings className="mr-3 h-5 w-5" /> <span className="font-bold">Configurações</span>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={signOut} className="text-rose-500 focus:text-rose-500 cursor-pointer font-bold">
-                <LogOut className="mr-2 h-4 w-4" /> Sair
+              <DropdownMenuSeparator className="bg-quiz-border" />
+              <DropdownMenuItem onClick={signOut} className="text-quiz-wrong focus:text-quiz-wrong focus:bg-quiz-wrong/10 cursor-pointer font-black p-3 rounded-xl">
+                <LogOut className="mr-3 h-5 w-5" /> SAIR
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -108,10 +105,10 @@ function NavLink({ to, children, active }: { to: string; children: React.ReactNo
     <Link 
       to={to} 
       className={cn(
-        "px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all",
+        "px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all",
         active 
-          ? "bg-primary text-primary-foreground shadow-md" 
-          : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+          ? "bg-quiz-primary text-black shadow-xl shadow-quiz-primary/10" 
+          : "text-quiz-text-muted hover:text-quiz-text-main hover:bg-quiz-bg"
       )}
     >
       {children}

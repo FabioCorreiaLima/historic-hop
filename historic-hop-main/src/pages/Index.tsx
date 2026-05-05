@@ -153,7 +153,7 @@ const Index = () => {
   if (!user) return <LandingPage />;
 
   return (
-    <div className="min-h-screen pt-16">
+    <div className="min-h-screen bg-quiz-bg pt-20">
       {screen === "map" && (
         <LevelMap 
           periods={periods}
@@ -173,6 +173,7 @@ const Index = () => {
           isLoading={isGeneratingActivities}
           onComplete={handleLevelComplete}
           onBack={() => setScreen("map")}
+          periodName={periods.find(p => p.id === currentPeriodId)?.name}
         />
       )}
 

@@ -59,6 +59,19 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Quiz Palette
+        quiz: {
+          bg: "#0a0a0a",
+          surface: "#141414",
+          primary: "#eab308",
+          "primary-dark": "#a16207",
+          secondary: "#3f3f46",
+          "text-main": "#fafafa",
+          "text-muted": "#a1a1aa",
+          correct: "#22c55e",
+          wrong: "#ef4444",
+          border: "#27272a",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

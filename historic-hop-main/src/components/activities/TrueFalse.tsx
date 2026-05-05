@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, XCircle, Lightbulb, ThumbsUp, ThumbsDown } from "lucide-react";
+import { ThumbsUp, ThumbsDown } from "lucide-react";
 import { playCorrectSound, playWrongSound } from "@/lib/sounds";
 import type { TrueFalseActivity } from "@/data/activities";
 import { cn } from "@/lib/utils";
@@ -20,8 +20,6 @@ const TrueFalse = ({ activity, onComplete }: Props) => {
     const correct = value === activity.isTrue;
     if (correct) playCorrectSound();
     else playWrongSound();
-    
-    // Notifica o QuizGame imediatamente
     onComplete(correct);
   };
 
@@ -30,46 +28,43 @@ const TrueFalse = ({ activity, onComplete }: Props) => {
   return (
     <div className="w-full max-w-2xl mx-auto px-4 animate-fade-in-up">
       <div className="p-5 md:p-7">
-        {/* Header */}
         <div className="flex items-center gap-3 mb-5">
-          <div className="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center border border-amber-500/20 text-xl">
+          <div className="w-12 h-12 rounded-2xl bg-quiz-primary/10 flex items-center justify-center border border-quiz-primary/20 text-xl">
              ⚖️
           </div>
-          <p className="text-[10px] font-black text-amber-500 uppercase tracking-widest">Verdadeiro ou Falso</p>
+          <p className="text-[10px] font-black text-quiz-primary uppercase tracking-widest">Verdadeiro ou Falso</p>
         </div>
 
-        {/* Statement */}
-        <div className="bg-white/5 border border-white/10 rounded-[2rem] p-8 mb-8">
-          <p className="text-xl md:text-2xl font-black text-white leading-tight text-center">
+        <div className="bg-quiz-surface border border-quiz-border rounded-[12px] p-8 mb-8 shadow-xl">
+          <p className="text-xl md:text-2xl font-bold text-quiz-text-main leading-tight text-center italic">
             "{activity.statement}"
           </p>
         </div>
 
-        {/* Buttons */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <button
             onClick={() => handleAnswer(true)}
             disabled={showFeedback}
             className={cn(
-              "duo-btn h-16 text-lg",
+              "flex items-center justify-center gap-3 h-16 rounded-xl font-black transition-all border-2",
               showFeedback && answer === true
-                ? isCorrect ? "duo-btn-success" : "duo-btn-danger"
-                : showFeedback ? "opacity-30" : "duo-btn-success shadow-emerald-500/10"
+                ? (isCorrect ? "bg-quiz-correct/20 border-quiz-correct text-quiz-correct" : "bg-quiz-wrong/20 border-quiz-wrong text-quiz-wrong")
+                : showFeedback ? "opacity-30 border-quiz-border text-quiz-text-muted" : "bg-quiz-correct/10 border-quiz-correct/50 text-quiz-correct hover:bg-quiz-correct/20"
             )}
           >
-            <ThumbsUp className="w-5 h-5 mr-2" /> Verdadeiro
+            <ThumbsUp className="w-6 h-6" /> VERDADEIRO
           </button>
           <button
             onClick={() => handleAnswer(false)}
             disabled={showFeedback}
             className={cn(
-              "duo-btn h-16 text-lg",
+              "flex items-center justify-center gap-3 h-16 rounded-xl font-black transition-all border-2",
               showFeedback && answer === false
-                ? isCorrect ? "duo-btn-success" : "duo-btn-danger"
-                : showFeedback ? "opacity-30" : "duo-btn-danger shadow-rose-500/10"
+                ? (isCorrect ? "bg-quiz-correct/20 border-quiz-correct text-quiz-correct" : "bg-quiz-wrong/20 border-quiz-wrong text-quiz-wrong")
+                : showFeedback ? "opacity-30 border-quiz-border text-quiz-text-muted" : "bg-quiz-wrong/10 border-quiz-wrong/50 text-quiz-wrong hover:bg-quiz-wrong/20"
             )}
           >
-            <ThumbsDown className="w-5 h-5 mr-2" /> Falso
+            <ThumbsDown className="w-6 h-6" /> FALSO
           </button>
         </div>
       </div>

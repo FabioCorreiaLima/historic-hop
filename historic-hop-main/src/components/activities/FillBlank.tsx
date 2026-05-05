@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, XCircle, Lightbulb, PenLine } from "lucide-react";
+import { PenLine } from "lucide-react";
 import { playCorrectSound, playWrongSound } from "@/lib/sounds";
 import type { FillBlankActivity } from "@/data/activities";
 import { cn } from "@/lib/utils";
@@ -99,14 +99,14 @@ const FillBlank = ({ activity, onComplete, onFactCollected }: Props) => {
     <div className="w-full max-w-2xl mx-auto px-4 animate-fade-in-up">
       <div className="p-5 md:p-7">
         <div className="flex items-center gap-3 mb-5">
-          <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center border border-purple-500/20">
-            <PenLine className="w-5 h-5 text-purple-400" />
+          <div className="w-12 h-12 rounded-2xl bg-quiz-primary/10 flex items-center justify-center border border-quiz-primary/20">
+            <PenLine className="w-5 h-5 text-quiz-primary" />
           </div>
-          <p className="text-[10px] font-black text-purple-400 uppercase tracking-widest">Complete o Texto</p>
+          <p className="text-[10px] font-black text-quiz-primary uppercase tracking-widest">Complete o Texto</p>
         </div>
 
-        <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 md:p-10 mb-8">
-          <p className="text-base md:text-lg leading-relaxed text-white/90">
+        <div className="bg-quiz-surface border border-quiz-border rounded-[12px] p-6 md:p-10 mb-8 shadow-xl">
+          <p className="text-base md:text-lg leading-relaxed text-quiz-text-main font-medium">
             {parts.map((part, i) => (
               <span key={i}>
                 {part}
@@ -114,10 +114,10 @@ const FillBlank = ({ activity, onComplete, onFactCollected }: Props) => {
                   <button
                     onClick={() => handleRemoveFromBlank(i)}
                     className={cn(
-                      "inline-flex items-center justify-center min-w-[80px] h-9 mx-1 px-3 rounded-xl border-2 transition-all font-bold text-sm",
-                      !selectedOptions[i] ? "border-dashed border-white/20 bg-white/5 text-white/20" : 
-                      checked ? (selectedOptions[i] === safeBlanks[i] ? "border-emerald-500 bg-emerald-500/10 text-emerald-400" : "border-rose-500 bg-rose-500/10 text-rose-400") :
-                      "border-primary/50 bg-primary/10 text-white"
+                      "inline-flex items-center justify-center min-w-[80px] h-9 mx-1 px-3 rounded-xl border-2 transition-all font-black text-xs",
+                      !selectedOptions[i] ? "border-dashed border-quiz-border bg-quiz-bg/50 text-quiz-text-muted" : 
+                      checked ? (selectedOptions[i] === safeBlanks[i] ? "border-quiz-correct bg-quiz-correct/10 text-quiz-correct" : "border-quiz-wrong bg-quiz-wrong/10 text-quiz-wrong") :
+                      "border-quiz-primary/50 bg-quiz-primary/10 text-quiz-primary"
                     )}
                   >
                     {selectedOptions[i] || "___"}
@@ -134,7 +134,7 @@ const FillBlank = ({ activity, onComplete, onFactCollected }: Props) => {
               <button
                 key={`${option}-${idx}`}
                 onClick={() => handleSelectOption(option)}
-                className="duo-btn h-12 px-6 text-sm bg-slate-800 border-white/10 text-white hover:bg-slate-700"
+                className="bg-quiz-surface border-2 border-quiz-border text-quiz-text-main px-6 py-3 rounded-xl font-bold hover:border-quiz-primary hover:scale-[1.05] transition-all active:scale-95 text-sm"
                 disabled={currentBlankIndex === -1}
               >
                 {option}
@@ -147,9 +147,9 @@ const FillBlank = ({ activity, onComplete, onFactCollected }: Props) => {
           <button
             onClick={checkAnswer}
             disabled={!allFilled}
-            className="duo-btn duo-btn-primary w-full h-16 text-lg"
+            className="w-full h-16 bg-quiz-primary text-black font-black rounded-xl text-lg hover:bg-quiz-primary-dark transition-all shadow-lg shadow-quiz-primary/10 disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            Verificar Resposta
+            VERIFICAR RESPOSTA
           </button>
         )}
       </div>

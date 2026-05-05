@@ -22,7 +22,7 @@ const AppContent = () => {
   const isAdminPath = location.pathname.startsWith('/admin');
 
   return (
-    <div className="min-h-screen bg-background dark:bg-[#0a0a0c]">
+    <div className="min-h-screen bg-quiz-bg">
       {!isAdminPath && <Navbar />}
       <Routes>
         <Route path="/" element={<Index />} />

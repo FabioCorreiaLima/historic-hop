@@ -1,10 +1,5 @@
-/**
- * EducationalFeedback.tsx
- * Componente de feedback educacional rico exibido após cada resposta.
- * Mostra: resultado, explicação, fato histórico complementar e fonte.
- */
-
 import { CheckCircle2, XCircle, BookOpen, Lightbulb, Quote } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface EducationalFeedbackProps {
   isCorrect: boolean;
@@ -25,70 +20,53 @@ export function EducationalFeedback({
   historicalFact,
   source,
   onNext,
-  nextLabel = "Próxima →",
+  nextLabel = "PRÓXIMA PERGUNTA",
 }: EducationalFeedbackProps) {
   return (
-    <div className="mt-6 animate-fade-in-up space-y-3">
-      {/* Resultado */}
-      <div
-        className={`flex items-start gap-3 p-4 rounded-2xl border-2 ${
-          isCorrect
-            ? "bg-emerald-500/10 border-emerald-500/30"
-            : "bg-red-500/10 border-red-500/30"
-        }`}
-      >
+    <div className="animate-fade-in-up space-y-4">
+      {/* Resultado Principal */}
+      <div className={cn(
+        "flex items-center gap-4 p-5 rounded-xl border-2 transition-all",
+        isCorrect ? "bg-quiz-correct/10 border-quiz-correct/50" : "bg-quiz-wrong/10 border-quiz-wrong/50"
+      )}>
         {isCorrect ? (
-          <CheckCircle2 className="w-6 h-6 text-emerald-400 mt-0.5 flex-shrink-0" />
+          <CheckCircle2 className="w-10 h-10 text-quiz-correct" />
         ) : (
-          <XCircle className="w-6 h-6 text-red-400 mt-0.5 flex-shrink-0" />
+          <XCircle className="w-10 h-10 text-quiz-wrong" />
         )}
         <div>
-          <p className={`font-black text-base ${isCorrect ? "text-emerald-400" : "text-red-400"}`}>
-            {isTimeout
-              ? "Tempo esgotado! ⏰"
-              : isCorrect
-              ? "Correto! Excelente! 🎉"
-              : "Não foi dessa vez! 😕"}
+          <h4 className={cn(
+            "text-xl font-black uppercase tracking-tight",
+            isCorrect ? "text-quiz-correct" : "text-quiz-wrong"
+          )}>
+            {isTimeout ? "Tempo Esgotado!" : isCorrect ? "Você Acertou!" : "Resposta Errada"}
+          </h4>
+          <p className="text-quiz-text-muted text-sm italic leading-relaxed mt-1">
+            {explanation}
           </p>
-          {!isCorrect && correctAnswerText && (
-            <p className="text-sm text-white/50 mt-1">
-              Resposta correta: <span className="text-white/80 font-semibold">{correctAnswerText}</span>
-            </p>
-          )}
         </div>
       </div>
 
-      {/* Explicação */}
-      <div className="flex items-start gap-3 p-4 rounded-2xl bg-purple-500/5 border border-purple-500/20">
-        <Lightbulb className="w-5 h-5 text-purple-400 mt-0.5 flex-shrink-0" />
-        <p className="text-sm text-purple-100/80 leading-relaxed">{explanation}</p>
-      </div>
-
-      {/* Fato histórico complementar */}
+      {/* Fato Histórico Complementar */}
       {historicalFact && (
-        <div className="flex items-start gap-3 p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20">
-          <BookOpen className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
-          <div>
-            <p className="text-[10px] font-black text-amber-400 uppercase tracking-widest mb-1">
-              📖 Fato Histórico
-            </p>
-            <p className="text-sm text-amber-100/80 leading-relaxed">{historicalFact}</p>
+        <div className="p-5 rounded-xl bg-quiz-surface border border-quiz-border">
+          <div className="flex items-center gap-2 mb-3">
+            <BookOpen className="w-4 h-4 text-quiz-primary" />
+            <span className="text-[10px] font-black text-quiz-primary uppercase tracking-widest">Fato Complementar</span>
           </div>
-        </div>
-      )}
-
-      {/* Fonte / Citação */}
-      {source && (
-        <div className="flex items-start gap-3 p-3 rounded-2xl bg-white/3 border border-white/10">
-          <Quote className="w-4 h-4 text-white/30 mt-0.5 flex-shrink-0" />
-          <p className="text-xs text-white/40 leading-relaxed italic">{source}</p>
+          <p className="text-sm text-quiz-text-main/80 leading-relaxed">
+            {historicalFact}
+          </p>
+          {source && (
+            <p className="text-[10px] text-quiz-text-muted mt-3 italic">Fonte: {source}</p>
+          )}
         </div>
       )}
 
       {/* Botão de avançar */}
       <button
         onClick={onNext}
-        className="w-full py-4 rounded-2xl bg-white text-black font-black text-sm uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-white/10"
+        className="w-full bg-quiz-primary text-black font-black py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-quiz-primary-dark transition-all transform hover:translate-y-[-1px] active:translate-y-[0] shadow-lg shadow-quiz-primary/10"
       >
         {nextLabel}
       </button>
