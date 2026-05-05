@@ -14,6 +14,26 @@ export class PeriodService {
 
   static async savePeriod(data: any) {
     const saved = await PeriodRepository.save(data);
+    
+    // Garantir que a lição principal existe para este período (permite salvar progresso)
+    const lessonId = `lesson_${saved.id}_main`;
+    const { query } = await import("../config/database.js");
+    
+    // Link ao curso padrão (se não existir)
+    await query(
+      `INSERT INTO course_periods (course_id, period_id, order_index)
+       VALUES ($1, $2, $3)
+       ON CONFLICT (course_id, period_id) DO NOTHING`,
+      ["default-br", saved.id, saved.order_index || 0]
+    );
+
+    await query(
+      `INSERT INTO lessons (id, period_id, title, order_index, xp_reward)
+       VALUES ($1, $2, $3, 0, 15)
+       ON CONFLICT (id) DO NOTHING`,
+      [lessonId, saved.id, "Trilha Principal"]
+    );
+
     return this.formatPeriod(saved);
   }
 

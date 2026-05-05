@@ -346,14 +346,25 @@ JSON:`;
         periodId,
         periodName,
         theme: data.theme ?? { wallColor: "#1e3a5f", bgColor: "#0a1628", accentColor: "#fcd34d", atmosphereLabel: periodName },
-        ghosts: data.ghosts ?? [],
-        collectibles: data.collectibles ?? [],
-        powerPellets: data.powerPellets ?? [],
+        ghosts: (data.ghosts && data.ghosts.length > 0) ? data.ghosts : [
+          { name: "Desafio 1", emoji: "👻", tintColor: "#ef4444", description: "Um desafio histórico do período." },
+          { name: "Desafio 2", emoji: "👻", tintColor: "#3b82f6", description: "Outro obstáculo enfrentado na época." }
+        ],
+        collectibles: (data.collectibles && data.collectibles.length > 0) ? data.collectibles : [
+          { name: "Personagem 1", emoji: "👤", fact: "Personagens importantes moldaram esta época." },
+          { name: "Personagem 2", emoji: "👤", fact: "A sociedade passava por grandes transformações." },
+          { name: "Personagem 3", emoji: "👤", fact: "Novas ideias começavam a surgir neste período." },
+          { name: "Personagem 4", emoji: "👤", fact: "A cultura brasileira se enriquecia com novos elementos." }
+        ],
+        powerPellets: (data.powerPellets && data.powerPellets.length > 0) ? data.powerPellets : [
+          { name: "Evento Marcante", emoji: "⭐", effect: "Um marco fundamental da nossa história." },
+          { name: "Grande Mudança", emoji: "🌟", effect: "Este evento alterou o rumo da nação." }
+        ],
         finalChallenge: data.finalChallenge ?? {
           question: `Qual foi a principal característica do período ${periodName}?`,
-          options: ["Resposta A", "Resposta B", "Resposta C", "Resposta D"],
+          options: ["Mudança Social", "Estabilidade Política", "Conflitos Internos", "Expansão Territorial"],
           correctIndex: 0,
-          explanation: "Consulte seu professor para mais detalhes sobre este período.",
+          explanation: "Este período foi fundamental para a formação do Brasil.",
         },
         periodSummary: data.periodSummary ?? `${periodName} foi um período importante da história do Brasil.`,
       };
@@ -368,16 +379,20 @@ JSON:`;
           { name: "Opressão", emoji: "⛓️", tintColor: "#92400e", description: "A opressão sobre grupos vulneráveis foi uma constante na história brasileira." },
         ],
         collectibles: [
-          { name: "Personagem Histórico", emoji: "👑", fact: `Personagens importantes marcaram o período ${periodName}.` },
+          { name: "Líder Histórico", emoji: "👑", fact: `Líderes importantes marcaram o período ${periodName}.` },
+          { name: "Povo Brasileiro", emoji: "🤝", fact: "A resistência e a cultura popular foram fundamentais." },
+          { name: "Legado", emoji: "📜", fact: "O legado deste período ainda é sentido hoje." },
+          { name: "Sociedade", emoji: "🏘️", fact: "As cidades e o campo passavam por mudanças." },
         ],
         powerPellets: [
-          { name: "Evento Marcante", emoji: "⭐", effect: `Um evento transformador do período ${periodName}. +500 pontos!` },
+          { name: "Evento Transformador", emoji: "⭐", effect: `Um evento que mudou tudo no período ${periodName}.` },
+          { name: "Conquista", emoji: "🏆", effect: "Uma vitória importante para a sociedade da época." },
         ],
         finalChallenge: {
-          question: `Qual foi o principal evento do período ${periodName}?`,
-          options: ["Opção A", "Opção B", "Opção C", "Opção D"],
+          question: `Qual foi o legado mais importante do período ${periodName}?`,
+          options: ["Cultura", "Política", "Economia", "Sociedade"],
           correctIndex: 0,
-          explanation: "Este período foi fundamental para a formação do Brasil moderno.",
+          explanation: "Este período deixou marcas profundas na identidade brasileira.",
         },
         periodSummary: `${periodName} foi um período importante que moldou a sociedade brasileira.`,
       };

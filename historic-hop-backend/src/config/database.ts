@@ -8,8 +8,8 @@ const pool = new Pool({
   // Neon e outros provedores gerenciados geralmente exigem SSL.
   ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : undefined,
   max: 20,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 5000,
+  idleTimeoutMillis: 60000,
+  connectionTimeoutMillis: 15000,
 });
 
 export { pool };
@@ -231,7 +231,8 @@ const DEFAULT_COURSE_ID = "default-br";
 async function ensureDefaultCurriculum() {
   const { rows } = await query(`SELECT COUNT(*)::int AS c FROM historical_periods`);
   if ((rows[0] as { c: number }).c === 0) {
-    await seedHistoricalPeriods();
+    console.log("ℹ️ Banco de dados vazio. Aguardando inicialização manual ou via IA pelo Painel Admin.");
+    // Removido o seed automático para permitir escolha do admin
   }
 
   await query(

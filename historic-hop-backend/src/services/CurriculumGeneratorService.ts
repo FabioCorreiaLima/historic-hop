@@ -1,6 +1,7 @@
 import { AIService } from "./AIService.js";
 import { PeriodRepository } from "../repositories/PeriodRepository.js";
 import { CurriculumRepository, DEFAULT_COURSE_ID } from "../repositories/CurriculumRepository.js";
+import { ActivityService } from "./ActivityService.js";
 import crypto from "crypto";
 import { query } from "../config/database.js";
 
@@ -60,7 +61,31 @@ JSON:
       });
 
       await CurriculumRepository.linkPeriodToCourse(DEFAULT_COURSE_ID, savedPeriod.id, i);
+      
+      // Criar a lição principal para este período para permitir rastreio de progresso
+      const lessonId = `lesson_${savedPeriod.id}_main`;
+      await query(
+        `INSERT INTO lessons (id, period_id, title, order_index, xp_reward)
+         VALUES ($1, $2, $3, 0, 15)
+         ON CONFLICT (id) DO NOTHING`,
+        [lessonId, savedPeriod.id, "Trilha Principal"]
+      );
+
       periodIds.push(savedPeriod.id);
+      
+      // Pré-gerar algumas atividades apenas para os primeiros períodos para evitar timeout da requisição HTTP
+      if (i < 5) {
+        try {
+          console.log(`✨ [BNCC] Gerando atividades iniciais para ${savedPeriod.name}...`);
+          await ActivityService.generateBatch(savedPeriod.id, 2, 1, "Fácil");
+          console.log(`✅ [BNCC] Atividades geradas para ${savedPeriod.name}`);
+        } catch (actErr) {
+          console.error(`❌ [BNCC] Erro ao pré-gerar atividades para ${savedPeriod.id}:`, actErr);
+        }
+      } else {
+        console.log(`⏭️ [BNCC] Pulando pré-geração para ${savedPeriod.name} (será gerado sob demanda)`);
+      }
+
       console.log(`Salvo: ${i+1}/${periodsData.length} - ${savedPeriod.name}`);
     }
 

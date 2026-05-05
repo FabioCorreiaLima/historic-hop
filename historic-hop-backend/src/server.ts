@@ -21,6 +21,7 @@ import rankingRoutes from "./routes/ranking.js";
 import periodsRoutes from "./routes/periods.js";
 import curriculumRoutes from "./routes/curriculum.js";
 import pacmanRoutes from "./routes/pacman.js";
+import adminRoutes from "./routes/admin.js";
 
 dotenv.config();
 
@@ -48,6 +49,7 @@ app.use("/api/ranking", rankingRoutes);
 app.use("/api/historical-periods", periodsRoutes);
 app.use("/api/curriculum", curriculumRoutes);
 app.use("/api/pacman", pacmanRoutes);
+app.use("/api/admin", adminRoutes);
 
 async function startServer() {
   try {

@@ -48,9 +48,21 @@ export class ActivityController {
       const { periodId, limit, random } = req.query;
       const parsedLimit = Number(limit) || 10;
       
-      const activities = random === 'true' 
+      let activities = random === 'true' 
         ? await ActivityRepository.getByPeriodRandom(periodId as string, parsedLimit)
         : await ActivityRepository.getByPeriod(periodId as string, parsedLimit);
+      
+      // Se não houver atividades no banco, gera um lote inicial via IA
+      if (activities.length === 0 && periodId) {
+        console.log(`✨ Nenhuma atividade para o período ${periodId}. Gerando lote inicial via IA...`);
+        try {
+          // Gera 5 atividades iniciais (mistura de tipos)
+          activities = await ActivityService.generateBatch(periodId as string, 5, 1, "Fácil");
+        } catch (genError) {
+          console.error("Erro ao gerar lote inicial automático:", genError);
+          // Se falhar a IA, retorna vazio mesmo
+        }
+      }
         
       res.json(activities.map((a: any) => ActivityController.formatActivity(a)));
     } catch (error) {

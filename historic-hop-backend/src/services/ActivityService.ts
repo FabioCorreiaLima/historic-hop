@@ -282,25 +282,29 @@ JSON válido:
       case "fill_blank":
         prompt = `Gere UMA atividade de completar lacunas com texto histórico sobre ${periodName}.
 ${diffGuidelines}
-Use __BLANK__ para indicar as lacunas no texto.
+IMPORTANTE: Use EXCLUSIVAMENTE o marcador __BLANK__ para indicar as lacunas. 
+PROIBIDO usar marcadores numerados como __1__, __2__.
+O campo "blanks" deve conter as PALAVRAS REAIS que completam o texto, na ordem correta.
 JSON válido:
 {
   "textWithBlanks": "Texto histórico com __BLANK__ nos lugares das lacunas",
-  "blanks": ["resposta1", "resposta2"],
-  "options": ["resposta1", "resposta2", "distrator1", "distrator2"],
+  "blanks": ["palavra_real_1", "palavra_real_2"],
+  "options": ["palavra_real_1", "palavra_real_2", "distrator1", "distrator2"],
   "explanation": "Contexto histórico explicando as respostas corretas",
   ${educationalFields}
 }`;
         break;
 
       case "matching":
-        prompt = `Gere UMA atividade de associação sobre ${periodName} com 4 pares.
+        prompt = `Gere UMA atividade de associação sobre ${periodName} com 4 pares ÚNICOS.
 ${diffGuidelines}
+IMPORTANTE: Cada item da direita deve ser uma DEFINIÇÃO ou DESCRIÇÃO diferente e específica. 
+PROIBIDO repetir o mesmo termo na coluna da direita.
 JSON válido:
 {
-  "instruction": "Associe cada item da coluna A com seu correspondente na coluna B",
+  "instruction": "Associe cada item da coluna A com sua descrição correspondente na coluna B",
   "pairs": [
-    { "left": "Conceito ou personagem", "right": "Definição ou evento relacionado" }
+    { "left": "Personagem ou Evento", "right": "Descrição detalhada e única do item da esquerda" }
   ],
   "explanation": "Explicação das associações e sua importância histórica",
   ${educationalFields}

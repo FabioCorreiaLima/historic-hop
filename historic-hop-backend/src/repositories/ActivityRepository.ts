@@ -14,6 +14,11 @@ export class ActivityRepository {
     
     return result.rows[0];
   }
+  
+  static async getAll() {
+    const result = await query("SELECT * FROM activities ORDER BY \"createdAt\" DESC");
+    return result.rows;
+  }
 
   static async getByPeriod(periodId: string, limit: number = 5) {
     const result = await query(
