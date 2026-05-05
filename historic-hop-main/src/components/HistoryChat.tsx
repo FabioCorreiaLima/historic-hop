@@ -20,6 +20,7 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
   
   useEffect(() => {
     const refreshData = async () => {
+      if (!initialPeriod?.id) return;
       try {
         const data = await api.periods.getOne(initialPeriod.id);
         if (data) setPeriodData(data);
@@ -28,7 +29,7 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
       }
     };
     refreshData();
-  }, [initialPeriod.id]);
+  }, [initialPeriod?.id]);
 
   // Garantir fallbacks para evitar ReferenceError ou undefined
   const charName = periodData?.characterName || "Historiador";

@@ -14,12 +14,13 @@ interface StoreItem {
 }
 
 interface Props {
-  onClose: () => void;
+  onClose?: () => void;
   onSkinChange?: (skinId: string) => void;
   currentSkin?: string;
+  isPage?: boolean;
 }
 
-export default function StoreModal({ onClose, onSkinChange, currentSkin: initialSkin }: Props) {
+export default function StoreModal({ onClose, onSkinChange, currentSkin: initialSkin, isPage = false }: Props) {
   const { session } = useAuth();
   const [items, setItems] = useState<StoreItem[]>([]);
   const [inventory, setInventory] = useState<Set<string>>(new Set());
@@ -85,9 +86,18 @@ export default function StoreModal({ onClose, onSkinChange, currentSkin: initial
     }
   };
 
+  // Wrapper classes
+  const wrapperClass = isPage 
+    ? "w-full max-w-4xl mx-auto py-8 animate-in fade-in duration-500" 
+    : "fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 backdrop-blur-md bg-black/60 animate-in fade-in duration-300";
+
+  const contentClass = isPage
+    ? "bg-slate-900/50 border border-white/10 w-full rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col min-h-[600px]"
+    : "bg-slate-900 border border-white/10 w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]";
+
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 backdrop-blur-md bg-black/60 animate-in fade-in duration-300">
-      <div className="bg-slate-900 border border-white/10 w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className={wrapperClass}>
+      <div className={contentClass}>
         
         {/* Header Loja */}
         <div className="p-6 md:p-8 border-b border-white/5 flex items-center justify-between bg-gradient-to-r from-primary/10 to-transparent">

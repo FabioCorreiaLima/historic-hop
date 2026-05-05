@@ -1,217 +1,221 @@
-import { useState, useEffect, useCallback } from "react";
-import { CheckCircle2, XCircle, Lightbulb, Zap, Timer } from "lucide-react";
-import type { QuizQuestion } from "@/data/quizQuestions";
-import QuizMedia from "./QuizMedia";
+import { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  X, 
+  Heart, 
+  Timer, 
+  Zap, 
+  ChevronRight, 
+  AlertCircle,
+  Loader2,
+  CheckCircle2
+} from "lucide-react";
+import { Button } from "./ui/button";
+import { Progress } from "./ui/progress";
+import QuizActivityComponent from "./activities/QuizActivityComponent";
+import FillBlank from "./activities/FillBlank";
+import Matching from "./activities/Matching";
+import ChronologicalOrder from "./activities/ChronologicalOrder";
+import TrueFalse from "./activities/TrueFalse";
+import EducationalFeedback from "./EducationalFeedback";
+import { type Activity } from "@/types";
+import { toast } from "sonner";
+import { cn } from "@/lib/utils";
+import { Badge } from "./ui/badge";
 
 interface QuizGameProps {
-  question: QuizQuestion;
-  currentIndex: number;
-  totalQuestions: number;
-  combo: number;
-  score: number;
-  onAnswer: (optionIndex: number, timeLeft: number) => { correct: boolean; points: number };
-  onNext: () => void;
-  isLast: boolean;
+  periodId: string;
+  activities: Activity[];
+  isLoading: boolean;
+  onComplete: (correct: number, total: number) => void;
+  onBack: () => void;
 }
 
-const optionLetters = ["A", "B", "C", "D"];
-
-const QuizGame = ({
-  question,
-  currentIndex,
-  totalQuestions,
-  combo,
-  score,
-  onAnswer,
-  onNext,
-  isLast,
-}: QuizGameProps) => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+const QuizGame = ({ activities, isLoading, onComplete, onBack }: QuizGameProps) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [correctCount, setCorrectCount] = useState(0);
   const [showFeedback, setShowFeedback] = useState(false);
-  const [result, setResult] = useState<{ correct: boolean; points: number } | null>(null);
-  const [timeLeft, setTimeLeft] = useState(20);
-  const [timerActive, setTimerActive] = useState(true);
-  const [showPoints, setShowPoints] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [combo, setCombo] = useState(0);
+  const [maxCombo, setMaxCombo] = useState(0);
+  const [startTime] = useState(Date.now());
+  const [timeLeft, setTimeLeft] = useState(30);
 
-  // Timer countdown
+  const currentActivity = activities[currentIndex];
+  const progress = ((currentIndex) / activities.length) * 100;
+
+  // Timer logic
   useEffect(() => {
-    if (!timerActive || timeLeft <= 0) return;
-    const interval = setInterval(() => {
-      setTimeLeft(prev => {
+    if (isLoading || showFeedback || !currentActivity) return;
+    
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
         if (prev <= 1) {
-          clearInterval(interval);
-          return 0;
+          handleAnswer(false);
+          return 30;
         }
         return prev - 1;
       });
     }, 1000);
-    return () => clearInterval(interval);
-  }, [timerActive, timeLeft]);
 
-  // Auto-answer on timeout
-  useEffect(() => {
-    if (timeLeft === 0 && !showFeedback) {
-      handleSelect(-1); // wrong answer
-    }
-  }, [timeLeft, showFeedback]);
+    return () => clearInterval(timer);
+  }, [currentIndex, isLoading, showFeedback, currentActivity]);
 
-  const handleSelect = useCallback((index: number) => {
-    if (showFeedback) return;
-    setTimerActive(false);
-    setSelectedIndex(index);
+  const handleAnswer = (correct: boolean) => {
+    setIsCorrect(correct);
     setShowFeedback(true);
     
-    const r = onAnswer(index, timeLeft);
-    setResult(r);
-    
-    if (r.correct && r.points > 0) {
-      setShowPoints(true);
-      setTimeout(() => setShowPoints(false), 1500);
+    if (correct) {
+      setCorrectCount(prev => prev + 1);
+      const newCombo = combo + 1;
+      setCombo(newCombo);
+      setMaxCombo(prev => Math.max(prev, newCombo));
+      
+      // Play success sound logic would go here
+    } else {
+      setCombo(0);
+      // Play error sound logic
     }
-  }, [showFeedback, onAnswer, timeLeft]);
+  };
 
-  const progress = ((currentIndex + 1) / totalQuestions) * 100;
-  const timerPercentage = (timeLeft / 20) * 100;
-  const timerColor = timeLeft > 10 ? "text-success" : timeLeft > 5 ? "text-accent" : "text-destructive";
-  const isCorrect = result?.correct;
+  const nextActivity = () => {
+    setShowFeedback(false);
+    setTimeLeft(30);
+    if (currentIndex < activities.length - 1) {
+      setCurrentIndex(prev => prev + 1);
+    } else {
+      onComplete(correctCount, activities.length);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center p-6 text-center">
+        <motion.div 
+          animate={{ rotate: 360 }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          className="w-16 h-16 rounded-3xl border-4 border-primary border-t-transparent mb-8"
+        />
+        <h2 className="text-3xl font-black tracking-tight mb-2 uppercase">Preparando Desafio</h2>
+        <p className="text-muted-foreground font-medium">A IA está consultando os registros históricos...</p>
+      </div>
+    );
+  }
+
+  if (!currentActivity) return null;
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-4 animate-fade-in-up">
-      {/* Top bar: score + combo + timer */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="glass rounded-xl px-4 py-2 flex items-center gap-3">
-          <span className="text-sm text-muted-foreground">Pontos</span>
-          <span className="font-bold text-foreground">{score}</span>
-        </div>
+    <div className="fixed inset-0 bg-slate-950 text-slate-50 z-50 flex flex-col overflow-hidden">
+      {/* Quiz Header */}
+      <header className="h-20 px-6 border-b border-white/10 flex items-center gap-6 max-w-5xl mx-auto w-full">
+        <Button variant="ghost" size="icon" onClick={onBack} className="rounded-xl text-slate-400 hover:text-white hover:bg-white/5">
+          <X className="w-6 h-6" />
+        </Button>
         
-        {combo > 1 && (
-          <div className="glass rounded-xl px-4 py-2 flex items-center gap-2 glow-accent animate-bounce-in">
-            <Zap className="w-4 h-4 text-accent" />
-            <span className="font-bold text-accent">x{combo}</span>
+        <div className="flex-1 px-4">
+          <div className="flex justify-between items-end mb-2">
+             <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">Progresso</span>
+             <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">{currentIndex + 1} de {activities.length}</span>
           </div>
-        )}
-        
-        {/* Timer */}
-        <div className={`glass rounded-xl px-4 py-2 flex items-center gap-2 ${timeLeft <= 5 ? "animate-timer-pulse" : ""}`}>
-          <Timer className={`w-4 h-4 ${timerColor}`} />
-          <span className={`font-bold text-lg ${timerColor}`}>{timeLeft}s</span>
+          <Progress value={progress} className="h-3 rounded-full bg-slate-800" />
         </div>
-      </div>
 
-      {/* Progress bar */}
-      <div className="mb-4">
-        <div className="flex justify-between text-xs text-muted-foreground mb-1.5">
-          <span>Pergunta {currentIndex + 1} de {totalQuestions}</span>
-          <span>{Math.round(progress)}%</span>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 px-4 py-2 bg-rose-500/10 rounded-xl text-rose-500 border border-rose-500/20">
+            <Heart className="w-4 h-4 fill-current" />
+            <span className="font-black text-sm">3</span>
+          </div>
+          <div className={cn(
+            "flex items-center gap-2 px-4 py-2 rounded-xl border transition-colors",
+            timeLeft < 10 ? "bg-rose-500/10 text-rose-500 border-rose-500/20 animate-pulse" : "bg-slate-800 text-slate-200 border-white/5"
+          )}>
+            <Timer className="w-4 h-4" />
+            <span className="font-black text-sm w-4">{timeLeft}</span>
+          </div>
         </div>
-        <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-          <div
-            className="h-full bg-gradient-to-r from-primary to-secondary rounded-full transition-all duration-500"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </div>
+      </header>
 
-      {/* Timer bar */}
-      <div className="w-full h-1 bg-muted rounded-full overflow-hidden mb-6">
-        <div
-          className={`h-full rounded-full transition-all duration-1000 linear ${
-            timeLeft > 10 ? "bg-success" : timeLeft > 5 ? "bg-accent" : "bg-destructive"
-          }`}
-          style={{ width: `${timerPercentage}%` }}
-        />
-      </div>
-
-      {/* Question card */}
-      <div className="glass-strong rounded-2xl p-5 md:p-7">
-        {/* Mídia da pergunta */}
-        <QuizMedia question={question} />
-
-        <h2 className="text-lg md:text-xl font-bold text-foreground mb-6 leading-snug">
-          {question.question}
-        </h2>
-
-        {/* Options */}
-        <div className="space-y-3">
-          {question.options.map((option, i) => {
-            let extraClasses = "";
-            
-            if (showFeedback) {
-              if (i === question.correctIndex) {
-                extraClasses = "!border-success !bg-success/15 glow-success";
-              } else if (i === selectedIndex) {
-                extraClasses = "!border-destructive !bg-destructive/15 animate-shake";
-              } else {
-                extraClasses = "opacity-40";
-              }
-            }
-
-            return (
-              <button
-                key={i}
-                onClick={() => handleSelect(i)}
-                disabled={showFeedback}
-                className={`w-full flex items-center gap-3 p-3.5 md:p-4 rounded-xl text-left transition-all duration-200 glass-option ${extraClasses}`}
+      {/* Main Activity Area */}
+      <main className="flex-1 overflow-y-auto p-6 md:p-12 relative">
+        <div className="max-w-3xl mx-auto h-full flex flex-col">
+          {/* Combo Indicator */}
+          <AnimatePresence>
+            {combo > 1 && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 1.5 }}
+                className="absolute top-4 right-12 flex items-center gap-2 px-4 py-2 bg-amber-500 rounded-2xl text-white font-black shadow-xl shadow-amber-500/20 z-10"
               >
-                <span className={`flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center font-bold text-sm
-                  ${showFeedback && i === question.correctIndex
-                    ? "bg-success text-success-foreground"
-                    : showFeedback && i === selectedIndex
-                    ? "bg-destructive text-destructive-foreground"
-                    : "bg-primary/15 text-primary"
-                  }`}
-                >
-                  {optionLetters[i]}
-                </span>
-                <span className="text-foreground font-medium text-sm md:text-base">{option}</span>
-                {showFeedback && i === question.correctIndex && (
-                  <CheckCircle2 className="ml-auto w-5 h-5 text-success flex-shrink-0" />
-                )}
-                {showFeedback && i === selectedIndex && i !== question.correctIndex && (
-                  <XCircle className="ml-auto w-5 h-5 text-destructive flex-shrink-0" />
-                )}
-              </button>
-            );
-          })}
-        </div>
+                <Zap className="w-5 h-5 fill-current" />
+                COMBO x{combo}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-        {/* Points popup */}
-        {showPoints && result && result.points > 0 && (
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-bounce-in pointer-events-none z-10">
-            <span className="text-4xl font-bold text-accent drop-shadow-lg">+{result.points}</span>
-          </div>
-        )}
+          <div className="flex-1 flex flex-col justify-center animate-fade-in-up">
+            <div className="mb-10">
+               <Badge variant="outline" className="mb-4 font-black uppercase tracking-widest text-[10px] py-1 px-4">
+                 {currentActivity.type.replace('_', ' ')}
+               </Badge>
+               <h2 className="text-3xl md:text-4xl font-black tracking-tighter leading-[1.1]">
+                  {currentActivity.type === 'matching' ? 'Associe os conceitos corretamente' : 
+                   currentActivity.type === 'chronological' ? 'Ordene os eventos no tempo' :
+                   currentActivity.type === 'fill_blank' ? 'Complete as lacunas do texto' :
+                   'Responda a pergunta abaixo'}
+               </h2>
+            </div>
 
-        {/* Feedback */}
-        {showFeedback && (
-          <div className="mt-5 animate-fade-in-up">
-            <div className={`flex items-start gap-3 p-4 rounded-xl ${
-              isCorrect ? "bg-success/10 border border-success/30" : "bg-destructive/10 border border-destructive/30"
-            }`}>
-              {isCorrect ? (
-                <CheckCircle2 className="w-5 h-5 text-success mt-0.5 flex-shrink-0" />
-              ) : (
-                <XCircle className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0" />
+            <div className="bg-white/5 rounded-[3rem] p-4 md:p-8 border border-white/10 backdrop-blur-md">
+              {currentActivity.type === "quiz" && (
+                <QuizActivityComponent activity={currentActivity} onComplete={handleAnswer} />
               )}
-              <p className={`font-semibold ${isCorrect ? "text-success" : "text-destructive"}`}>
-                {isCorrect ? "Correto! 🎉" : timeLeft === 0 && selectedIndex === -1 ? "Tempo esgotado! ⏰" : "Errado! 😕"}
-              </p>
+              {currentActivity.type === "true_false" && (
+                <TrueFalse activity={currentActivity} onComplete={handleAnswer} />
+              )}
+              {currentActivity.type === "fill_blank" && (
+                <FillBlank activity={currentActivity} onComplete={handleAnswer} />
+              )}
+              {currentActivity.type === "matching" && (
+                <Matching activity={currentActivity} onComplete={handleAnswer} />
+              )}
+              {currentActivity.type === "chronological" && (
+                <ChronologicalOrder activity={currentActivity} onComplete={handleAnswer} />
+              )}
             </div>
-
-            <div className="flex items-start gap-3 mt-3 p-4 rounded-xl bg-primary/5 border border-primary/20">
-              <Lightbulb className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-              <p className="text-sm text-foreground leading-relaxed">{question.explanation}</p>
-            </div>
-
-            <button
-              onClick={onNext}
-              className="mt-4 w-full glass-option !bg-primary/20 !border-primary/30 hover:!bg-primary/30 rounded-xl py-4 text-base font-semibold text-foreground transition-all"
-            >
-              {isLast ? "Ver Resultado →" : "Próxima Pergunta →"}
-            </button>
           </div>
+        </div>
+      </main>
+
+      {/* Footer / Feedback Bar */}
+      <AnimatePresence>
+        {showFeedback && (
+          <motion.footer 
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "100%" }}
+            transition={{ type: "spring", damping: 20 }}
+            className={cn(
+              "fixed bottom-0 left-0 right-0 p-6 md:p-8 z-[60] border-t-4 shadow-[0_-20px_50px_rgba(0,0,0,0.3)] backdrop-blur-xl",
+              isCorrect 
+                ? "bg-emerald-950/90 border-emerald-500 text-emerald-200" 
+                : "bg-rose-950/90 border-rose-500 text-rose-200"
+            )}
+          >
+            <div className="max-w-3xl mx-auto">
+              <EducationalFeedback 
+                isCorrect={isCorrect}
+                explanation={currentActivity.explanation || ""}
+                historicalFact={(currentActivity as any).historicalFact || (currentActivity as any).content?.explanation}
+                source={(currentActivity as any).source}
+                onNext={nextActivity}
+                nextLabel={currentIndex === activities.length - 1 ? "Finalizar Trilha →" : "Continuar Desafio →"}
+                correctAnswerText={!isCorrect ? "Veja a explicação abaixo" : undefined}
+              />
+            </div>
+          </motion.footer>
         )}
-      </div>
+      </AnimatePresence>
     </div>
   );
 };

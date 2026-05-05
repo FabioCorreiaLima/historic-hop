@@ -256,10 +256,12 @@ export default function PacManGame({ periodId, onGameOver, onBack, skinId = "cla
           const remaining = this.dots.countActive(true);
           setDotsLeft(remaining);
           playBeep(BEEP.DOT, 0.05);
-          const item = phaseData!.collectibles[this.collectibleIndex++ % phaseData!.collectibles.length];
-          setShowCollectible(item);
-          if (item.fact) addFact({ periodId, periodName: phaseData!.periodName, fact: item.fact, source: '', activityType: 'pacman', emoji: item.emoji });
-          setTimeout(() => setShowCollectible(null), 3000);
+          if (remaining % 15 === 0) {
+            const item = phaseData!.collectibles[this.collectibleIndex++ % phaseData!.collectibles.length];
+            setShowCollectible(item);
+            if (item.fact) addFact({ periodId, periodName: phaseData!.periodName, fact: item.fact, source: '', activityType: 'pacman', emoji: item.emoji });
+            setTimeout(() => setShowCollectible(null), 4000);
+          }
           if (this.dots.countActive(true) === 0) { this.physics.world.pause(); setShowFinalChallenge(true); }
         });
 
@@ -269,11 +271,18 @@ export default function PacManGame({ periodId, onGameOver, onBack, skinId = "cla
           playBeep(BEEP.POWERUP, 0.2);
           const pp = phaseData!.powerPellets[this.powerPelletIndex++ % phaseData!.powerPellets.length];
           
-          setShowMidGameQuiz({
-            question: `Sobre "${pp?.name || 'Histórico'}": ${phaseData!.finalChallenge.question}`,
+          const challenge = pp?.challenge || {
+            question: phaseData!.finalChallenge.question,
             options: phaseData!.finalChallenge.options,
             correctIndex: phaseData!.finalChallenge.correctIndex,
-            explanation: pp?.effect || ""
+            explanation: phaseData!.finalChallenge.explanation
+          };
+
+          setShowMidGameQuiz({
+            question: `Sobre "${pp?.name || 'Histórico'}": ${challenge.question}`,
+            options: challenge.options,
+            correctIndex: challenge.correctIndex,
+            explanation: challenge.explanation || pp?.effect || ""
           });
           setShowPowerPellet(pp);
         });
@@ -545,10 +554,10 @@ export default function PacManGame({ periodId, onGameOver, onBack, skinId = "cla
       </div>
 
       {showCollectible && (
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-slate-900 border-2 border-amber-400 rounded-2xl px-4 py-2 text-center animate-bounce-in z-50">
-          <p className="text-xl">{showCollectible.emoji}</p>
-          <p className="text-[10px] text-amber-400 font-black uppercase">{showCollectible.name}</p>
-          <p className="text-xs text-white/70">{showCollectible.fact}</p>
+        <div className="absolute top-24 left-1/2 -translate-x-1/2 bg-slate-900/95 border-2 border-amber-400 rounded-2xl px-6 py-3 text-center animate-bounce-in z-50 shadow-2xl max-w-[80vw] backdrop-blur-sm">
+          <p className="text-2xl mb-1">{showCollectible.emoji}</p>
+          <p className="text-xs text-amber-400 font-black uppercase tracking-tighter mb-1">{showCollectible.name}</p>
+          <p className="text-sm text-white font-medium leading-tight">{showCollectible.fact}</p>
         </div>
       )}
 

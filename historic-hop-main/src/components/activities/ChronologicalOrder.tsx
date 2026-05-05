@@ -48,8 +48,7 @@ const ChronologicalOrder = ({ activity, onComplete }: Props) => {
     });
     setIsCorrect(correct);
     setChecked(true);
-    if (correct) playCorrectSound();
-    else playWrongSound();
+    onComplete(correct);
   };
 
   const correctOrder = [...activity.events].sort((a, b) => a.year - b.year);
@@ -83,7 +82,7 @@ const ChronologicalOrder = ({ activity, onComplete }: Props) => {
 
             return (
               <div
-                key={item.text}
+                key={`${item.text}-${index}`}
                 draggable={!checked}
                 onDragStart={() => handleDragStart(index)}
                 onDragOver={(e) => e.preventDefault()}
@@ -93,7 +92,9 @@ const ChronologicalOrder = ({ activity, onComplete }: Props) => {
                 <span className="flex-shrink-0 w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-sm font-black text-white/60 border border-white/5">
                   {index + 1}
                 </span>
-                <span className="flex-1 text-sm md:text-base font-medium text-white/90">{item.text}</span>
+                <span className="flex-1 text-sm md:text-base font-medium text-white/90">
+                  {typeof item.text === 'string' ? item.text : (item.text as any).option || (item.text as any).text || String(item.text)}
+                </span>
                 {!checked && (
                   <div className="flex flex-col gap-1">
                     <button onClick={() => moveItem(index, -1)} className="text-white/30 hover:text-white transition-colors p-1" disabled={index === 0}>▲</button>
@@ -108,55 +109,14 @@ const ChronologicalOrder = ({ activity, onComplete }: Props) => {
           })}
         </div>
 
-        {/* Check / Feedback */}
-        {!checked ? (
+        {/* Check Button */}
+        {!checked && (
           <button 
             onClick={checkAnswer} 
-            className="w-full py-4 rounded-2xl bg-primary text-white font-black text-sm uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/20"
+            className="w-full h-16 rounded-2xl bg-primary text-white font-black text-lg uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/20"
           >
             Verificar Ordem
           </button>
-        ) : (
-          <div className="animate-fade-in-up space-y-4">
-            <div className={`flex items-start gap-4 p-5 rounded-[2rem] border-2 ${
-              isCorrect ? "bg-emerald-500/10 border-emerald-500/30" : "bg-red-500/10 border-red-500/30"
-            }`}>
-              {isCorrect ? (
-                <CheckCircle2 className="w-6 h-6 text-emerald-400 mt-0.5 flex-shrink-0" />
-              ) : (
-                <XCircle className="w-6 h-6 text-red-400 mt-0.5 flex-shrink-0" />
-              )}
-              <p className={`font-black text-lg ${isCorrect ? "text-emerald-400" : "text-red-400"}`}>
-                {isCorrect ? "Ordem correta! 🎉" : "Ordem incorreta! 😕"}
-              </p>
-            </div>
-
-            {!isCorrect && (
-              <div className="p-5 rounded-[2rem] bg-blue-500/5 border border-blue-500/20">
-                <p className="text-[10px] font-black text-blue-400 uppercase tracking-[0.2em] mb-3">Sequência Histórica:</p>
-                <div className="space-y-2">
-                  {correctOrder.map((e, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <span className="text-[10px] font-black text-blue-400/50">{i + 1}.</span>
-                      <p className="text-sm text-blue-100 font-medium">{e.text} <span className="text-blue-400/60 font-black ml-1">({e.year})</span></p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div className="flex items-start gap-4 p-5 rounded-[2rem] bg-purple-500/5 border border-purple-500/20">
-              <Lightbulb className="w-6 h-6 text-purple-400 mt-0.5 flex-shrink-0" />
-              <p className="text-sm text-purple-100/80 leading-relaxed italic">{activity.explanation}</p>
-            </div>
-
-            <button 
-              onClick={() => onComplete(isCorrect)} 
-              className="w-full py-4 rounded-2xl bg-white text-black font-black text-sm uppercase tracking-widest hover:scale-105 active:scale-95 transition-all"
-            >
-              Próximo Desafio →
-            </button>
-          </div>
         )}
       </div>
     </div>

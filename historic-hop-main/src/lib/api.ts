@@ -167,6 +167,18 @@ export const curriculumApi = {
       method: "POST",
       token,
     }),
+
+  clearAll: (token: string) =>
+    apiCall<{ success: boolean; message: string }>("/curriculum/admin/clear-all", {
+      method: "POST",
+      token,
+    }),
+
+  seedStandard: (token: string) =>
+    apiCall<{ success: boolean; message: string }>("/curriculum/admin/seed-standard", {
+      method: "POST",
+      token,
+    }),
 };
 
 // Streaks API
@@ -385,4 +397,8 @@ export const api = {
   periods: historicalPeriodsApi,
   curriculum: curriculumApi,
   pacman: pacmanApi,
+  admin: {
+    getStats: (token: string) => apiCall<{ totalUsers: number; totalActivities: number; avgAccuracy: number }>("/admin/stats", { token }),
+    getActivities: (token: string) => apiCall<any[]>("/admin/activities", { token }),
+  }
 };

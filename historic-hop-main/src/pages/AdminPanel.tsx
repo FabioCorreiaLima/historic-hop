@@ -1,640 +1,443 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAdmin } from "@/hooks/useAdmin";
-import { ArrowLeft, Plus, Pencil, Trash2, Save, X, Search, Filter, Image, Video, Volume2, Map as MapIcon, Database, MessageSquare, Sparkles, Loader2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { api } from "@/lib/api";
+import { 
+  LayoutDashboard, 
+  History, 
+  Gamepad2, 
+  Users, 
+  BarChart3, 
+  Plus, 
+  Sparkles, 
+  Trash2, 
+  Database, 
+  Loader2,
+  Edit,
+  MoreVertical,
+  CheckCircle2,
+  AlertCircle,
+  TrendingUp,
+  FileText,
+  Filter,
+  Download,
+  Search
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { AdminLayout } from "@/components/layout/AdminLayout";
+import { StatCard } from "@/components/ui/StatCard";
+import { DataTable } from "@/components/ui/DataTable";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { 
+  BarChart, 
+  Bar, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer, 
+  AreaChart, 
+  Area,
+  PieChart,
+  Pie,
+  Cell
+} from 'recharts';
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogFooter,
+  DialogDescription
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 
-import { type HistoricalPeriod as Period, type Activity } from "@/types";
-
-// Adapt Question interface to match the existing one based on Activity
 interface Question {
   id: string;
+  type: string;
+  content: any;
+  period: string;
   level: number;
   difficulty: string;
-  topic: string;
-  question: string;
-  options: string[];
-  correct_index: number;
-  explanation: string;
-  media_type: string;
-  image_url: string | null;
-  audio_url: string | null;
-  video_url: string | null;
 }
 
-const emptyQuestion: Omit<Question, "id"> = {
-  level: 1,
-  difficulty: "Fácil",
-  topic: "",
-  question: "",
-  options: ["", "", "", ""],
-  correct_index: 0,
-  explanation: "",
-  media_type: "text",
-  image_url: null,
-  audio_url: null,
-  video_url: null,
-};
+interface Period {
+  id: string;
+  name: string;
+  emoji: string;
+  years: string;
+  color: string;
+  description: string;
+  order_index: number;
+  characterName?: string;
+  characterEmoji?: string;
+}
 
-const emptyPeriod: Period = {
-  id: "",
-  name: "",
-  emoji: "📜",
-  years: "",
-  color: "text-primary",
-  bgColor: "bg-primary/5",
-  borderColor: "border-primary/20",
-  description: "",
-  characterName: "",
-  characterEmoji: "👤",
-};
-
-const difficulties = ["Fácil", "Médio", "Avançado", "Expert"];
-const mediaTypes = [
-  { value: "text", label: "Apenas Texto", icon: null },
-  { value: "image", label: "Com Imagem", icon: Image },
-  { value: "audio", label: "Com Áudio", icon: Volume2 },
-  { value: "video", label: "Com Vídeo", icon: Video },
-];
+const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
 
 const AdminPanel = () => {
   const navigate = useNavigate();
-  const { user, session } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { session } = useAuth();
   const { isAdmin, loading: adminLoading } = useAdmin();
   
-  const [activeTab, setActiveTab] = useState<"questions" | "periods">("questions");
+  const activeTab = searchParams.get("tab") || "dashboard";
   
-  // Questions State
+  // State
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [editingQuestion, setEditingQuestion] = useState<Omit<Question, "id"> & { id?: string } | null>(null);
-  
-  // Periods State
   const [periods, setPeriods] = useState<Period[]>([]);
-  const [editingPeriod, setEditingPeriod] = useState<Period | null>(null);
-  
+  const [statsData, setStatsData] = useState({ totalUsers: 0, totalActivities: 0, avgAccuracy: 0 });
   const [loading, setLoading] = useState(true);
-  const [filterLevel, setFilterLevel] = useState<number | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [generatingBNCC, setGeneratingBNCC] = useState(false);
+  
+  // Modals state
+  const [editingPeriod, setEditingPeriod] = useState<Period | null>(null);
+  const [editingQuestion, setEditingQuestion] = useState<any | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
-  const fetchQuestions = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     if (!session?.access_token) return;
     setLoading(true);
     try {
-      const data = await api.questions.getQuestions(session.access_token, filterLevel || undefined);
-      setQuestions(data as Question[]);
+      const [activitiesData, periodsData, realStats] = await Promise.all([
+        api.admin.getActivities(session.access_token),
+        api.periods.getAll(),
+        api.admin.getStats(session.access_token)
+      ]);
+      setQuestions(activitiesData as Question[]);
+      setPeriods(periodsData);
+      setStatsData(realStats);
     } catch (err: any) {
-      setError(err.message || "Erro ao carregar perguntas");
+      toast.error("Erro ao carregar dados do painel");
+      setError(err.message);
     }
     setLoading(false);
-  }, [session, filterLevel]);
-
-  const fetchPeriods = useCallback(async () => {
-    setLoading(true);
-    try {
-      const data = await api.periods.getAll();
-      setPeriods(data);
-    } catch (err: any) {
-      setError(err.message || "Erro ao carregar períodos");
-    }
-    setLoading(false);
-  }, []);
+  }, [session]);
 
   useEffect(() => {
     if (isAdmin && session) {
-      if (activeTab === "questions") fetchQuestions();
-      else fetchPeriods();
+      fetchData();
     }
-  }, [isAdmin, session, activeTab, fetchQuestions, fetchPeriods]);
+  }, [isAdmin, session, fetchData]);
 
-  const handleSaveQuestion = async () => {
-    if (!editingQuestion || !session?.access_token) return;
-    setSaving(true);
-    setError("");
-    setSuccess("");
+  // Dashboard Stats
+  const stats = useMemo(() => {
+    return [
+      { title: "Total de Períodos", value: periods.length, icon: History, color: "text-blue-500", trend: { value: 12, isPositive: true } },
+      { title: "Atividades Ativas", value: statsData.totalActivities, icon: Gamepad2, color: "text-emerald-500", trend: { value: 5, isPositive: true } },
+      { title: "Usuários Ativos", value: statsData.totalUsers, icon: Users, color: "text-amber-500", trend: { value: 8, isPositive: true } },
+      { title: "Taxa de Acertos", value: `${statsData.avgAccuracy}%`, icon: TrendingUp, color: "text-purple-500", trend: { value: 2, isPositive: false } },
+    ];
+  }, [periods, statsData]);
 
-    try {
-      if (editingQuestion.id) {
-        await api.questions.updateQuestion(session.access_token, editingQuestion.id, editingQuestion);
-        setSuccess("Pergunta atualizada!");
-      } else {
-        await api.questions.createQuestion(session.access_token, editingQuestion);
-        setSuccess("Pergunta criada!");
-      }
-      setEditingQuestion(null);
-      fetchQuestions();
-    } catch (err: any) {
-      setError(err.message || "Erro ao salvar");
-    }
-    setSaving(false);
-  };
+  // Chart Data
+  const chartData = useMemo(() => {
+    return periods.map(p => ({
+      name: p.name,
+      atividades: questions.filter(q => q.period === p.id).length
+    })).slice(0, 8);
+  }, [periods, questions]);
 
+  const userGrowthData = [
+    { name: '01/05', users: 12 },
+    { name: '05/05', users: 18 },
+    { name: '10/05', users: 25 },
+    { name: '15/05', users: 32 },
+    { name: '20/05', users: 38 },
+    { name: '25/05', users: 42 },
+  ];
+
+  // Handlers
   const handleGenerateBNCC = async () => {
-    if (!confirm("Isso irá apagar a trilha atual e gerar a Base Nacional Comum Curricular (História do Brasil) completa via IA. Esse processo pode demorar até 1 minuto. Deseja continuar?")) return;
-    if (!session?.access_token) return;
-
+    if (!confirm("Isso irá apagar a trilha atual e gerar a Base Nacional Comum Curricular via IA. Deseja continuar?")) return;
     setGeneratingBNCC(true);
-    setError("");
-    setSuccess("");
-
     try {
-      const response = await api.curriculum.generateFullCurriculum(session.access_token);
-      setSuccess(`Currículo gerado! ${response.result?.count || ''} períodos criados.`);
-      fetchPeriods();
+      await api.curriculum.generateFullCurriculum(session!.access_token);
+      toast.success("Currículo BNCC gerado com sucesso!");
+      fetchData();
     } catch (err: any) {
-      setError(err.message || "Erro ao gerar currículo BNCC");
+      toast.error("Erro ao gerar currículo");
     }
     setGeneratingBNCC(false);
   };
 
+  const handleClearAll = async () => {
+    if (!confirm("Deseja apagar TUDO? Essa ação é irreversível.")) return;
+    try {
+      await api.curriculum.clearAll(session!.access_token);
+      toast.success("Banco de dados limpo!");
+      fetchData();
+    } catch (err) {
+      toast.error("Erro ao limpar banco");
+    }
+  };
+
   const handleSavePeriod = async () => {
     if (!editingPeriod) return;
-    setSaving(true);
-    setError("");
-    setSuccess("");
-
+    setIsSaving(true);
     try {
       await api.periods.save(editingPeriod);
-      setSuccess("Período histórico salvo!");
+      toast.success("Período salvo com sucesso!");
       setEditingPeriod(null);
-      fetchPeriods();
-    } catch (err: any) {
-      setError(err.message || "Erro ao salvar período");
+      fetchData();
+    } catch (err) {
+      toast.error("Erro ao salvar período");
     }
-    setSaving(false);
+    setIsSaving(false);
   };
 
-  const handleDeleteQuestion = async (id: string) => {
-    if (!confirm("Tem certeza que deseja excluir esta pergunta?")) return;
-    if (!session?.access_token) return;
-
-    try {
-      await api.questions.deleteQuestion(session.access_token, id);
-      setSuccess("Pergunta excluída!");
-      fetchQuestions();
-    } catch (err: any) {
-      setError(err.message || "Erro ao excluir");
-    }
-  };
-
-  if (adminLoading) {
-    return (
-      <div className="game-bg flex items-center justify-center">
-        <div className="glass rounded-2xl px-8 py-6 animate-pulse">
-          <p className="text-lg text-muted-foreground">Verificando permissões...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!user || !isAdmin) {
-    return (
-      <div className="game-bg flex items-center justify-center">
-        <div className="glass rounded-2xl px-8 py-6 text-center">
-          <p className="text-lg text-foreground mb-4">Acesso negado.</p>
-          <button onClick={() => navigate("/")} className="text-primary hover:underline">
-            Voltar ao início
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  const filteredQuestions = questions.filter(q =>
-    q.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    q.topic.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const filteredPeriods = periods.filter(p =>
-    p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    p.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  if (adminLoading) return <div className="h-screen w-full flex items-center justify-center"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
+  if (!isAdmin) return <div className="h-screen w-full flex items-center justify-center text-rose-500 font-bold uppercase tracking-widest">Acesso Negado</div>;
 
   return (
-    <div className="game-bg min-h-screen pb-20 selection:bg-primary/30">
-      <div className="max-w-6xl mx-auto px-4 py-6 md:py-10">
-        {/* Header Responsivo */}
-        <div className="flex flex-col gap-6 mb-10">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
-              <button 
-                onClick={() => navigate("/")} 
-                className="group p-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all active:scale-90"
-                title="Voltar ao Início"
-              >
-                <ArrowLeft className="w-5 h-5 text-white/70 group-hover:text-white" />
-              </button>
-              <div>
-                <h1 className="text-3xl font-black text-white tracking-tighter">Painel Admin</h1>
-                <p className="text-xs font-bold text-primary uppercase tracking-widest">Gestão de Conteúdo</p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3">
-              {activeTab === "questions" ? (
-                <button
-                  onClick={() => setEditingQuestion({ ...emptyQuestion })}
-                  className="duo-btn duo-btn-primary flex items-center justify-center gap-2 px-6 py-3 w-full sm:w-auto"
-                >
-                  <Plus className="w-4 h-4" /> Nova Pergunta
-                </button>
-              ) : (
-                <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
-                  <button
-                    onClick={handleGenerateBNCC}
-                    disabled={generatingBNCC}
-                    className="duo-btn duo-btn-secondary flex items-center justify-center gap-2 border-emerald-500/50 hover:bg-emerald-500/10 text-emerald-400 disabled:opacity-50 w-full sm:w-auto"
-                  >
-                    {generatingBNCC ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
-                    {generatingBNCC ? "Gerando IA..." : "Gerar BNCC"}
-                  </button>
-                  <button
-                    onClick={() => setEditingPeriod({ ...emptyPeriod })}
-                    className="duo-btn duo-btn-primary flex items-center justify-center gap-2 px-6 py-3 w-full sm:w-auto"
-                  >
-                    <Plus className="w-4 h-4" /> Novo Período
-                  </button>
-                </div>
-              )}
-            </div>
+    <AdminLayout>
+      <div className="space-y-8">
+        {/* Page Header */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h2 className="text-3xl font-black tracking-tight capitalize">{activeTab === 'dashboard' ? 'Visão Geral' : activeTab}</h2>
+            <p className="text-muted-foreground text-sm font-medium mt-1">Gerencie o currículo e acompanhe o progresso da plataforma.</p>
           </div>
-          
-          {/* Tabs Responsivas */}
-          <div className="flex bg-slate-900/50 p-1.5 rounded-2xl border border-white/10 w-full sm:w-fit">
-            <button
-              onClick={() => { setActiveTab("questions"); setSearchTerm(""); }}
-              className={`flex-1 sm:flex-none flex items-center justify-center gap-3 px-6 py-3 rounded-xl text-sm font-black transition-all ${activeTab === "questions" ? "bg-white text-slate-950 shadow-xl" : "text-white/50 hover:text-white"}`}
-            >
-              <Database className="w-4 h-4" /> Perguntas
-            </button>
-            <button
-              onClick={() => { setActiveTab("periods"); setSearchTerm(""); }}
-              className={`flex-1 sm:flex-none flex items-center justify-center gap-3 px-6 py-3 rounded-xl text-sm font-black transition-all ${activeTab === "periods" ? "bg-white text-slate-950 shadow-xl" : "text-white/50 hover:text-white"}`}
-            >
-              <MapIcon className="w-4 h-4" /> Mapa e Períodos
-            </button>
+          <div className="flex items-center gap-3">
+            <Button variant="outline" size="sm" onClick={fetchData} className="rounded-xl border-border/50">
+              <Loader2 className={cn("w-4 h-4 mr-2", loading && "animate-spin")} /> Atualizar
+            </Button>
+            <Button size="sm" className="rounded-xl shadow-lg shadow-primary/20" onClick={() => setEditingPeriod({} as any)}>
+              <Plus className="w-4 h-4 mr-2" /> Novo Período
+            </Button>
           </div>
         </div>
 
-        {/* Messages */}
-        {error && <div className="mb-4 p-3 rounded-xl bg-destructive/10 border border-destructive/30 text-destructive text-sm">{error}</div>}
-        {success && <div className="mb-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 text-sm font-medium">{success}</div>}
+        {/* Dashboard Content */}
+        {activeTab === "dashboard" && (
+          <div className="space-y-8 animate-fade-in-up">
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {stats.map((stat, i) => (
+                <StatCard key={i} {...stat} />
+              ))}
+            </div>
 
-        {/* PERIODS TAB CONTENT */}
-        {activeTab === "periods" && (
-          <div className="animate-fade-in space-y-6">
-            {editingPeriod && (
-              <div className="glass-strong rounded-3xl p-6 md:p-10 mb-10 border-white/20 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] -z-10 rounded-full" />
-                
-                <div className="flex items-center gap-4 mb-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center text-3xl shadow-inner">
-                    {editingPeriod.emoji}
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-black text-white">
-                      {editingPeriod.id ? `Editar: ${editingPeriod.name}` : "Novo Período"}
-                    </h3>
-                    <p className="text-xs font-bold text-white/40 uppercase tracking-widest">Configurações da Linha do Tempo</p>
-                  </div>
+            {/* Charts Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="p-6 rounded-2xl border border-border/50 bg-card">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="font-bold text-sm uppercase tracking-widest flex items-center gap-2">
+                    <BarChart3 className="w-4 h-4 text-primary" /> Atividades por Período
+                  </h3>
+                  <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-lg"><Download className="w-4 h-4" /></Button>
                 </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-10">
-                  {/* Seção 1 */}
-                  <div className="space-y-6">
-                    <h4 className="text-sm font-black text-primary uppercase flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-lg bg-primary/20 flex items-center justify-center"><MapIcon className="w-3 h-3" /></div>
-                      Essenciais
-                    </h4>
-                    <div className="space-y-4">
-                      <div>
-                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">ID Único (Slug)</label>
-                        <input
-                          type="text"
-                          value={editingPeriod.id || ""}
-                          onChange={e => setEditingPeriod({ ...editingPeriod, id: e.target.value.toLowerCase().replace(/\s+/g, '_') })}
-                          placeholder="ex: era_vargas"
-                          disabled={!!editingPeriod.id && periods.some(p => p.id === editingPeriod.id)}
-                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none font-medium"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Nome do Período</label>
-                        <input
-                          type="text"
-                          value={editingPeriod.name || ""}
-                          onChange={e => setEditingPeriod({ ...editingPeriod, name: e.target.value })}
-                          placeholder="ex: Era Vargas"
-                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white focus:border-primary transition-all outline-none font-medium"
-                        />
-                      </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Emoji</label>
-                          <input
-                            type="text"
-                            value={editingPeriod.emoji || ""}
-                            onChange={e => setEditingPeriod({ ...editingPeriod, emoji: e.target.value })}
-                            className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white text-center text-2xl"
-                          />
-                        </div>
-                        <div>
-                          <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Anos</label>
-                          <input
-                            type="text"
-                            value={editingPeriod.years || ""}
-                            onChange={e => setEditingPeriod({ ...editingPeriod, years: e.target.value })}
-                            placeholder="1930-1945"
-                            className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Seção 2 */}
-                  <div className="space-y-6">
-                    <h4 className="text-sm font-black text-amber-400 uppercase flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-lg bg-amber-400/20 flex items-center justify-center"><MessageSquare className="w-3 h-3" /></div>
-                      Pedagógico & Chat
-                    </h4>
-                    <div className="space-y-4">
-                      <div>
-                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Nome do Personagem</label>
-                        <input
-                          type="text"
-                          value={editingPeriod.characterName || ""}
-                          onChange={e => setEditingPeriod({ ...editingPeriod, characterName: e.target.value })}
-                          placeholder="ex: Getúlio"
-                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Emoji do Personagem</label>
-                        <input
-                          type="text"
-                          value={editingPeriod.characterEmoji || ""}
-                          onChange={e => setEditingPeriod({ ...editingPeriod, characterEmoji: e.target.value })}
-                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white text-center text-2xl"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Descrição (Contexto IA)</label>
-                        <textarea
-                          value={editingPeriod.description || ""}
-                          onChange={e => setEditingPeriod({ ...editingPeriod, description: e.target.value })}
-                          rows={3}
-                          placeholder="Fatos chaves para a IA usar no chat e perguntas..."
-                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white resize-none text-sm font-medium leading-relaxed"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Seção 3 */}
-                  <div className="space-y-6">
-                    <h4 className="text-sm font-black text-emerald-400 uppercase flex items-center gap-3">
-                      <div className="w-6 h-6 rounded-lg bg-emerald-400/20 flex items-center justify-center"><Sparkles className="w-3 h-3" /></div>
-                      Aparência & Mapa
-                    </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Ordem (Índice)</label>
-                        <input
-                          type="number"
-                          value={editingPeriod.order_index || 0}
-                          onChange={e => setEditingPeriod({ ...editingPeriod, order_index: parseInt(e.target.value) || 0 })}
-                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Cor Texto</label>
-                        <input
-                          type="text"
-                          value={editingPeriod.color || ""}
-                          onChange={e => setEditingPeriod({ ...editingPeriod, color: e.target.value })}
-                          placeholder="text-blue-500"
-                          className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">URL da Imagem</label>
-                      <input
-                        type="text"
-                        value={editingPeriod.image_url || ''}
-                        onChange={e => setEditingPeriod({ ...editingPeriod, image_url: e.target.value })}
-                        placeholder="https://..."
-                        className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium"
+                <div className="h-[300px] w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={chartData}>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border) / 0.3)" />
+                      <XAxis dataKey="name" fontSize={10} axisLine={false} tickLine={false} />
+                      <YAxis fontSize={10} axisLine={false} tickLine={false} />
+                      <Tooltip 
+                        contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
+                        cursor={{ fill: 'hsl(var(--secondary) / 0.4)' }}
                       />
-                    </div>
-                    <div className="p-4 rounded-2xl bg-white/5 border border-dashed border-white/10 flex items-center justify-center">
-                       {editingPeriod.image_url ? (
-                         <img src={editingPeriod.image_url} alt="Preview" className="h-20 w-full object-cover rounded-lg" />
-                       ) : (
-                         <div className="text-[10px] font-bold text-white/20">Sem preview de imagem</div>
-                       )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-white/10">
-                  <button
-                    onClick={handleSavePeriod}
-                    disabled={saving || !editingPeriod.id || !editingPeriod.name}
-                    className="duo-btn duo-btn-primary px-10 py-4 flex items-center justify-center gap-3 disabled:opacity-50 text-base"
-                  >
-                    <Save className="w-5 h-5" /> {saving ? "Salvando..." : "Salvar Período"}
-                  </button>
-                  <button
-                    onClick={() => setEditingPeriod(null)}
-                    className="duo-btn duo-btn-secondary px-8 py-4 flex items-center justify-center gap-3 text-base"
-                  >
-                    <X className="w-5 h-5" /> Cancelar
-                  </button>
+                      <Bar dataKey="atividades" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} barSize={30} />
+                    </BarChart>
+                  </ResponsiveContainer>
                 </div>
               </div>
-            )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {periods.map(p => (
-                <div key={p.id} className="bg-slate-900/40 border border-white/10 rounded-3xl p-5 flex items-center gap-5 hover:bg-slate-900/60 hover:border-white/20 transition-all group relative overflow-hidden">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0 border border-white/5 bg-white/5 shadow-inner`}>
-                    {p.emoji}
-                  </div>
-                  <div className="flex-1 min-w-0 pr-10">
-                    <h3 className="font-black text-white mb-0.5 truncate tracking-tight">{p.name}</h3>
-                    <p className="text-[10px] text-primary font-black uppercase tracking-widest">{p.years}</p>
-                    <div className="mt-2 flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center text-[8px]">{p.characterEmoji}</div>
-                      <span className="text-[10px] font-bold text-white/40 truncate">{p.characterName}</span>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setEditingPeriod(p)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-white/5 text-white/50 hover:bg-white hover:text-slate-950 transition-all opacity-0 group-hover:opacity-100 shadow-xl"
-                  >
-                    <Pencil className="w-4 h-4" />
-                  </button>
+              <div className="p-6 rounded-2xl border border-border/50 bg-card">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="font-bold text-sm uppercase tracking-widest flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4 text-emerald-500" /> Crescimento de Usuários
+                  </h3>
                 </div>
-              ))}
+                <div className="h-[300px] w-full">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={userGrowthData}>
+                      <defs>
+                        <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
+                          <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="hsl(var(--border) / 0.3)" />
+                      <XAxis dataKey="name" fontSize={10} axisLine={false} tickLine={false} />
+                      <YAxis fontSize={10} axisLine={false} tickLine={false} />
+                      <Tooltip />
+                      <Area type="monotone" dataKey="users" stroke="hsl(var(--primary))" fillOpacity={1} fill="url(#colorUsers)" strokeWidth={3} />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Actions Card */}
+            <div className="p-8 rounded-[2rem] bg-secondary/20 border border-dashed border-border/50 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-6 text-center md:text-left">
+                <div className="w-16 h-16 rounded-3xl bg-amber-500/10 flex items-center justify-center text-amber-500 border border-amber-500/20">
+                  <Sparkles className="w-8 h-8" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-black tracking-tight">Geração em Lote com IA</h4>
+                  <p className="text-muted-foreground text-sm font-medium">Automatize a criação de atividades para todos os períodos da BNCC.</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 w-full md:w-auto">
+                <Button onClick={handleGenerateBNCC} disabled={generatingBNCC} className="flex-1 md:flex-none duo-btn duo-btn-primary shadow-amber-500/20 border-amber-600 bg-amber-500 hover:bg-amber-600">
+                  {generatingBNCC ? <Loader2 className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4 mr-2" />}
+                  Gerar BNCC Full
+                </Button>
+                <Button variant="outline" onClick={handleClearAll} className="flex-1 md:flex-none h-12 rounded-2xl border-rose-500/30 text-rose-500 hover:bg-rose-500/10">
+                  <Trash2 className="w-4 h-4 mr-2" /> Reset DB
+                </Button>
+              </div>
             </div>
           </div>
         )}
 
-        {/* QUESTIONS TAB CONTENT */}
-        {activeTab === "questions" && (
-          <div className="animate-fade-in space-y-6">
-            {editingQuestion && (
-              <div className="glass-strong rounded-3xl p-6 md:p-10 border-white/20 shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] -z-10 rounded-full" />
-                
-                <h3 className="text-2xl font-black text-white mb-8">
-                  {editingQuestion.id ? "Editar Pergunta" : "Nova Pergunta"}
-                </h3>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                  <div>
-                    <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Nível (Fase)</label>
-                    <input
-                      type="number"
-                      min={1}
-                      max={20}
-                      value={editingQuestion.level}
-                      onChange={e => setEditingQuestion({ ...editingQuestion, level: parseInt(e.target.value) || 1 })}
-                      className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium outline-none focus:border-primary transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Dificuldade</label>
-                    <select
-                      value={editingQuestion.difficulty}
-                      onChange={e => setEditingQuestion({ ...editingQuestion, difficulty: e.target.value })}
-                      className="w-full px-5 py-3 rounded-2xl bg-slate-900 border border-white/10 text-white font-medium outline-none focus:border-primary transition-all appearance-none"
-                    >
-                      {difficulties.map(d => <option key={d} value={d} className="bg-slate-900">{d}</option>)}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Tópico / Assunto</label>
-                    <input
-                      type="text"
-                      value={editingQuestion.topic || ""}
-                      onChange={e => setEditingQuestion({ ...editingQuestion, topic: e.target.value })}
-                      placeholder="Ex: Revolução Industrial"
-                      className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white font-medium outline-none focus:border-primary transition-all"
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-8">
-                  <label className="text-[10px] font-black text-white/40 uppercase tracking-wider mb-1.5 block">Texto da Pergunta</label>
-                  <textarea
-                    value={editingQuestion.question || ""}
-                    onChange={e => setEditingQuestion({ ...editingQuestion, question: e.target.value })}
-                    rows={3}
-                    placeholder="Escreva a pergunta aqui..."
-                    className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 text-white resize-none font-medium leading-relaxed outline-none focus:border-primary transition-all"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-                  {editingQuestion.options.map((opt, i) => (
-                    <div key={i} className={`flex items-center gap-3 p-2 rounded-2xl border transition-all ${editingQuestion.correct_index === i ? 'bg-emerald-500/10 border-emerald-500/50' : 'bg-white/5 border-white/10'}`}>
-                      <button
-                        type="button"
-                        onClick={() => setEditingQuestion({ ...editingQuestion, correct_index: i })}
-                        className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm transition-all ${editingQuestion.correct_index === i ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/30" : "bg-white/10 text-white/40 hover:bg-white/20"}`}
-                      >
-                        {String.fromCharCode(65 + i)}
-                      </button>
-                      <input
-                        type="text"
-                        value={opt || ""}
-                        onChange={e => {
-                          const newOpts = [...editingQuestion.options];
-                          newOpts[i] = e.target.value;
-                          setEditingQuestion({ ...editingQuestion, options: newOpts });
-                        }}
-                        placeholder={`Opção ${String.fromCharCode(65 + i)}`}
-                        className="flex-1 bg-transparent border-none text-white font-medium focus:ring-0 outline-none"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-white/10">
-                  <button
-                    onClick={handleSaveQuestion}
-                    disabled={saving || !editingQuestion.question.trim()}
-                    className="duo-btn duo-btn-primary px-10 py-4 flex items-center justify-center gap-3 disabled:opacity-50 text-base"
-                  >
-                    <Save className="w-5 h-5" /> {saving ? "Salvando..." : "Salvar Pergunta"}
-                  </button>
-                  <button
-                    onClick={() => setEditingQuestion(null)}
-                    className="duo-btn duo-btn-secondary px-8 py-4 flex items-center justify-center gap-3 text-base"
-                  >
-                    <X className="w-5 h-5" /> Cancelar
-                  </button>
-                </div>
-              </div>
-            )}
-
-            <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <div className="relative flex-1">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" />
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={e => setSearchTerm(e.target.value)}
-                  placeholder="Buscar perguntas, tópicos ou períodos..."
-                  className="w-full pl-12 pr-6 py-4 rounded-2xl bg-slate-900/50 border border-white/10 text-white font-medium focus:border-primary transition-all outline-none"
-                />
-              </div>
-            </div>
-
-            {loading ? (
-              <div className="text-center py-24">
-                <Loader2 className="w-12 h-12 animate-spin mx-auto text-primary opacity-20" />
-                <p className="mt-4 text-white/20 font-bold uppercase tracking-widest text-xs">Carregando Acervo...</p>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {filteredQuestions.map(q => (
-                  <div key={q.id} className="bg-slate-900/40 border border-white/10 rounded-3xl p-5 md:p-6 flex items-center gap-6 hover:bg-slate-900/60 transition-all group relative overflow-hidden">
-                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/5 flex flex-col items-center justify-center flex-shrink-0 shadow-inner">
-                      <span className="text-[10px] font-black text-white/30 uppercase leading-none mb-1">Nível</span>
-                      <span className="text-xl font-black text-white leading-none">{q.level}</span>
-                    </div>
-                    <div className="flex-1 min-w-0 pr-12">
-                      <p className="font-bold text-white mb-1.5 leading-tight group-hover:text-primary transition-colors">{q.question}</p>
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                        <span className="text-[10px] font-black text-primary uppercase tracking-widest">{q.topic}</span>
-                        <span className="text-[10px] font-black text-white/30 uppercase tracking-widest">• {q.difficulty}</span>
+        {/* Periods Tab */}
+        {activeTab === "periods" && (
+          <div className="animate-fade-in-up">
+            <DataTable 
+              isLoading={loading}
+              columns={[
+                { 
+                  header: "Período", 
+                  cell: (p) => (
+                    <div className="flex items-center gap-4">
+                      <div className="text-2xl w-12 h-12 rounded-xl bg-secondary/50 flex items-center justify-center border border-border/50">{p.emoji}</div>
+                      <div>
+                        <p className="font-black tracking-tight">{p.name}</p>
+                        <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">{p.years}</p>
                       </div>
                     </div>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2 opacity-0 group-hover:opacity-100 transition-all scale-90 group-hover:scale-100">
-                      <button onClick={() => setEditingQuestion(q)} className="p-3 rounded-xl bg-white/5 text-white/50 hover:bg-white hover:text-slate-950 transition-all shadow-xl"><Pencil className="w-4 h-4" /></button>
-                      <button onClick={() => handleDeleteQuestion(q.id)} className="p-3 rounded-xl bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-xl"><Trash2 className="w-4 h-4" /></button>
+                  )
+                },
+                { 
+                  header: "Status", 
+                  cell: () => <Badge variant="secondary" className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20 font-black uppercase text-[9px] tracking-widest px-3 py-1">Ativo</Badge>
+                },
+                { header: "Índice", accessorKey: "order_index", className: "text-center w-24" },
+                { 
+                  header: "Ações", 
+                  className: "text-right",
+                  cell: (p) => (
+                    <div className="flex items-center justify-end gap-2">
+                      <Button variant="ghost" size="icon" onClick={() => setEditingPeriod(p)} className="rounded-xl hover:bg-secondary"><Edit className="w-4 h-4" /></Button>
+                      <Button variant="ghost" size="icon" className="rounded-xl hover:bg-rose-500/10 text-rose-500"><Trash2 className="w-4 h-4" /></Button>
                     </div>
-                  </div>
-                ))}
-                {filteredQuestions.length === 0 && (
-                  <div className="text-center py-20 bg-white/5 rounded-3xl border border-dashed border-white/10">
-                    <p className="text-white/20 font-bold uppercase tracking-widest text-sm">Nenhuma pergunta encontrada</p>
-                  </div>
-                )}
+                  )
+                }
+              ]}
+              data={periods}
+            />
+          </div>
+        )}
+
+        {/* Questions Tab */}
+        {activeTab === "questions" && (
+          <div className="animate-fade-in-up space-y-6">
+            <div className="flex items-center gap-4">
+               <div className="relative flex-1">
+                  <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                  <Input placeholder="Filtrar por pergunta ou período..." className="pl-12 rounded-2xl border-border/50 h-12" />
+               </div>
+               <Button variant="outline" className="rounded-2xl h-12 px-6 border-border/50"><Filter className="w-4 h-4 mr-2" /> Filtros</Button>
+            </div>
+
+            {questions.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-20 bg-secondary/10 border-2 border-dashed border-border/50 rounded-[2rem]">
+                <div className="w-16 h-16 rounded-2xl bg-secondary flex items-center justify-center text-muted-foreground mb-4">
+                  <Gamepad2 className="w-8 h-8" />
+                </div>
+                <h4 className="text-xl font-black tracking-tight">Sem Atividades Disponíveis</h4>
+                <p className="text-muted-foreground text-sm max-w-xs text-center mt-2 mb-8 font-medium">Use o botão de geração BNCC no Dashboard para criar automaticamente as atividades da plataforma.</p>
+                <Button variant="outline" onClick={() => setSearchParams({ tab: 'dashboard' })} className="rounded-xl border-border/50">Ir para o Dashboard</Button>
               </div>
+            ) : (
+              <DataTable 
+                isLoading={loading}
+                columns={[
+                  { header: "Tipo", cell: (q) => <Badge variant="outline" className="font-bold uppercase text-[9px] tracking-widest border-border/50">{q.type.replace('_', ' ')}</Badge> },
+                  { 
+                    header: "Conteúdo", 
+                    cell: (q) => <p className="truncate max-w-[400px] font-medium text-xs">{q.content?.question || q.content?.statement || q.content?.instruction || 'Atividade Variada'}</p> 
+                  },
+                  { header: "Período", accessorKey: "period", className: "text-muted-foreground font-bold text-[10px] uppercase" },
+                  { header: "Nível", accessorKey: "level", className: "text-center w-20" },
+                  { 
+                    header: "Ações", 
+                    className: "text-right",
+                    cell: (q) => (
+                      <div className="flex items-center justify-end gap-2">
+                        <Button variant="ghost" size="icon" className="rounded-xl hover:bg-secondary"><Edit className="w-4 h-4" /></Button>
+                        <Button variant="ghost" size="icon" className="rounded-xl hover:bg-rose-500/10 text-rose-500"><Trash2 className="w-4 h-4" /></Button>
+                      </div>
+                    )
+                  }
+                ]}
+                data={questions}
+              />
             )}
           </div>
         )}
       </div>
-    </div>
+
+      {/* Period Edit Modal */}
+      <Dialog open={!!editingPeriod} onOpenChange={(open) => !open && setEditingPeriod(null)}>
+        <DialogContent className="sm:max-w-[500px] rounded-[2rem] p-8">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-black tracking-tight">{editingPeriod?.id ? 'Editar Período' : 'Novo Período'}</DialogTitle>
+            <DialogDescription className="font-medium text-muted-foreground">Preencha os dados abaixo para {editingPeriod?.id ? 'atualizar o' : 'criar um novo'} período histórico.</DialogDescription>
+          </DialogHeader>
+          
+          <div className="grid gap-6 py-6">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label className="text-right font-bold text-xs uppercase tracking-widest">Nome</Label>
+              <Input 
+                value={editingPeriod?.name || ""} 
+                onChange={(e) => setEditingPeriod({ ...editingPeriod!, name: e.target.value })}
+                className="col-span-3 rounded-xl border-border/50" 
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label className="text-right font-bold text-xs uppercase tracking-widest">Emoji / Anos</Label>
+              <Input 
+                value={editingPeriod?.emoji || ""} 
+                onChange={(e) => setEditingPeriod({ ...editingPeriod!, emoji: e.target.value })}
+                placeholder="Emoji"
+                className="col-span-1 rounded-xl border-border/50 text-center" 
+              />
+              <Input 
+                value={editingPeriod?.years || ""} 
+                onChange={(e) => setEditingPeriod({ ...editingPeriod!, years: e.target.value })}
+                placeholder="Ex: 1500-1822"
+                className="col-span-2 rounded-xl border-border/50" 
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label className="text-right font-bold text-xs uppercase tracking-widest">Descrição</Label>
+              <Textarea 
+                value={editingPeriod?.description || ""} 
+                onChange={(e) => setEditingPeriod({ ...editingPeriod!, description: e.target.value })}
+                className="col-span-3 rounded-xl border-border/50 min-h-[100px]" 
+              />
+            </div>
+          </div>
+
+          <DialogFooter>
+            <Button variant="ghost" onClick={() => setEditingPeriod(null)} className="rounded-xl font-bold uppercase tracking-widest text-xs">Cancelar</Button>
+            <Button onClick={handleSavePeriod} disabled={isSaving} className="duo-btn duo-btn-primary px-8">
+              {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Salvar Período'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </AdminLayout>
   );
 };
 

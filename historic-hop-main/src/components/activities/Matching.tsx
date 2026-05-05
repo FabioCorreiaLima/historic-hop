@@ -8,72 +8,96 @@ interface Props {
 }
 
 const Matching = ({ activity, onComplete }: Props) => {
-  const [selectedLeft, setSelectedLeft] = useState<string | null>(null);
-  const [selectedRight, setSelectedRight] = useState<string | null>(null);
-  const [matches, setMatches] = useState<Record<string, string>>({});
+  const [selectedLeftIndex, setSelectedLeftIndex] = useState<number | null>(null);
+  const [selectedRightIndex, setSelectedRightIndex] = useState<number | null>(null);
+  const [matchedPairs, setMatchedPairs] = useState<Set<number>>(new Set()); // IDs dos pares originais resolvidos
+  const [matchedRightIndices, setMatchedRightIndices] = useState<Set<number>>(new Set()); // Índices da direita já usados
   const [showFeedback, setShowFeedback] = useState(false);
-  const [wrongPair, setWrongPair] = useState<[string, string] | null>(null);
+  const [wrongPairIndices, setWrongPairIndices] = useState<[number, number] | null>(null);
 
-  const leftItems = useMemo(() => activity.pairs?.map(p => p.left) ?? [], [activity.pairs]);
-  const rightItems = useMemo(() => [...(activity.pairs?.map(p => p.right) ?? [])].sort(() => Math.random() - 0.5), [activity.pairs]);
+  const normalize = (val: any): string => {
+    if (typeof val === 'string') return val;
+    if (val && typeof val === 'object') {
+      return val.option || val.blank || val.text || val.value || val.answer || 
+             Object.values(val).find(v => typeof v === 'string') || 
+             JSON.stringify(val);
+    }
+    return String(val);
+  };
+
+  // Prepara os itens com seus índices originais para não perder a referência
+  const leftItems = useMemo(() => 
+    activity.pairs?.map((p, idx) => ({ text: normalize(p.left), originalIndex: idx })) ?? [], 
+    [activity.pairs]
+  );
+
+  const rightItems = useMemo(() => {
+    const items = activity.pairs?.map((p, idx) => ({ text: normalize(p.right), originalIndex: idx })) ?? [];
+    return [...items].sort(() => Math.random() - 0.5);
+  }, [activity.pairs]);
 
   useEffect(() => {
-    if (selectedLeft && selectedRight) {
-      const pair = activity.pairs?.find(p => p.left === selectedLeft && p.right === selectedRight);
+    if (selectedLeftIndex !== null && selectedRightIndex !== null) {
+      // O par está correto se o texto da direita selecionado for igual ao texto esperado para o item da esquerda
+      const expectedRightText = normalize(activity.pairs[selectedLeftIndex].right);
+      const selectedRightText = normalize(activity.pairs[selectedRightIndex].right);
 
-      if (pair) {
-        setMatches(prev => ({ ...prev, [selectedLeft]: selectedRight }));
-        setSelectedLeft(null);
-        setSelectedRight(null);
+      if (expectedRightText === selectedRightText) {
+        // Encontramos um par válido por texto! 
+        // Vamos marcar o par original da esquerda como resolvido
+        setMatchedPairs(prev => new Set(prev).add(selectedLeftIndex));
+        
+        // E marcar o índice visual da direita como usado
+        const rightVisualIndex = rightItems.findIndex(item => 
+          item.originalIndex === selectedRightIndex && !matchedRightIndices.has(rightItems.indexOf(item))
+        );
+        // Nota: O findIndex acima é um pouco redundante pois já temos o visualIdx no loop, 
+        // mas aqui no useEffect precisamos encontrar qual botão da direita foi clicado.
+        
+        // Na verdade, o useEffect já sabe qual rightItem foi clicado via selectedRightIndex.
+        // Mas como podem haver vários com o mesmo originalIndex (não, originalIndex é único), 
+        // basta encontrar o índice visual dele.
+        const vIdx = rightItems.findIndex(ri => ri.originalIndex === selectedRightIndex);
+        setMatchedRightIndices(prev => new Set(prev).add(vIdx));
+        
+        setSelectedLeftIndex(null);
+        setSelectedRightIndex(null);
       } else {
-        setWrongPair([selectedLeft, selectedRight]);
+        setWrongPairIndices([selectedLeftIndex, selectedRightIndex]);
         setTimeout(() => {
-          setSelectedLeft(null);
-          setSelectedRight(null);
-          setWrongPair(null);
+          setSelectedLeftIndex(null);
+          setSelectedRightIndex(null);
+          setWrongPairIndices(null);
         }, 900);
       }
     }
-  }, [selectedLeft, selectedRight, activity.pairs]);
+  }, [selectedLeftIndex, selectedRightIndex, leftItems, rightItems]);
 
   useEffect(() => {
-    if (leftItems.length > 0 && Object.keys(matches).length === leftItems.length) {
-      setShowFeedback(true);
+    if (leftItems.length > 0 && matchedPairs.size === leftItems.length) {
+      onComplete(true);
     }
-  }, [matches, leftItems.length]);
+  }, [matchedPairs.size, leftItems.length, onComplete]);
 
-  const isWrong = wrongPair !== null;
+  const isWrong = wrongPairIndices !== null;
 
   return (
     <div className="p-6 md:p-8 animate-fade-in">
-      <h3 className="text-xl md:text-2xl font-black text-white mb-6 leading-tight">
-        {activity.instruction}
-      </h3>
-
-      {activity.imageUrl && (
-        <div className="mb-6 rounded-3xl overflow-hidden border border-white/10 shadow-2xl max-h-48">
-          <img
-            src={activity.imageUrl}
-            alt="Imagem da atividade"
-            className="w-full h-full object-cover"
-            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-          />
-        </div>
-      )}
-
+      {/* instruction and image removed as they are now in the parent QuizGame header/area */}
+      
       <div className="grid grid-cols-2 gap-3 md:gap-6 mb-8">
         {/* Coluna Esquerda */}
         <div className="flex flex-col gap-3">
           {leftItems.map((item) => {
-            const isMatched = !!matches[item];
-            const isSelected = selectedLeft === item;
-            const isError = wrongPair?.[0] === item;
+            const isMatched = matchedPairs.has(item.originalIndex);
+            const isSelected = selectedLeftIndex === item.originalIndex;
+            const isError = wrongPairIndices?.[0] === item.originalIndex;
 
             return (
               <button
-                key={item}
+                key={`left-${item.originalIndex}`}
                 disabled={isMatched || isWrong}
-                onClick={() => setSelectedLeft(item)}
+                onClick={() => setSelectedLeftIndex(item.originalIndex)}
                 className={`p-3 rounded-2xl border-2 text-sm font-bold transition-all text-left min-h-[70px] flex items-center justify-between gap-2
                   ${isMatched
                     ? "bg-emerald-500/20 border-emerald-500 text-emerald-400 opacity-60"
@@ -84,7 +108,7 @@ const Matching = ({ activity, onComplete }: Props) => {
                     : "bg-white/5 border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20"}
                 `}
               >
-                <span>{item}</span>
+                <span>{item.text}</span>
                 {isMatched && <Check className="w-4 h-4 shrink-0" />}
               </button>
             );
@@ -93,16 +117,16 @@ const Matching = ({ activity, onComplete }: Props) => {
 
         {/* Coluna Direita */}
         <div className="flex flex-col gap-3">
-          {rightItems.map((item) => {
-            const isMatched = Object.values(matches).includes(item);
-            const isSelected = selectedRight === item;
-            const isError = wrongPair?.[1] === item;
+          {rightItems.map((item, visualIdx) => {
+            const isMatched = matchedRightIndices.has(visualIdx);
+            const isSelected = selectedRightIndex === item.originalIndex;
+            const isError = wrongPairIndices?.[1] === item.originalIndex;
 
             return (
               <button
-                key={item}
+                key={`right-${visualIdx}`}
                 disabled={isMatched || isWrong}
-                onClick={() => setSelectedRight(item)}
+                onClick={() => setSelectedRightIndex(item.originalIndex)}
                 className={`p-3 rounded-2xl border-2 text-sm font-bold transition-all text-left min-h-[70px] flex items-center justify-between gap-2
                   ${isMatched
                     ? "bg-emerald-500/20 border-emerald-500 text-emerald-400 opacity-60"
@@ -113,37 +137,13 @@ const Matching = ({ activity, onComplete }: Props) => {
                     : "bg-white/5 border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20"}
                 `}
               >
-                <span>{item}</span>
+                <span>{item.text}</span>
                 {isMatched && <Check className="w-4 h-4 shrink-0" />}
               </button>
             );
           })}
         </div>
       </div>
-
-      {showFeedback && (
-        <div className="mt-4 animate-fade-in-up">
-          <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-3xl p-6 mb-5">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white">
-                <Check className="w-6 h-6" />
-              </div>
-              <h4 className="text-lg font-black text-emerald-400">Perfeito! Todas as associações corretas.</h4>
-            </div>
-            <div className="flex gap-3 text-emerald-400/80">
-              <Info className="w-5 h-5 shrink-0 mt-1" />
-              <p className="text-sm font-medium leading-relaxed">{activity.explanation}</p>
-            </div>
-          </div>
-
-          <button
-            onClick={() => onComplete(true)}
-            className="w-full py-5 rounded-[2rem] bg-emerald-500 text-white font-black text-lg hover:bg-emerald-600 transition-all shadow-[0_10px_30px_rgba(16,185,129,0.3)] active:scale-95"
-          >
-            CONTINUAR
-          </button>
-        </div>
-      )}
     </div>
   );
 };

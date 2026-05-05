@@ -279,7 +279,7 @@ const ActivityRunner = ({
               <TrueFalse activity={current} onComplete={handleActivityComplete} />
             )}
             {current?.type === "fill_blank" && (
-              <FillBlank activity={current} onComplete={handleActivityComplete} />
+              <FillBlank activity={current} onComplete={handleActivityComplete} onFactCollected={handleFactCollected} />
             )}
             {current?.type === "matching" && (
               <Matching activity={current} onComplete={handleActivityComplete} />

@@ -4,54 +4,72 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 20% 15%;
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 15%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 15%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 259 58% 56%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 199 89% 48%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 220 14% 92%;
-    --muted-foreground: 220 10% 46%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 30 95% 55%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 38 92% 50%; /* Gold/Amber */
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 72% 55%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-    --success: 152 69% 45%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222 47% 11%;
+
+    --radius: 0.75rem;
+
+    --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
 
-    --border: 220 13% 87%;
-    --input: 220 13% 87%;
-    --ring: 259 58% 56%;
+    --history-gold: 38 92% 50%;
+    --history-paper: 40 30% 96%;
+    --history-ink: 222 47% 11%;
+  }
 
-    --radius: 1rem;
+  .dark {
+    --background: 222 47% 4%;
+    --foreground: 210 40% 98%;
 
-    --duo-green: 152 69% 45%;
-    --duo-blue: 199 89% 48%;
-    --duo-purple: 259 58% 56%;
-    --duo-orange: 30 95% 55%;
-    --duo-red: 0 72% 55%;
-    --duo-yellow: 45 100% 51%;
+    --card: 222 47% 6%;
+    --card-foreground: 210 40% 98%;
 
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 220 20% 15%;
-    --sidebar-primary: 259 58% 56%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 14% 92%;
-    --sidebar-accent-foreground: 220 20% 15%;
-    --sidebar-border: 220 13% 87%;
-    --sidebar-ring: 259 58% 56%;
+    --popover: 222 47% 5%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 15%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 15%;
+    --input: 217.2 32.6% 15%;
+    --ring: 212.7 26.8% 83.9%;
   }
 }
 
@@ -352,10 +370,43 @@
 .stagger-5 { animation-delay: 0.25s; }
 .stagger-6 { animation-delay: 0.3s; }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: hsl(220 14% 94%); }
-::-webkit-scrollbar-thumb { background: hsl(220 10% 78%); border-radius: 3px; }
+/* Specialized Historical Aesthetic */
+.history-ink {
+  color: hsl(var(--history-ink));
+  font-family: 'Georgia', serif;
+}
+
+.history-paper {
+  background-color: hsl(var(--history-paper));
+  background-image: url("https://www.transparenttextures.com/patterns/parchment.png");
+  border: 1px solid hsl(var(--history-gold) / 0.2);
+}
+
+.gold-glow {
+  box-shadow: 0 0 20px hsl(var(--history-gold) / 0.3);
+  border-color: hsl(var(--history-gold));
+}
+
+.premium-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.premium-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.premium-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.premium-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
 
 @layer base {
   * {
@@ -363,10 +414,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Nunito', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Nunito', sans-serif;
     margin: 0;
     padding: 0;
-    background: #0a0a0c;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -377,3 +429,12 @@
 .glow-primary { box-shadow: 0 4px 12px hsl(259 58% 56% / 0.25); }
 .glow-accent { box-shadow: 0 4px 12px hsl(30 95% 55% / 0.25); }
 .glow-success { box-shadow: 0 4px 12px hsl(152 69% 45% / 0.25); }
+
+/* Ensure Toasts are on top */
+[data-sonner-toaster] {
+  z-index: 9999 !important;
+}
+
+#radix-toaster {
+  z-index: 9999 !important;
+}

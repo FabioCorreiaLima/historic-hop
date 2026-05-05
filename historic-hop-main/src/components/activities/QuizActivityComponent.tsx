@@ -4,7 +4,6 @@ import { Zap, Timer } from "lucide-react";
 import { playCorrectSound, playWrongSound } from "@/lib/sounds";
 import type { QuizActivity } from "@/data/activities";
 import { getTimerForLevel, getDifficultyConfig } from "@/config/difficultyConfig";
-import { EducationalFeedback } from "@/components/EducationalFeedback";
 
 interface Props {
   activity: QuizActivity;
@@ -91,7 +90,10 @@ const QuizActivityComponent = ({
     if (fact && onFactCollected) {
       onFactCollected(fact, source ?? "", "❓");
     }
-  }, [showFeedback, activity, onFactCollected]);
+
+    // Comunica ao QuizGame que a resposta foi dada
+    onComplete(correct);
+  }, [showFeedback, activity, onFactCollected, onComplete]);
 
   const handleComplete = () => {
     onComplete(isCorrect);
@@ -181,7 +183,17 @@ const QuizActivityComponent = ({
 
         {/* Options */}
         <div className="space-y-3">
-          {activity.options.map((option, i) => {
+          {activity.options.map((rawOption, i) => {
+            const normalize = (val: any): string => {
+              if (typeof val === 'string') return val;
+              if (val && typeof val === 'object') {
+                return val.option || val.blank || val.text || val.value || val.answer || 
+                       Object.values(val).find(v => typeof v === 'string') || 
+                       JSON.stringify(val);
+              }
+              return String(val);
+            };
+            const option = normalize(rawOption);
             let itemClass =
               "w-full flex items-center gap-4 p-4 rounded-2xl border transition-all duration-200 text-left";
 
@@ -221,24 +233,6 @@ const QuizActivityComponent = ({
             );
           })}
         </div>
-
-        {/* Feedback educacional rico */}
-        {showFeedback && (
-          <EducationalFeedback
-            isCorrect={isCorrect}
-            isTimeout={timeLeft === 0 && selectedIndex === -1}
-            correctAnswerText={
-              !isCorrect && activity.correctIndex !== undefined
-                ? `${optionLetters[activity.correctIndex]} — ${activity.options[activity.correctIndex]}`
-                : undefined
-            }
-            explanation={activity.explanation}
-            historicalFact={(activity as any).historicalFact}
-            source={(activity as any).source}
-            onNext={showNextButton ? handleComplete : () => {}}
-            nextLabel={isLast ? "Ver Resultado →" : "Próxima Pergunta →"}
-          />
-        )}
       </div>
     </div>
   );

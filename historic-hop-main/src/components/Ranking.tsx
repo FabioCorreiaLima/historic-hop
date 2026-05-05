@@ -13,7 +13,7 @@ interface RankingEntry {
   avatar_url: string | null;
 }
 
-const Ranking = ({ onBack }: { onBack: () => void }) => {
+const Ranking = () => {
   const { user } = useAuth();
   const [entries, setEntries] = useState<RankingEntry[]>([]);
   const [tab, setTab] = useState<"total" | "weekly">("total");
@@ -47,16 +47,12 @@ const Ranking = ({ onBack }: { onBack: () => void }) => {
   return (
     <div className="w-full max-w-lg mx-auto px-4 py-6 animate-fade-in-up">
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
-        <button onClick={onBack} className="glass-option p-2 rounded-xl hover:bg-muted/50 transition-colors">
-          <ArrowLeft className="w-5 h-5 text-foreground" />
-        </button>
-        <div>
-          <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
-            <Trophy className="w-6 h-6 text-accent" /> Ranking
-          </h2>
-          <p className="text-sm text-muted-foreground">Os melhores jogadores</p>
+      <div className="text-center mb-8">
+        <div className="w-20 h-20 bg-accent/10 rounded-3xl flex items-center justify-center mx-auto mb-4 border-2 border-accent/20 shadow-xl shadow-accent/5">
+          <Trophy className="w-10 h-10 text-accent animate-bounce" />
         </div>
+        <h2 className="text-3xl font-black text-foreground tracking-tight">Ranking Global</h2>
+        <p className="text-sm text-muted-foreground font-medium">Os heróis que estão fazendo história</p>
       </div>
 
       {/* Tabs */}
