@@ -5,7 +5,8 @@ import {
   User as UserIcon, 
   Settings, 
   LogOut, 
-  Trophy 
+  Menu,
+  X
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -19,10 +20,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
 
 export function Navbar() {
   const { user, profile, signOut } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -31,20 +34,27 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
   if (!user) return null;
 
   return (
     <nav className={cn(
-      "fixed top-0 w-full z-50 transition-all duration-500 px-6 h-20 flex items-center justify-center",
-      isScrolled ? "bg-quiz-bg/90 backdrop-blur-xl border-b border-quiz-border py-2" : "bg-transparent py-4"
+      "fixed top-0 w-full z-50 transition-all duration-500 px-4 md:px-6 h-16 md:h-20 flex items-center justify-center",
+      isScrolled ? "bg-quiz-bg/90 backdrop-blur-xl border-b border-quiz-border" : "bg-transparent"
     )}>
       <div className="max-w-7xl w-full flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-12 h-12 bg-quiz-primary rounded-2xl flex items-center justify-center shadow-2xl shadow-quiz-primary/20 group-hover:rotate-6 transition-transform">
-            <History className="w-7 h-7 text-black" />
+        <Link to="/" className="flex items-center gap-3 group shrink-0">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-quiz-primary rounded-xl md:rounded-2xl flex items-center justify-center shadow-2xl shadow-quiz-primary/20 group-hover:rotate-6 transition-transform">
+            <History className="w-6 h-6 md:w-7 md:h-7 text-black" />
           </div>
-          <span className="text-2xl font-black tracking-tighter uppercase hidden sm:block text-quiz-text-main">Historic <span className="text-quiz-primary">Hop</span></span>
+          <span className="text-xl md:text-2xl font-black tracking-tighter uppercase hidden sm:block text-quiz-text-main">
+            Historic <span className="text-quiz-primary">Hop</span>
+          </span>
         </Link>
 
         {/* Desktop Nav */}
@@ -57,11 +67,12 @@ export function Navbar() {
           )}
         </div>
 
-        {/* User Menu */}
-        <div className="flex items-center gap-4">
+        {/* Right Section */}
+        <div className="flex items-center gap-3">
+          {/* User Menu (Desktop & Mobile) */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-12 w-12 rounded-2xl p-0 overflow-hidden border-2 border-quiz-border hover:border-quiz-primary transition-all">
+              <Button variant="ghost" className="relative h-10 w-10 md:h-12 md:w-12 rounded-xl md:rounded-2xl p-0 overflow-hidden border-2 border-quiz-border hover:border-quiz-primary transition-all">
                 <Avatar className="h-full w-full rounded-none">
                   <AvatarImage src={profile?.avatar_url || ""} />
                   <AvatarFallback className="bg-quiz-primary/10 text-quiz-primary font-black">
@@ -94,8 +105,35 @@ export function Navbar() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden w-10 h-10 flex items-center justify-center bg-quiz-surface border border-quiz-border rounded-xl text-quiz-text-main active:scale-95 transition-all"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-x-0 top-16 bg-quiz-bg border-b border-quiz-border md:hidden z-40 p-6 flex flex-col gap-4 shadow-2xl"
+          >
+            <MobileNavLink to="/" active={location.pathname === "/"}>Mapa</MobileNavLink>
+            <MobileNavLink to="/ranking" active={location.pathname === "/ranking"}>Ranking</MobileNavLink>
+            <MobileNavLink to="/loja" active={location.pathname === "/loja"}>Loja</MobileNavLink>
+            {profile?.is_admin && (
+              <MobileNavLink to="/admin" active={location.pathname.startsWith("/admin")}>Admin</MobileNavLink>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
@@ -112,6 +150,23 @@ function NavLink({ to, children, active }: { to: string; children: React.ReactNo
       )}
     >
       {children}
+    </Link>
+  );
+}
+
+function MobileNavLink({ to, children, active }: { to: string; children: React.ReactNode; active?: boolean }) {
+  return (
+    <Link 
+      to={to} 
+      className={cn(
+        "px-6 py-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center justify-between",
+        active 
+          ? "bg-quiz-primary text-black" 
+          : "bg-quiz-surface text-quiz-text-main"
+      )}
+    >
+      {children}
+      {active && <div className="w-2 h-2 rounded-full bg-black" />}
     </Link>
   );
 }
