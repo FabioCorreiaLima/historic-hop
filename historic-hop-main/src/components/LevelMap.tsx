@@ -36,7 +36,7 @@ const LevelMap = ({
     return (
       <div className="flex-1 flex flex-col items-center justify-center min-h-[60vh] bg-quiz-bg p-6">
         <Loader2 className="w-10 h-10 md:w-12 md:h-12 animate-spin text-quiz-primary mb-4" />
-        <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-quiz-text-muted text-center">Recuperando registros históricos...</p>
+        <p className="text-xs md:text-sm font-black uppercase tracking-[0.2em] text-quiz-text-muted text-center">Recuperando registros históricos...</p>
       </div>
     );
   }
@@ -52,7 +52,7 @@ const LevelMap = ({
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-quiz-primary/10 border border-quiz-primary/20 text-quiz-primary text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] mb-6 md:mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-quiz-primary/10 border border-quiz-primary/20 text-quiz-primary text-xs md:text-sm font-black uppercase tracking-[0.3em] mb-6 md:mb-8"
           >
             <Trophy className="w-3 h-3 md:w-4 md:h-4" />
             Sua Jornada Histórica
@@ -61,7 +61,7 @@ const LevelMap = ({
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-6 md:mb-8 text-quiz-text-main leading-[1.1] md:leading-[0.9]"
+            className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter mb-6 md:mb-8 text-quiz-text-main leading-[1.1] md:leading-[0.9]"
           >
             LINHA DO <span className="text-quiz-primary">TEMPO</span>
           </motion.h1>
@@ -70,18 +70,15 @@ const LevelMap = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-quiz-text-muted font-medium max-w-2xl mx-auto text-sm md:text-lg lg:text-xl leading-relaxed opacity-80"
+            className="text-xs md:text-sm lg:text-base text-quiz-text-muted font-medium max-w-2xl mx-auto leading-relaxed opacity-80"
           >
             Domine os grandes eventos que moldaram o mundo e desbloqueie recompensas exclusivas através do conhecimento.
           </motion.p>
         </div>
 
-        {/* Timeline Responsiva (Tailwind Nativo Only) */}
+        {/* Timeline Responsiva */}
         <div className="relative">
-          {/* Linha Central (Desktop md+) */}
           <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-quiz-border -translate-x-1/2 hidden md:block opacity-30" />
-          
-          {/* Linha Lateral (Mobile <md) */}
           <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-quiz-border md:hidden opacity-30" />
 
           <div className="space-y-10 md:space-y-24 lg:space-y-32 relative z-10">
@@ -101,24 +98,20 @@ const LevelMap = ({
                     isEven ? "md:flex-row" : "md:flex-row-reverse"
                   )}
                 >
-                  {/* Card Section */}
                   <div className={cn(
                     "w-full md:w-[44%] lg:w-[42%] group relative",
                     !unlocked && "pointer-events-none"
                   )}>
                     <div className={cn(
-                      "relative z-10 p-6 md:p-8 lg:p-10 rounded-2xl md:rounded-[2rem] border-2 transition-all duration-500 overflow-hidden",
+                      "relative z-10 p-5 md:p-8 lg:p-10 rounded-2xl md:rounded-[2rem] border-2 transition-all duration-500 overflow-hidden",
                       unlocked 
                         ? "bg-quiz-surface border-quiz-border hover:border-quiz-primary shadow-2xl" 
                         : "bg-quiz-bg border-dashed border-quiz-border/50 opacity-40 grayscale"
                     )}>
-                      {/* Glow Effect */}
-                      <div className="absolute -inset-1 bg-gradient-to-r from-quiz-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity blur-2xl" />
-
                       <div className="relative z-20">
                         <div className="flex items-center justify-between mb-6 md:mb-10">
                           <div className={cn(
-                            "w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-xl md:rounded-2xl flex items-center justify-center text-xl md:text-3xl lg:text-4xl shadow-inner transition-all group-hover:scale-110 group-hover:rotate-3 duration-500",
+                            "w-10 h-10 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-xl md:rounded-2xl flex items-center justify-center text-xl md:text-3xl lg:text-4xl shadow-inner",
                             unlocked ? "bg-quiz-bg border border-quiz-border" : "bg-quiz-surface"
                           )}>
                             {unlocked ? period.emoji : <Lock className="w-5 h-5 md:w-8 md:h-8 text-quiz-text-muted" />}
@@ -128,8 +121,8 @@ const LevelMap = ({
                               <Star 
                                 key={s} 
                                 className={cn(
-                                  "w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 transition-all duration-500", 
-                                  s <= progress.stars ? "fill-quiz-primary text-quiz-primary drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]" : "text-quiz-border"
+                                  "w-3 h-3 md:w-5 md:h-5 lg:w-6 lg:h-6", 
+                                  s <= progress.stars ? "fill-quiz-primary text-quiz-primary" : "text-quiz-border"
                                 )} 
                               />
                             ))}
@@ -137,23 +130,22 @@ const LevelMap = ({
                         </div>
 
                         <div className="space-y-1.5 md:space-y-3 mb-6 md:mb-10">
-                          <div className="flex items-center gap-2 text-quiz-primary text-[9px] md:text-[11px] lg:text-xs font-black uppercase tracking-[0.2em]">
-                            <Zap className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                          <div className="flex items-center gap-2 text-quiz-primary text-xs md:text-sm font-black uppercase tracking-[0.2em]">
+                            <Zap className="w-3 h-3 md:w-4 md:h-4" />
                             <span>{period.years}</span>
                           </div>
-                          <h3 className="text-xl md:text-2xl lg:text-3xl font-black tracking-tight text-quiz-text-main uppercase group-hover:text-quiz-primary transition-colors leading-tight">
+                          <h3 className="text-base md:text-lg lg:text-xl font-black tracking-tight text-quiz-text-main uppercase group-hover:text-quiz-primary transition-colors leading-tight">
                             {period.name}
                           </h3>
-                          <p className="text-xs md:text-sm lg:text-base text-quiz-text-muted leading-relaxed line-clamp-2 md:line-clamp-3 font-medium opacity-70">
+                          <p className="text-xs md:text-sm text-quiz-text-muted leading-relaxed line-clamp-2 md:line-clamp-3 font-medium opacity-70">
                             {period.description}
                           </p>
                         </div>
 
-                        {/* Botões de Ação */}
                         <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
                           <button 
                             onClick={() => onSelectPeriod(period.id)}
-                            className="flex-1 h-12 md:h-14 lg:h-16 bg-quiz-primary text-black font-black rounded-xl md:rounded-2xl flex items-center justify-center gap-2 hover:bg-quiz-primary-dark transition-all transform hover:translate-y-[-4px] active:translate-y-0 shadow-xl shadow-quiz-primary/10 text-xs md:text-sm lg:text-base uppercase tracking-widest"
+                            className="flex-1 h-12 md:h-14 lg:h-16 bg-quiz-primary text-black font-black rounded-xl md:rounded-2xl flex items-center justify-center gap-2 hover:bg-quiz-primary-dark transition-all text-xs md:text-sm lg:text-base uppercase tracking-widest"
                           >
                             <Play className="w-4 h-4 md:w-5 md:h-5 fill-current" /> JOGAR
                           </button>
@@ -164,7 +156,7 @@ const LevelMap = ({
                                 <TooltipTrigger asChild>
                                   <button 
                                     onClick={() => onOpenChat(period.id)}
-                                    className="h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 rounded-xl md:rounded-2xl bg-quiz-surface border border-quiz-border text-quiz-text-main hover:text-quiz-primary hover:border-quiz-primary transition-all flex items-center justify-center shadow-lg active:scale-95"
+                                    className="h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 rounded-xl md:rounded-2xl bg-quiz-surface border border-quiz-border text-quiz-text-main hover:text-quiz-primary transition-all flex items-center justify-center shadow-lg active:scale-95"
                                   >
                                     <MessageCircle className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />
                                   </button>
@@ -178,7 +170,7 @@ const LevelMap = ({
                                 <TooltipTrigger asChild>
                                   <button 
                                     onClick={() => onPlayPacman(period.id)}
-                                    className="h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 rounded-xl md:rounded-2xl bg-quiz-surface border border-quiz-border text-quiz-text-main hover:text-quiz-primary hover:border-quiz-primary transition-all flex items-center justify-center shadow-lg active:scale-95"
+                                    className="h-12 w-12 md:h-14 md:w-14 lg:h-16 lg:w-16 rounded-xl md:rounded-2xl bg-quiz-surface border border-quiz-border text-quiz-text-main hover:text-quiz-primary transition-all flex items-center justify-center shadow-lg active:scale-95"
                                   >
                                     <Gamepad2 className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />
                                   </button>
@@ -192,21 +184,16 @@ const LevelMap = ({
                     </div>
                   </div>
 
-                  {/* Nó da Linha do Tempo Responsivo */}
                   <div className={cn(
                     "absolute left-6 md:left-1/2 flex items-center justify-center -translate-x-1/2 z-20",
-                    "w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14"
+                    "w-8 h-8 md:w-12 md:h-12 lg:w-14 lg:h-14"
                   )}>
                     <div className={cn(
-                      "w-4 h-4 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full border-4 md:border-8 border-quiz-bg transition-all duration-500",
-                      unlocked ? "bg-quiz-primary shadow-[0_0_20px_rgba(234,179,8,0.4)] md:shadow-[0_0_40px_rgba(234,179,8,0.6)] scale-110" : "bg-quiz-border"
+                      "w-3 h-3 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-full border-4 md:border-8 border-quiz-bg transition-all duration-500",
+                      unlocked ? "bg-quiz-primary shadow-xl scale-110" : "bg-quiz-border"
                     )} />
-                    {unlocked && (
-                      <div className="absolute inset-0 bg-quiz-primary/20 blur-xl rounded-full animate-pulse -z-10" />
-                    )}
                   </div>
 
-                  {/* Espaçamento para alinhamento (md+) */}
                   <div className="hidden md:block w-[44%] lg:w-[42%]" />
                 </motion.div>
               );
