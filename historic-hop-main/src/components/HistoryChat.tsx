@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ArrowLeft, Loader2, Volume2, VolumeX, Play, Pause, Sparkles } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import type { HistoricalPeriod } from "@/data/activities";
+import type { HistoricalPeriod } from "@/types";
 import { api } from "@/lib/api";
 
 interface Props {
@@ -22,7 +22,7 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
     const refreshData = async () => {
       if (!initialPeriod?.id) return;
       try {
-        const data = await api.periods.getOne(initialPeriod.id);
+        const data = await api.apiCall(`/periods/${initialPeriod.id}`);
         if (data) setPeriodData(data);
       } catch (err) {
         console.warn("Erro ao atualizar chat:", err);
@@ -31,7 +31,6 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
     refreshData();
   }, [initialPeriod?.id]);
 
-  // Garantir fallbacks para evitar ReferenceError ou undefined
   const charName = periodData?.characterName || "Historiador";
   const charEmoji = periodData?.characterEmoji || "🧐";
   const periodYears = periodData?.years || "";
@@ -53,12 +52,11 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
   const [currentSpeakingIndex, setCurrentSpeakingIndex] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Fetch suggested questions on mount
   useEffect(() => {
     if (!initialPeriod?.id) return;
     const fetchQuestions = async () => {
       try {
-        const data = await api.historyChat.getSuggestedQuestions(initialPeriod.id);
+        const data = await api.apiCall(`/chat/suggested-questions?periodId=${initialPeriod.id}`);
         setSuggestedQuestions(data.questions || []);
       } catch (error) {
         console.error("Erro ao buscar perguntas:", error);
@@ -71,24 +69,18 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
   }, [initialPeriod?.id]);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
   }, [messages]);
 
-  // Clean up speech synthesis on unmount
   useEffect(() => {
-    return () => {
-      window.speechSynthesis.cancel();
-    };
+    return () => { window.speechSynthesis.cancel(); };
   }, []);
 
   const speak = (text: string, index: number) => {
     window.speechSynthesis.cancel();
-    // Regex mais agressiva para remover QUALQUER caractere não-alfanumérico/pontuação básica
-    const cleanText = text
-      .replace(/[^\w\sÀ-ÿ.,!?;:]/gi, '') 
-      .replace(/\s+/g, ' ')
-      .trim();
-
+    const cleanText = text.replace(/[^\w\sÀ-ÿ.,!?;:]/gi, '').replace(/\s+/g, ' ').trim();
     if (!cleanText) return;
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
@@ -104,12 +96,6 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
     };
 
     utterance.onend = () => {
-      setIsSpeaking(false);
-      setCurrentSpeakingIndex(null);
-      setMessages(prev => prev.map((m, i) => i === index ? { ...m, isPlaying: false } : m));
-    };
-
-    utterance.onerror = () => {
       setIsSpeaking(false);
       setCurrentSpeakingIndex(null);
       setMessages(prev => prev.map((m, i) => i === index ? { ...m, isPlaying: false } : m));
@@ -137,12 +123,15 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
     setIsLoading(true);
 
     try {
-      const data = await api.historyChat.sendMessage({
-        messages: [...messages, userMsg],
-        periodId: periodData.id,
-        characterName: charName,
-        periodName: periodName,
-        periodYears: periodYears,
+      const data = await api.apiCall("/chat/message", {
+        method: "POST",
+        body: {
+          messages: [...messages, userMsg],
+          periodId: periodData.id,
+          characterName: charName,
+          periodName: periodName,
+          periodYears: periodYears,
+        }
       });
 
       const assistantContent = data.response;
@@ -157,56 +146,41 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
       if (audioEnabled) {
         setTimeout(() => speak(assistantContent, newMsgIndex), 100);
       }
-
     } catch (e) {
-      console.error("Erro no chat:", e);
       setMessages(prev => [...prev, {
         role: "assistant",
-        content: "Desculpe, tive um problema para processar sua pergunta. Pode tentar novamente?",
+        content: "Desculpe, tive um problema para processar sua pergunta.",
       }]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const isImageUrl = (url?: string | null) => {
-    if (!url) return false;
-    const lower = url.toLowerCase();
-    return lower.endsWith('.jpg') || lower.endsWith('.jpeg') || lower.endsWith('.png') || lower.endsWith('.webp') || lower.endsWith('.svg') || url.includes('pollinations.ai');
-  };
-
-  const currentImg = periodData?.image_url || periodData?.imageUrl;
-  const finalBg = isImageUrl(currentImg) ? currentImg : "/map-bg.png";
-
   return (
-    <div 
-      className="min-h-screen w-full relative pt-6 pb-12 flex flex-col items-center overflow-x-hidden"
-      style={{ 
-        backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url("${finalBg}")`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
-    >
-      {/* Content Wrapper */}
-      <div className="relative z-10 w-full max-w-2xl mx-auto px-4 md:px-6 flex flex-col h-[90vh]">
+    <div className="fixed inset-0 bg-quiz-bg text-quiz-text-main z-50 flex flex-col font-sans">
+      {/* Background Decor */}
+      <div className="absolute inset-0 z-0 opacity-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-quiz-primary/20 to-transparent" />
+      </div>
+
+      <div className="relative z-10 flex flex-col h-full max-w-4xl mx-auto w-full">
         
-        {/* Header */}
-        <div className="flex items-center gap-4 py-6 border-b border-white/10 mb-4">
+        {/* Header Responsivo */}
+        <header className="flex items-center gap-3 md:gap-4 p-4 md:p-6 border-b border-quiz-border bg-quiz-surface/50 backdrop-blur-xl shrink-0">
           <button 
             onClick={() => { window.speechSynthesis.cancel(); onBack(); }} 
-            className="p-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all active:scale-90"
+            className="p-2.5 md:p-3 rounded-xl bg-quiz-bg border border-quiz-border hover:border-quiz-primary transition-all active:scale-90"
           >
-            <ArrowLeft className="w-5 h-5 text-white" />
+            <ArrowLeft className="w-5 h-5 text-quiz-text-main" />
           </button>
           
-          <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl shadow-inner">
+          <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-quiz-bg border border-quiz-border flex items-center justify-center text-xl md:text-3xl shadow-inner">
             {charEmoji}
           </div>
           
-          <div className="flex-1">
-            <h2 className="font-black text-white text-lg tracking-tight leading-tight">{charName}</h2>
-            <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{periodName}</p>
+          <div className="flex-1 min-w-0">
+            <h2 className="font-black text-sm md:text-xl tracking-tight leading-tight truncate uppercase">{charName}</h2>
+            <p className="text-[8px] md:text-[10px] font-bold text-quiz-primary uppercase tracking-[0.2em] truncate">{periodName}</p>
           </div>
 
           <button
@@ -215,36 +189,36 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
               setAudioEnabled(nextVal);
               if (!nextVal) window.speechSynthesis.cancel();
             }}
-            className={`p-3 rounded-2xl transition-all border ${audioEnabled ? 'bg-primary/20 border-primary/40 text-primary shadow-lg shadow-primary/20' : 'bg-white/5 border-white/10 text-white/40'}`}
+            className={`p-2.5 md:p-3 rounded-xl transition-all border ${audioEnabled ? 'bg-quiz-primary/10 border-quiz-primary/40 text-quiz-primary shadow-lg shadow-quiz-primary/10' : 'bg-quiz-bg border-quiz-border text-quiz-text-muted'}`}
           >
             {audioEnabled ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
           </button>
-        </div>
+        </header>
 
-        {/* Messages */}
-        <div ref={scrollRef} className="flex-1 overflow-y-auto space-y-6 py-6 scrollbar-hide">
+        {/* Mensagens com Layout Adaptável */}
+        <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 md:space-y-8 custom-scrollbar">
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"} animate-fade-in-up`}>
-              <div className={`max-w-[85%] rounded-[2rem] px-6 py-4 text-sm shadow-2xl backdrop-blur-xl border ${
+              <div className={`max-w-[90%] md:max-w-[80%] rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-6 text-sm md:text-base shadow-2xl border ${
                 msg.role === "user"
-                  ? "bg-primary/90 text-white border-white/10 rounded-br-none"
-                  : "bg-white/5 text-white/90 border-white/10 rounded-bl-none"
+                  ? "bg-quiz-primary text-black border-quiz-primary/20 rounded-br-none"
+                  : "bg-quiz-surface text-quiz-text-main border-quiz-border rounded-bl-none"
               }`}>
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-3 md:gap-4">
                   <div className="flex-1 leading-relaxed">
                     {msg.role === "assistant" ? (
-                      <div className="prose prose-sm max-w-none prose-invert prose-p:leading-relaxed">
+                      <div className="prose prose-sm md:prose-base max-w-none prose-invert prose-p:leading-relaxed">
                         <ReactMarkdown>{msg.content}</ReactMarkdown>
                       </div>
                     ) : (
-                      <span className="font-medium">{msg.content}</span>
+                      <span className="font-bold">{msg.content}</span>
                     )}
                   </div>
                   {msg.role === "assistant" && (
                     <button
                       onClick={() => toggleAudio(i)}
-                      className={`mt-1 p-2 rounded-xl transition-all ${
-                        msg.isPlaying ? 'bg-primary text-white animate-pulse' : 'bg-white/5 hover:bg-white/10 text-white/40 hover:text-white'
+                      className={`mt-1 p-2 rounded-xl transition-all shrink-0 ${
+                        msg.isPlaying ? 'bg-quiz-primary text-black animate-pulse' : 'bg-quiz-bg hover:bg-quiz-primary/10 text-quiz-text-muted hover:text-quiz-primary'
                       }`}
                     >
                       {msg.isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
@@ -256,40 +230,36 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
           ))}
           {isLoading && (
             <div className="flex justify-start animate-pulse">
-              <div className="bg-white/5 border border-white/10 rounded-[2rem] rounded-bl-none px-6 py-5 shadow-2xl backdrop-blur-xl">
-                <Loader2 className="w-5 h-5 animate-spin text-primary" />
+              <div className="bg-quiz-surface border border-quiz-border rounded-2xl rounded-bl-none p-4 md:p-6">
+                <Loader2 className="w-5 h-5 animate-spin text-quiz-primary" />
               </div>
             </div>
           )}
         </div>
 
-        {/* Suggested Questions Area */}
-        <div className="py-6 border-t border-white/10 mt-4 bg-transparent backdrop-blur-sm rounded-t-[2rem]">
-          <div className="flex items-center gap-2 mb-4 px-2">
-            <Sparkles className="w-4 h-4 text-amber-500" />
-            <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em]">Perguntas Sugeridas</p>
+        {/* Área de Sugestões Responsiva */}
+        <div className="p-4 md:p-8 bg-quiz-surface border-t border-quiz-border shrink-0">
+          <div className="flex items-center gap-2 mb-4">
+            <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-quiz-primary" />
+            <p className="text-[9px] md:text-[10px] font-black text-quiz-text-muted uppercase tracking-[0.2em]">O que perguntar?</p>
           </div>
           
-          {isLoadingQuestions ? (
-            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="h-12 w-40 bg-white/5 animate-pulse rounded-2xl flex-shrink-0 border border-white/10" />
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-wrap gap-2">
-              {suggestedQuestions.map((q, i) => (
+          <div className="flex flex-wrap gap-2 max-h-32 md:max-h-none overflow-y-auto">
+            {isLoadingQuestions ? (
+              [1, 2].map(i => <div key={i} className="h-10 w-32 bg-quiz-bg animate-pulse rounded-xl" />)
+            ) : (
+              suggestedQuestions.map((q, i) => (
                 <button
                   key={i}
                   onClick={() => handleSelectQuestion(q)}
                   disabled={isLoading}
-                  className="text-left text-xs font-bold px-5 py-3 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-primary/10 text-white/70 hover:text-white transition-all active:scale-95 disabled:opacity-30"
+                  className="text-left text-[10px] md:text-xs font-bold px-4 py-2.5 md:px-5 md:py-3 rounded-xl bg-quiz-bg border border-quiz-border hover:border-quiz-primary/50 hover:bg-quiz-primary/5 text-quiz-text-main transition-all active:scale-95 disabled:opacity-30"
                 >
                   {q}
                 </button>
-              ))}
-            </div>
-          )}
+              ))
+            )}
+          </div>
         </div>
       </div>
     </div>

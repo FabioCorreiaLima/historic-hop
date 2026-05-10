@@ -1,4 +1,3 @@
-// src/components/activities/QuizActivityComponent.tsx
 import { useState, useCallback, useEffect } from "react";
 import { Zap, Timer, CheckCircle2, XCircle, ChevronRight, Trophy, Flame } from "lucide-react";
 import { playCorrectSound, playWrongSound } from "@/lib/sounds";
@@ -83,80 +82,83 @@ const QuizActivityComponent = ({
   const timerPercentage = (timeLeft / timerTotal) * 100;
 
   return (
-    <div className="w-full max-w-3xl mx-auto flex flex-col animate-fade-in px-4">
+    <div className="w-full max-w-4xl mx-auto flex flex-col p-4 md:p-6 lg:p-8 animate-fade-in">
       
-      {/* HEADER RESPONSIVO */}
-      <div className="mb-6 space-y-3 md:space-y-4">
-        {/* Linha 1: Pontuação | Combo | Timer */}
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5 md:gap-2 text-quiz-primary">
-            <Trophy className="w-4 h-4 md:w-5 md:h-5" />
-            <span className="font-black text-sm md:text-lg">{score}</span>
+      {/* HEADER RESPONSIVO COM TAILWIND NATIVO */}
+      <div className="mb-6 md:mb-8 lg:mb-10 space-y-4 md:space-y-6">
+        {/* Linha 1: Status Bar */}
+        <div className="flex flex-row items-center justify-between gap-3 md:gap-6">
+          <div className="flex items-center gap-2 md:gap-3 text-quiz-primary group transition-all">
+            <Trophy className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform" />
+            <span className="font-black text-lg md:text-xl lg:text-2xl tracking-tighter">{score}</span>
           </div>
           
-          <div className="flex items-center gap-1.5 md:gap-2 text-rose-500">
-            <Flame className="w-4 h-4 md:w-5 md:h-5 animate-pulse" />
-            <span className="font-black text-sm md:text-lg">{combo}x</span>
+          <div className="flex items-center gap-2 md:gap-3 text-rose-500 animate-pulse">
+            <Flame className="w-5 h-5 md:w-6 md:h-6" />
+            <span className="font-black text-lg md:text-xl lg:text-2xl tracking-tighter">{combo}x</span>
           </div>
 
           <div className={cn(
-            "flex items-center gap-1.5 md:gap-2 px-2.5 md:px-3 py-0.5 md:py-1 rounded-full border-2 transition-all",
-            timeLeft < 5 ? "border-quiz-wrong text-quiz-wrong animate-pulse" : "border-quiz-primary text-quiz-primary"
+            "flex items-center gap-2 px-3 md:px-5 py-1 md:py-2 rounded-xl md:rounded-2xl border-2 transition-all",
+            timeLeft < 5 ? "border-quiz-wrong text-quiz-wrong animate-bounce" : "border-quiz-primary text-quiz-primary"
           )}>
-            <Timer className="w-3.5 h-3.5 md:w-4 md:h-4" />
-            <span className="font-black text-xs md:text-sm">{timeLeft}s</span>
+            <Timer className="w-4 h-4 md:w-5 md:h-5" />
+            <span className="font-black text-sm md:text-base lg:text-lg">{timeLeft}s</span>
           </div>
         </div>
 
-        {/* Linha 2: Barra de progresso */}
-        <div className="w-full h-2 md:h-3 bg-quiz-surface rounded-full overflow-hidden border border-quiz-border">
+        {/* Linha 2: Barra de Progresso */}
+        <div className="w-full h-2.5 md:h-4 bg-quiz-surface rounded-full overflow-hidden border border-quiz-border shadow-inner">
           <div 
-            className="h-full bg-quiz-primary transition-all duration-1000 ease-linear"
+            className={cn(
+              "h-full transition-all duration-1000 ease-linear",
+              timeLeft < 5 ? "bg-quiz-wrong" : "bg-quiz-primary"
+            )}
             style={{ width: `${timerPercentage}%` }}
           />
         </div>
 
-        {/* Linha 3: Nível e período */}
-        <div className="flex items-center gap-1.5 text-quiz-text-muted text-[8px] md:text-[10px] font-bold uppercase tracking-widest overflow-hidden">
-          <Zap className="w-2.5 h-2.5 md:w-3 md:h-3 shrink-0" />
-          <span className="truncate">Nível {activity.level ?? 1} • {periodName}</span>
+        {/* Linha 3: Metadata */}
+        <div className="flex flex-wrap items-center gap-3 md:gap-4 text-quiz-text-muted text-[9px] md:text-[11px] lg:text-xs font-black uppercase tracking-[0.2em]">
+          <div className="flex items-center gap-1.5 bg-quiz-surface px-3 py-1.5 rounded-lg border border-quiz-border">
+            <Zap className="w-3 h-3 md:w-4 md:h-4 text-quiz-primary" />
+            <span>Nível {activity.level ?? 1}</span>
+          </div>
+          <div className="flex items-center gap-1.5 bg-quiz-surface px-3 py-1.5 rounded-lg border border-quiz-border truncate max-w-[200px]">
+            <BookOpen className="w-3 h-3 md:w-4 md:h-4 text-quiz-primary" />
+            <span className="truncate">{periodName}</span>
+          </div>
         </div>
       </div>
 
-      {/* CORPO RESPONSIVO */}
-      <div className="bg-quiz-surface border border-quiz-border rounded-2xl md:rounded-[12px] p-5 md:p-8 shadow-2xl overflow-y-auto max-h-[70vh] md:max-h-none">
+      {/* CONTEÚDO PRINCIPAL (CARD) */}
+      <div className="bg-quiz-surface border border-quiz-border rounded-2xl md:rounded-[2rem] p-6 md:p-10 lg:p-12 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
         
         {/* Pergunta */}
-        <h2 className="text-lg md:text-2xl font-bold text-quiz-text-main mb-6 leading-tight">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-quiz-text-main mb-8 md:mb-12 leading-[1.3] tracking-tight">
           {activity.question}
         </h2>
 
-        {/* Opções (Grid 2x2 no desktop, 1x4 no mobile) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+        {/* Opções - Layout Nativo Tailwind sm: md: lg: */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
           {activity.options.map((rawOption, i) => {
-            const normalize = (val: any): string => {
-              if (typeof val === 'string') return val;
-              if (val && typeof val === 'object') {
-                return val.option || val.text || JSON.stringify(val);
-              }
-              return String(val);
-            };
-            const option = normalize(rawOption);
+            const option = typeof rawOption === 'string' ? rawOption : (rawOption as any).option || (rawOption as any).text || JSON.stringify(rawOption);
+            
             const isSelected = selectedIndex === i;
             const isOptionCorrect = i === activity.correctIndex;
             
-            let buttonClass = "flex items-center gap-3 p-3.5 md:p-4 rounded-xl border-2 transition-all duration-200 text-left w-full group min-h-[60px]";
+            let buttonClass = "flex items-center gap-4 md:gap-6 p-5 md:p-6 lg:p-8 rounded-xl md:rounded-2xl border-2 transition-all duration-300 text-left w-full group relative overflow-hidden";
             
             if (showFeedback) {
               if (isOptionCorrect) {
-                buttonClass += " bg-quiz-correct/10 border-quiz-correct text-quiz-text-main";
+                buttonClass += " bg-quiz-correct/10 border-quiz-correct text-quiz-text-main shadow-[0_0_20px_rgba(34,197,94,0.2)]";
               } else if (isSelected) {
                 buttonClass += " bg-quiz-wrong/10 border-quiz-wrong text-quiz-text-main animate-shake";
               } else {
-                buttonClass += " bg-quiz-surface border-quiz-border opacity-50";
+                buttonClass += " opacity-40 grayscale";
               }
             } else {
-              buttonClass += " bg-quiz-surface border-quiz-border hover:border-quiz-primary hover:bg-quiz-primary/5 text-quiz-text-main active:scale-95";
+              buttonClass += " bg-quiz-surface border-quiz-border hover:border-quiz-primary hover:bg-quiz-primary/5 text-quiz-text-main hover:scale-[1.02] active:scale-95";
             }
 
             return (
@@ -167,39 +169,47 @@ const QuizActivityComponent = ({
                 className={buttonClass}
               >
                 <div className={cn(
-                  "w-7 h-7 md:w-8 md:h-8 shrink-0 rounded-full border-2 flex items-center justify-center font-black text-xs md:text-sm transition-colors",
-                  showFeedback && isOptionCorrect ? "bg-quiz-correct border-quiz-correct text-white" :
+                  "w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 shrink-0 rounded-xl md:rounded-2xl border-2 flex items-center justify-center font-black text-sm md:text-lg lg:text-xl transition-all",
+                  showFeedback && isOptionCorrect ? "bg-quiz-correct border-quiz-correct text-white rotate-[360deg]" :
                   showFeedback && isSelected ? "bg-quiz-wrong border-quiz-wrong text-white" :
                   "border-quiz-primary text-quiz-primary group-hover:bg-quiz-primary group-hover:text-black"
                 )}>
                   {optionLetters[i]}
                 </div>
-                <span className="font-medium text-sm md:text-base leading-snug">{option}</span>
+                <span className="font-bold text-sm md:text-base lg:text-lg leading-snug md:leading-normal">{option}</span>
+                
+                {/* Glow Effect */}
+                {!showFeedback && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-quiz-primary/0 via-quiz-primary/0 to-quiz-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                )}
               </button>
             );
           })}
         </div>
 
-        {/* Feedback (aparece após resposta) */}
-        {showFeedback && (
-          <div className="mt-6 md:mt-8 animate-fade-in-up space-y-4">
+        {/* Feedback Section */}
+        <div className={cn(
+          "transition-all duration-500 overflow-hidden",
+          showFeedback ? "mt-10 md:mt-16 opacity-100 max-h-[1000px]" : "max-h-0 opacity-0"
+        )}>
+          <div className="space-y-6 md:space-y-8">
             <div className={cn(
-              "flex items-start md:items-center gap-3 md:gap-4 p-4 rounded-xl border",
-              isCorrect ? "bg-quiz-correct/5 border-quiz-correct/20" : "bg-quiz-wrong/5 border-quiz-wrong/20"
+              "flex flex-col sm:flex-row items-start sm:items-center gap-4 md:gap-6 p-6 md:p-8 rounded-2xl md:rounded-[1.5rem] border-2",
+              isCorrect ? "bg-quiz-correct/5 border-quiz-correct/30" : "bg-quiz-wrong/5 border-quiz-wrong/30"
             )}>
               {isCorrect ? (
-                <CheckCircle2 className="w-8 h-8 md:w-10 md:h-10 text-quiz-correct shrink-0" />
+                <CheckCircle2 className="w-12 h-12 md:w-16 md:h-16 text-quiz-correct shrink-0" />
               ) : (
-                <XCircle className="w-8 h-8 md:w-10 md:h-10 text-quiz-wrong shrink-0" />
+                <XCircle className="w-12 h-12 md:w-16 md:h-16 text-quiz-wrong shrink-0" />
               )}
-              <div>
+              <div className="space-y-2">
                 <h4 className={cn(
-                  "text-base md:text-lg font-black uppercase tracking-tight",
+                  "text-xl md:text-2xl font-black uppercase tracking-tight",
                   isCorrect ? "text-quiz-correct" : "text-quiz-wrong"
                 )}>
                   {isCorrect ? "Excelente! Você acertou." : "Ops! Não foi dessa vez."}
                 </h4>
-                <p className="text-quiz-text-muted text-xs md:text-sm italic leading-relaxed mt-1">
+                <p className="text-quiz-text-muted text-xs md:text-sm lg:text-base italic leading-relaxed font-medium">
                   {activity.explanation}
                 </p>
               </div>
@@ -208,16 +218,19 @@ const QuizActivityComponent = ({
             {onNext && (
               <button
                 onClick={onNext}
-                className="w-full h-14 md:h-16 bg-quiz-primary text-black font-black py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-quiz-primary-dark transition-all transform hover:translate-y-[-2px] active:translate-y-[0] shadow-lg shadow-quiz-primary/10 text-xs md:text-base"
+                className="w-full h-16 md:h-20 lg:h-24 bg-quiz-primary text-black font-black py-4 rounded-xl md:rounded-2xl flex items-center justify-center gap-3 hover:bg-quiz-primary-dark transition-all transform hover:translate-y-[-4px] active:translate-y-[0] shadow-[0_10px_40px_rgba(234,179,8,0.3)] text-sm md:text-lg lg:text-xl uppercase tracking-widest"
               >
-                {isLast ? "FINALIZAR DESAFIO" : "PRÓXIMA PERGUNTA"} <ChevronRight className="w-5 h-5" />
+                {isLast ? "FINALIZAR DESAFIO" : "PRÓXIMA PERGUNTA"} 
+                <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
               </button>
             )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
 };
+
+import { BookOpen } from "lucide-react";
 
 export default QuizActivityComponent;

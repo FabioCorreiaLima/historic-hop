@@ -13,7 +13,6 @@ import ProfilePage from "./pages/ProfilePage.tsx";
 import SettingsPage from "./pages/SettingsPage.tsx";
 
 import { Navbar } from "./components/layout/Navbar";
-import { MobileMenu } from "./components/layout/MobileMenu";
 
 const queryClient = new QueryClient();
 
@@ -33,7 +32,6 @@ const AppContent = () => {
         <Route path="/config" element={<SettingsPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {!isAdminPath && <MobileMenu />}
     </div>
   );
 };
