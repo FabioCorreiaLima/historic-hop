@@ -41,6 +41,21 @@ export class ActivityRepository {
     return result.rows[0] || null;
   }
 
+  static async update(id: string, activity: any) {
+    const { type, periodId, level, difficulty, content, imageUrl } = activity;
+    const result = await query(
+      `UPDATE activities SET 
+      type = $1, "periodId" = $2, level = $3, difficulty = $4, content = $5, "imageUrl" = $6, "updatedAt" = CURRENT_TIMESTAMP
+      WHERE id = $7 RETURNING *`,
+      [type, periodId, level || 1, difficulty || "Fácil", JSON.stringify(content), imageUrl, id]
+    );
+    return result.rows[0];
+  }
+
+  static async delete(id: string) {
+    await query("DELETE FROM activities WHERE id = $1", [id]);
+  }
+
   static async deleteBatch(ids: string[]) {
     if (ids.length === 0) return;
     await query("DELETE FROM activities WHERE id = ANY($1)", [ids]);

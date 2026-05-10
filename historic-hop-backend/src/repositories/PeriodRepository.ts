@@ -72,4 +72,8 @@ export class PeriodRepository {
     );
     return result.rows[0];
   }
+
+  static async delete(id: string) {
+    await query("DELETE FROM historical_periods WHERE id = $1", [id]);
+  }
 }
