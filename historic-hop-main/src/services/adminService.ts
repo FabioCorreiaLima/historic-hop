@@ -25,4 +25,6 @@ export const adminService = {
   // IA
   generateWithAI: (token: string, periodId: string, type: string, level: number) => 
     api.apiCall("/admin/generate-activity", { method: "POST", body: { periodId, type, level }, token }),
+  // Usuários
+  getUsers: (token: string) => api.apiCall("/admin/users", { token }),
 };

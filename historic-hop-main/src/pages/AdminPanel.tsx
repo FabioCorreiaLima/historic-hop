@@ -30,6 +30,7 @@ import { PeriodTable } from "@/components/admin/PeriodTable";
 import { PeriodForm } from "@/components/admin/PeriodForm";
 import { ActivityTable } from "@/components/admin/ActivityTable";
 import { ActivityForm } from "@/components/admin/ActivityForm";
+import { UserTable } from "@/components/admin/UserTable";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Link, useNavigate } from "react-router-dom";
@@ -40,6 +41,7 @@ const AdminPanel = () => {
   const [stats, setStats] = useState<any>(null);
   const [periods, setPeriods] = useState<any[]>([]);
   const [activities, setActivities] = useState<any[]>([]);
+  const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("dashboard");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -56,14 +58,16 @@ const AdminPanel = () => {
     if (!session?.access_token) return;
     setLoading(true);
     try {
-      const [statsData, periodsData, activitiesData] = await Promise.all([
+      const [statsData, periodsData, activitiesData, usersData] = await Promise.all([
         adminService.getStats(session.access_token),
         adminService.getPeriods(session.access_token),
-        adminService.getActivities(session.access_token, filterPeriod || undefined, filterType || undefined)
+        adminService.getActivities(session.access_token, filterPeriod || undefined, filterType || undefined),
+        adminService.getUsers(session.access_token)
       ]);
       setStats(statsData);
       setPeriods(periodsData);
       setActivities(activitiesData);
+      setUsers(usersData);
     } catch (error) {
       toast.error("Erro ao carregar dados do painel");
     } finally {
@@ -328,6 +332,29 @@ const AdminPanel = () => {
                       onDelete={handleDeleteActivity}
                       onDuplicate={(a) => { setEditingActivity({...a, id: undefined}); setIsActivityModalOpen(true); }}
                    />
+                 </div>
+              </div>
+            )}
+
+            {activeTab === "users" && (
+              <div className="space-y-8">
+                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-6">
+                    <div>
+                      <h2 className="text-2xl md:text-4xl font-black uppercase tracking-tighter italic">Gestão de <span className="text-quiz-primary">Usuários</span></h2>
+                      <p className="text-quiz-text-muted text-[10px] font-bold uppercase tracking-[0.3em] mt-1">Monitore e gerencie os exploradores da história.</p>
+                    </div>
+                    <div className="flex items-center gap-3 bg-quiz-correct/10 border border-quiz-correct/20 px-6 py-4 rounded-2xl">
+                       <div className="w-10 h-10 rounded-full bg-quiz-correct/20 flex items-center justify-center text-quiz-correct">
+                          <Users className="w-5 h-5" />
+                       </div>
+                       <div>
+                          <p className="text-[10px] font-black uppercase tracking-widest text-quiz-correct">Total Ativos</p>
+                          <p className="text-xl font-black text-quiz-text-main leading-none">{users.length}</p>
+                       </div>
+                    </div>
+                 </div>
+                 <div className="bg-quiz-surface rounded-[2rem] border border-quiz-border overflow-hidden shadow-2xl">
+                   <UserTable users={users} />
                  </div>
               </div>
             )}
