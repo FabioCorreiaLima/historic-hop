@@ -1,11 +1,9 @@
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
-import LevelMap from "@/components/LevelMap";
+import TimelineMap from "@/components/TimelineMap";
 import QuizGame from "@/components/QuizGame";
 import PeriodComplete from "@/components/PeriodComplete";
 import LandingPage from "@/pages/LandingPage";
-import Ranking from "@/components/Ranking";
-import AchievementsPanel from "@/components/AchievementsPanel";
 import AchievementPopup from "@/components/AchievementPopup";
 import HistoryChat from "@/components/HistoryChat";
 import PacManGame from "@/components/minigames/PacManGame";
@@ -14,7 +12,6 @@ import { useAchievements } from "@/hooks/useAchievements";
 import { type Activity, type HistoricalPeriod } from "@/types";
 import { api } from "@/lib/api";
 import { curriculumUnitsToPeriodProgress } from "@/lib/curriculumSync";
-import { Loader2 } from "lucide-react";
 
 type Screen = "map" | "activities" | "result" | "auth" | "ranking" | "achievements" | "chat" | "pacman";
 
@@ -31,7 +28,7 @@ const Index = () => {
   const [isLoadingPeriods, setIsLoadingPeriods] = useState(true);
 
   const { streak, recordPractice, practicedToday } = useStreaks();
-  const { unlockedKeys, newlyUnlocked, unlock, dismissNew, loading: achievementsLoading } = useAchievements();
+  const { unlockedKeys, newlyUnlocked, dismissNew } = useAchievements();
 
   // Sync with localStorage as fallback
   useEffect(() => {
@@ -52,7 +49,6 @@ const Index = () => {
 
   const fetchPeriodsAndCurriculum = useCallback(async () => {
     if (!session?.access_token) {
-      // Just fetch public periods if not logged in
       try {
         const data = await api.periods.getAll();
         setPeriods(data as HistoricalPeriod[]);
@@ -153,16 +149,21 @@ const Index = () => {
   if (!user) return <LandingPage />;
 
   return (
-    <div className="min-h-screen bg-quiz-bg pt-20">
+    <div className="min-h-screen bg-quiz-bg pt-16 md:pt-0">
       {screen === "map" && (
-        <LevelMap
+        <TimelineMap
           periods={periods}
           periodProgress={periodProgress}
           periodServerUnlock={serverPeriodUnlock}
-          loading={isLoadingPeriods}
           onSelectPeriod={handleSelectPeriod}
           onOpenChat={(id) => { setCurrentPeriodId(id); setScreen("chat"); }}
           onPlayPacman={(id) => { setCurrentPeriodId(id); setScreen("pacman"); }}
+          onShowRanking={() => setScreen("ranking")}
+          onShowAuth={() => {}}
+          onShowAchievements={() => setScreen("achievements")}
+          streakCount={streak}
+          achievementCount={unlockedKeys.length}
+          practicedToday={practicedToday}
         />
       )}
 
@@ -186,7 +187,7 @@ const Index = () => {
           onRetry={() => handleSelectPeriod(currentPeriodId!)}
           onNext={() => setScreen("map")}
           onBackToMap={() => setScreen("map")}
-          hasNext={false} // Can be dynamic later
+          hasNext={false}
         />
       )}
 

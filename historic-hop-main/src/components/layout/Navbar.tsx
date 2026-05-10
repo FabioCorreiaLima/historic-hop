@@ -38,8 +38,8 @@ export function Navbar() {
 
   return (
     <nav className={cn(
-      "fixed top-0 w-full z-50 transition-all duration-300 flex items-center justify-center",
-      "h-16 md:h-20 px-4 md:px-8 lg:px-12",
+      "fixed top-0 inset-x-0 z-50 transition-all duration-300 flex items-center justify-center md:hidden",
+      "h-16 px-4",
       isScrolled ? "bg-quiz-bg/95 backdrop-blur-md border-b border-quiz-border" : "bg-transparent"
     )}>
       <div className="max-w-7xl w-full flex items-center justify-between">

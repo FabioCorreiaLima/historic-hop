@@ -22,7 +22,7 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
     const refreshData = async () => {
       if (!initialPeriod?.id) return;
       try {
-        const data = await api.apiCall(`/periods/${initialPeriod.id}`);
+        const data = await api.periods.getOne(initialPeriod.id);
         if (data) setPeriodData(data);
       } catch (err) {
         console.warn("Erro ao atualizar chat:", err);
@@ -56,7 +56,7 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
     if (!initialPeriod?.id) return;
     const fetchQuestions = async () => {
       try {
-        const data = await api.apiCall(`/chat/suggested-questions?periodId=${initialPeriod.id}`);
+        const data = await api.historyChat.getSuggestedQuestions(initialPeriod.id);
         setSuggestedQuestions(data.questions || []);
       } catch (error) {
         console.error("Erro ao buscar perguntas:", error);
@@ -123,15 +123,12 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
     setIsLoading(true);
 
     try {
-      const data = await api.apiCall("/chat/message", {
-        method: "POST",
-        body: {
-          messages: [...messages, userMsg],
-          periodId: periodData.id,
-          characterName: charName,
-          periodName: periodName,
-          periodYears: periodYears,
-        }
+      const data = await api.historyChat.sendMessage({
+        messages: [...messages, userMsg],
+        periodId: periodData.id,
+        characterName: charName,
+        periodName: periodName,
+        periodYears: periodYears,
       });
 
       const assistantContent = data.response;

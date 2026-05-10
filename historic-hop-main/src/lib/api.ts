@@ -384,6 +384,7 @@ export default {
 
 // Export named for convenience
 export const api = {
+  apiCall,
   auth: authApi,
   user: userApi,
   progress: progressApi,

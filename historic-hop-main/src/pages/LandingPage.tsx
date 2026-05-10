@@ -99,15 +99,15 @@ const LandingPage = () => {
           >
             <Button 
               onClick={() => setShowLogin(true)}
-              className="w-full sm:w-auto h-16 md:h-20 bg-quiz-primary text-black font-black px-10 md:px-12 rounded-2xl text-sm md:text-base hover:bg-quiz-primary-dark transition-all shadow-[0_0_50px_rgba(234,179,8,0.2)]"
+              className="w-full sm:w-auto h-14 md:h-16 bg-quiz-primary text-black font-black px-8 md:px-10 rounded-2xl text-xs md:text-sm hover:bg-quiz-primary-dark transition-all shadow-[0_0_50px_rgba(234,179,8,0.2)]"
             >
-              <PlayCircle className="w-6 h-6 mr-3" /> Começar Jornada
+              <PlayCircle className="w-5 h-5 mr-2" /> Começar Jornada
             </Button>
             <Button 
               variant="ghost"
-              className="w-full sm:w-auto h-16 md:h-20 text-quiz-text-main font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-quiz-surface transition-all px-10"
+              className="w-full sm:w-auto h-14 md:h-16 text-quiz-text-main font-black uppercase tracking-widest text-[9px] md:text-[10px] hover:bg-quiz-surface transition-all px-8"
             >
-              Ver Demonstração <ArrowRight className="w-5 h-5 ml-2" />
+              Ver Demonstração <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </motion.div>
         </div>
