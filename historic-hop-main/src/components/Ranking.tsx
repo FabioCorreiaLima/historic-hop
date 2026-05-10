@@ -81,20 +81,20 @@ const Ranking = () => {
       {/* User Status Card */}
       {user && userPosition >= 0 && (
         <div className="bg-quiz-primary/5 border border-quiz-primary/20 rounded-xl md:rounded-2xl p-4 md:p-5 mb-6 md:mb-8 flex items-center justify-between">
-           <div className="flex items-center gap-3">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-quiz-primary flex items-center justify-center text-black font-black text-xs md:text-sm">
-                #{userPosition + 1}
-              </div>
-              <div>
-                <p className="text-[10px] md:text-xs font-black text-quiz-primary uppercase tracking-widest">Sua Posição</p>
-                <p className="text-sm md:text-base font-black text-quiz-text-main">{entries[userPosition].display_name}</p>
-              </div>
-           </div>
-           <div className="text-right">
-              <p className="text-sm md:text-base font-black text-quiz-primary">
-                {(tab === "weekly" ? entries[userPosition].weekly_score : entries[userPosition].total_score).toLocaleString()} pts
-              </p>
-           </div>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-quiz-primary flex items-center justify-center text-black font-black text-xs md:text-sm">
+              #{userPosition + 1}
+            </div>
+            <div>
+              <p className="text-[10px] md:text-xs font-black text-quiz-primary uppercase tracking-widest">Sua Posição</p>
+              <p className="text-sm md:text-base font-black text-quiz-text-main">{entries[userPosition].display_name}</p>
+            </div>
+          </div>
+          <div className="text-right">
+            <p className="text-sm md:text-base font-black text-quiz-primary">
+              {(tab === "weekly" ? entries[userPosition].weekly_score : entries[userPosition].total_score).toLocaleString()} pts
+            </p>
+          </div>
         </div>
       )}
 
@@ -115,7 +115,7 @@ const Ranking = () => {
             const isMe = entry.user_id === user?.id;
             const score = tab === "weekly" ? entry.weekly_score : entry.total_score;
             const level = getLevel(entry.total_score);
-            
+
             return (
               <div
                 key={entry.user_id}
@@ -127,7 +127,7 @@ const Ranking = () => {
                 <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center shrink-0">
                   {getMedalIcon(i)}
                 </div>
-                
+
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-quiz-bg border border-quiz-border flex items-center justify-center text-xs md:text-sm font-black text-quiz-primary shrink-0 uppercase">
                   {entry.display_name.charAt(0)}
                 </div>

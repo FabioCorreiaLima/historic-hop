@@ -1,10 +1,10 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { Link, useLocation } from "react-router-dom";
-import { 
-  History, 
-  User as UserIcon, 
-  Settings, 
-  LogOut, 
+import {
+  History,
+  User as UserIcon,
+  Settings,
+  LogOut,
   Menu,
   X,
   LayoutDashboard
@@ -103,7 +103,7 @@ export function Navbar() {
             </DropdownMenu>
           </div>
 
-          <button 
+          <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="flex md:hidden w-10 h-10 items-center justify-center bg-quiz-surface border border-quiz-border rounded-xl text-quiz-text-main hover:border-quiz-primary transition-all"
           >
@@ -117,20 +117,20 @@ export function Navbar() {
         isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
       )}>
         <div className="grid grid-cols-1 gap-2">
-          <MobileNavLink to="/" active={location.pathname === "/"} onClick={() => setIsMobileMenuOpen(false)} icon={<History className="w-4 h-4"/>}>Mapa</MobileNavLink>
-          <MobileNavLink to="/ranking" active={location.pathname === "/ranking"} onClick={() => setIsMobileMenuOpen(false)} icon={<LayoutDashboard className="w-4 h-4"/>}>Ranking</MobileNavLink>
-          <MobileNavLink to="/loja" active={location.pathname === "/loja"} onClick={() => setIsMobileMenuOpen(false)} icon={<Settings className="w-4 h-4"/>}>Loja</MobileNavLink>
+          <MobileNavLink to="/" active={location.pathname === "/"} onClick={() => setIsMobileMenuOpen(false)} icon={<History className="w-4 h-4" />}>Mapa</MobileNavLink>
+          <MobileNavLink to="/ranking" active={location.pathname === "/ranking"} onClick={() => setIsMobileMenuOpen(false)} icon={<LayoutDashboard className="w-4 h-4" />}>Ranking</MobileNavLink>
+          <MobileNavLink to="/loja" active={location.pathname === "/loja"} onClick={() => setIsMobileMenuOpen(false)} icon={<Settings className="w-4 h-4" />}>Loja</MobileNavLink>
           {profile?.is_admin && (
-            <MobileNavLink to="/admin" active={location.pathname.startsWith("/admin")} onClick={() => setIsMobileMenuOpen(false)} icon={<LayoutDashboard className="w-4 h-4"/>}>Painel Admin</MobileNavLink>
+            <MobileNavLink to="/admin" active={location.pathname.startsWith("/admin")} onClick={() => setIsMobileMenuOpen(false)} icon={<LayoutDashboard className="w-4 h-4" />}>Painel Admin</MobileNavLink>
           )}
         </div>
 
         <div className="h-px bg-quiz-border my-2" />
 
         <div className="grid grid-cols-1 gap-2">
-          <MobileNavLink to="/perfil" active={location.pathname === "/perfil"} onClick={() => setIsMobileMenuOpen(false)} icon={<UserIcon className="w-4 h-4"/>}>Meu Perfil</MobileNavLink>
-          <MobileNavLink to="/config" active={location.pathname === "/config"} onClick={() => setIsMobileMenuOpen(false)} icon={<Settings className="w-4 h-4"/>}>Configurações</MobileNavLink>
-          <button 
+          <MobileNavLink to="/perfil" active={location.pathname === "/perfil"} onClick={() => setIsMobileMenuOpen(false)} icon={<UserIcon className="w-4 h-4" />}>Meu Perfil</MobileNavLink>
+          <MobileNavLink to="/config" active={location.pathname === "/config"} onClick={() => setIsMobileMenuOpen(false)} icon={<Settings className="w-4 h-4" />}>Configurações</MobileNavLink>
+          <button
             onClick={() => { setIsMobileMenuOpen(false); signOut(); }}
             className="flex items-center gap-3 px-5 py-4 rounded-xl text-xs font-black uppercase tracking-widest bg-quiz-wrong/10 text-quiz-wrong border border-quiz-wrong/20"
           >
@@ -144,12 +144,12 @@ export function Navbar() {
 
 function NavLink({ to, children, active }: { to: string; children: React.ReactNode; active?: boolean }) {
   return (
-    <Link 
-      to={to} 
+    <Link
+      to={to}
       className={cn(
         "px-4 md:px-6 lg:px-8 py-2 md:py-2.5 rounded-lg md:rounded-xl text-sm md:text-base font-black uppercase tracking-[0.2em] transition-all whitespace-nowrap",
-        active 
-          ? "bg-quiz-primary text-black" 
+        active
+          ? "bg-quiz-primary text-black"
           : "text-quiz-text-muted hover:text-quiz-text-main"
       )}
     >
@@ -160,13 +160,13 @@ function NavLink({ to, children, active }: { to: string; children: React.ReactNo
 
 function MobileNavLink({ to, children, active, onClick, icon }: { to: string; children: React.ReactNode; active?: boolean; onClick: () => void; icon: React.ReactNode }) {
   return (
-    <Link 
-      to={to} 
+    <Link
+      to={to}
       onClick={onClick}
       className={cn(
         "px-5 py-4 rounded-xl text-sm font-black uppercase tracking-widest transition-all flex items-center gap-3",
-        active 
-          ? "bg-quiz-primary text-black" 
+        active
+          ? "bg-quiz-primary text-black"
           : "bg-quiz-surface text-quiz-text-main border border-quiz-border/50"
       )}
     >

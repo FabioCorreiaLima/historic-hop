@@ -17,7 +17,7 @@ type Msg = {
 
 const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
   const [periodData, setPeriodData] = useState(initialPeriod);
-  
+
   useEffect(() => {
     const refreshData = async () => {
       if (!initialPeriod?.id) return;
@@ -43,7 +43,7 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
       isPlaying: false,
     },
   ]);
-  
+
   const [suggestedQuestions, setSuggestedQuestions] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
@@ -163,19 +163,19 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
       </div>
 
       <div className="relative z-10 flex flex-col h-full max-w-4xl mx-auto w-full">
-        
+
         <header className="flex items-center gap-3 md:gap-4 p-4 md:p-6 border-b border-quiz-border bg-quiz-surface/50 backdrop-blur-xl shrink-0">
-          <button 
-            onClick={() => { window.speechSynthesis.cancel(); onBack(); }} 
+          <button
+            onClick={() => { window.speechSynthesis.cancel(); onBack(); }}
             className="p-2 md:p-3 rounded-xl bg-quiz-bg border border-quiz-border hover:border-quiz-primary transition-all"
           >
             <ArrowLeft className="w-5 h-5 text-quiz-text-main" />
           </button>
-          
+
           <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-quiz-bg border border-quiz-border flex items-center justify-center text-xl md:text-3xl">
             {charEmoji}
           </div>
-          
+
           <div className="flex-1 min-w-0">
             <h2 className="font-black text-sm md:text-base lg:text-lg tracking-tight leading-tight truncate uppercase">{charName}</h2>
             <p className="text-[10px] md:text-xs font-bold text-quiz-primary uppercase tracking-[0.2em] truncate">{periodName}</p>
@@ -196,11 +196,10 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
         <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 md:space-y-8 custom-scrollbar">
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-              <div className={`max-w-[85%] md:max-w-[75%] rounded-2xl p-4 md:p-6 text-sm md:text-base shadow-lg border ${
-                msg.role === "user"
+              <div className={`max-w-[85%] md:max-w-[75%] rounded-2xl p-4 md:p-6 text-sm md:text-base shadow-lg border ${msg.role === "user"
                   ? "bg-quiz-primary text-black border-quiz-primary/20 rounded-br-none"
                   : "bg-quiz-surface text-quiz-text-main border-quiz-border rounded-bl-none"
-              }`}>
+                }`}>
                 <div className="flex items-start gap-3 md:gap-4">
                   <div className="flex-1 leading-relaxed">
                     {msg.role === "assistant" ? (
@@ -214,9 +213,8 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
                   {msg.role === "assistant" && (
                     <button
                       onClick={() => toggleAudio(i)}
-                      className={`mt-1 p-2 rounded-xl transition-all shrink-0 ${
-                        msg.isPlaying ? 'bg-quiz-primary text-black animate-pulse' : 'bg-quiz-bg text-quiz-text-muted'
-                      }`}
+                      className={`mt-1 p-2 rounded-xl transition-all shrink-0 ${msg.isPlaying ? 'bg-quiz-primary text-black animate-pulse' : 'bg-quiz-bg text-quiz-text-muted'
+                        }`}
                     >
                       {msg.isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                     </button>
@@ -239,7 +237,7 @@ const HistoryChat = ({ period: initialPeriod, onBack }: Props) => {
             <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 text-quiz-primary" />
             <p className="text-[10px] md:text-xs font-black text-quiz-text-muted uppercase tracking-[0.2em]">Sugeridos</p>
           </div>
-          
+
           <div className="flex flex-wrap gap-2">
             {isLoadingQuestions ? (
               <div className="h-10 w-32 bg-quiz-bg animate-pulse rounded-xl" />

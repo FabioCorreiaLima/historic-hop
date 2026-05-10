@@ -12,11 +12,11 @@ interface ApiOptions {
 
 async function apiCall<T>(endpoint: string, options: ApiOptions = {}): Promise<T> {
   const { method = "GET", body, token } = options;
-  
+
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
-  
+
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
@@ -323,11 +323,11 @@ export const historyChatApi = {
   getSuggestedQuestions: (periodId: string) =>
     apiCall<{ questions: string[] }>(`/history-chat/questions/${periodId}`),
 
-  sendMessage: (data: { 
-    messages: unknown[]; 
-    periodId: string; 
-    characterName: string; 
-    periodName: string; 
+  sendMessage: (data: {
+    messages: unknown[];
+    periodId: string;
+    characterName: string;
+    periodName: string;
     periodYears: string;
   }) =>
     apiCall<{ response: string }>("/history-chat", {
@@ -340,10 +340,10 @@ export const historyChatApi = {
 export const historicalPeriodsApi = {
   getAll: () =>
     apiCall<any[]>("/historical-periods"),
-  
+
   getOne: (id: string) =>
     apiCall<any>(`/historical-periods/${id}`),
-  
+
   save: (data: any) =>
     apiCall<any>("/historical-periods", {
       method: "POST",

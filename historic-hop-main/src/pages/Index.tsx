@@ -52,13 +52,13 @@ const Index = () => {
 
   const fetchPeriodsAndCurriculum = useCallback(async () => {
     if (!session?.access_token) {
-       // Just fetch public periods if not logged in
-       try {
-         const data = await api.periods.getAll();
-         setPeriods(data as HistoricalPeriod[]);
-       } catch (e) { console.error(e); }
-       setIsLoadingPeriods(false);
-       return;
+      // Just fetch public periods if not logged in
+      try {
+        const data = await api.periods.getAll();
+        setPeriods(data as HistoricalPeriod[]);
+      } catch (e) { console.error(e); }
+      setIsLoadingPeriods(false);
+      return;
     }
 
     setIsLoadingPeriods(true);
@@ -67,7 +67,7 @@ const Index = () => {
         api.periods.getAll(),
         api.curriculum.getMe(session.access_token),
       ]);
-      
+
       const pathIds = new Set(curriculum.units.map((u) => (u.period as { id: string }).id));
       const ordered = curriculum.units.map((u) => u.period as HistoricalPeriod);
       const extra = (periodsList as HistoricalPeriod[]).filter((p) => !pathIds.has(p.id));
@@ -138,13 +138,13 @@ const Index = () => {
     }));
 
     if (session?.access_token) {
-       await api.progress.completeLesson(session.access_token, {
-          lessonId: `lesson_${currentPeriodId}_main`,
-          stars,
-          percentage: Math.round((correct / total) * 100)
-       });
-       if (stars > 0) recordPractice();
-       fetchPeriodsAndCurriculum();
+      await api.progress.completeLesson(session.access_token, {
+        lessonId: `lesson_${currentPeriodId}_main`,
+        stars,
+        percentage: Math.round((correct / total) * 100)
+      });
+      if (stars > 0) recordPractice();
+      fetchPeriodsAndCurriculum();
     }
 
     setScreen("result");
@@ -155,7 +155,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-quiz-bg pt-20">
       {screen === "map" && (
-        <LevelMap 
+        <LevelMap
           periods={periods}
           periodProgress={periodProgress}
           periodServerUnlock={serverPeriodUnlock}
@@ -167,7 +167,7 @@ const Index = () => {
       )}
 
       {screen === "activities" && (
-        <QuizGame 
+        <QuizGame
           periodId={currentPeriodId!}
           activities={generatedActivities}
           isLoading={isGeneratingActivities}
@@ -178,7 +178,7 @@ const Index = () => {
       )}
 
       {screen === "result" && (
-        <PeriodComplete 
+        <PeriodComplete
           periodName={periods.find(p => p.id === currentPeriodId)?.name || ""}
           periodEmoji={periods.find(p => p.id === currentPeriodId)?.emoji || ""}
           correct={lastResult?.correct || 0}
@@ -191,14 +191,14 @@ const Index = () => {
       )}
 
       {screen === "chat" && currentPeriodId && (
-        <HistoryChat 
+        <HistoryChat
           period={periods.find(p => p.id === currentPeriodId) || { id: currentPeriodId, name: 'Carregando...', emoji: '⌛' } as any}
           onBack={() => setScreen("map")}
         />
       )}
 
       {screen === "pacman" && currentPeriodId && (
-        <PacManGame 
+        <PacManGame
           periodId={currentPeriodId}
           onBack={() => setScreen("map")}
           onGameOver={(score, won) => {
